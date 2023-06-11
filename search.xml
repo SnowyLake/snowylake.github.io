@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2023/06/11/Hello%20World/</url>
-    <content><![CDATA[<h2 id="测试提交"><a href="#测试提交" class="headerlink" title="测试提交"></a>测试提交</h2><p>花有重开日, 人无再少年.</p>
+    <title>Hello World!</title>
+    <url>/2023/06/11/HelloWorld/</url>
+    <content><![CDATA[<h2 id="First-Blog"><a href="#First-Blog" class="headerlink" title="First Blog"></a>First Blog</h2><p>花有重开日, 人无再少年.</p>
 ]]></content>
       <categories>
         <category>测试</category>
