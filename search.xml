@@ -4,8 +4,9 @@
     <title>Hello World!</title>
     <url>/2023/06/11/HelloWorld/</url>
     <content><![CDATA[<h2 id="My-First-Blog"><a href="#My-First-Blog" class="headerlink" title="My First Blog"></a>My First Blog</h2><p>花有重开日, 人无再少年.</p>
+<span id="more"></span>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout &lt;&lt; std::format(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/2023/06/11/HelloWorld/../HelloWorld/image.jpg" alt="Alt text"></p>
+<p><img src="/2023/06/11/HelloWorld/../HelloWorld/image.jpg" alt="HelloWorld"></p>
 ]]></content>
       <categories>
         <category>Others</category>
@@ -16,49 +17,51 @@
       </tags>
   </entry>
   <entry>
-    <title>建站记录</title>
-    <url>/2023/06/12/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Others</category>
-        <category>技术随笔</category>
-      </categories>
-      <tags>
-        <tag>技术随笔</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SnowyArkEngine开发笔记[0x00]: 引擎架构</title>
     <url>/2023/06/12/SnowyArkEngine%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B00x00/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<span id="more"></span>]]></content>
       <categories>
         <category>Game Engine Development</category>
         <category>SnowyArk</category>
       </categories>
       <tags>
-        <tag>Rendering</tag>
-        <tag>SnowyArk Engine</tag>
-        <tag>Vulkan</tag>
         <tag>Game Engine Development</tag>
-        <tag>HLSL</tag>
+        <tag>SnowyArk Engine</tag>
+        <tag>Rendering</tag>
+        <tag>Vulkan</tag>
         <tag>C++</tag>
+        <tag>HLSL</tag>
       </tags>
   </entry>
   <entry>
     <title>为美好的URP献上解析[0x00]: 管线结构</title>
     <url>/2023/06/12/%E4%B8%BA%E7%BE%8E%E5%A5%BD%E7%9A%84URP%E7%8C%AE%E4%B8%8A%E8%A7%A3%E6%9E%900x00/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<span id="more"></span>]]></content>
       <categories>
         <category>Game Engine</category>
         <category>Unity</category>
         <category>URP</category>
       </categories>
       <tags>
+        <tag>Rendering</tag>
+        <tag>HLSL</tag>
         <tag>Unity</tag>
         <tag>URP</tag>
-        <tag>Rendering</tag>
         <tag>C#</tag>
-        <tag>HLSL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>建站记录</title>
+    <url>/2023/06/12/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<p>建这个网站的初衷是因为自己知乎被连续封了几次, 以至于让我对这类非可控的平台产生了大量不信任感, 再加之我个人的知乎账号掺杂了大量的非技术相关内容, 所以尽管我在知乎也写了一些技术文章, 但仍并不方便将来贴在简历上.<br>总总原因驱使下, 在综合考量了云服务器+Wordpress和GitHub Pages两种方案后, 我还是选择了更为轻便的后者, 毕竟对我而言只是需要一个发布文章与随想的完全可控的平台罢了.<br>技术选型到此为止, 剩下的便是具体实现了. 这篇文章便是用来记录我的建站流程以及踩到的一些小坑.<br>顺便一提, 这个网站就叫作<strong>SnowyLakeSide</strong>好了, 中文名雪之湖畔, 一个独属于我(SnowyLake&#x2F;雪湖)、面向互联网的小小浅滩.</p>
+<span id="more"></span>
+<h1 id="Github-Pages与Hexo框架搭建"><a href="#Github-Pages与Hexo框架搭建" class="headerlink" title="Github Pages与Hexo框架搭建"></a>Github Pages与Hexo框架搭建</h1><h1 id="Next主题配置"><a href="#Next主题配置" class="headerlink" title="Next主题配置"></a>Next主题配置</h1>]]></content>
+      <categories>
+        <category>Others</category>
+        <category>技术随笔</category>
+      </categories>
+      <tags>
+        <tag>技术随笔</tag>
       </tags>
   </entry>
 </search>
