@@ -34,7 +34,7 @@
       </tags>
   </entry>
   <entry>
-    <title>为美好的URP献上解析[0x00]: 管线结构</title>
+    <title>为美好的URP献上解析[0x00]: 管线架构</title>
     <url>/2023/06/12/%E4%B8%BA%E7%BE%8E%E5%A5%BD%E7%9A%84URP%E7%8C%AE%E4%B8%8A%E8%A7%A3%E6%9E%900x00/</url>
     <content><![CDATA[<span id="more"></span>]]></content>
       <categories>
@@ -63,5 +63,39 @@
       <tags>
         <tag>技术随笔</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>CategoryCollection</title>
+    <url>/2023/06/12/CategoryCollection/</url>
+    <content><![CDATA[<span id="more"></span>]]></content>
+      <categories>
+        <category>Others</category>
+        <category>Game Engine Development</category>
+        <category>Game Engine</category>
+        <category>技术随笔</category>
+        <category>闲谈</category>
+        <category>SnowyArk</category>
+        <category>Unity</category>
+        <category>URP</category>
+        <category>HDRP</category>
+        <category>SnowyOwl</category>
+        <category>Unreal</category>
+        <category>Piccolo</category>
+        <category>DCC</category>
+        <category>Blender</category>
+        <category>PCG</category>
+        <category>Houdini</category>
+        <category>Substance Designer</category>
+        <category>3ds Max</category>
+        <category>GPU Programming</category>
+        <category>Graphics API</category>
+        <category>OpenGL</category>
+        <category>Vulkan</category>
+        <category>DirectX 11</category>
+        <category>DirectX 12</category>
+        <category>CUDA</category>
+        <category>Rendering</category>
+        <category>Unreal/SnowyFalcon</category>
+      </categories>
   </entry>
 </search>
