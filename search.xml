@@ -5,8 +5,7 @@
     <url>/2023/06/11/HelloWorld/</url>
     <content><![CDATA[<h2 id="My-First-Blog"><a href="#My-First-Blog" class="headerlink" title="My First Blog"></a>My First Blog</h2><p>花有重开日, 人无再少年.</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout &lt;&lt; std::format(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2023/06/11/HelloWorld/../HelloWorld/0AC7F15D5152337BA5356ACEDBC4455020899677.jpg" alt="Alt text"></p>
+<p><img src="/2023/06/11/HelloWorld/../HelloWorld/image.jpg" alt="Alt text"></p>
 ]]></content>
       <categories>
         <category>Others</category>
@@ -29,23 +28,6 @@
       </tags>
   </entry>
   <entry>
-    <title>为美好的URP上解析[0x00]: 管线结构</title>
-    <url>/2023/06/12/%E4%B8%BA%E7%BE%8E%E5%A5%BD%E7%9A%84URP%E4%B8%8A%E8%A7%A3%E6%9E%900x00/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Game Engine</category>
-        <category>Unity</category>
-        <category>URP</category>
-      </categories>
-      <tags>
-        <tag>Unity</tag>
-        <tag>URP</tag>
-        <tag>Rendering</tag>
-        <tag>C#</tag>
-        <tag>HLSL</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SnowyArkEngine开发笔记[0x00]: 引擎架构</title>
     <url>/2023/06/12/SnowyArkEngine%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B00x00/</url>
     <content><![CDATA[]]></content>
@@ -60,6 +42,23 @@
         <tag>Game Engine Development</tag>
         <tag>HLSL</tag>
         <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>为美好的URP献上解析[0x00]: 管线结构</title>
+    <url>/2023/06/12/%E4%B8%BA%E7%BE%8E%E5%A5%BD%E7%9A%84URP%E7%8C%AE%E4%B8%8A%E8%A7%A3%E6%9E%900x00/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Game Engine</category>
+        <category>Unity</category>
+        <category>URP</category>
+      </categories>
+      <tags>
+        <tag>Unity</tag>
+        <tag>URP</tag>
+        <tag>Rendering</tag>
+        <tag>C#</tag>
+        <tag>HLSL</tag>
       </tags>
   </entry>
 </search>
