@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>CategoryCollection</title>
-    <url>/2023/06/12/CategoryCollection/</url>
+    <url>/2023/06/11/CategoryCollection/</url>
     <content><![CDATA[<span id="more"></span>]]></content>
       <categories>
         <category>Game Engine</category>
@@ -51,6 +51,23 @@
       </tags>
   </entry>
   <entry>
+    <title>SnowyArkEngine开发笔记[0x00]: 写在最前</title>
+    <url>/2023/06/12/SnowyArkEngine%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B00x00/</url>
+    <content><![CDATA[<span id="more"></span>]]></content>
+      <categories>
+        <category>Game Engine Development</category>
+        <category>SnowyArk</category>
+      </categories>
+      <tags>
+        <tag>Game Engine Development</tag>
+        <tag>SnowyArk Engine</tag>
+        <tag>Rendering</tag>
+        <tag>Vulkan</tag>
+        <tag>C++</tag>
+        <tag>HLSL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>为美好的URP献上解析[0x00]: 管线架构</title>
     <url>/2023/06/12/%E4%B8%BA%E7%BE%8E%E5%A5%BD%E7%9A%84URP%E7%8C%AE%E4%B8%8A%E8%A7%A3%E6%9E%900x00/</url>
     <content><![CDATA[<span id="more"></span>]]></content>
@@ -60,28 +77,11 @@
         <category>URP</category>
       </categories>
       <tags>
+        <tag>Rendering</tag>
+        <tag>HLSL</tag>
         <tag>Unity</tag>
         <tag>URP</tag>
-        <tag>Rendering</tag>
         <tag>C#</tag>
-        <tag>HLSL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SnowyArkEngine开发笔记[0x00]: 写在最前</title>
-    <url>/2023/06/12/SnowyArkEngine%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B00x00/</url>
-    <content><![CDATA[<span id="more"></span>]]></content>
-      <categories>
-        <category>Game Engine Development</category>
-        <category>SnowyArk</category>
-      </categories>
-      <tags>
-        <tag>Rendering</tag>
-        <tag>HLSL</tag>
-        <tag>Game Engine Development</tag>
-        <tag>SnowyArk Engine</tag>
-        <tag>Vulkan</tag>
-        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -118,7 +118,7 @@
 <p>常用Hexo命令:</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">生成public文件夹</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo generate</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo g <span class="comment">#简写</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">向github推送</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo deploy</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo d <span class="comment">#简写</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">本地预览网站</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo server</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo s <span class="comment">#简写</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo s --debug <span class="comment">#debug状态下本地预览网站</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">新建文章</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo new <span class="string">&quot;postName&quot;</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">新建页面(后续演示)</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo new page <span class="string">&quot;postName&quot;</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">生成并本地预览</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo s -g</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">生成并推送</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo d -g</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="Next主题配置"><a href="#Next主题配置" class="headerlink" title="Next主题配置"></a>Next主题配置</h1><h1 id="自定义域名"><a href="#自定义域名" class="headerlink" title="自定义域名"></a>自定义域名</h1><p>这里我是通过<a href="http://www.dynadot.com网站购买的域名/">www.dynadot.com网站购买的域名</a>.<br>首先要对域名进行dns解析, 这里选择CNAME的形式, 顺便也要把www的子域名给解析了.<br><img src="/2023/06/12/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/../%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/image-2.png" alt="Alt text"><br>之后在source文件夹下创建一个CNAME文件, 注意不要加文件扩展名, 在里面输入要自定义的域名, 比如我的就是 snowylake.net :<br><img src="/2023/06/12/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/../%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/image-3.png" alt="Alt text"><br>进入github repo页面, 点击setting找到pages, 将域名输入到Custom domain中, 点击save等待片刻即可.<br><img src="/2023/06/12/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/../%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/image-4.png" alt="Alt text"></p>
+<h1 id="Next主题配置"><a href="#Next主题配置" class="headerlink" title="Next主题配置"></a>Next主题配置</h1><h1 id="自定义域名"><a href="#自定义域名" class="headerlink" title="自定义域名"></a>自定义域名</h1><p>这里我是通过 <a href="http://www.dynadot.com/">www.dynadot.com</a> 购买的域名.<br>首先要对域名进行dns解析, 这里选择CNAME的形式, 顺便也要把www的子域名给解析了.<br><img src="/2023/06/12/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/../%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/image-2.png" alt="Alt text"><br>之后在source文件夹下创建一个CNAME文件, 注意不要加文件扩展名, 在里面输入要自定义的域名, 比如我的就是 snowylake.net :<br><img src="/2023/06/12/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/../%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/image-3.png" alt="Alt text"><br>进入github repo页面, 点击setting找到pages, 将域名输入到Custom domain中, 点击save等待片刻即可.<br><img src="/2023/06/12/%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/../%E5%BB%BA%E7%AB%99%E8%AE%B0%E5%BD%95/image-4.png" alt="Alt text"></p>
 ]]></content>
       <categories>
         <category>Others</category>
