@@ -12,7 +12,6 @@
         <category>闲谈</category>
         <category>SnowyArk</category>
         <category>URP</category>
-        <category>技术随笔</category>
         <category>HDRP</category>
         <category>SnowyOwl</category>
         <category>Unreal</category>
@@ -32,6 +31,11 @@
         <category>PCG</category>
         <category>Houdini</category>
         <category>Substance Designer</category>
+        <category>Shader</category>
+        <category>Programming Language</category>
+        <category>C++</category>
+        <category>C#</category>
+        <category>技术杂谈</category>
       </categories>
   </entry>
   <entry>
@@ -148,10 +152,68 @@
 ]]></content>
       <categories>
         <category>Others</category>
-        <category>技术随笔</category>
+        <category>技术杂谈</category>
       </categories>
       <tags>
-        <tag>技术随笔</tag>
+        <tag>技术杂谈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>来点图程破防乐子</title>
+    <url>/2023/06/24/%E6%9D%A5%E7%82%B9%E5%9B%BE%E7%A8%8B%E7%A0%B4%E9%98%B2%E4%B9%90%E5%AD%90/</url>
+    <content><![CDATA[<blockquote>
+<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/456526193">https://zhuanlan.zhihu.com/p/456526193</a></p>
+</blockquote>
+<p>快过年了，不要再讨论什么C++，图形学，模板元之类的了，你带你的C++语言的设计与演化回到家并不能给你带来任何实质性作用，朋友们打开UE4连连看就做出了好看的特效，你默默的在家里瞪着两眼看GAMES、may佬和侯捷的视频。<br>亲戚朋友们吃饭问你收获了什么，你说我读完了RTR4和PBRT，系统的研究了基于物理的渲染和非真实感渲染，还用C++20重构了自己的渲染器。亲戚们懵逼了，你还在心里默默嘲笑他们，笑他们不懂C++和计算机图形学，不懂光照方程，不懂RAII和CRTP，也笑他们连Shader是什么都不知道。<br>你父母的同事都在说自己儿女一年的收获，有的用Java做了个网站后端赚到了第一笔外快，有的用Python做了点数据可视化发到B站成了up主，有的学了Unity和C#做独立游戏已经发售了。<br>你的父母默默无言，说我的儿子买了一整套的Effective C++，上Stack Overflow痛骂了C++标准委员会，写了一堆狗屁不通报错几百几千行的模板元编程代码，还对着谷歌翻译啃Ray Tracing the Rest of Your Life，人也越来越魔怔了。</p>
+<span id="more"></span>]]></content>
+      <categories>
+        <category>Others</category>
+        <category>闲谈</category>
+      </categories>
+      <tags>
+        <tag>闲谈</tag>
+        <tag>Compute Graphics</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>从auto_ptr到unique_ptr：浅谈C++右值引用、移动语义与智能指针</title>
+    <url>/2023/06/24/%E4%BB%8Eauto-ptr%E5%88%B0unique-ptr%EF%BC%9A%E6%B5%85%E8%B0%88C-%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E3%80%81%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89%E4%B8%8E%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/</url>
+    <content><![CDATA[<p>std::auto_ptr是C++03对智能指针的第一次尝试，作为一个失败品，其甚至已然在后续的标准中被移除，但时至今日，我们依然可以透过它一窥C++发展史的一角。</p>
+<span id="more"></span>
+<p>出于方便、严谨起见，下文所提及类与函数，如未特别标明命名空间，均为std或其子命名空间下的标准库设施。</p>
+<h1 id="std-auto-ptr的失败之处"><a href="#std-auto-ptr的失败之处" class="headerlink" title="std::auto_ptr的失败之处"></a>std::auto_ptr的失败之处</h1><p>auto_ptr在语义上是有些类似它的后辈unique_ptr的，其拷贝构造&#x2F;赋值函数并非深拷贝或浅拷贝，而是被设计成了资产的所有权转移即move语义，从而保证一份资源同时只能被一根auto_ptr所持有：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">_Ty</span>&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">auto_ptr</span> </span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">auto_ptr</span>(auto_ptr&amp; _Right) <span class="keyword">noexcept</span> : _Myptr(_Right.<span class="built_in">release</span>()) &#123;&#125;</span><br><span class="line">    <span class="function">_Ty* <span class="title">release</span><span class="params">()</span> <span class="keyword">noexcept</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        _Ty* _Tmp = _Myptr;</span><br><span class="line">        _Myptr    = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">return</span> _Tmp;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    _Ty* _Myptr; <span class="comment">// the wrapped object pointer</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，auto_ptr的copy ctor实际上执行的是C++11及以后的move ctor的工作，为此，其参数特意取消了const限定。这看似是个好设计，然而却有着致命的缺陷。考虑以下场景：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::vector&lt;std::auto_ptr&lt;<span class="type">int</span>&gt;&gt; aptrVec;</span><br><span class="line"><span class="function">std::auto_ptr&lt;<span class="type">int</span>&gt; <span class="title">aptr</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>(<span class="number">1</span>))</span></span>;</span><br><span class="line">aptrVec.<span class="built_in">push_back</span>(aptr);</span><br></pre></td></tr></table></figure>
+
+<p>或许难以想象，但这段理所应当的代码是实实在在的编译不过的。其原因是push_back时会发生拷贝构造的，而push_back的参数为<code>const _Ty&amp; _Val</code>，在发生拷贝构造时const限定的参数自然无法传入非const限定的拷贝构造函数中，从而编译失败。</p>
+<p>堂堂智能指针，竟然无法放到任何一个容器中去，何其荒诞可笑。更何况除此以外，auto_ptr依旧存在很多缺陷——这里不一一赘述，总之，在十多年前的那会儿，C++急需一套完备的智能指针来替换掉auto_ptr这个笑话。</p>
+<h1 id="std-unique-ptr如何成功？"><a href="#std-unique-ptr如何成功？" class="headerlink" title="std::unique_ptr如何成功？"></a>std::unique_ptr如何成功？</h1><blockquote>
+<p>C++标准委员会说要有unique_ptr，于是就有了unique_ptr。<br>C++标准委员会说unique_ptr是好的，于是……于是他们就忘了在C++11里加上make_unique :)<br>前面说到，auto_ptr想用copy ctor实现move语义，但却与容器库冲突，惨遭失败。想要一雪前耻，那么就需要C++11的重量级特性右值引用了。</p>
+</blockquote>
+<p>虽然我们常说，右值引用的作用是“延长右值生命周期”，即：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">Type&amp;&amp; t = Type&#123;&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>但实际上右值引用更为重要的作用是区分copy与move语义，而这一点又着重体现在C++11中由过去三法则演变而来的五法则上：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Fuxk</span></span><br><span class="line">&#123;	</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Fuxk</span>();</span><br><span class="line">    ~<span class="built_in">Fuxk</span>();</span><br><span class="line">    <span class="built_in">Fuxk</span>(<span class="type">const</span> Fuxk&amp;);</span><br><span class="line">    <span class="built_in">Fuxk</span>(Fuxk&amp;&amp;) <span class="keyword">noexcept</span>;</span><br><span class="line">    Fuxk&amp; <span class="keyword">operator</span>=(<span class="type">const</span> Fuxk&amp;);</span><br><span class="line">    Fuxk&amp; <span class="keyword">operator</span>=(Fuxk&amp;&amp;) <span class="keyword">noexcept</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>相比与C++11之前的三法则dtor、copy ctor、copy op&#x3D;，C++11新增了以右值引用作为参数的move ctor和move op&#x3D;，正式将copy语义与move语义分隔开，使得用户可以更加自由的对内存所有权进行管理。</p>
+<p>而这一切最直接的受益者之一，就是std::unique_ptr了。</p>
+<p>前面我们说，auto_ptr的目标是既要“保证一份资源同时只能被一根auto_ptr所持有”又要“支持资产所有权的转移”，这是只依靠copy语义无法完成的，而在C++11中，通过copy move语义的拆分，我们可以很自然而然的delete掉copy ctor&#x2F;op&#x3D;来保证所有权的唯一性，同时提供move ctor&#x2F;op&#x3D;来支持所有权的转移。</p>
+<p>我并没有精力去搜寻资料与论文去考据当年右值引用被提出的理由，但站在现在的视角来看，经受住了时间的考验、成功的智能指针系统毫无疑问是建立在右值引用存在的基础之上的，其二者有着千丝万缕的联系，他们共同构成了Modern C++的基石。</p>
+<hr>
+<p>这篇文章并非什么语法的辨析与讲解，讨论的也是十年前C++11的一些老东西，单纯是我在学习与思考C++发展过程中的一些发散。</p>
+<p>一直以来大多数讲述Modern C++特性的教程&#x2F;文章都会将智能指针与右值引用&#x2F;移动语义&#x2F;完美转发分成两个单独的part来讲解、而忽略其它们之间的联系，同时又几乎不约而同地忽略了失败品auto_ptr，使初学者难以领会到C++十几年间的演化历程，于是经常会看到新人开发者在社区中提问——“C++为什么要有XXX？”</p>
+<p>故此就有了这篇不成气候的随笔，希望能够给予初学者们一些思路与帮助。</p>
+]]></content>
+      <categories>
+        <category>Programming Language</category>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+        <tag>技术杂谈</tag>
       </tags>
   </entry>
 </search>

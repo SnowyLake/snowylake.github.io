@@ -11,6 +11,33 @@
   </url>
   
   <url>
+    <loc>http://snowylake.net/2023/06/11/CategoryCollection/</loc>
+    
+    <lastmod>2023-06-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://snowylake.net/2023/06/24/%E4%BB%8Eauto-ptr%E5%88%B0unique-ptr%EF%BC%9A%E6%B5%85%E8%B0%88C-%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E3%80%81%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89%E4%B8%8E%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/</loc>
+    
+    <lastmod>2023-06-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://snowylake.net/2023/06/24/%E6%9D%A5%E7%82%B9%E5%9B%BE%E7%A8%8B%E7%A0%B4%E9%98%B2%E4%B9%90%E5%AD%90/</loc>
+    
+    <lastmod>2023-06-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://snowylake.net/google147370bdb620e415.html</loc>
     
     <lastmod>2023-06-15</lastmod>
@@ -21,15 +48,6 @@
   
   <url>
     <loc>http://snowylake.net/2023/06/11/HelloWorld/</loc>
-    
-    <lastmod>2023-06-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://snowylake.net/2023/06/11/CategoryCollection/</loc>
     
     <lastmod>2023-06-13</lastmod>
     
@@ -162,7 +180,14 @@
   </url>
   
   <url>
-    <loc>http://snowylake.net/tags/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/</loc>
+    <loc>http://snowylake.net/tags/Compute-Graphics/</loc>
+    <lastmod>2023-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://snowylake.net/tags/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/</loc>
     <lastmod>2023-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -214,13 +239,6 @@
   
   <url>
     <loc>http://snowylake.net/categories/Game-Engine/Unity/URP/</loc>
-    <lastmod>2023-06-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://snowylake.net/categories/Others/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/</loc>
     <lastmod>2023-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -354,6 +372,41 @@
   
   <url>
     <loc>http://snowylake.net/categories/DCC/PCG/Substance-Designer/</loc>
+    <lastmod>2023-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://snowylake.net/categories/GPU-Programming/Shader/</loc>
+    <lastmod>2023-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://snowylake.net/categories/Programming-Language/</loc>
+    <lastmod>2023-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://snowylake.net/categories/Programming-Language/C/</loc>
+    <lastmod>2023-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://snowylake.net/categories/Programming-Language/C/</loc>
+    <lastmod>2023-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://snowylake.net/categories/Others/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/</loc>
     <lastmod>2023-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
