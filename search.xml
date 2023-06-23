@@ -144,6 +144,7 @@
 <h2 id="生成网站地图"><a href="#生成网站地图" class="headerlink" title="生成网站地图"></a>生成网站地图</h2><p>Blog根目录下执行命令:</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install hexo-generator-sitemap --save</span></span><br></pre></td></tr></table></figure>
 <p>之后每次生成都会生成新的sitemap.</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://www.lfzxb.top/the-record-of-build-site-based-on-hexo/">https://www.lfzxb.top/the-record-of-build-site-based-on-hexo/</a><br><a href="https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html">https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html</a><br><a href="https://zhuanlan.zhihu.com/p/618864711">https://zhuanlan.zhihu.com/p/618864711</a><br><a href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a><br><a href="https://hexo-next.readthedocs.io/zh_CN/latest/">https://hexo-next.readthedocs.io/zh_CN/latest/</a></p>
 ]]></content>
       <categories>
         <category>Others</category>
