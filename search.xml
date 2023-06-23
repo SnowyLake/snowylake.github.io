@@ -190,7 +190,7 @@
 <p>或许难以想象，但这段理所应当的代码是实实在在的编译不过的。其原因是push_back时会发生拷贝构造的，而push_back的参数为<code>const _Ty&amp; _Val</code>，在发生拷贝构造时const限定的参数自然无法传入非const限定的拷贝构造函数中，从而编译失败。</p>
 <p>堂堂智能指针，竟然无法放到任何一个容器中去，何其荒诞可笑。更何况除此以外，auto_ptr依旧存在很多缺陷——这里不一一赘述，总之，在十多年前的那会儿，C++急需一套完备的智能指针来替换掉auto_ptr这个笑话。</p>
 <h1 id="std-unique-ptr如何成功？"><a href="#std-unique-ptr如何成功？" class="headerlink" title="std::unique_ptr如何成功？"></a>std::unique_ptr如何成功？</h1><blockquote>
-<p>C++标准委员会说要有unique_ptr，于是就有了unique_ptr。<br>C++标准委员会说unique_ptr是好的，于是……于是他们就忘了在C++11里加上make_unique :)</p>
+<p>C++标准委员会说要有unique_ptr，于是就有了unique_ptr。<br>C++标准委员会说unique_ptr是好的，于是……于是他们就忘了在C++11里加上make_unique了 :)</p>
 </blockquote>
 <p>前面说到，auto_ptr想用copy ctor实现move语义，但却与容器库冲突，惨遭失败。想要一雪前耻，那么就需要C++11的重量级特性右值引用了。</p>
 <p>虽然我们常说，右值引用的作用是“延长右值生命周期”，即：</p>
