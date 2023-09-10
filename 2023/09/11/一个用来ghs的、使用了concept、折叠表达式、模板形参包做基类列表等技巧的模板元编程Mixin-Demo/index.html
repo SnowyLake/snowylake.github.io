@@ -19,29 +19,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"snowylake.net","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","width":280,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="原文链接: https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;456526193  快过年了，不要再讨论什么C++，图形学，模板元之类的了，你带你的C++语言的设计与演化回到家并不能给你带来任何实质性作用，朋友们打开UE4连连看就做出了好看的特效，你默默的在家里瞪着两眼看GAMES、may佬和侯捷的视频。亲戚朋友们吃饭问你收获了什么，你说我读完了RTR4和PBRT，系统的研究了基于物理的">
+    <meta name="description" content="昨天看Mixin时突发奇想，写着玩的。图一乐。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="来点图程破防乐子">
-<meta property="og:url" content="http://snowylake.net/2023/06/24/%E6%9D%A5%E7%82%B9%E5%9B%BE%E7%A8%8B%E7%A0%B4%E9%98%B2%E4%B9%90%E5%AD%90/index.html">
+<meta property="og:title" content="一个用来ghs的、使用了concept、折叠表达式、模板形参包做基类列表等技巧的模板元编程Mixin Demo">
+<meta property="og:url" content="http://snowylake.net/2023/09/11/%E4%B8%80%E4%B8%AA%E7%94%A8%E6%9D%A5ghs%E7%9A%84%E3%80%81%E4%BD%BF%E7%94%A8%E4%BA%86concept%E3%80%81%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%81%E6%A8%A1%E6%9D%BF%E5%BD%A2%E5%8F%82%E5%8C%85%E5%81%9A%E5%9F%BA%E7%B1%BB%E5%88%97%E8%A1%A8%E7%AD%89%E6%8A%80%E5%B7%A7%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%85%83%E7%BC%96%E7%A8%8BMixin-Demo/index.html">
 <meta property="og:site_name" content="雪之湖畔-SnowyLakeSide">
-<meta property="og:description" content="原文链接: https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;456526193  快过年了，不要再讨论什么C++，图形学，模板元之类的了，你带你的C++语言的设计与演化回到家并不能给你带来任何实质性作用，朋友们打开UE4连连看就做出了好看的特效，你默默的在家里瞪着两眼看GAMES、may佬和侯捷的视频。亲戚朋友们吃饭问你收获了什么，你说我读完了RTR4和PBRT，系统的研究了基于物理的">
+<meta property="og:description" content="昨天看Mixin时突发奇想，写着玩的。图一乐。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-06-23T21:59:42.000Z">
-<meta property="article:modified_time" content="2023-06-23T22:20:27.994Z">
+<meta property="article:published_time" content="2023-09-10T20:49:41.000Z">
+<meta property="article:modified_time" content="2023-09-10T20:50:35.200Z">
 <meta property="article:author" content="SnowyLake">
-<meta property="article:tag" content="闲谈">
-<meta property="article:tag" content="Compute Graphics">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="技术杂谈">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://snowylake.net/2023/06/24/%E6%9D%A5%E7%82%B9%E5%9B%BE%E7%A8%8B%E7%A0%B4%E9%98%B2%E4%B9%90%E5%AD%90/">
+<link rel="canonical" href="http://snowylake.net/2023/09/11/%E4%B8%80%E4%B8%AA%E7%94%A8%E6%9D%A5ghs%E7%9A%84%E3%80%81%E4%BD%BF%E7%94%A8%E4%BA%86concept%E3%80%81%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%81%E6%A8%A1%E6%9D%BF%E5%BD%A2%E5%8F%82%E5%8C%85%E5%81%9A%E5%9F%BA%E7%B1%BB%E5%88%97%E8%A1%A8%E7%AD%89%E6%8A%80%E5%B7%A7%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%85%83%E7%BC%96%E7%A8%8BMixin-Demo/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://snowylake.net/2023/06/24/%E6%9D%A5%E7%82%B9%E5%9B%BE%E7%A8%8B%E7%A0%B4%E9%98%B2%E4%B9%90%E5%AD%90/","path":"2023/06/24/来点图程破防乐子/","title":"来点图程破防乐子"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://snowylake.net/2023/09/11/%E4%B8%80%E4%B8%AA%E7%94%A8%E6%9D%A5ghs%E7%9A%84%E3%80%81%E4%BD%BF%E7%94%A8%E4%BA%86concept%E3%80%81%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%81%E6%A8%A1%E6%9D%BF%E5%BD%A2%E5%8F%82%E5%8C%85%E5%81%9A%E5%9F%BA%E7%B1%BB%E5%88%97%E8%A1%A8%E7%AD%89%E6%8A%80%E5%B7%A7%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%85%83%E7%BC%96%E7%A8%8BMixin-Demo/","path":"2023/09/11/一个用来ghs的、使用了concept、折叠表达式、模板形参包做基类列表等技巧的模板元编程Mixin-Demo/","title":"一个用来ghs的、使用了concept、折叠表达式、模板形参包做基类列表等技巧的模板元编程Mixin Demo"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>来点图程破防乐子 | 雪之湖畔-SnowyLakeSide</title>
+<title>一个用来ghs的、使用了concept、折叠表达式、模板形参包做基类列表等技巧的模板元编程Mixin Demo | 雪之湖畔-SnowyLakeSide</title>
   
 
 
@@ -204,7 +204,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://snowylake.net/2023/06/24/%E6%9D%A5%E7%82%B9%E5%9B%BE%E7%A8%8B%E7%A0%B4%E9%98%B2%E4%B9%90%E5%AD%90/">
+    <link itemprop="mainEntityOfPage" href="http://snowylake.net/2023/09/11/%E4%B8%80%E4%B8%AA%E7%94%A8%E6%9D%A5ghs%E7%9A%84%E3%80%81%E4%BD%BF%E7%94%A8%E4%BA%86concept%E3%80%81%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%81%E6%A8%A1%E6%9D%BF%E5%BD%A2%E5%8F%82%E5%8C%85%E5%81%9A%E5%9F%BA%E7%B1%BB%E5%88%97%E8%A1%A8%E7%AD%89%E6%8A%80%E5%B7%A7%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%85%83%E7%BC%96%E7%A8%8BMixin-Demo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/snowylake.png">
@@ -217,12 +217,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="来点图程破防乐子 | 雪之湖畔-SnowyLakeSide">
+      <meta itemprop="name" content="一个用来ghs的、使用了concept、折叠表达式、模板形参包做基类列表等技巧的模板元编程Mixin Demo | 雪之湖畔-SnowyLakeSide">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          来点图程破防乐子
+          一个用来ghs的、使用了concept、折叠表达式、模板形参包做基类列表等技巧的模板元编程Mixin Demo
         </h1>
 
         <div class="post-meta-container">
@@ -234,7 +234,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2023-06-24 05:59:42 / 修改时间：06:20:27" itemprop="dateCreated datePublished" datetime="2023-06-24T05:59:42+08:00">2023-06-24</time>
+      <time title="创建时间：2023-09-11 04:49:41 / 修改时间：04:50:35" itemprop="dateCreated datePublished" datetime="2023-09-11T04:49:41+08:00">2023-09-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -242,11 +242,11 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Others/" itemprop="url" rel="index"><span itemprop="name">Others</span></a>
+          <a href="/categories/Programming-Language/" itemprop="url" rel="index"><span itemprop="name">Programming Language</span></a>
         </span>
           ，
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Others/%E9%97%B2%E8%B0%88/" itemprop="url" rel="index"><span itemprop="name">闲谈</span></a>
+          <a href="/categories/Programming-Language/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
         </span>
     </span>
 
@@ -264,14 +264,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>516</span>
+      <span>1.7k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>3 分钟</span>
     </span>
 </div>
 
@@ -281,11 +281,10 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><blockquote>
-<p>原文链接: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/456526193">https://zhuanlan.zhihu.com/p/456526193</a></p>
-</blockquote>
-<p>快过年了，不要再讨论什么C++，图形学，模板元之类的了，你带你的C++语言的设计与演化回到家并不能给你带来任何实质性作用，朋友们打开UE4连连看就做出了好看的特效，你默默的在家里瞪着两眼看GAMES、may佬和侯捷的视频。<br>亲戚朋友们吃饭问你收获了什么，你说我读完了RTR4和PBRT，系统的研究了基于物理的渲染和非真实感渲染，还用C++20重构了自己的渲染器。亲戚们懵逼了，你还在心里默默嘲笑他们，笑他们不懂C++和计算机图形学，不懂光照方程，不懂RAII和CRTP，也笑他们连Shader是什么都不知道。<br>你父母的同事都在说自己儿女一年的收获，有的用Java做了个网站后端赚到了第一笔外快，有的用Python做了点数据可视化发到B站成了up主，有的学了Unity和C#做独立游戏已经发售了。<br>你的父母默默无言，说我的儿子买了一整套的Effective C++，上Stack Overflow痛骂了C++标准委员会，写了一堆狗屁不通报错几百几千行的模板元编程代码，还对着谷歌翻译啃Ray Tracing the Rest of Your Life，人也越来越魔怔了。</p>
+    <div class="post-body" itemprop="articleBody"><p>昨天看Mixin时突发奇想，写着玩的。图一乐。</p>
 <span id="more"></span>
+<p>直接上代码，受限于平台，Show()部分自行脑补。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;concepts&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">concept</span> IsSexuality = <span class="keyword">requires</span>&#123; T::<span class="built_in">Show</span>(); &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;IsSexuality... Sexuality&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">GirlFriend</span> :<span class="keyword">private</span> Sexuality...</span><br><span class="line">&#123;</span><br><span class="line">	<span class="function"><span class="keyword">constexpr</span> <span class="title">GirlFriend</span><span class="params">()</span> :Sexuality()... &#123;</span>&#125;</span><br><span class="line">	<span class="function"><span class="keyword">constexpr</span> <span class="type">void</span> <span class="title">ShowSexuality</span><span class="params">()</span> <span class="type">const</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;I have a girl friend.\n&quot;</span>;</span><br><span class="line">		<span class="function"><span class="keyword">if</span> <span class="title">constexpr</span> <span class="params">(<span class="keyword">sizeof</span>...(Sexuality) &gt; <span class="number">0</span>)</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			std::cout &lt;&lt; <span class="string">&quot;She can:\n&quot;</span>;</span><br><span class="line">			((Sexuality::<span class="built_in">Show</span>()), ...);</span><br><span class="line">		&#125; <span class="keyword">else</span></span><br><span class="line">		&#123; std::cout &lt;&lt; <span class="string">&quot;She was a virgin.\n&quot;</span>; &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">MakeLoveable</span></span><br><span class="line">&#123; <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;Make love with me.\n&quot;</span>; &#125; &#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">BlowJobable</span></span><br><span class="line">&#123; <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;BlowJob.\n&quot;</span>; &#125; &#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">FootJobable</span></span><br><span class="line">&#123; <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;FootJob.\n&quot;</span>; &#125; &#125;;</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">concept</span> IsSexSkill = IsSexuality&lt;T&gt; &amp;&amp; !std::same_as&lt;T, MakeLoveable&gt;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;IsSexSkill... SexSkills&gt;</span><br><span class="line"><span class="keyword">using</span> ReallyGirlFriend = GirlFriend&lt;MakeLoveable, SexSkills...&gt;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">constexpr</span> GirlFriend girlFriend;</span><br><span class="line">	<span class="keyword">constexpr</span> ReallyGirlFriend&lt;&gt; reallyGirlFriend;</span><br><span class="line">	<span class="keyword">constexpr</span> ReallyGirlFriend&lt;BlowJobable, FootJobable&gt; sexyGirlFriend;</span><br><span class="line">	girlFriend.<span class="built_in">ShowSexuality</span>();</span><br><span class="line">	reallyGirlFriend.<span class="built_in">ShowSexuality</span>();</span><br><span class="line">	sexyGirlFriend.<span class="built_in">ShowSexuality</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//output:</span></span><br><span class="line"><span class="comment">/*------------------------</span></span><br><span class="line"><span class="comment">I have a girl friend.</span></span><br><span class="line"><span class="comment">She was a virgin.</span></span><br><span class="line"><span class="comment">I have a girl friend.</span></span><br><span class="line"><span class="comment">She can:</span></span><br><span class="line"><span class="comment">Make love with me.</span></span><br><span class="line"><span class="comment">I have a girl friend.</span></span><br><span class="line"><span class="comment">She can:</span></span><br><span class="line"><span class="comment">Make love with me.</span></span><br><span class="line"><span class="comment">BlowJob.</span></span><br><span class="line"><span class="comment">FootJob.</span></span><br><span class="line"><span class="comment">------------------------*/</span></span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -302,7 +301,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="http://snowylake.net/2023/06/24/%E6%9D%A5%E7%82%B9%E5%9B%BE%E7%A8%8B%E7%A0%B4%E9%98%B2%E4%B9%90%E5%AD%90/" title="来点图程破防乐子">http://snowylake.net/2023/06/24/来点图程破防乐子/</a>
+      <a href="http://snowylake.net/2023/09/11/%E4%B8%80%E4%B8%AA%E7%94%A8%E6%9D%A5ghs%E7%9A%84%E3%80%81%E4%BD%BF%E7%94%A8%E4%BA%86concept%E3%80%81%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%81%E6%A8%A1%E6%9D%BF%E5%BD%A2%E5%8F%82%E5%8C%85%E5%81%9A%E5%9F%BA%E7%B1%BB%E5%88%97%E8%A1%A8%E7%AD%89%E6%8A%80%E5%B7%A7%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%85%83%E7%BC%96%E7%A8%8BMixin-Demo/" title="一个用来ghs的、使用了concept、折叠表达式、模板形参包做基类列表等技巧的模板元编程Mixin Demo">http://snowylake.net/2023/09/11/一个用来ghs的、使用了concept、折叠表达式、模板形参包做基类列表等技巧的模板元编程Mixin-Demo/</a>
   </li>
   <li class="post-copyright-license">
       <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -311,22 +310,19 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/%E9%97%B2%E8%B0%88/" rel="tag"># 闲谈</a>
-              <a href="/tags/Compute-Graphics/" rel="tag"># Compute Graphics</a>
+              <a href="/tags/C/" rel="tag"># C++</a>
+              <a href="/tags/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/" rel="tag"># 技术杂谈</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2023/06/12/SnowyArkEngine%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B00x00/" rel="prev" title="SnowyArkEngine开发笔记[0x00]: 写在最前">
-                  <i class="fa fa-chevron-left"></i> SnowyArkEngine开发笔记[0x00]: 写在最前
+                <a href="/2023/09/11/%E5%85%B3%E4%BA%8Estd-optional%E4%BC%A0%E9%80%92%E5%BC%80%E9%94%80%E7%9A%84%E8%AE%A8%E8%AE%BA%E4%B8%8E%E4%BC%98%E5%8C%96/" rel="prev" title="关于std::optional传递开销的讨论与优化">
+                  <i class="fa fa-chevron-left"></i> 关于std::optional传递开销的讨论与优化
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2023/06/24/%E4%BB%8Eauto-ptr%E5%88%B0unique-ptr%EF%BC%9A%E6%B5%85%E8%B0%88C-%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E3%80%81%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89%E4%B8%8E%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/" rel="next" title="从auto_ptr到unique_ptr：浅谈C++右值引用、移动语义与智能指针">
-                  从auto_ptr到unique_ptr：浅谈C++右值引用、移动语义与智能指针 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
