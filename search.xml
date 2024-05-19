@@ -7,28 +7,19 @@
       <categories>
         <category>Game Engine</category>
         <category>Others</category>
-        <category>Game Engine Development</category>
         <category>Unity</category>
         <category>闲谈</category>
         <category>Programming Language</category>
-        <category>SnowyArk</category>
-        <category>URP</category>
         <category>Unreal</category>
         <category>Cpp</category>
         <category>HDRP</category>
-        <category>SnowyOwl</category>
-        <category>Piccolo</category>
-        <category>Unreal/SnowyFalcon</category>
         <category>GPU Programming</category>
-        <category>Rendering</category>
-        <category>Shader</category>
         <category>Graphics API</category>
         <category>OpenGL</category>
         <category>Vulkan</category>
         <category>DirectX 11</category>
         <category>DirectX 12</category>
         <category>CUDA</category>
-        <category>Cshape</category>
         <category>DCC</category>
         <category>3ds Max</category>
         <category>Blender</category>
@@ -36,6 +27,11 @@
         <category>Houdini</category>
         <category>Substance Designer</category>
         <category>技术杂谈</category>
+        <category>URP/SnowyOwl</category>
+        <category>SnowyArk</category>
+        <category>SnowyFalcon</category>
+        <category>CSharp</category>
+        <category>TypeScript</category>
       </categories>
   </entry>
   <entry>
@@ -59,11 +55,10 @@
     <url>/2023/06/12/SnowyArkEngine%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B00x00/</url>
     <content><![CDATA[<span id="more"></span>]]></content>
       <categories>
-        <category>Game Engine Development</category>
+        <category>Game Engine</category>
         <category>SnowyArk</category>
       </categories>
       <tags>
-        <tag>Game Engine Development</tag>
         <tag>SnowyArk Engine</tag>
         <tag>Cpp</tag>
       </tags>
@@ -77,6 +72,15 @@
 <p>原文链接: <a href="https://zhuanlan.zhihu.com/p/575618981">https://zhuanlan.zhihu.com/p/575618981</a></p>
 </blockquote>
 ]]></content>
+      <categories>
+        <category>Game Engine</category>
+        <category>Unreal</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>Rendering</tag>
+        <tag>Unreal</tag>
+      </tags>
   </entry>
   <entry>
     <title>URP延迟渲染+Native Renderpass踩坑记录</title>
@@ -121,6 +125,17 @@
 <p>原文链接: <a href="https://zhuanlan.zhihu.com/p/574540329">https://zhuanlan.zhihu.com/p/574540329</a></p>
 </blockquote>
 ]]></content>
+      <categories>
+        <category>Game Engine</category>
+        <category>Unity</category>
+        <category>URP/SnowyOwl</category>
+      </categories>
+      <tags>
+        <tag>Unity</tag>
+        <tag>URP</tag>
+        <tag>Rendering</tag>
+        <tag>CSharp</tag>
+      </tags>
   </entry>
   <entry>
     <title>UE5.1移动端延迟管线基于Light Channels模拟Unity Rendering Layers</title>
@@ -131,6 +146,15 @@
 <p>原文链接: <a href="https://zhuanlan.zhihu.com/p/577239276">https://zhuanlan.zhihu.com/p/577239276</a></p>
 </blockquote>
 ]]></content>
+      <categories>
+        <category>Game Engine</category>
+        <category>Unreal</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>Rendering</tag>
+        <tag>Unreal</tag>
+      </tags>
   </entry>
   <entry>
     <title>为美好的URP献上解析[0x00]: 管线架构</title>
@@ -139,14 +163,13 @@
       <categories>
         <category>Game Engine</category>
         <category>Unity</category>
-        <category>URP</category>
+        <category>URP/SnowyOwl</category>
       </categories>
       <tags>
         <tag>Unity</tag>
         <tag>URP</tag>
         <tag>Rendering</tag>
-        <tag>Cshape</tag>
-        <tag>HLSL</tag>
+        <tag>CSharp</tag>
       </tags>
   </entry>
   <entry>
@@ -289,6 +312,7 @@
         <category>Unreal</category>
       </categories>
       <tags>
+        <tag>Cpp</tag>
         <tag>Rendering</tag>
         <tag>Unreal</tag>
       </tags>
@@ -302,6 +326,15 @@
 <p>原文链接: <a href="https://zhuanlan.zhihu.com/p/551343308">https://zhuanlan.zhihu.com/p/551343308</a></p>
 </blockquote>
 ]]></content>
+      <categories>
+        <category>Game Engine</category>
+        <category>Unreal</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>Rendering</tag>
+        <tag>Unreal</tag>
+      </tags>
   </entry>
   <entry>
     <title>关于std::optional传递开销的讨论与优化</title>
@@ -457,5 +490,14 @@
 <p>原文链接: <a href="https://zhuanlan.zhihu.com/p/574551808">https://zhuanlan.zhihu.com/p/574551808</a></p>
 </blockquote>
 ]]></content>
+      <categories>
+        <category>Game Engine</category>
+        <category>Unreal</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>Rendering</tag>
+        <tag>Unreal</tag>
+      </tags>
   </entry>
 </search>
