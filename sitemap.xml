@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://snowylake.net/about/index.html</loc>
+    
+    <lastmod>2024-05-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://snowylake.net/2023/06/11/CategoryCollection/</loc>
     
     <lastmod>2024-05-19</lastmod>
@@ -149,15 +158,6 @@
     <loc>http://snowylake.net/2023/06/11/HelloWorld/</loc>
     
     <lastmod>2023-06-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://snowylake.net/about/index.html</loc>
-    
-    <lastmod>2023-06-11</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
