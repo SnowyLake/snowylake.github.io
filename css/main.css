@@ -2541,7 +2541,7 @@ header.header {
   }
 }
 body {
-  background-image: url("/images/background.jpg");
+  background-image: url("/images/background_0.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -2558,9 +2558,4 @@ body {
 }
 .popup {
   opacity: 0.9;
-}
-.post-block {
-  padding: 25px;
-  -webkit-box-shadow: 0 0 5px rgba(202,203,203,0.5);
-  -moz-box-shadow: 0 0 5px rgba(202,203,204,0.5);
 }
