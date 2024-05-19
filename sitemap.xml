@@ -277,13 +277,6 @@
 
   
   <url>
-    <loc>http://snowylake.net/categories/Game-Engine/</loc>
-    <lastmod>2024-05-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://snowylake.net/categories/Others/</loc>
     <lastmod>2024-05-19</lastmod>
     <changefreq>weekly</changefreq>
@@ -298,14 +291,14 @@
   </url>
   
   <url>
-    <loc>http://snowylake.net/categories/Game-Engine/Unity/</loc>
+    <loc>http://snowylake.net/categories/Others/%E9%97%B2%E8%B0%88/</loc>
     <lastmod>2024-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://snowylake.net/categories/Others/%E9%97%B2%E8%B0%88/</loc>
+    <loc>http://snowylake.net/categories/Game-Engine/</loc>
     <lastmod>2024-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -326,7 +319,7 @@
   </url>
   
   <url>
-    <loc>http://snowylake.net/categories/Game-Engine/Unity/URP/</loc>
+    <loc>http://snowylake.net/categories/Game-Engine/Unity/</loc>
     <lastmod>2024-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -341,6 +334,13 @@
   
   <url>
     <loc>http://snowylake.net/categories/Programming-Language/Cpp/</loc>
+    <lastmod>2024-05-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://snowylake.net/categories/Game-Engine/Unity/URP/</loc>
     <lastmod>2024-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
