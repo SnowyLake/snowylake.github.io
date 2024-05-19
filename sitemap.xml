@@ -219,13 +219,6 @@
   </url>
   
   <url>
-    <loc>http://snowylake.net/tags/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/</loc>
-    <lastmod>2024-05-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://snowylake.net/tags/Unity/</loc>
     <lastmod>2024-05-19</lastmod>
     <changefreq>weekly</changefreq>
@@ -255,6 +248,13 @@
   
   <url>
     <loc>http://snowylake.net/tags/HLSL/</loc>
+    <lastmod>2024-05-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://snowylake.net/tags/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/</loc>
     <lastmod>2024-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -305,14 +305,14 @@
   </url>
   
   <url>
-    <loc>http://snowylake.net/categories/Programming-Language/</loc>
+    <loc>http://snowylake.net/categories/Others/%E9%97%B2%E8%B0%88/</loc>
     <lastmod>2024-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://snowylake.net/categories/Others/%E9%97%B2%E8%B0%88/</loc>
+    <loc>http://snowylake.net/categories/Programming-Language/</loc>
     <lastmod>2024-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
