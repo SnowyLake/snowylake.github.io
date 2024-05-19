@@ -1,72 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello world!</title>
-    <url>/2023/06/11/HelloWorld/</url>
-    <content><![CDATA[<p>花有重开日, 人无再少年.</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout &lt;&lt; std::format(<span class="string">&quot;Hello world!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p><img src="/2023/06/11/HelloWorld/../HelloWorld/image.jpg" alt="HelloWorld"></p>
-]]></content>
-      <categories>
-        <category>Others</category>
-        <category>闲谈</category>
-      </categories>
-      <tags>
-        <tag>闲谈</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SnowyArkEngine开发笔记[0x00]: 写在最前</title>
-    <url>/2023/06/12/SnowyArkEngine%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B00x00/</url>
-    <content><![CDATA[<span id="more"></span>]]></content>
-      <categories>
-        <category>Game Engine Development</category>
-        <category>SnowyArk</category>
-      </categories>
-      <tags>
-        <tag>Game Engine Development</tag>
-        <tag>SnowyArk Engine</tag>
-        <tag>Cpp</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>UE5.1移动端延迟渲染管线测试与剖析</title>
-    <url>/2023/09/11/UE5-1%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BB%B6%E8%BF%9F%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%89%96%E6%9E%90/</url>
-    <content><![CDATA[<span id="more"></span>
-<p>待搬运, 内容详见原文链接.</p>
-<blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/575618981">https://zhuanlan.zhihu.com/p/575618981</a></p>
-</blockquote>
-]]></content>
-  </entry>
-  <entry>
-    <title>UE5.1移动端延迟管线基于Light Channels模拟Unity Rendering Layers</title>
-    <url>/2023/09/11/UE5-1%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BB%B6%E8%BF%9F%E7%AE%A1%E7%BA%BF%E5%9F%BA%E4%BA%8ELight-Channels%E6%A8%A1%E6%8B%9FUnity-Rendering-Layers/</url>
-    <content><![CDATA[<span id="more"></span>
-<p>待搬运, 内容详见原文链接.</p>
-<blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/577239276">https://zhuanlan.zhihu.com/p/577239276</a></p>
-</blockquote>
-]]></content>
-  </entry>
-  <entry>
     <title>CategoryCollection</title>
     <url>/2023/06/11/CategoryCollection/</url>
     <content><![CDATA[<span id="more"></span>]]></content>
       <categories>
-        <category>Others</category>
-        <category>Game Engine Development</category>
-        <category>闲谈</category>
         <category>Game Engine</category>
-        <category>Programming Language</category>
-        <category>SnowyArk</category>
+        <category>Others</category>
         <category>Unity</category>
+        <category>Programming Language</category>
+        <category>闲谈</category>
+        <category>URP</category>
         <category>Unreal</category>
         <category>Cpp</category>
-        <category>URP</category>
         <category>HDRP</category>
         <category>SnowyOwl</category>
+        <category>Game Engine Development</category>
+        <category>SnowyArk</category>
         <category>Piccolo</category>
         <category>Unreal/SnowyFalcon</category>
         <category>GPU Programming</category>
@@ -89,94 +39,40 @@
       </categories>
   </entry>
   <entry>
-    <title>一个用来ghs的、使用了concept、折叠表达式、模板形参包做基类列表等技巧的模板元编程Mixin Demo</title>
-    <url>/2023/09/11/%E4%B8%80%E4%B8%AA%E7%94%A8%E6%9D%A5ghs%E7%9A%84%E3%80%81%E4%BD%BF%E7%94%A8%E4%BA%86concept%E3%80%81%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%81%E6%A8%A1%E6%9D%BF%E5%BD%A2%E5%8F%82%E5%8C%85%E5%81%9A%E5%9F%BA%E7%B1%BB%E5%88%97%E8%A1%A8%E7%AD%89%E6%8A%80%E5%B7%A7%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%85%83%E7%BC%96%E7%A8%8BMixin-Demo/</url>
-    <content><![CDATA[<p>昨天看Mixin时突发奇想，写着玩的。图一乐。</p>
+    <title>Hello world!</title>
+    <url>/2023/06/11/HelloWorld/</url>
+    <content><![CDATA[<p>花有重开日, 人无再少年.</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout &lt;&lt; std::format(<span class="string">&quot;Hello world!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <span id="more"></span>
-<p>直接上代码，受限于平台，Show()部分自行脑补。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;concepts&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">concept</span> IsSexuality = <span class="keyword">requires</span>&#123; T::<span class="built_in">Show</span>(); &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;IsSexuality... Sexuality&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">GirlFriend</span> :<span class="keyword">private</span> Sexuality...</span><br><span class="line">&#123;</span><br><span class="line">	<span class="function"><span class="keyword">constexpr</span> <span class="title">GirlFriend</span><span class="params">()</span> :Sexuality()... &#123;</span>&#125;</span><br><span class="line">	<span class="function"><span class="keyword">constexpr</span> <span class="type">void</span> <span class="title">ShowSexuality</span><span class="params">()</span> <span class="type">const</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;I have a girl friend.\n&quot;</span>;</span><br><span class="line">		<span class="function"><span class="keyword">if</span> <span class="title">constexpr</span> <span class="params">(<span class="keyword">sizeof</span>...(Sexuality) &gt; <span class="number">0</span>)</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			std::cout &lt;&lt; <span class="string">&quot;She can:\n&quot;</span>;</span><br><span class="line">			((Sexuality::<span class="built_in">Show</span>()), ...);</span><br><span class="line">		&#125; <span class="keyword">else</span></span><br><span class="line">		&#123; std::cout &lt;&lt; <span class="string">&quot;She was a virgin.\n&quot;</span>; &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">MakeLoveable</span></span><br><span class="line">&#123; <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;Make love with me.\n&quot;</span>; &#125; &#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">BlowJobable</span></span><br><span class="line">&#123; <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;BlowJob.\n&quot;</span>; &#125; &#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">FootJobable</span></span><br><span class="line">&#123; <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;FootJob.\n&quot;</span>; &#125; &#125;;</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">concept</span> IsSexSkill = IsSexuality&lt;T&gt; &amp;&amp; !std::same_as&lt;T, MakeLoveable&gt;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;IsSexSkill... SexSkills&gt;</span><br><span class="line"><span class="keyword">using</span> ReallyGirlFriend = GirlFriend&lt;MakeLoveable, SexSkills...&gt;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">constexpr</span> GirlFriend girlFriend;</span><br><span class="line">	<span class="keyword">constexpr</span> ReallyGirlFriend&lt;&gt; reallyGirlFriend;</span><br><span class="line">	<span class="keyword">constexpr</span> ReallyGirlFriend&lt;BlowJobable, FootJobable&gt; sexyGirlFriend;</span><br><span class="line">	girlFriend.<span class="built_in">ShowSexuality</span>();</span><br><span class="line">	reallyGirlFriend.<span class="built_in">ShowSexuality</span>();</span><br><span class="line">	sexyGirlFriend.<span class="built_in">ShowSexuality</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//output:</span></span><br><span class="line"><span class="comment">/*------------------------</span></span><br><span class="line"><span class="comment">I have a girl friend.</span></span><br><span class="line"><span class="comment">She was a virgin.</span></span><br><span class="line"><span class="comment">I have a girl friend.</span></span><br><span class="line"><span class="comment">She can:</span></span><br><span class="line"><span class="comment">Make love with me.</span></span><br><span class="line"><span class="comment">I have a girl friend.</span></span><br><span class="line"><span class="comment">She can:</span></span><br><span class="line"><span class="comment">Make love with me.</span></span><br><span class="line"><span class="comment">BlowJob.</span></span><br><span class="line"><span class="comment">FootJob.</span></span><br><span class="line"><span class="comment">------------------------*/</span></span><br></pre></td></tr></table></figure>
-<p><img src="/2023/09/11/%E4%B8%80%E4%B8%AA%E7%94%A8%E6%9D%A5ghs%E7%9A%84%E3%80%81%E4%BD%BF%E7%94%A8%E4%BA%86concept%E3%80%81%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%81%E6%A8%A1%E6%9D%BF%E5%BD%A2%E5%8F%82%E5%8C%85%E5%81%9A%E5%9F%BA%E7%B1%BB%E5%88%97%E8%A1%A8%E7%AD%89%E6%8A%80%E5%B7%A7%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%85%83%E7%BC%96%E7%A8%8BMixin-Demo/../%E4%B8%80%E4%B8%AA%E7%94%A8%E6%9D%A5ghs%E7%9A%84%E3%80%81%E4%BD%BF%E7%94%A8%E4%BA%86concept%E3%80%81%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%81%E6%A8%A1%E6%9D%BF%E5%BD%A2%E5%8F%82%E5%8C%85%E5%81%9A%E5%9F%BA%E7%B1%BB%E5%88%97%E8%A1%A8%E7%AD%89%E6%8A%80%E5%B7%A7%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%85%83%E7%BC%96%E7%A8%8BMixin-Demo/image.png" alt="Alt text"></p>
-<blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/460970247">https://zhuanlan.zhihu.com/p/460970247</a></p>
-</blockquote>
+<p><img src="/2023/06/11/HelloWorld/../HelloWorld/image.jpg" alt="HelloWorld"></p>
 ]]></content>
       <categories>
-        <category>Programming Language</category>
-        <category>Cpp</category>
+        <category>Others</category>
+        <category>闲谈</category>
       </categories>
       <tags>
-        <tag>Cpp</tag>
-        <tag>技术杂谈</tag>
+        <tag>闲谈</tag>
       </tags>
   </entry>
   <entry>
-    <title>一个C++20下的string split实现</title>
-    <url>/2023/09/11/%E4%B8%80%E4%B8%AAC-20%E4%B8%8B%E7%9A%84string-split%E5%AE%9E%E7%8E%B0/</url>
-    <content><![CDATA[<p>众所周知，C++一直没有一个官方提供的string split用于分割字符串，在过去（C++20之前）我们可能需要使用std::regex、std::string::find系列方法、甚至是继承自C的strtok函数来自行封装一个split，非常繁琐与不便。<br>然而，这一切都在C++20中发生了变化。C++20引入了范围库ranges，其中提供的两个范围适配器std::split、std::lazy_split可以使我们以一种更为优雅的形式实现split。</p>
-<span id="more"></span>
-
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;concept&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ranges&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;format&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> stdr  std::ranges</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> stdrv std::ranges::views</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> Container = std::vector, <span class="keyword">typename</span> Arg = std::string_view&gt;</span><br><span class="line"><span class="keyword">auto</span> <span class="built_in">Split</span>(std::string_view str, std::string_view delimiter)</span><br><span class="line">&#123;</span><br><span class="line">	Container&lt;Arg&gt; myCont;</span><br><span class="line">	<span class="keyword">auto</span> temp = str </span><br><span class="line">		| stdrv::<span class="built_in">split</span>(delimiter)</span><br><span class="line">		| stdrv::<span class="built_in">transform</span>([](<span class="keyword">auto</span>&amp;&amp; r)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="built_in">Arg</span>(std::<span class="built_in">addressof</span>(*r.<span class="built_in">begin</span>()), stdr::<span class="built_in">distance</span>(r));</span><br><span class="line">			&#125;);</span><br><span class="line">	<span class="keyword">auto</span> iter = std::<span class="built_in">inserter</span>(myCont, myCont.<span class="built_in">end</span>());</span><br><span class="line">	stdr::for_each(temp, [&amp;](<span class="keyword">auto</span>&amp;&amp; x) &#123; iter = &#123;x.<span class="built_in">begin</span>(), x.<span class="built_in">end</span>()&#125;; &#125;);</span><br><span class="line">	<span class="keyword">return</span> myCont;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::string str = <span class="string">&quot;Hello233C++20233and233New233Spilt&quot;</span>;</span><br><span class="line">	std::string delimiter = <span class="string">&quot;233&quot;</span>;</span><br><span class="line">	<span class="keyword">auto</span>&amp;&amp; strCont = <span class="built_in">Split</span>&lt;std::list, std::string&gt;(str, delimiter);</span><br><span class="line">	stdr::for_each(strCont, [](<span class="keyword">auto</span>&amp;&amp; x) &#123; std::cout &lt;&lt; std::format(<span class="string">&quot;&#123;&#125; &quot;</span>, x); &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//output: Hello C++20 and New Spilt</span></span><br></pre></td></tr></table></figure>
-<hr>
-<p>PS：std::split与std::lazy_split存在细微区别，在此不作详细说明，感兴趣可以参考：<br><a href="https://stackoverflow.com/questions/68067612/what-is-the-difference-between-the-split-view-and-the-lazy-split-view-in-c">https://stackoverflow.com/questions/68067612/what-is-the-difference-between-the-split-view-and-the-lazy-split-view-in-c</a><br>PS2：C++20没有提供关键的ranges::to<container>函数，导致demo中还需要额外封装并手写for_each来写入数据，等到C++23实装了该函数，split的实现会比现在简洁优雅的多，真正做到方便泛用、无需封装：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span>&amp;&amp; strCont = str</span><br><span class="line">	| stdrv::<span class="built_in">lazy_split</span>(delimiter)</span><br><span class="line">	| stdr ::to&lt;std::vector&lt;std::string&gt;&gt;;</span><br></pre></td></tr></table></figure>
-
+    <title>UE5.1移动端延迟渲染管线测试与剖析</title>
+    <url>/2023/09/11/UE5-1%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BB%B6%E8%BF%9F%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%89%96%E6%9E%90/</url>
+    <content><![CDATA[<span id="more"></span>
+<p>待搬运, 内容详见原文链接.</p>
 <blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/474447289">https://zhuanlan.zhihu.com/p/474447289</a></p>
+<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/575618981">https://zhuanlan.zhihu.com/p/575618981</a></p>
 </blockquote>
 ]]></content>
-      <categories>
-        <category>Programming Language</category>
-        <category>Cpp</category>
-      </categories>
-      <tags>
-        <tag>Cpp</tag>
-        <tag>技术杂谈</tag>
-      </tags>
   </entry>
   <entry>
-    <title>从auto_ptr到unique_ptr：浅谈C++右值引用、移动语义与智能指针</title>
-    <url>/2023/06/24/%E4%BB%8Eauto-ptr%E5%88%B0unique-ptr%EF%BC%9A%E6%B5%85%E8%B0%88C-%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E3%80%81%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89%E4%B8%8E%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/</url>
-    <content><![CDATA[<p>std::auto_ptr是C++03对智能指针的第一次尝试，作为一个失败品，其甚至已然在后续的标准中被移除，但时至今日，我们依然可以透过它一窥C++发展史的一角。</p>
-<span id="more"></span>
-<p>出于方便、严谨起见，下文所提及类与函数，如未特别标明命名空间，均为std或其子命名空间下的标准库设施。</p>
-<h1 id="std-auto-ptr的失败之处"><a href="#std-auto-ptr的失败之处" class="headerlink" title="std::auto_ptr的失败之处"></a>std::auto_ptr的失败之处</h1><p>auto_ptr在语义上是有些类似它的后辈unique_ptr的，其拷贝构造&#x2F;赋值函数并非深拷贝或浅拷贝，而是被设计成了资产的所有权转移即move语义，从而保证一份资源同时只能被一根auto_ptr所持有：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">_Ty</span>&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">auto_ptr</span> </span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">auto_ptr</span>(auto_ptr&amp; _Right) <span class="keyword">noexcept</span> : _Myptr(_Right.<span class="built_in">release</span>()) &#123;&#125;</span><br><span class="line">    <span class="function">_Ty* <span class="title">release</span><span class="params">()</span> <span class="keyword">noexcept</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        _Ty* _Tmp = _Myptr;</span><br><span class="line">        _Myptr    = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">return</span> _Tmp;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    _Ty* _Myptr; <span class="comment">// the wrapped object pointer</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以看到，auto_ptr的copy ctor实际上执行的是C++11及以后的move ctor的工作，为此，其参数特意取消了const限定。这看似是个好设计，然而却有着致命的缺陷。考虑以下场景：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::vector&lt;std::auto_ptr&lt;<span class="type">int</span>&gt;&gt; aptrVec;</span><br><span class="line"><span class="function">std::auto_ptr&lt;<span class="type">int</span>&gt; <span class="title">aptr</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>(<span class="number">1</span>))</span></span>;</span><br><span class="line">aptrVec.<span class="built_in">push_back</span>(aptr);</span><br></pre></td></tr></table></figure>
-
-<p>或许难以想象，但这段理所应当的代码是实实在在的编译不过的。其原因是push_back时会发生拷贝构造的，而push_back的参数为<code>const _Ty&amp; _Val</code>，在发生拷贝构造时const限定的参数自然无法传入非const限定的拷贝构造函数中，从而编译失败。</p>
-<p>堂堂智能指针，竟然无法放到任何一个容器中去，何其荒诞可笑。更何况除此以外，auto_ptr依旧存在很多缺陷——这里不一一赘述，总之，在十多年前的那会儿，C++急需一套完备的智能指针来替换掉auto_ptr这个笑话。</p>
-<h1 id="std-unique-ptr如何成功？"><a href="#std-unique-ptr如何成功？" class="headerlink" title="std::unique_ptr如何成功？"></a>std::unique_ptr如何成功？</h1><blockquote>
-<p>C++标准委员会说要有unique_ptr，于是就有了unique_ptr。<br>C++标准委员会说unique_ptr是好的，于是……于是他们就忘了在C++11里加上make_unique了 :)</p>
-</blockquote>
-<p>前面说到，auto_ptr想用copy ctor实现move语义，但却与容器库冲突，惨遭失败。想要一雪前耻，那么就需要C++11的重量级特性右值引用了。</p>
-<p>虽然我们常说，右值引用的作用是“延长右值生命周期”，即：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">Type&amp;&amp; t = Type&#123;&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>但实际上右值引用更为重要的作用是区分copy与move语义，而这一点又着重体现在C++11中由过去三法则演变而来的五法则上：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Fuxk</span></span><br><span class="line">&#123;	</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Fuxk</span>();</span><br><span class="line">    ~<span class="built_in">Fuxk</span>();</span><br><span class="line">    <span class="built_in">Fuxk</span>(<span class="type">const</span> Fuxk&amp;);</span><br><span class="line">    <span class="built_in">Fuxk</span>(Fuxk&amp;&amp;) <span class="keyword">noexcept</span>;</span><br><span class="line">    Fuxk&amp; <span class="keyword">operator</span>=(<span class="type">const</span> Fuxk&amp;);</span><br><span class="line">    Fuxk&amp; <span class="keyword">operator</span>=(Fuxk&amp;&amp;) <span class="keyword">noexcept</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>相比与C++11之前的三法则dtor、copy ctor、copy op&#x3D;，C++11新增了以右值引用作为参数的move ctor和move op&#x3D;，正式将copy语义与move语义分隔开，使得用户可以更加自由的对内存所有权进行管理。</p>
-<p>而这一切最直接的受益者之一，就是std::unique_ptr了。</p>
-<p>前面我们说，auto_ptr的目标是既要“保证一份资源同时只能被一根auto_ptr所持有”又要“支持资产所有权的转移”，这是只依靠copy语义无法完成的，而在C++11中，通过copy move语义的拆分，我们可以很自然而然的delete掉copy ctor&#x2F;op&#x3D;来保证所有权的唯一性，同时提供move ctor&#x2F;op&#x3D;来支持所有权的转移。</p>
-<p>我并没有精力去搜寻资料与论文去考据当年右值引用被提出的理由，但站在现在的视角来看，经受住了时间的考验、成功的智能指针系统毫无疑问是建立在右值引用存在的基础之上的，其二者有着千丝万缕的联系，他们共同构成了Modern C++的基石。</p>
-<hr>
-<p>这篇文章并非什么语法的辨析与讲解，讨论的也是十年前C++11的一些老东西，单纯是我在学习与思考C++发展过程中的一些发散。</p>
-<p>一直以来大多数讲述Modern C++特性的教程&#x2F;文章都会将智能指针与右值引用&#x2F;移动语义&#x2F;完美转发分成两个单独的part来讲解、而忽略其它们之间的联系，同时又几乎不约而同地忽略了失败品auto_ptr，使初学者难以领会到C++十几年间的演化历程，于是经常会看到新人开发者在社区中提问——“C++为什么要有XXX？”</p>
-<p>故此就有了这篇不成气候的随笔，希望能够给予初学者们一些思路与帮助。</p>
+    <title>UE5.1移动端延迟管线基于Light Channels模拟Unity Rendering Layers</title>
+    <url>/2023/09/11/UE5-1%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BB%B6%E8%BF%9F%E7%AE%A1%E7%BA%BF%E5%9F%BA%E4%BA%8ELight-Channels%E6%A8%A1%E6%8B%9FUnity-Rendering-Layers/</url>
+    <content><![CDATA[<span id="more"></span>
+<p>待搬运, 内容详见原文链接.</p>
 <blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/551883955">https://zhuanlan.zhihu.com/p/551883955</a></p>
+<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/577239276">https://zhuanlan.zhihu.com/p/577239276</a></p>
 </blockquote>
 ]]></content>
-      <categories>
-        <category>Programming Language</category>
-        <category>Cpp</category>
-      </categories>
-      <tags>
-        <tag>Cpp</tag>
-        <tag>技术杂谈</tag>
-      </tags>
   </entry>
   <entry>
     <title>URP延迟渲染+Native Renderpass踩坑记录</title>
@@ -223,6 +119,51 @@
 ]]></content>
   </entry>
   <entry>
+    <title>一个C++20下的string split实现</title>
+    <url>/2023/09/11/%E4%B8%80%E4%B8%AAC-20%E4%B8%8B%E7%9A%84string-split%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<p>众所周知，C++一直没有一个官方提供的string split用于分割字符串，在过去（C++20之前）我们可能需要使用std::regex、std::string::find系列方法、甚至是继承自C的strtok函数来自行封装一个split，非常繁琐与不便。<br>然而，这一切都在C++20中发生了变化。C++20引入了范围库ranges，其中提供的两个范围适配器std::split、std::lazy_split可以使我们以一种更为优雅的形式实现split。</p>
+<span id="more"></span>
+
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;concept&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ranges&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;format&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> stdr  std::ranges</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> stdrv std::ranges::views</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> Container = std::vector, <span class="keyword">typename</span> Arg = std::string_view&gt;</span><br><span class="line"><span class="keyword">auto</span> <span class="built_in">Split</span>(std::string_view str, std::string_view delimiter)</span><br><span class="line">&#123;</span><br><span class="line">	Container&lt;Arg&gt; myCont;</span><br><span class="line">	<span class="keyword">auto</span> temp = str </span><br><span class="line">		| stdrv::<span class="built_in">split</span>(delimiter)</span><br><span class="line">		| stdrv::<span class="built_in">transform</span>([](<span class="keyword">auto</span>&amp;&amp; r)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="built_in">Arg</span>(std::<span class="built_in">addressof</span>(*r.<span class="built_in">begin</span>()), stdr::<span class="built_in">distance</span>(r));</span><br><span class="line">			&#125;);</span><br><span class="line">	<span class="keyword">auto</span> iter = std::<span class="built_in">inserter</span>(myCont, myCont.<span class="built_in">end</span>());</span><br><span class="line">	stdr::for_each(temp, [&amp;](<span class="keyword">auto</span>&amp;&amp; x) &#123; iter = &#123;x.<span class="built_in">begin</span>(), x.<span class="built_in">end</span>()&#125;; &#125;);</span><br><span class="line">	<span class="keyword">return</span> myCont;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::string str = <span class="string">&quot;Hello233C++20233and233New233Spilt&quot;</span>;</span><br><span class="line">	std::string delimiter = <span class="string">&quot;233&quot;</span>;</span><br><span class="line">	<span class="keyword">auto</span>&amp;&amp; strCont = <span class="built_in">Split</span>&lt;std::list, std::string&gt;(str, delimiter);</span><br><span class="line">	stdr::for_each(strCont, [](<span class="keyword">auto</span>&amp;&amp; x) &#123; std::cout &lt;&lt; std::format(<span class="string">&quot;&#123;&#125; &quot;</span>, x); &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//output: Hello C++20 and New Spilt</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>PS：std::split与std::lazy_split存在细微区别，在此不作详细说明，感兴趣可以参考：<br><a href="https://stackoverflow.com/questions/68067612/what-is-the-difference-between-the-split-view-and-the-lazy-split-view-in-c">https://stackoverflow.com/questions/68067612/what-is-the-difference-between-the-split-view-and-the-lazy-split-view-in-c</a><br>PS2：C++20没有提供关键的ranges::to<container>函数，导致demo中还需要额外封装并手写for_each来写入数据，等到C++23实装了该函数，split的实现会比现在简洁优雅的多，真正做到方便泛用、无需封装：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span>&amp;&amp; strCont = str</span><br><span class="line">	| stdrv::<span class="built_in">lazy_split</span>(delimiter)</span><br><span class="line">	| stdr ::to&lt;std::vector&lt;std::string&gt;&gt;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/474447289">https://zhuanlan.zhihu.com/p/474447289</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Programming Language</category>
+        <category>Cpp</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>技术杂谈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>一个用来ghs的、使用了concept、折叠表达式、模板形参包做基类列表等技巧的模板元编程Mixin Demo</title>
+    <url>/2023/09/11/%E4%B8%80%E4%B8%AA%E7%94%A8%E6%9D%A5ghs%E7%9A%84%E3%80%81%E4%BD%BF%E7%94%A8%E4%BA%86concept%E3%80%81%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%81%E6%A8%A1%E6%9D%BF%E5%BD%A2%E5%8F%82%E5%8C%85%E5%81%9A%E5%9F%BA%E7%B1%BB%E5%88%97%E8%A1%A8%E7%AD%89%E6%8A%80%E5%B7%A7%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%85%83%E7%BC%96%E7%A8%8BMixin-Demo/</url>
+    <content><![CDATA[<p>昨天看Mixin时突发奇想，写着玩的。图一乐。</p>
+<span id="more"></span>
+<p>直接上代码，受限于平台，Show()部分自行脑补。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;concepts&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">concept</span> IsSexuality = <span class="keyword">requires</span>&#123; T::<span class="built_in">Show</span>(); &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;IsSexuality... Sexuality&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">GirlFriend</span> :<span class="keyword">private</span> Sexuality...</span><br><span class="line">&#123;</span><br><span class="line">	<span class="function"><span class="keyword">constexpr</span> <span class="title">GirlFriend</span><span class="params">()</span> :Sexuality()... &#123;</span>&#125;</span><br><span class="line">	<span class="function"><span class="keyword">constexpr</span> <span class="type">void</span> <span class="title">ShowSexuality</span><span class="params">()</span> <span class="type">const</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;I have a girl friend.\n&quot;</span>;</span><br><span class="line">		<span class="function"><span class="keyword">if</span> <span class="title">constexpr</span> <span class="params">(<span class="keyword">sizeof</span>...(Sexuality) &gt; <span class="number">0</span>)</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			std::cout &lt;&lt; <span class="string">&quot;She can:\n&quot;</span>;</span><br><span class="line">			((Sexuality::<span class="built_in">Show</span>()), ...);</span><br><span class="line">		&#125; <span class="keyword">else</span></span><br><span class="line">		&#123; std::cout &lt;&lt; <span class="string">&quot;She was a virgin.\n&quot;</span>; &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">MakeLoveable</span></span><br><span class="line">&#123; <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;Make love with me.\n&quot;</span>; &#125; &#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">BlowJobable</span></span><br><span class="line">&#123; <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;BlowJob.\n&quot;</span>; &#125; &#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">FootJobable</span></span><br><span class="line">&#123; <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;FootJob.\n&quot;</span>; &#125; &#125;;</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">concept</span> IsSexSkill = IsSexuality&lt;T&gt; &amp;&amp; !std::same_as&lt;T, MakeLoveable&gt;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;IsSexSkill... SexSkills&gt;</span><br><span class="line"><span class="keyword">using</span> ReallyGirlFriend = GirlFriend&lt;MakeLoveable, SexSkills...&gt;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">constexpr</span> GirlFriend girlFriend;</span><br><span class="line">	<span class="keyword">constexpr</span> ReallyGirlFriend&lt;&gt; reallyGirlFriend;</span><br><span class="line">	<span class="keyword">constexpr</span> ReallyGirlFriend&lt;BlowJobable, FootJobable&gt; sexyGirlFriend;</span><br><span class="line">	girlFriend.<span class="built_in">ShowSexuality</span>();</span><br><span class="line">	reallyGirlFriend.<span class="built_in">ShowSexuality</span>();</span><br><span class="line">	sexyGirlFriend.<span class="built_in">ShowSexuality</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//output:</span></span><br><span class="line"><span class="comment">/*------------------------</span></span><br><span class="line"><span class="comment">I have a girl friend.</span></span><br><span class="line"><span class="comment">She was a virgin.</span></span><br><span class="line"><span class="comment">I have a girl friend.</span></span><br><span class="line"><span class="comment">She can:</span></span><br><span class="line"><span class="comment">Make love with me.</span></span><br><span class="line"><span class="comment">I have a girl friend.</span></span><br><span class="line"><span class="comment">She can:</span></span><br><span class="line"><span class="comment">Make love with me.</span></span><br><span class="line"><span class="comment">BlowJob.</span></span><br><span class="line"><span class="comment">FootJob.</span></span><br><span class="line"><span class="comment">------------------------*/</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2023/09/11/%E4%B8%80%E4%B8%AA%E7%94%A8%E6%9D%A5ghs%E7%9A%84%E3%80%81%E4%BD%BF%E7%94%A8%E4%BA%86concept%E3%80%81%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%81%E6%A8%A1%E6%9D%BF%E5%BD%A2%E5%8F%82%E5%8C%85%E5%81%9A%E5%9F%BA%E7%B1%BB%E5%88%97%E8%A1%A8%E7%AD%89%E6%8A%80%E5%B7%A7%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%85%83%E7%BC%96%E7%A8%8BMixin-Demo/../%E4%B8%80%E4%B8%AA%E7%94%A8%E6%9D%A5ghs%E7%9A%84%E3%80%81%E4%BD%BF%E7%94%A8%E4%BA%86concept%E3%80%81%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%81%E6%A8%A1%E6%9D%BF%E5%BD%A2%E5%8F%82%E5%8C%85%E5%81%9A%E5%9F%BA%E7%B1%BB%E5%88%97%E8%A1%A8%E7%AD%89%E6%8A%80%E5%B7%A7%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%85%83%E7%BC%96%E7%A8%8BMixin-Demo/image.png" alt="Alt text"></p>
+<blockquote>
+<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/460970247">https://zhuanlan.zhihu.com/p/460970247</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Programming Language</category>
+        <category>Cpp</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>技术杂谈</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>为美好的URP献上解析[0x00]: 管线架构</title>
     <url>/2023/06/12/%E4%B8%BA%E7%BE%8E%E5%A5%BD%E7%9A%84URP%E7%8C%AE%E4%B8%8A%E8%A7%A3%E6%9E%900x00/</url>
     <content><![CDATA[<span id="more"></span>]]></content>
@@ -240,52 +181,39 @@
       </tags>
   </entry>
   <entry>
-    <title>关于std::optional传递开销的讨论与优化</title>
-    <url>/2023/09/11/%E5%85%B3%E4%BA%8Estd-optional%E4%BC%A0%E9%80%92%E5%BC%80%E9%94%80%E7%9A%84%E8%AE%A8%E8%AE%BA%E4%B8%8E%E4%BC%98%E5%8C%96/</url>
-    <content><![CDATA[<p>在讨论std::optional之前，我们应该先适当谈论一下“可空类型”。</p>
+    <title>从auto_ptr到unique_ptr：浅谈C++右值引用、移动语义与智能指针</title>
+    <url>/2023/06/24/%E4%BB%8Eauto-ptr%E5%88%B0unique-ptr%EF%BC%9A%E6%B5%85%E8%B0%88C-%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E3%80%81%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89%E4%B8%8E%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/</url>
+    <content><![CDATA[<p>std::auto_ptr是C++03对智能指针的第一次尝试，作为一个失败品，其甚至已然在后续的标准中被移除，但时至今日，我们依然可以透过它一窥C++发展史的一角。</p>
 <span id="more"></span>
-<p>我们知道，在传统的C++中，是不存在现代编程语言中常见的“可空类型”（如C#中的Nullable<T>)的，这就导致很多情况下我们无法给一个指针以外的变量或返回值设置一个安全的空值（实际上C++11之前用于指针空值的NULL也并不安全），而需要设置一个人为规定的标记值（Sentinel Value）来将其标识为空。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//C#</span></span><br><span class="line"><span class="comment">//size理应为非负</span></span><br><span class="line">uint? size = null;  <span class="comment">//OK, 通过C#语法糖[int?]标记size可为空，并将size设置为空</span></span><br><span class="line"><span class="comment">//C++</span></span><br><span class="line"><span class="comment">//因为需要考虑Sentinel Value，故size无法为unsigned int</span></span><br><span class="line"><span class="comment">//当size == -1时，size为空</span></span><br><span class="line"><span class="type">int</span> size = <span class="number">-1</span>;  <span class="comment">//OK，通过人为设定标记值来将size设置为空</span></span><br></pre></td></tr></table></figure>
-<p>显而易见，传统C++使用标记值来对某一变量设置为空的行为相比现代语言是存在问题、丑陋且不安全的：</p>
-<ul>
-<li>某些情况下为了考虑标记值不得不放弃最为合适的数据类型（比如unsigned int之于size）</li>
-<li>其他使用者容易忘记甚至不了解标记值的含义</li>
-<li>……</li>
-</ul>
-<h1 id="std-optional"><a href="#std-optional" class="headerlink" title="std::optional"></a>std::optional</h1><p>为了解决这一问题，C++17中引入了std::optional，实现了安全的可空值。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::optional&lt;<span class="type">unsigned</span> <span class="type">int</span>&gt; size = std::<span class="literal">nullopt</span>;  <span class="comment">//通过std::nullopt将size设置为空</span></span><br></pre></td></tr></table></figure>
-<p>这很好，极大提高了代码的安全性与严谨性。<br>但同时又引入了一个新问题，当我们将一个对象（比如std::string）做参数传递时，我们总想避免传递过程中无意义的拷贝、移动等操作带来的额外开销，比如：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Func</span><span class="params">(<span class="type">const</span> std::string&amp; str)</span></span>;  <span class="comment">//引用传递，不会发生拷贝，当Func不改变str时将其修饰为const</span></span><br></pre></td></tr></table></figure>
-<p>那么在使用optional做参数、返回值传递时，optional包裹着的对象是否会进行拷贝、移动等增大程序开销的操作呢？如果会，该如何避免？</p>
-<h1 id="开销测试与优化"><a href="#开销测试与优化" class="headerlink" title="开销测试与优化"></a>开销测试与优化</h1><p>为了解决这个问题，我编写了如下测试代码。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//测试类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	std::string s = <span class="string">&quot;Fuxk Cpp.&quot;</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">Test</span>()</span><br><span class="line">	&#123; std::cout &lt;&lt; <span class="string">&quot;\tctor\n&quot;</span>; &#125;</span><br><span class="line">	~<span class="built_in">Test</span>() </span><br><span class="line">	&#123; std::cout &lt;&lt; <span class="string">&quot;\tdtor\n&quot;</span>; &#125;</span><br><span class="line">	<span class="built_in">Test</span>(<span class="type">const</span> Test&amp;) </span><br><span class="line">	&#123; std::cout &lt;&lt; <span class="string">&quot;\tcopy ctor\n&quot;</span>; &#125;</span><br><span class="line">	<span class="built_in">Test</span>(Test&amp;&amp;) <span class="keyword">noexcept</span></span><br><span class="line">	&#123; std::cout &lt;&lt; <span class="string">&quot;\tmove ctor\n&quot;</span>; &#125;</span><br><span class="line">	Test&amp; <span class="keyword">operator</span>=(<span class="type">const</span> Test&amp;) </span><br><span class="line">	&#123; std::cout &lt;&lt; <span class="string">&quot;\tcopy op= \n&quot;</span>; <span class="keyword">return</span> *<span class="keyword">this</span>; &#125;</span><br><span class="line">	Test&amp; <span class="keyword">operator</span>=(Test&amp;&amp;) <span class="keyword">noexcept</span></span><br><span class="line">	&#123; std::cout &lt;&lt; <span class="string">&quot;\tmove op= \n&quot;</span>; <span class="keyword">return</span> *<span class="keyword">this</span>; &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>首先是一个很简单的测试类，包含一个std::string类型的字段s，以及基于五法则编写的用于debug的析构函数、拷贝&#x2F;移动构造函数和重载op&#x3D;运算符。<br>然后是用于测试的部分：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//测试函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">OptFunc</span><span class="params">(std::optional&lt;Test&gt; x)</span></span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">	std::cout &lt;&lt; std::format(<span class="string">&quot;\t&#123;&#125;\n&quot;</span>, x-&gt;s);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DefaultFunc</span><span class="params">(<span class="type">const</span> Test&amp; x)</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">	std::cout &lt;&lt; std::format(<span class="string">&quot;\t&#123;&#125;\n&quot;</span>, x.s);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//测试代码</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Test t0;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;-----------------------------------------\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Use Optional:\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;copy:\n&quot;</span>;</span><br><span class="line">	<span class="built_in">OptFunc</span>(t0);</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;-------------\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;move:\n&quot;</span>;</span><br><span class="line">	<span class="built_in">OptFunc</span>(<span class="built_in">Test</span>());</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;-----------------------------------------\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Not use Optional:\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;copy:\n&quot;</span>;</span><br><span class="line">	<span class="built_in">DefaultFunc</span>(t0);</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;-----------------\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;move:\n&quot;</span>;</span><br><span class="line">	<span class="built_in">DefaultFunc</span>(<span class="built_in">Test</span>());</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;-----------------------------------------\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这段代码定义了两个函数OptFunc()和DefaultFunc()，以分别表示形参使用和不使用optional的情况。<br>在Vsiual Studio 2022 17.0.2，&#x2F;std:c++latest下的运行结果为：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">        ctor</span><br><span class="line">-----------------------------------------</span><br><span class="line">Use Optional:</span><br><span class="line">copy:</span><br><span class="line">        copy ctor</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">        dtor</span><br><span class="line">-------------</span><br><span class="line">move:</span><br><span class="line">        ctor</span><br><span class="line">        move ctor</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">        dtor</span><br><span class="line">        dtor</span><br><span class="line">-----------------------------------------</span><br><span class="line">Not use Optional:</span><br><span class="line">copy:</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">-----------------</span><br><span class="line">move:</span><br><span class="line">        ctor</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">        dtor</span><br><span class="line">-----------------------------------------</span><br><span class="line">        dtor</span><br></pre></td></tr></table></figure>
-<p>可以很明显的看出，在使用std::optional作为形参的情况下，调用两个测试函数分别多了一次拷贝&#x2F;移动构造函数和析构函数，这很显然不是我们想看到的。<br>那么有什么方案解决这个问题吗？</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">OptFunc</span><span class="params">(<span class="type">const</span> std::optional&lt;Test&gt;&amp; x)</span></span>;  <span class="comment">//这样？</span></span><br></pre></td></tr></table></figure>
-<p>不行，虽然在形式上这与const Test&amp;非常相似，但实际上当Test类型的参数传入时，将会被拷贝到std::optional<Test>类型的对象x中，之后x将以引用的形式继续传递到函数中。所以实际上在这种写法中我们并没有避免x的拷贝开销，当然，如果你的传入参数本身就是optional时，这或许会有用——不过一般这种情况非常罕见。<br>那么这样呢？</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">OptFunc</span><span class="params">(std::optional&lt;<span class="type">const</span> Test&amp;&gt; x)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>这看起来好像是可行的，既然修饰optional不行，那么我们就对原对象下手。然而很遗憾的是，C++并不支持这样做，即std::optional&lt;Test&amp;&gt;。</p>
-<blockquote>
-<p>若以引用类型实例化optional则程序非良构。 </p>
+<p>出于方便、严谨起见，下文所提及类与函数，如未特别标明命名空间，均为std或其子命名空间下的标准库设施。</p>
+<h1 id="std-auto-ptr的失败之处"><a href="#std-auto-ptr的失败之处" class="headerlink" title="std::auto_ptr的失败之处"></a>std::auto_ptr的失败之处</h1><p>auto_ptr在语义上是有些类似它的后辈unique_ptr的，其拷贝构造&#x2F;赋值函数并非深拷贝或浅拷贝，而是被设计成了资产的所有权转移即move语义，从而保证一份资源同时只能被一根auto_ptr所持有：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">_Ty</span>&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">auto_ptr</span> </span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">auto_ptr</span>(auto_ptr&amp; _Right) <span class="keyword">noexcept</span> : _Myptr(_Right.<span class="built_in">release</span>()) &#123;&#125;</span><br><span class="line">    <span class="function">_Ty* <span class="title">release</span><span class="params">()</span> <span class="keyword">noexcept</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        _Ty* _Tmp = _Myptr;</span><br><span class="line">        _Myptr    = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">return</span> _Tmp;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    _Ty* _Myptr; <span class="comment">// the wrapped object pointer</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，auto_ptr的copy ctor实际上执行的是C++11及以后的move ctor的工作，为此，其参数特意取消了const限定。这看似是个好设计，然而却有着致命的缺陷。考虑以下场景：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::vector&lt;std::auto_ptr&lt;<span class="type">int</span>&gt;&gt; aptrVec;</span><br><span class="line"><span class="function">std::auto_ptr&lt;<span class="type">int</span>&gt; <span class="title">aptr</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>(<span class="number">1</span>))</span></span>;</span><br><span class="line">aptrVec.<span class="built_in">push_back</span>(aptr);</span><br></pre></td></tr></table></figure>
+
+<p>或许难以想象，但这段理所应当的代码是实实在在的编译不过的。其原因是push_back时会发生拷贝构造的，而push_back的参数为<code>const _Ty&amp; _Val</code>，在发生拷贝构造时const限定的参数自然无法传入非const限定的拷贝构造函数中，从而编译失败。</p>
+<p>堂堂智能指针，竟然无法放到任何一个容器中去，何其荒诞可笑。更何况除此以外，auto_ptr依旧存在很多缺陷——这里不一一赘述，总之，在十多年前的那会儿，C++急需一套完备的智能指针来替换掉auto_ptr这个笑话。</p>
+<h1 id="std-unique-ptr如何成功？"><a href="#std-unique-ptr如何成功？" class="headerlink" title="std::unique_ptr如何成功？"></a>std::unique_ptr如何成功？</h1><blockquote>
+<p>C++标准委员会说要有unique_ptr，于是就有了unique_ptr。<br>C++标准委员会说unique_ptr是好的，于是……于是他们就忘了在C++11里加上make_unique了 :)</p>
 </blockquote>
-<p>这样一来好像走到了死胡同。但C++还是给我们留了一个缺口，即std::reference_wrapper。  </p>
+<p>前面说到，auto_ptr想用copy ctor实现move语义，但却与容器库冲突，惨遭失败。想要一雪前耻，那么就需要C++11的重量级特性右值引用了。</p>
+<p>虽然我们常说，右值引用的作用是“延长右值生命周期”，即：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">Type&amp;&amp; t = Type&#123;&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>但实际上右值引用更为重要的作用是区分copy与move语义，而这一点又着重体现在C++11中由过去三法则演变而来的五法则上：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Fuxk</span></span><br><span class="line">&#123;	</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Fuxk</span>();</span><br><span class="line">    ~<span class="built_in">Fuxk</span>();</span><br><span class="line">    <span class="built_in">Fuxk</span>(<span class="type">const</span> Fuxk&amp;);</span><br><span class="line">    <span class="built_in">Fuxk</span>(Fuxk&amp;&amp;) <span class="keyword">noexcept</span>;</span><br><span class="line">    Fuxk&amp; <span class="keyword">operator</span>=(<span class="type">const</span> Fuxk&amp;);</span><br><span class="line">    Fuxk&amp; <span class="keyword">operator</span>=(Fuxk&amp;&amp;) <span class="keyword">noexcept</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>相比与C++11之前的三法则dtor、copy ctor、copy op&#x3D;，C++11新增了以右值引用作为参数的move ctor和move op&#x3D;，正式将copy语义与move语义分隔开，使得用户可以更加自由的对内存所有权进行管理。</p>
+<p>而这一切最直接的受益者之一，就是std::unique_ptr了。</p>
+<p>前面我们说，auto_ptr的目标是既要“保证一份资源同时只能被一根auto_ptr所持有”又要“支持资产所有权的转移”，这是只依靠copy语义无法完成的，而在C++11中，通过copy move语义的拆分，我们可以很自然而然的delete掉copy ctor&#x2F;op&#x3D;来保证所有权的唯一性，同时提供move ctor&#x2F;op&#x3D;来支持所有权的转移。</p>
+<p>我并没有精力去搜寻资料与论文去考据当年右值引用被提出的理由，但站在现在的视角来看，经受住了时间的考验、成功的智能指针系统毫无疑问是建立在右值引用存在的基础之上的，其二者有着千丝万缕的联系，他们共同构成了Modern C++的基石。</p>
+<hr>
+<p>这篇文章并非什么语法的辨析与讲解，讨论的也是十年前C++11的一些老东西，单纯是我在学习与思考C++发展过程中的一些发散。</p>
+<p>一直以来大多数讲述Modern C++特性的教程&#x2F;文章都会将智能指针与右值引用&#x2F;移动语义&#x2F;完美转发分成两个单独的part来讲解、而忽略其它们之间的联系，同时又几乎不约而同地忽略了失败品auto_ptr，使初学者难以领会到C++十几年间的演化历程，于是经常会看到新人开发者在社区中提问——“C++为什么要有XXX？”</p>
+<p>故此就有了这篇不成气候的随笔，希望能够给予初学者们一些思路与帮助。</p>
 <blockquote>
-<p>std::reference_wrapper是包装引用于可复制、可赋值对象的类模板。它常用作将引用存储入无法正常保有引用的标准容器（类似std::vector）的机制。<br>可用T类型的std::reference_wrapper的optional保有引用。 </p>
-</blockquote>
-<p>通过reference_wrapper，我们可以做到等同于std::optional&lt;const Test&amp;&gt;的效果，我们添加一个函数并编写新的测试代码：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//新添加测试函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">OptWithRefWrapperFunc</span><span class="params">(std::optional&lt;std::reference_wrapper&lt;<span class="type">const</span> Test&gt;&gt; x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::cout &lt;&lt; std::format(<span class="string">&quot;\t&#123;&#125;\n&quot;</span>, x-&gt;<span class="built_in">get</span>().s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//新添加测试代码</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Use Optional with std::reference_wrapper:\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;copy:\n&quot;</span>;</span><br><span class="line">	<span class="built_in">OptWithRefWrapperFunc</span>(t0);</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;-----------------\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;move:\n&quot;</span>;</span><br><span class="line">	<span class="comment">//FuncOptWithRefWrapper(Test());</span></span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;-----------------------------------------\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>再次运行：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">        ctor</span><br><span class="line">-----------------------------------------</span><br><span class="line">Use Optional:</span><br><span class="line">copy:</span><br><span class="line">        copy ctor</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">        dotr</span><br><span class="line">-------------</span><br><span class="line">move:</span><br><span class="line">        cotr</span><br><span class="line">        move cotr</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">        dtor</span><br><span class="line">        dtor</span><br><span class="line">-----------------------------------------</span><br><span class="line">Not use Optional:</span><br><span class="line">copy:</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">-----------------</span><br><span class="line">move:</span><br><span class="line">        ctor</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">        dtor</span><br><span class="line">-----------------------------------------</span><br><span class="line">Use Optional with std::reference_wrapper:</span><br><span class="line">copy:</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">-----------------</span><br><span class="line">move:</span><br><span class="line">-----------------------------------------</span><br><span class="line">        dtor</span><br></pre></td></tr></table></figure>
-<p>可以看到，这样一来，我们终于在optional<T>上实现了传统的const T&amp;的效果。但同时需要注意的是，正如无法使用一个Test&amp;类型的对象接收一个右值（如Test()），std::reference_wrapper同样无法接收一个右值，所以我们看到，在新的测试代码中，尝试将右值传入函数的FuncOptWithRefWrapper(Test())被注释掉了。</p>
-<h1 id="最后一件事"><a href="#最后一件事" class="headerlink" title="最后一件事"></a>最后一件事</h1><p>虽然我们最终通过std::optional&lt;std::reference_wrapper<const T>&gt;的形式实现了安全可空同时兼顾开销的参数传递，但不可否认的是这样写出的代码实在太过复杂繁琐。（虽然很多情况下复杂和繁琐本身就是C++体验的一环）<br>所以说——或许看到这里的很多朋友也已经发现，上述这一串复杂冗余的代码其实就等价于const T<em>，指针也早在C++11就拥有了安全的空值nullptr（实际上reference_wrapper的本质就是把引用保存为指针），甚至T</em>占用的内存还要比std::optional&lt;std::reference_wrapper<T>&gt;小。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::cout &lt;&lt; std::format(<span class="string">&quot;&#123;&#125;, &#123;&#125;\n&quot;</span>, <span class="built_in">sizeof</span>(<span class="type">const</span> Test*), </span><br><span class="line">			<span class="built_in">sizeof</span>(std::optional&lt;std::reference_wrapper&lt;<span class="type">const</span> Test&gt;&gt;));</span><br><span class="line"><span class="comment">//output:</span></span><br><span class="line"><span class="comment">//x86: 4, 8</span></span><br><span class="line"><span class="comment">//x64: 8, 16</span></span><br></pre></td></tr></table></figure>
-<p>如果真要说有什么使用上的优势，那么应该就是相比T<em>表义更为清晰、以及在传参时不需要加取地址符&amp;了吧，或许这对部分人来说很重要，但为了方便一般还是推荐使用T</em>，只在传递足够小的对象比如int时，使用std::optional。</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://abseil.io/tips/171">https://abseil.io/tips/171</a><br><a href="https://zh.cppreference.com/w/cpp/utility/optional">https://zh.cppreference.com/w/cpp/utility/optional</a><br><a href="https://stackoverflow.com/a/47842325/12822957">https://stackoverflow.com/a/47842325/12822957</a><br><a href="https://abseil.io/tips/163">https://abseil.io/tips/163</a><br><a href="https://zh.cppreference.com/w/cpp/utility/functional/reference_wrapper">https://zh.cppreference.com/w/cpp/utility/functional/reference_wrapper</a></p>
-<blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/438821425">https://zhuanlan.zhihu.com/p/438821425</a></p>
+<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/551883955">https://zhuanlan.zhihu.com/p/551883955</a></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -362,20 +290,61 @@
 ]]></content>
   </entry>
   <entry>
-    <title>来点图程破防乐子</title>
-    <url>/2023/06/24/%E6%9D%A5%E7%82%B9%E5%9B%BE%E7%A8%8B%E7%A0%B4%E9%98%B2%E4%B9%90%E5%AD%90/</url>
-    <content><![CDATA[<p>快过年了，不要再讨论什么C++，图形学，模板元之类的了，你带你的C++语言的设计与演化回到家并不能给你带来任何实质性作用，朋友们打开UE4连连看就做出了好看的特效，你默默的在家里瞪着两眼看GAMES、may佬和侯捷的视频。<br>亲戚朋友们吃饭问你收获了什么，你说我读完了RTR4和PBRT，系统的研究了基于物理的渲染和非真实感渲染，还用C++20重构了自己的渲染器。亲戚们懵逼了，你还在心里默默嘲笑他们，笑他们不懂C++和计算机图形学，不懂光照方程，不懂RAII和CRTP，也笑他们连Shader是什么都不知道。<br>你父母的同事都在说自己儿女一年的收获，有的用Java做了个网站后端赚到了第一笔外快，有的用Python做了点数据可视化发到B站成了up主，有的学了Unity和C#做独立游戏已经发售了。<br>你的父母默默无言，说我的儿子买了一整套的Effective C++，上Stack Overflow痛骂了C++标准委员会，写了一堆狗屁不通报错几百几千行的模板元编程代码，还对着谷歌翻译啃Ray Tracing the Rest of Your Life，人也越来越魔怔了。</p>
+    <title>关于std::optional传递开销的讨论与优化</title>
+    <url>/2023/09/11/%E5%85%B3%E4%BA%8Estd-optional%E4%BC%A0%E9%80%92%E5%BC%80%E9%94%80%E7%9A%84%E8%AE%A8%E8%AE%BA%E4%B8%8E%E4%BC%98%E5%8C%96/</url>
+    <content><![CDATA[<p>在讨论std::optional之前，我们应该先适当谈论一下“可空类型”。</p>
+<span id="more"></span>
+<p>我们知道，在传统的C++中，是不存在现代编程语言中常见的“可空类型”（如C#中的Nullable<T>)的，这就导致很多情况下我们无法给一个指针以外的变量或返回值设置一个安全的空值（实际上C++11之前用于指针空值的NULL也并不安全），而需要设置一个人为规定的标记值（Sentinel Value）来将其标识为空。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//C#</span></span><br><span class="line"><span class="comment">//size理应为非负</span></span><br><span class="line">uint? size = null;  <span class="comment">//OK, 通过C#语法糖[int?]标记size可为空，并将size设置为空</span></span><br><span class="line"><span class="comment">//C++</span></span><br><span class="line"><span class="comment">//因为需要考虑Sentinel Value，故size无法为unsigned int</span></span><br><span class="line"><span class="comment">//当size == -1时，size为空</span></span><br><span class="line"><span class="type">int</span> size = <span class="number">-1</span>;  <span class="comment">//OK，通过人为设定标记值来将size设置为空</span></span><br></pre></td></tr></table></figure>
+<p>显而易见，传统C++使用标记值来对某一变量设置为空的行为相比现代语言是存在问题、丑陋且不安全的：</p>
+<ul>
+<li>某些情况下为了考虑标记值不得不放弃最为合适的数据类型（比如unsigned int之于size）</li>
+<li>其他使用者容易忘记甚至不了解标记值的含义</li>
+<li>……</li>
+</ul>
+<h1 id="std-optional"><a href="#std-optional" class="headerlink" title="std::optional"></a>std::optional</h1><p>为了解决这一问题，C++17中引入了std::optional，实现了安全的可空值。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::optional&lt;<span class="type">unsigned</span> <span class="type">int</span>&gt; size = std::<span class="literal">nullopt</span>;  <span class="comment">//通过std::nullopt将size设置为空</span></span><br></pre></td></tr></table></figure>
+<p>这很好，极大提高了代码的安全性与严谨性。<br>但同时又引入了一个新问题，当我们将一个对象（比如std::string）做参数传递时，我们总想避免传递过程中无意义的拷贝、移动等操作带来的额外开销，比如：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Func</span><span class="params">(<span class="type">const</span> std::string&amp; str)</span></span>;  <span class="comment">//引用传递，不会发生拷贝，当Func不改变str时将其修饰为const</span></span><br></pre></td></tr></table></figure>
+<p>那么在使用optional做参数、返回值传递时，optional包裹着的对象是否会进行拷贝、移动等增大程序开销的操作呢？如果会，该如何避免？</p>
+<h1 id="开销测试与优化"><a href="#开销测试与优化" class="headerlink" title="开销测试与优化"></a>开销测试与优化</h1><p>为了解决这个问题，我编写了如下测试代码。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//测试类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	std::string s = <span class="string">&quot;Fuxk Cpp.&quot;</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">Test</span>()</span><br><span class="line">	&#123; std::cout &lt;&lt; <span class="string">&quot;\tctor\n&quot;</span>; &#125;</span><br><span class="line">	~<span class="built_in">Test</span>() </span><br><span class="line">	&#123; std::cout &lt;&lt; <span class="string">&quot;\tdtor\n&quot;</span>; &#125;</span><br><span class="line">	<span class="built_in">Test</span>(<span class="type">const</span> Test&amp;) </span><br><span class="line">	&#123; std::cout &lt;&lt; <span class="string">&quot;\tcopy ctor\n&quot;</span>; &#125;</span><br><span class="line">	<span class="built_in">Test</span>(Test&amp;&amp;) <span class="keyword">noexcept</span></span><br><span class="line">	&#123; std::cout &lt;&lt; <span class="string">&quot;\tmove ctor\n&quot;</span>; &#125;</span><br><span class="line">	Test&amp; <span class="keyword">operator</span>=(<span class="type">const</span> Test&amp;) </span><br><span class="line">	&#123; std::cout &lt;&lt; <span class="string">&quot;\tcopy op= \n&quot;</span>; <span class="keyword">return</span> *<span class="keyword">this</span>; &#125;</span><br><span class="line">	Test&amp; <span class="keyword">operator</span>=(Test&amp;&amp;) <span class="keyword">noexcept</span></span><br><span class="line">	&#123; std::cout &lt;&lt; <span class="string">&quot;\tmove op= \n&quot;</span>; <span class="keyword">return</span> *<span class="keyword">this</span>; &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>首先是一个很简单的测试类，包含一个std::string类型的字段s，以及基于五法则编写的用于debug的析构函数、拷贝&#x2F;移动构造函数和重载op&#x3D;运算符。<br>然后是用于测试的部分：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//测试函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">OptFunc</span><span class="params">(std::optional&lt;Test&gt; x)</span></span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">	std::cout &lt;&lt; std::format(<span class="string">&quot;\t&#123;&#125;\n&quot;</span>, x-&gt;s);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DefaultFunc</span><span class="params">(<span class="type">const</span> Test&amp; x)</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">	std::cout &lt;&lt; std::format(<span class="string">&quot;\t&#123;&#125;\n&quot;</span>, x.s);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//测试代码</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Test t0;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;-----------------------------------------\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Use Optional:\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;copy:\n&quot;</span>;</span><br><span class="line">	<span class="built_in">OptFunc</span>(t0);</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;-------------\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;move:\n&quot;</span>;</span><br><span class="line">	<span class="built_in">OptFunc</span>(<span class="built_in">Test</span>());</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;-----------------------------------------\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Not use Optional:\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;copy:\n&quot;</span>;</span><br><span class="line">	<span class="built_in">DefaultFunc</span>(t0);</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;-----------------\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;move:\n&quot;</span>;</span><br><span class="line">	<span class="built_in">DefaultFunc</span>(<span class="built_in">Test</span>());</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;-----------------------------------------\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段代码定义了两个函数OptFunc()和DefaultFunc()，以分别表示形参使用和不使用optional的情况。<br>在Vsiual Studio 2022 17.0.2，&#x2F;std:c++latest下的运行结果为：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">        ctor</span><br><span class="line">-----------------------------------------</span><br><span class="line">Use Optional:</span><br><span class="line">copy:</span><br><span class="line">        copy ctor</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">        dtor</span><br><span class="line">-------------</span><br><span class="line">move:</span><br><span class="line">        ctor</span><br><span class="line">        move ctor</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">        dtor</span><br><span class="line">        dtor</span><br><span class="line">-----------------------------------------</span><br><span class="line">Not use Optional:</span><br><span class="line">copy:</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">-----------------</span><br><span class="line">move:</span><br><span class="line">        ctor</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">        dtor</span><br><span class="line">-----------------------------------------</span><br><span class="line">        dtor</span><br></pre></td></tr></table></figure>
+<p>可以很明显的看出，在使用std::optional作为形参的情况下，调用两个测试函数分别多了一次拷贝&#x2F;移动构造函数和析构函数，这很显然不是我们想看到的。<br>那么有什么方案解决这个问题吗？</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">OptFunc</span><span class="params">(<span class="type">const</span> std::optional&lt;Test&gt;&amp; x)</span></span>;  <span class="comment">//这样？</span></span><br></pre></td></tr></table></figure>
+<p>不行，虽然在形式上这与const Test&amp;非常相似，但实际上当Test类型的参数传入时，将会被拷贝到std::optional<Test>类型的对象x中，之后x将以引用的形式继续传递到函数中。所以实际上在这种写法中我们并没有避免x的拷贝开销，当然，如果你的传入参数本身就是optional时，这或许会有用——不过一般这种情况非常罕见。<br>那么这样呢？</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">OptFunc</span><span class="params">(std::optional&lt;<span class="type">const</span> Test&amp;&gt; x)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>这看起来好像是可行的，既然修饰optional不行，那么我们就对原对象下手。然而很遗憾的是，C++并不支持这样做，即std::optional&lt;Test&amp;&gt;。</p>
 <blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/456526193">https://zhuanlan.zhihu.com/p/456526193</a></p>
+<p>若以引用类型实例化optional则程序非良构。 </p>
 </blockquote>
-<span id="more"></span>]]></content>
+<p>这样一来好像走到了死胡同。但C++还是给我们留了一个缺口，即std::reference_wrapper。  </p>
+<blockquote>
+<p>std::reference_wrapper是包装引用于可复制、可赋值对象的类模板。它常用作将引用存储入无法正常保有引用的标准容器（类似std::vector）的机制。<br>可用T类型的std::reference_wrapper的optional保有引用。 </p>
+</blockquote>
+<p>通过reference_wrapper，我们可以做到等同于std::optional&lt;const Test&amp;&gt;的效果，我们添加一个函数并编写新的测试代码：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//新添加测试函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">OptWithRefWrapperFunc</span><span class="params">(std::optional&lt;std::reference_wrapper&lt;<span class="type">const</span> Test&gt;&gt; x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::cout &lt;&lt; std::format(<span class="string">&quot;\t&#123;&#125;\n&quot;</span>, x-&gt;<span class="built_in">get</span>().s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//新添加测试代码</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Use Optional with std::reference_wrapper:\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;copy:\n&quot;</span>;</span><br><span class="line">	<span class="built_in">OptWithRefWrapperFunc</span>(t0);</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;-----------------\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;move:\n&quot;</span>;</span><br><span class="line">	<span class="comment">//FuncOptWithRefWrapper(Test());</span></span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;-----------------------------------------\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再次运行：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">        ctor</span><br><span class="line">-----------------------------------------</span><br><span class="line">Use Optional:</span><br><span class="line">copy:</span><br><span class="line">        copy ctor</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">        dotr</span><br><span class="line">-------------</span><br><span class="line">move:</span><br><span class="line">        cotr</span><br><span class="line">        move cotr</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">        dtor</span><br><span class="line">        dtor</span><br><span class="line">-----------------------------------------</span><br><span class="line">Not use Optional:</span><br><span class="line">copy:</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">-----------------</span><br><span class="line">move:</span><br><span class="line">        ctor</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">        dtor</span><br><span class="line">-----------------------------------------</span><br><span class="line">Use Optional with std::reference_wrapper:</span><br><span class="line">copy:</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">-----------------</span><br><span class="line">move:</span><br><span class="line">-----------------------------------------</span><br><span class="line">        dtor</span><br></pre></td></tr></table></figure>
+<p>可以看到，这样一来，我们终于在optional<T>上实现了传统的const T&amp;的效果。但同时需要注意的是，正如无法使用一个Test&amp;类型的对象接收一个右值（如Test()），std::reference_wrapper同样无法接收一个右值，所以我们看到，在新的测试代码中，尝试将右值传入函数的FuncOptWithRefWrapper(Test())被注释掉了。</p>
+<h1 id="最后一件事"><a href="#最后一件事" class="headerlink" title="最后一件事"></a>最后一件事</h1><p>虽然我们最终通过std::optional&lt;std::reference_wrapper<const T>&gt;的形式实现了安全可空同时兼顾开销的参数传递，但不可否认的是这样写出的代码实在太过复杂繁琐。（虽然很多情况下复杂和繁琐本身就是C++体验的一环）<br>所以说——或许看到这里的很多朋友也已经发现，上述这一串复杂冗余的代码其实就等价于const T<em>，指针也早在C++11就拥有了安全的空值nullptr（实际上reference_wrapper的本质就是把引用保存为指针），甚至T</em>占用的内存还要比std::optional&lt;std::reference_wrapper<T>&gt;小。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::cout &lt;&lt; std::format(<span class="string">&quot;&#123;&#125;, &#123;&#125;\n&quot;</span>, <span class="built_in">sizeof</span>(<span class="type">const</span> Test*), </span><br><span class="line">			<span class="built_in">sizeof</span>(std::optional&lt;std::reference_wrapper&lt;<span class="type">const</span> Test&gt;&gt;));</span><br><span class="line"><span class="comment">//output:</span></span><br><span class="line"><span class="comment">//x86: 4, 8</span></span><br><span class="line"><span class="comment">//x64: 8, 16</span></span><br></pre></td></tr></table></figure>
+<p>如果真要说有什么使用上的优势，那么应该就是相比T<em>表义更为清晰、以及在传参时不需要加取地址符&amp;了吧，或许这对部分人来说很重要，但为了方便一般还是推荐使用T</em>，只在传递足够小的对象比如int时，使用std::optional。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://abseil.io/tips/171">https://abseil.io/tips/171</a><br><a href="https://zh.cppreference.com/w/cpp/utility/optional">https://zh.cppreference.com/w/cpp/utility/optional</a><br><a href="https://stackoverflow.com/a/47842325/12822957">https://stackoverflow.com/a/47842325/12822957</a><br><a href="https://abseil.io/tips/163">https://abseil.io/tips/163</a><br><a href="https://zh.cppreference.com/w/cpp/utility/functional/reference_wrapper">https://zh.cppreference.com/w/cpp/utility/functional/reference_wrapper</a></p>
+<blockquote>
+<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/438821425">https://zhuanlan.zhihu.com/p/438821425</a></p>
+</blockquote>
+]]></content>
       <categories>
-        <category>Others</category>
-        <category>闲谈</category>
+        <category>Programming Language</category>
+        <category>Cpp</category>
       </categories>
       <tags>
-        <tag>闲谈</tag>
-        <tag>Compute Graphics</tag>
+        <tag>Cpp</tag>
+        <tag>技术杂谈</tag>
       </tags>
   </entry>
   <entry>
@@ -457,5 +426,36 @@
 <p>原文链接: <a href="https://zhuanlan.zhihu.com/p/574551808">https://zhuanlan.zhihu.com/p/574551808</a></p>
 </blockquote>
 ]]></content>
+  </entry>
+  <entry>
+    <title>SnowyArkEngine开发笔记[0x00]: 写在最前</title>
+    <url>/2023/06/12/SnowyArkEngine%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B00x00/</url>
+    <content><![CDATA[<span id="more"></span>]]></content>
+      <categories>
+        <category>Game Engine Development</category>
+        <category>SnowyArk</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>Game Engine Development</tag>
+        <tag>SnowyArk Engine</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>来点图程破防乐子</title>
+    <url>/2023/06/24/%E6%9D%A5%E7%82%B9%E5%9B%BE%E7%A8%8B%E7%A0%B4%E9%98%B2%E4%B9%90%E5%AD%90/</url>
+    <content><![CDATA[<p>快过年了，不要再讨论什么C++，图形学，模板元之类的了，你带你的C++语言的设计与演化回到家并不能给你带来任何实质性作用，朋友们打开UE4连连看就做出了好看的特效，你默默的在家里瞪着两眼看GAMES、may佬和侯捷的视频。<br>亲戚朋友们吃饭问你收获了什么，你说我读完了RTR4和PBRT，系统的研究了基于物理的渲染和非真实感渲染，还用C++20重构了自己的渲染器。亲戚们懵逼了，你还在心里默默嘲笑他们，笑他们不懂C++和计算机图形学，不懂光照方程，不懂RAII和CRTP，也笑他们连Shader是什么都不知道。<br>你父母的同事都在说自己儿女一年的收获，有的用Java做了个网站后端赚到了第一笔外快，有的用Python做了点数据可视化发到B站成了up主，有的学了Unity和C#做独立游戏已经发售了。<br>你的父母默默无言，说我的儿子买了一整套的Effective C++，上Stack Overflow痛骂了C++标准委员会，写了一堆狗屁不通报错几百几千行的模板元编程代码，还对着谷歌翻译啃Ray Tracing the Rest of Your Life，人也越来越魔怔了。</p>
+<blockquote>
+<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/456526193">https://zhuanlan.zhihu.com/p/456526193</a></p>
+</blockquote>
+<span id="more"></span>]]></content>
+      <categories>
+        <category>Others</category>
+        <category>闲谈</category>
+      </categories>
+      <tags>
+        <tag>闲谈</tag>
+        <tag>Compute Graphics</tag>
+      </tags>
   </entry>
 </search>
