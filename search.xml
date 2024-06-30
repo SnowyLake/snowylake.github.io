@@ -7,12 +7,15 @@
       <categories>
         <category>Game Engine</category>
         <category>Others</category>
+        <category>SnowyArk</category>
         <category>Unity</category>
-        <category>闲谈</category>
-        <category>Programming Language</category>
         <category>Unreal</category>
+        <category>Programming Language</category>
+        <category>闲谈</category>
+        <category>URP/SnowyOwl</category>
         <category>Cpp</category>
         <category>HDRP</category>
+        <category>SnowyFalcon</category>
         <category>GPU Programming</category>
         <category>Graphics API</category>
         <category>OpenGL</category>
@@ -20,6 +23,8 @@
         <category>DirectX 11</category>
         <category>DirectX 12</category>
         <category>CUDA</category>
+        <category>CSharp</category>
+        <category>TypeScript</category>
         <category>DCC</category>
         <category>3ds Max</category>
         <category>Blender</category>
@@ -27,11 +32,6 @@
         <category>Houdini</category>
         <category>Substance Designer</category>
         <category>技术杂谈</category>
-        <category>URP/SnowyOwl</category>
-        <category>SnowyArk</category>
-        <category>SnowyFalcon</category>
-        <category>CSharp</category>
-        <category>TypeScript</category>
       </categories>
   </entry>
   <entry>
@@ -51,6 +51,25 @@
       </tags>
   </entry>
   <entry>
+    <title>UE5.1移动端延迟管线基于Light Channels模拟Unity Rendering Layers</title>
+    <url>/2023/09/11/UE5-1%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BB%B6%E8%BF%9F%E7%AE%A1%E7%BA%BF%E5%9F%BA%E4%BA%8ELight-Channels%E6%A8%A1%E6%8B%9FUnity-Rendering-Layers/</url>
+    <content><![CDATA[<span id="more"></span>
+<p>待搬运, 内容详见原文链接.</p>
+<blockquote>
+<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/577239276">https://zhuanlan.zhihu.com/p/577239276</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Game Engine</category>
+        <category>Unreal</category>
+      </categories>
+      <tags>
+        <tag>Unreal</tag>
+        <tag>Rendering</tag>
+        <tag>Cpp</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SnowyArkEngine开发笔记[0x00]: 写在最前</title>
     <url>/2023/06/12/SnowyArkEngine%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B00x00/</url>
     <content><![CDATA[<span id="more"></span>]]></content>
@@ -59,8 +78,8 @@
         <category>SnowyArk</category>
       </categories>
       <tags>
-        <tag>SnowyArk Engine</tag>
         <tag>Cpp</tag>
+        <tag>SnowyArk Engine</tag>
       </tags>
   </entry>
   <entry>
@@ -77,9 +96,33 @@
         <category>Unreal</category>
       </categories>
       <tags>
-        <tag>Cpp</tag>
-        <tag>Rendering</tag>
         <tag>Unreal</tag>
+        <tag>Rendering</tag>
+        <tag>Cpp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>一个C++20下的string split实现</title>
+    <url>/2023/09/11/%E4%B8%80%E4%B8%AAC-20%E4%B8%8B%E7%9A%84string-split%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<p>众所周知，C++一直没有一个官方提供的string split用于分割字符串，在过去（C++20之前）我们可能需要使用std::regex、std::string::find系列方法、甚至是继承自C的strtok函数来自行封装一个split，非常繁琐与不便。<br>然而，这一切都在C++20中发生了变化。C++20引入了范围库ranges，其中提供的两个范围适配器std::split、std::lazy_split可以使我们以一种更为优雅的形式实现split。</p>
+<span id="more"></span>
+
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;concept&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ranges&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;format&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> stdr  std::ranges</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> stdrv std::ranges::views</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> Container = std::vector, <span class="keyword">typename</span> Arg = std::string_view&gt;</span><br><span class="line"><span class="keyword">auto</span> <span class="built_in">Split</span>(std::string_view str, std::string_view delimiter)</span><br><span class="line">&#123;</span><br><span class="line">	Container&lt;Arg&gt; myCont;</span><br><span class="line">	<span class="keyword">auto</span> temp = str </span><br><span class="line">		| stdrv::<span class="built_in">split</span>(delimiter)</span><br><span class="line">		| stdrv::<span class="built_in">transform</span>([](<span class="keyword">auto</span>&amp;&amp; r)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="built_in">Arg</span>(std::<span class="built_in">addressof</span>(*r.<span class="built_in">begin</span>()), stdr::<span class="built_in">distance</span>(r));</span><br><span class="line">			&#125;);</span><br><span class="line">	<span class="keyword">auto</span> iter = std::<span class="built_in">inserter</span>(myCont, myCont.<span class="built_in">end</span>());</span><br><span class="line">	stdr::for_each(temp, [&amp;](<span class="keyword">auto</span>&amp;&amp; x) &#123; iter = &#123;x.<span class="built_in">begin</span>(), x.<span class="built_in">end</span>()&#125;; &#125;);</span><br><span class="line">	<span class="keyword">return</span> myCont;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::string str = <span class="string">&quot;Hello233C++20233and233New233Spilt&quot;</span>;</span><br><span class="line">	std::string delimiter = <span class="string">&quot;233&quot;</span>;</span><br><span class="line">	<span class="keyword">auto</span>&amp;&amp; strCont = <span class="built_in">Split</span>&lt;std::list, std::string&gt;(str, delimiter);</span><br><span class="line">	stdr::for_each(strCont, [](<span class="keyword">auto</span>&amp;&amp; x) &#123; std::cout &lt;&lt; std::format(<span class="string">&quot;&#123;&#125; &quot;</span>, x); &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//output: Hello C++20 and New Spilt</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>PS：std::split与std::lazy_split存在细微区别，在此不作详细说明，感兴趣可以参考：<br><a href="https://stackoverflow.com/questions/68067612/what-is-the-difference-between-the-split-view-and-the-lazy-split-view-in-c">https://stackoverflow.com/questions/68067612/what-is-the-difference-between-the-split-view-and-the-lazy-split-view-in-c</a><br>PS2：C++20没有提供关键的ranges::to<container>函数，导致demo中还需要额外封装并手写for_each来写入数据，等到C++23实装了该函数，split的实现会比现在简洁优雅的多，真正做到方便泛用、无需封装：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span>&amp;&amp; strCont = str</span><br><span class="line">	| stdrv::<span class="built_in">lazy_split</span>(delimiter)</span><br><span class="line">	| stdr ::to&lt;std::vector&lt;std::string&gt;&gt;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/474447289">https://zhuanlan.zhihu.com/p/474447289</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Programming Language</category>
+        <category>Cpp</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>技术杂谈</tag>
       </tags>
   </entry>
   <entry>
@@ -131,90 +174,10 @@
         <category>URP/SnowyOwl</category>
       </categories>
       <tags>
+        <tag>Rendering</tag>
         <tag>Unity</tag>
         <tag>URP</tag>
-        <tag>Rendering</tag>
         <tag>CSharp</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>UE5.1移动端延迟管线基于Light Channels模拟Unity Rendering Layers</title>
-    <url>/2023/09/11/UE5-1%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BB%B6%E8%BF%9F%E7%AE%A1%E7%BA%BF%E5%9F%BA%E4%BA%8ELight-Channels%E6%A8%A1%E6%8B%9FUnity-Rendering-Layers/</url>
-    <content><![CDATA[<span id="more"></span>
-<p>待搬运, 内容详见原文链接.</p>
-<blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/577239276">https://zhuanlan.zhihu.com/p/577239276</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Game Engine</category>
-        <category>Unreal</category>
-      </categories>
-      <tags>
-        <tag>Cpp</tag>
-        <tag>Rendering</tag>
-        <tag>Unreal</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>为美好的URP献上解析[0x00]: 管线架构</title>
-    <url>/2023/06/12/%E4%B8%BA%E7%BE%8E%E5%A5%BD%E7%9A%84URP%E7%8C%AE%E4%B8%8A%E8%A7%A3%E6%9E%900x00/</url>
-    <content><![CDATA[<span id="more"></span>]]></content>
-      <categories>
-        <category>Game Engine</category>
-        <category>Unity</category>
-        <category>URP/SnowyOwl</category>
-      </categories>
-      <tags>
-        <tag>Unity</tag>
-        <tag>URP</tag>
-        <tag>Rendering</tag>
-        <tag>CSharp</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>一个C++20下的string split实现</title>
-    <url>/2023/09/11/%E4%B8%80%E4%B8%AAC-20%E4%B8%8B%E7%9A%84string-split%E5%AE%9E%E7%8E%B0/</url>
-    <content><![CDATA[<p>众所周知，C++一直没有一个官方提供的string split用于分割字符串，在过去（C++20之前）我们可能需要使用std::regex、std::string::find系列方法、甚至是继承自C的strtok函数来自行封装一个split，非常繁琐与不便。<br>然而，这一切都在C++20中发生了变化。C++20引入了范围库ranges，其中提供的两个范围适配器std::split、std::lazy_split可以使我们以一种更为优雅的形式实现split。</p>
-<span id="more"></span>
-
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;concept&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ranges&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;format&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> stdr  std::ranges</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> stdrv std::ranges::views</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> Container = std::vector, <span class="keyword">typename</span> Arg = std::string_view&gt;</span><br><span class="line"><span class="keyword">auto</span> <span class="built_in">Split</span>(std::string_view str, std::string_view delimiter)</span><br><span class="line">&#123;</span><br><span class="line">	Container&lt;Arg&gt; myCont;</span><br><span class="line">	<span class="keyword">auto</span> temp = str </span><br><span class="line">		| stdrv::<span class="built_in">split</span>(delimiter)</span><br><span class="line">		| stdrv::<span class="built_in">transform</span>([](<span class="keyword">auto</span>&amp;&amp; r)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="built_in">Arg</span>(std::<span class="built_in">addressof</span>(*r.<span class="built_in">begin</span>()), stdr::<span class="built_in">distance</span>(r));</span><br><span class="line">			&#125;);</span><br><span class="line">	<span class="keyword">auto</span> iter = std::<span class="built_in">inserter</span>(myCont, myCont.<span class="built_in">end</span>());</span><br><span class="line">	stdr::for_each(temp, [&amp;](<span class="keyword">auto</span>&amp;&amp; x) &#123; iter = &#123;x.<span class="built_in">begin</span>(), x.<span class="built_in">end</span>()&#125;; &#125;);</span><br><span class="line">	<span class="keyword">return</span> myCont;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::string str = <span class="string">&quot;Hello233C++20233and233New233Spilt&quot;</span>;</span><br><span class="line">	std::string delimiter = <span class="string">&quot;233&quot;</span>;</span><br><span class="line">	<span class="keyword">auto</span>&amp;&amp; strCont = <span class="built_in">Split</span>&lt;std::list, std::string&gt;(str, delimiter);</span><br><span class="line">	stdr::for_each(strCont, [](<span class="keyword">auto</span>&amp;&amp; x) &#123; std::cout &lt;&lt; std::format(<span class="string">&quot;&#123;&#125; &quot;</span>, x); &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//output: Hello C++20 and New Spilt</span></span><br></pre></td></tr></table></figure>
-<hr>
-<p>PS：std::split与std::lazy_split存在细微区别，在此不作详细说明，感兴趣可以参考：<br><a href="https://stackoverflow.com/questions/68067612/what-is-the-difference-between-the-split-view-and-the-lazy-split-view-in-c">https://stackoverflow.com/questions/68067612/what-is-the-difference-between-the-split-view-and-the-lazy-split-view-in-c</a><br>PS2：C++20没有提供关键的ranges::to<container>函数，导致demo中还需要额外封装并手写for_each来写入数据，等到C++23实装了该函数，split的实现会比现在简洁优雅的多，真正做到方便泛用、无需封装：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span>&amp;&amp; strCont = str</span><br><span class="line">	| stdrv::<span class="built_in">lazy_split</span>(delimiter)</span><br><span class="line">	| stdr ::to&lt;std::vector&lt;std::string&gt;&gt;;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/474447289">https://zhuanlan.zhihu.com/p/474447289</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Programming Language</category>
-        <category>Cpp</category>
-      </categories>
-      <tags>
-        <tag>Cpp</tag>
-        <tag>技术杂谈</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>一个用来ghs的、使用了concept、折叠表达式、模板形参包做基类列表等技巧的模板元编程Mixin Demo</title>
-    <url>/2023/09/11/%E4%B8%80%E4%B8%AA%E7%94%A8%E6%9D%A5ghs%E7%9A%84%E3%80%81%E4%BD%BF%E7%94%A8%E4%BA%86concept%E3%80%81%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%81%E6%A8%A1%E6%9D%BF%E5%BD%A2%E5%8F%82%E5%8C%85%E5%81%9A%E5%9F%BA%E7%B1%BB%E5%88%97%E8%A1%A8%E7%AD%89%E6%8A%80%E5%B7%A7%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%85%83%E7%BC%96%E7%A8%8BMixin-Demo/</url>
-    <content><![CDATA[<p>昨天看Mixin时突发奇想，写着玩的。图一乐。</p>
-<span id="more"></span>
-<p>直接上代码，受限于平台，Show()部分自行脑补。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;concepts&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">concept</span> IsSexuality = <span class="keyword">requires</span>&#123; T::<span class="built_in">Show</span>(); &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;IsSexuality... Sexuality&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">GirlFriend</span> :<span class="keyword">private</span> Sexuality...</span><br><span class="line">&#123;</span><br><span class="line">	<span class="function"><span class="keyword">constexpr</span> <span class="title">GirlFriend</span><span class="params">()</span> :Sexuality()... &#123;</span>&#125;</span><br><span class="line">	<span class="function"><span class="keyword">constexpr</span> <span class="type">void</span> <span class="title">ShowSexuality</span><span class="params">()</span> <span class="type">const</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;I have a girl friend.\n&quot;</span>;</span><br><span class="line">		<span class="function"><span class="keyword">if</span> <span class="title">constexpr</span> <span class="params">(<span class="keyword">sizeof</span>...(Sexuality) &gt; <span class="number">0</span>)</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			std::cout &lt;&lt; <span class="string">&quot;She can:\n&quot;</span>;</span><br><span class="line">			((Sexuality::<span class="built_in">Show</span>()), ...);</span><br><span class="line">		&#125; <span class="keyword">else</span></span><br><span class="line">		&#123; std::cout &lt;&lt; <span class="string">&quot;She was a virgin.\n&quot;</span>; &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">MakeLoveable</span></span><br><span class="line">&#123; <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;Make love with me.\n&quot;</span>; &#125; &#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">BlowJobable</span></span><br><span class="line">&#123; <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;BlowJob.\n&quot;</span>; &#125; &#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">FootJobable</span></span><br><span class="line">&#123; <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;FootJob.\n&quot;</span>; &#125; &#125;;</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">concept</span> IsSexSkill = IsSexuality&lt;T&gt; &amp;&amp; !std::same_as&lt;T, MakeLoveable&gt;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;IsSexSkill... SexSkills&gt;</span><br><span class="line"><span class="keyword">using</span> ReallyGirlFriend = GirlFriend&lt;MakeLoveable, SexSkills...&gt;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">constexpr</span> GirlFriend girlFriend;</span><br><span class="line">	<span class="keyword">constexpr</span> ReallyGirlFriend&lt;&gt; reallyGirlFriend;</span><br><span class="line">	<span class="keyword">constexpr</span> ReallyGirlFriend&lt;BlowJobable, FootJobable&gt; sexyGirlFriend;</span><br><span class="line">	girlFriend.<span class="built_in">ShowSexuality</span>();</span><br><span class="line">	reallyGirlFriend.<span class="built_in">ShowSexuality</span>();</span><br><span class="line">	sexyGirlFriend.<span class="built_in">ShowSexuality</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//output:</span></span><br><span class="line"><span class="comment">/*------------------------</span></span><br><span class="line"><span class="comment">I have a girl friend.</span></span><br><span class="line"><span class="comment">She was a virgin.</span></span><br><span class="line"><span class="comment">I have a girl friend.</span></span><br><span class="line"><span class="comment">She can:</span></span><br><span class="line"><span class="comment">Make love with me.</span></span><br><span class="line"><span class="comment">I have a girl friend.</span></span><br><span class="line"><span class="comment">She can:</span></span><br><span class="line"><span class="comment">Make love with me.</span></span><br><span class="line"><span class="comment">BlowJob.</span></span><br><span class="line"><span class="comment">FootJob.</span></span><br><span class="line"><span class="comment">------------------------*/</span></span><br></pre></td></tr></table></figure>
-<p><img src="/2023/09/11/%E4%B8%80%E4%B8%AA%E7%94%A8%E6%9D%A5ghs%E7%9A%84%E3%80%81%E4%BD%BF%E7%94%A8%E4%BA%86concept%E3%80%81%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%81%E6%A8%A1%E6%9D%BF%E5%BD%A2%E5%8F%82%E5%8C%85%E5%81%9A%E5%9F%BA%E7%B1%BB%E5%88%97%E8%A1%A8%E7%AD%89%E6%8A%80%E5%B7%A7%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%85%83%E7%BC%96%E7%A8%8BMixin-Demo/../%E4%B8%80%E4%B8%AA%E7%94%A8%E6%9D%A5ghs%E7%9A%84%E3%80%81%E4%BD%BF%E7%94%A8%E4%BA%86concept%E3%80%81%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%81%E6%A8%A1%E6%9D%BF%E5%BD%A2%E5%8F%82%E5%8C%85%E5%81%9A%E5%9F%BA%E7%B1%BB%E5%88%97%E8%A1%A8%E7%AD%89%E6%8A%80%E5%B7%A7%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%85%83%E7%BC%96%E7%A8%8BMixin-Demo/image.png" alt="Alt text"></p>
-<blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/460970247">https://zhuanlan.zhihu.com/p/460970247</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Programming Language</category>
-        <category>Cpp</category>
-      </categories>
-      <tags>
-        <tag>Cpp</tag>
-        <tag>技术杂谈</tag>
       </tags>
   </entry>
   <entry>
@@ -260,6 +223,43 @@
       <tags>
         <tag>Cpp</tag>
         <tag>技术杂谈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>一个用来ghs的、使用了concept、折叠表达式、模板形参包做基类列表等技巧的模板元编程Mixin Demo</title>
+    <url>/2023/09/11/%E4%B8%80%E4%B8%AA%E7%94%A8%E6%9D%A5ghs%E7%9A%84%E3%80%81%E4%BD%BF%E7%94%A8%E4%BA%86concept%E3%80%81%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%81%E6%A8%A1%E6%9D%BF%E5%BD%A2%E5%8F%82%E5%8C%85%E5%81%9A%E5%9F%BA%E7%B1%BB%E5%88%97%E8%A1%A8%E7%AD%89%E6%8A%80%E5%B7%A7%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%85%83%E7%BC%96%E7%A8%8BMixin-Demo/</url>
+    <content><![CDATA[<p>昨天看Mixin时突发奇想，写着玩的。图一乐。</p>
+<span id="more"></span>
+<p>直接上代码，受限于平台，Show()部分自行脑补。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;concepts&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">concept</span> IsSexuality = <span class="keyword">requires</span>&#123; T::<span class="built_in">Show</span>(); &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;IsSexuality... Sexuality&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">GirlFriend</span> :<span class="keyword">private</span> Sexuality...</span><br><span class="line">&#123;</span><br><span class="line">	<span class="function"><span class="keyword">constexpr</span> <span class="title">GirlFriend</span><span class="params">()</span> :Sexuality()... &#123;</span>&#125;</span><br><span class="line">	<span class="function"><span class="keyword">constexpr</span> <span class="type">void</span> <span class="title">ShowSexuality</span><span class="params">()</span> <span class="type">const</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;I have a girl friend.\n&quot;</span>;</span><br><span class="line">		<span class="function"><span class="keyword">if</span> <span class="title">constexpr</span> <span class="params">(<span class="keyword">sizeof</span>...(Sexuality) &gt; <span class="number">0</span>)</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			std::cout &lt;&lt; <span class="string">&quot;She can:\n&quot;</span>;</span><br><span class="line">			((Sexuality::<span class="built_in">Show</span>()), ...);</span><br><span class="line">		&#125; <span class="keyword">else</span></span><br><span class="line">		&#123; std::cout &lt;&lt; <span class="string">&quot;She was a virgin.\n&quot;</span>; &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">MakeLoveable</span></span><br><span class="line">&#123; <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;Make love with me.\n&quot;</span>; &#125; &#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">BlowJobable</span></span><br><span class="line">&#123; <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;BlowJob.\n&quot;</span>; &#125; &#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">FootJobable</span></span><br><span class="line">&#123; <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;FootJob.\n&quot;</span>; &#125; &#125;;</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">concept</span> IsSexSkill = IsSexuality&lt;T&gt; &amp;&amp; !std::same_as&lt;T, MakeLoveable&gt;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;IsSexSkill... SexSkills&gt;</span><br><span class="line"><span class="keyword">using</span> ReallyGirlFriend = GirlFriend&lt;MakeLoveable, SexSkills...&gt;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">constexpr</span> GirlFriend girlFriend;</span><br><span class="line">	<span class="keyword">constexpr</span> ReallyGirlFriend&lt;&gt; reallyGirlFriend;</span><br><span class="line">	<span class="keyword">constexpr</span> ReallyGirlFriend&lt;BlowJobable, FootJobable&gt; sexyGirlFriend;</span><br><span class="line">	girlFriend.<span class="built_in">ShowSexuality</span>();</span><br><span class="line">	reallyGirlFriend.<span class="built_in">ShowSexuality</span>();</span><br><span class="line">	sexyGirlFriend.<span class="built_in">ShowSexuality</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//output:</span></span><br><span class="line"><span class="comment">/*------------------------</span></span><br><span class="line"><span class="comment">I have a girl friend.</span></span><br><span class="line"><span class="comment">She was a virgin.</span></span><br><span class="line"><span class="comment">I have a girl friend.</span></span><br><span class="line"><span class="comment">She can:</span></span><br><span class="line"><span class="comment">Make love with me.</span></span><br><span class="line"><span class="comment">I have a girl friend.</span></span><br><span class="line"><span class="comment">She can:</span></span><br><span class="line"><span class="comment">Make love with me.</span></span><br><span class="line"><span class="comment">BlowJob.</span></span><br><span class="line"><span class="comment">FootJob.</span></span><br><span class="line"><span class="comment">------------------------*/</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2023/09/11/%E4%B8%80%E4%B8%AA%E7%94%A8%E6%9D%A5ghs%E7%9A%84%E3%80%81%E4%BD%BF%E7%94%A8%E4%BA%86concept%E3%80%81%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%81%E6%A8%A1%E6%9D%BF%E5%BD%A2%E5%8F%82%E5%8C%85%E5%81%9A%E5%9F%BA%E7%B1%BB%E5%88%97%E8%A1%A8%E7%AD%89%E6%8A%80%E5%B7%A7%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%85%83%E7%BC%96%E7%A8%8BMixin-Demo/../%E4%B8%80%E4%B8%AA%E7%94%A8%E6%9D%A5ghs%E7%9A%84%E3%80%81%E4%BD%BF%E7%94%A8%E4%BA%86concept%E3%80%81%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%81%E6%A8%A1%E6%9D%BF%E5%BD%A2%E5%8F%82%E5%8C%85%E5%81%9A%E5%9F%BA%E7%B1%BB%E5%88%97%E8%A1%A8%E7%AD%89%E6%8A%80%E5%B7%A7%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%85%83%E7%BC%96%E7%A8%8BMixin-Demo/image.png" alt="Alt text"></p>
+<blockquote>
+<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/460970247">https://zhuanlan.zhihu.com/p/460970247</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Programming Language</category>
+        <category>Cpp</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>技术杂谈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>为美好的URP献上解析[0x00]: 管线架构</title>
+    <url>/2023/06/12/%E4%B8%BA%E7%BE%8E%E5%A5%BD%E7%9A%84URP%E7%8C%AE%E4%B8%8A%E8%A7%A3%E6%9E%900x00/</url>
+    <content><![CDATA[<span id="more"></span>]]></content>
+      <categories>
+        <category>Game Engine</category>
+        <category>Unity</category>
+        <category>URP/SnowyOwl</category>
+      </categories>
+      <tags>
+        <tag>Rendering</tag>
+        <tag>Unity</tag>
+        <tag>URP</tag>
+        <tag>CSharp</tag>
       </tags>
   </entry>
   <entry>
@@ -312,9 +312,9 @@
         <category>Unreal</category>
       </categories>
       <tags>
-        <tag>Cpp</tag>
-        <tag>Rendering</tag>
         <tag>Unreal</tag>
+        <tag>Rendering</tag>
+        <tag>Cpp</tag>
       </tags>
   </entry>
   <entry>
@@ -331,9 +331,9 @@
         <category>Unreal</category>
       </categories>
       <tags>
-        <tag>Cpp</tag>
-        <tag>Rendering</tag>
         <tag>Unreal</tag>
+        <tag>Rendering</tag>
+        <tag>Cpp</tag>
       </tags>
   </entry>
   <entry>
@@ -483,7 +483,7 @@
   </entry>
   <entry>
     <title>浅谈UE5的C++程序化生成Shader</title>
-    <url>/2023/09/11/%E6%B5%85%E8%B0%88UE5%E7%9A%84C-%E7%A8%8B%E5%BA%8F%E5%8C%96%E7%94%9F%E6%88%90Shader/</url>
+    <url>/2023/09/11/UE5CppGenerateShader/</url>
     <content><![CDATA[<span id="more"></span>
 <p>待搬运, 内容详见原文链接.</p>
 <blockquote>
@@ -495,9 +495,9 @@
         <category>Unreal</category>
       </categories>
       <tags>
-        <tag>Cpp</tag>
-        <tag>Rendering</tag>
         <tag>Unreal</tag>
+        <tag>Rendering</tag>
+        <tag>Cpp</tag>
       </tags>
   </entry>
 </search>
