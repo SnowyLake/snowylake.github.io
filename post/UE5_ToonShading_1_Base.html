@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/snowylake-apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/snowylake-icon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/snowylake-icon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"snowylake.net","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","width":280,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="最近在研究基于UE5的卡通渲染，颇有收获。正巧前段时间与同事吃饭，聊到知乎，深感自己知乎各种不正经的东西实在太多了，而我又是个懒得腾出时间写正经东西的懒狗，遂决定趁编译Shader的空闲，写点学习笔记、心得与分享。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从零开始的UE5卡通渲染【一】：理论基础">
+<meta property="og:url" content="http://snowylake.net/post/UE5_ToonShading_1_Base.html">
+<meta property="og:site_name" content="雪之湖畔-SnowyLakeSide">
+<meta property="og:description" content="最近在研究基于UE5的卡通渲染，颇有收获。正巧前段时间与同事吃饭，聊到知乎，深感自己知乎各种不正经的东西实在太多了，而我又是个懒得腾出时间写正经东西的懒狗，遂决定趁编译Shader的空闲，写点学习笔记、心得与分享。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://snowylake.net/post/UE5_ToonShading_1_Base.html../UE5_ToonShading_1_Base/image.png">
+<meta property="og:image" content="http://snowylake.net/post/UE5_ToonShading_1_Base.html../UE5_ToonShading_1_Base/image-1.png">
+<meta property="og:image" content="http://snowylake.net/post/UE5_ToonShading_1_Base.html../UE5_ToonShading_1_Base/image-3.png">
+<meta property="og:image" content="http://snowylake.net/post/UE5_ToonShading_1_Base.html../UE5_ToonShading_1_Base/image-5.png">
+<meta property="og:image" content="http://snowylake.net/post/UE5_ToonShading_1_Base.html../UE5_ToonShading_1_Base/image-4.png">
+<meta property="og:image" content="http://snowylake.net/post/UE5_ToonShading_1_Base.html../UE5_ToonShading_1_Base/image-6.png">
+<meta property="og:image" content="http://snowylake.net/post/UE5_ToonShading_1_Base.html../UE5_ToonShading_1_Base/image-7.png">
+<meta property="og:image" content="http://snowylake.net/post/UE5_ToonShading_1_Base.html../UE5_ToonShading_1_Base/image-8.png">
+<meta property="og:image" content="http://snowylake.net/post/UE5_ToonShading_1_Base.html../UE5_ToonShading_1_Base/image-9.png">
+<meta property="article:published_time" content="2023-09-10T21:02:45.000Z">
+<meta property="article:modified_time" content="2024-06-30T18:06:11.171Z">
+<meta property="article:author" content="SnowyLake">
+<meta property="article:tag" content="Cpp">
+<meta property="article:tag" content="Unreal">
+<meta property="article:tag" content="Rendering">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://snowylake.net/post/UE5_ToonShading_1_Base.html../UE5_ToonShading_1_Base/image.png">
+
+
+<link rel="canonical" href="http://snowylake.net/post/UE5_ToonShading_1_Base.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://snowylake.net/post/UE5_ToonShading_1_Base.html","path":"post/UE5_ToonShading_1_Base.html","title":"从零开始的UE5卡通渲染【一】：理论基础"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>从零开始的UE5卡通渲染【一】：理论基础 | 雪之湖畔-SnowyLakeSide</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">雪之湖畔-SnowyLakeSide</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">27</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">10</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">16</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="SnowyLake"
+      src="/uploads/snowylake.png">
+  <p class="site-author-name" itemprop="name">SnowyLake</p>
+  <div class="site-description" itemprop="description">Before it begins, the war we all fear.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SnowyLake" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SnowyLake" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/snowylake" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;snowylake" rel="noopener me" target="_blank"><i class="fab fa-zhihu fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:snowylake.me@outlook.com" title="E-Mail → mailto:snowylake.me@outlook.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+
+      <!-- Custom Sidebar -->
+        <div class="sidebar-inner sidebar-post-related">
+          <div class="animated">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-commenting fa-fw"></i>
+              全站公告
+            </div>
+            <a class="custom-sidebar-board-text">SnowyLakeSide绝绝绝绝赞更新中!
+不想工作, 苦呀西~
+</a>
+          </div>  
+        </div>
+        <div class="sidebar-inner sidebar-post-related">
+          <div class="animated">
+            <div class="links-of-blogroll-title">
+                <i class="fa fa-bookmark fa-fw"></i>
+                精选文章
+            </div>
+            <ul class="popular-posts">
+                    <li class="popular-posts-item">
+                        <a class="popular-posts-link" href="/post/GraphicsDeveloperFun.html" rel="bookmark">
+                          <time class="popular-posts-time">2023-06-24</time>
+                          <br>
+                        来点图程破防乐子
+                        </a>
+                    </li>
+                    <li class="popular-posts-item">
+                        <a class="popular-posts-link" href="/post/UE51_Mobile_DeferredRendering.html" rel="bookmark">
+                          <time class="popular-posts-time">2023-09-11</time>
+                          <br>
+                        UE5.1移动端延迟渲染管线测试与剖析
+                        </a>
+                    </li>
+                    <li class="popular-posts-item">
+                        <a class="popular-posts-link" href="/post/URP_Analysis_0x00_PipelineFramework.html" rel="bookmark">
+                          <time class="popular-posts-time">2023-06-12</time>
+                          <br>
+                        为美好的URP献上解析[0x00]: 管线架构
+                        </a>
+                    </li>
+                    <li class="popular-posts-item">
+                        <a class="popular-posts-link" href="/post/URP_DeferredRendering_NativeRenderpass.html" rel="bookmark">
+                          <time class="popular-posts-time">2023-09-11</time>
+                          <br>
+                        URP延迟渲染+Native Renderpass踩坑记录
+                        </a>
+                    </li>
+            </ul>
+          </div>  
+        </div>
+      <!-- Custom Sidebar -->
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://snowylake.net/post/UE5_ToonShading_1_Base.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/snowylake.png">
+      <meta itemprop="name" content="SnowyLake">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="雪之湖畔-SnowyLakeSide">
+      <meta itemprop="description" content="Before it begins, the war we all fear.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="从零开始的UE5卡通渲染【一】：理论基础 | 雪之湖畔-SnowyLakeSide">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          从零开始的UE5卡通渲染【一】：理论基础
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-09-11 05:02:45" itemprop="dateCreated datePublished" datetime="2023-09-11T05:02:45+08:00">2023-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-07-01 02:06:11" itemprop="dateModified" datetime="2024-07-01T02:06:11+08:00">2024-07-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Game-Engine/" itemprop="url" rel="index"><span itemprop="name">Game Engine</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Game-Engine/Unreal/" itemprop="url" rel="index"><span itemprop="name">Unreal</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>最近在研究基于UE5的卡通渲染，颇有收获。正巧前段时间与同事吃饭，聊到知乎，深感自己知乎各种不正经的东西实在太多了，而我又是个懒得腾出时间写正经东西的懒狗，遂决定趁编译Shader的空闲，写点学习笔记、心得与分享。</p>
+<span id="more"></span>
+<p>虽然卡渲本身的知识不算很多，但放到UE5上就是不得不改动源码的大工程了，不由得让人怀念起自由的Unity，令人感叹……扯远了，总之UE5卡渲这块我准备分成多篇文章，多水一水。</p>
+<p>目前的大(feng)致(kuang)计(hua)划(bing)如下：</p>
+<ul>
+<li>卡通渲染理论基础</li>
+<li>修改源码的卡渲光照模型实现</li>
+<li>基于卷积矩阵的卡渲描边实现、添加子Mesh的Backface卡渲描边实现</li>
+<li>修改源码自定义Pass的Backface卡渲描边实现<br>……<br>次世代卡渲&#x2F;独立的Hair、Skin卡渲光照模型&#x2F;UE5复刻原神ShadingModel……(或许会有？)<br>废话不多说了，进入正题。</li>
+</ul>
+<hr>
+<p>提到卡通渲染，很多了解不多的朋友可能就会将其与NPR(Non-Photorealistic Rendering)混为一谈，可实际上这两者并不能划等号。事实上NPR是个非常广泛的概念，不止是卡渲，油画、水墨风等等等等各种特殊的渲染风格都可以算作是NPR的一部分，而整个卡渲大类也只是NPR的一个分支罢了，更不用说卡渲自己还有分有各种流派，比如日式赛璐璐风格、有明显明暗分界的Cel Shading和琪亚娜极乐净土中明暗渐变连续的Tone based Shading，以及结合pbr的次世代卡通渲染等。<br><img src="/post/UE5_ToonShading_1_Base.html../UE5_ToonShading_1_Base/image.png" alt="Alt text"></p>
+<blockquote>
+<p>GGX采用的就是Cel Shading，可以看到角色身上明显的明暗分界</p>
+</blockquote>
+<p><img src="/post/UE5_ToonShading_1_Base.html../UE5_ToonShading_1_Base/image-1.png" alt="Alt text"></p>
+<blockquote>
+<p>琪亚娜的皮肤很显然是Tone based Shading……虫虫，我的虫虫，嘿嘿嘿</p>
+</blockquote>
+<p>那么说到流派，既然要研究卡渲，那我们自然要选择一个流派去研究，这里我选择当然的是前面拿来举例、卡渲领域典中之典的罪恶装备(以下简称GGX，注意不是Cook-Torrance BRDF里那个GGX，笑)作为参考。<br>作为卡渲领域的里程碑作品，GGX的材质模型其实非常的简单，主要使用了三张贴图：BaseColor，ilm和SSS：</p>
+<ul>
+<li><p>BaseColor：提供基础颜色<br><img src="/post/UE5_ToonShading_1_Base.html../UE5_ToonShading_1_Base/image-3.png" alt="Alt text"></p>
+</li>
+<li><p>ilm：提供高光、阴影与内描边信息<br><img src="/post/UE5_ToonShading_1_Base.html../UE5_ToonShading_1_Base/image-5.png" alt="Alt text"></p>
+</li>
+<li><p>SSS：提供模型阴影颜色信息，模型阴影颜色即为SSS * BaseColor<br><img src="/post/UE5_ToonShading_1_Base.html../UE5_ToonShading_1_Base/image-4.png" alt="Alt text"><br>其中，最值得详谈的是ilm贴图，其RGBA四个通道分别存储了高光强度、阴影阈值、高光范围与内描边信息：</p>
+</li>
+<li><p>R通道：<br><img src="/post/UE5_ToonShading_1_Base.html../UE5_ToonShading_1_Base/image-6.png" alt="Alt text"><br>高光强度，没什么好说的；</p>
+</li>
+<li><p>G通道：<br><img src="/post/UE5_ToonShading_1_Base.html../UE5_ToonShading_1_Base/image-7.png" alt="Alt text"><br>阴影阈值，基于128灰度的底色，控制材质进入阴影的倾向强弱。</p>
+</li>
+<li><p>B通道<br><img src="/post/UE5_ToonShading_1_Base.html../UE5_ToonShading_1_Base/image-8.png" alt="Alt text"><br>高光区域，决定了高光的范围。</p>
+</li>
+<li><p>A通道<br><img src="/post/UE5_ToonShading_1_Base.html../UE5_ToonShading_1_Base/image-9.png" alt="Alt text"><br>内描边信息，著名的本村线；</p>
+</li>
+</ul>
+<p>除此以外，实际上GGX的卡渲方案还用到了一些贴图，比如角色的伤痕等，但这些对于ShadingModel来说都不重要，我们暂不去考虑。本来打算把卡渲的算法部分放在这里讲，但想了想不如丢到实现部分直接结合代码来讲……而且如果只是做一个简单卡渲模型的话，倒也不需要什么复杂的算法。</p>
+<p>那么作为序言的第一篇就到此为止，下一篇开始，我们将在UE5内通过修改源码来实现第一个卡渲模型。</p>
+<blockquote>
+<p>原文链接: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/544141830">https://zhuanlan.zhihu.com/p/544141830</a></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>SnowyLake
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://snowylake.net/post/UE5_ToonShading_1_Base.html" title="从零开始的UE5卡通渲染【一】：理论基础">http://snowylake.net/post/UE5_ToonShading_1_Base.html</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Cpp/" rel="tag"><i class="fa fa-tag"></i> Cpp</a>
+              <a href="/tags/Unreal/" rel="tag"><i class="fa fa-tag"></i> Unreal</a>
+              <a href="/tags/Rendering/" rel="tag"><i class="fa fa-tag"></i> Rendering</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/Cpp20_GHS_Concept_FoldExpression_MixinDemo.html" rel="prev" title="一个用来ghs的、使用了concept、折叠表达式、模板形参包做基类列表等技巧的模板元编程Mixin Demo">
+                  <i class="fa fa-chevron-left"></i> 一个用来ghs的、使用了concept、折叠表达式、模板形参包做基类列表等技巧的模板元编程Mixin Demo
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/UE5_ToonShading_2_CustomShadingModel.html" rel="next" title="从零开始的UE5卡通渲染【二】：自定义着色模型">
+                  从零开始的UE5卡通渲染【二】：自定义着色模型 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">SnowyLake</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/SnowyLake" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

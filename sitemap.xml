@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://snowylake.net/2023/06/12/SiteBuildNote/</loc>
+    <loc>http://snowylake.net/post/SiteBuildNote.html</loc>
     
     <lastmod>2024-06-30</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>http://snowylake.net/2023/09/11/URP_DeferredRendering_NativeRenderpass/</loc>
+    <loc>http://snowylake.net/post/URP_DeferredRendering_NativeRenderpass.html</loc>
     
     <lastmod>2024-06-30</lastmod>
     
@@ -20,7 +20,7 @@
   </url>
   
   <url>
-    <loc>http://snowylake.net/2023/09/11/Cpp20_GHS_Concept_FoldExpression_MixinDemo/</loc>
+    <loc>http://snowylake.net/post/Cpp20_GHS_Concept_FoldExpression_MixinDemo.html</loc>
     
     <lastmod>2024-06-30</lastmod>
     
@@ -29,7 +29,7 @@
   </url>
   
   <url>
-    <loc>http://snowylake.net/2023/09/11/Cpp20_StringSplit/</loc>
+    <loc>http://snowylake.net/post/Cpp20_StringSplit.html</loc>
     
     <lastmod>2024-06-30</lastmod>
     
@@ -38,7 +38,7 @@
   </url>
   
   <url>
-    <loc>http://snowylake.net/2023/09/11/UE5_ToonShading_1_Base/</loc>
+    <loc>http://snowylake.net/post/UE5_ToonShading_1_Base.html</loc>
     
     <lastmod>2024-06-30</lastmod>
     
@@ -47,7 +47,7 @@
   </url>
   
   <url>
-    <loc>http://snowylake.net/2023/09/11/UE5_CppGenerateShader/</loc>
+    <loc>http://snowylake.net/post/UE5_CppGenerateShader.html</loc>
     
     <lastmod>2024-06-30</lastmod>
     
@@ -56,7 +56,7 @@
   </url>
   
   <url>
-    <loc>http://snowylake.net/2023/06/12/SnowyArkEngine_DevNote_0x00/</loc>
+    <loc>http://snowylake.net/post/SnowyArkEngine_DevNote_0x00.html</loc>
     
     <lastmod>2024-06-30</lastmod>
     
@@ -74,7 +74,7 @@
   </url>
   
   <url>
-    <loc>http://snowylake.net/2023/06/11/CategoryCollection/</loc>
+    <loc>http://snowylake.net/post/CategoryCollection.html</loc>
     
     <lastmod>2024-05-19</lastmod>
     
@@ -83,7 +83,7 @@
   </url>
   
   <url>
-    <loc>http://snowylake.net/2023/09/11/UE51_Mobile_DeferredRendering_LightChannels/</loc>
+    <loc>http://snowylake.net/post/UE51_Mobile_DeferredRendering_LightChannels.html</loc>
     
     <lastmod>2024-05-19</lastmod>
     
@@ -92,7 +92,7 @@
   </url>
   
   <url>
-    <loc>http://snowylake.net/2023/09/11/UE51_Mobile_DeferredRendering/</loc>
+    <loc>http://snowylake.net/post/UE51_Mobile_DeferredRendering.html</loc>
     
     <lastmod>2024-05-19</lastmod>
     
@@ -101,7 +101,7 @@
   </url>
   
   <url>
-    <loc>http://snowylake.net/2023/09/11/UE5_ToonShading_2_CustomShadingModel/</loc>
+    <loc>http://snowylake.net/post/UE5_ToonShading_2_CustomShadingModel.html</loc>
     
     <lastmod>2024-05-19</lastmod>
     
@@ -110,7 +110,7 @@
   </url>
   
   <url>
-    <loc>http://snowylake.net/2023/06/12/URP_Analysis_0x00_PipelineFramework/</loc>
+    <loc>http://snowylake.net/post/URP_Analysis_0x00_PipelineFramework.html</loc>
     
     <lastmod>2024-05-19</lastmod>
     
@@ -119,7 +119,7 @@
   </url>
   
   <url>
-    <loc>http://snowylake.net/2023/09/11/Cpp_StdOptional_Overhead/</loc>
+    <loc>http://snowylake.net/post/Cpp_StdOptional_Overhead.html</loc>
     
     <lastmod>2023-09-10</lastmod>
     
@@ -128,7 +128,7 @@
   </url>
   
   <url>
-    <loc>http://snowylake.net/2023/06/24/Cpp_AutoPtr2UniquePtr/</loc>
+    <loc>http://snowylake.net/post/Cpp_AutoPtr2UniquePtr.html</loc>
     
     <lastmod>2023-09-10</lastmod>
     
@@ -137,7 +137,7 @@
   </url>
   
   <url>
-    <loc>http://snowylake.net/2023/06/24/GraphicsDeveloperFun/</loc>
+    <loc>http://snowylake.net/post/GraphicsDeveloperFun.html</loc>
     
     <lastmod>2023-09-10</lastmod>
     
@@ -146,16 +146,7 @@
   </url>
   
   <url>
-    <loc>http://snowylake.net/google147370bdb620e415.html</loc>
-    
-    <lastmod>2023-06-15</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://snowylake.net/2023/06/11/HelloWorld/</loc>
+    <loc>http://snowylake.net/post/HelloWorld.html</loc>
     
     <lastmod>2023-06-13</lastmod>
     
@@ -184,7 +175,7 @@
 
   <url>
     <loc>http://snowylake.net/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -192,70 +183,70 @@
   
   <url>
     <loc>http://snowylake.net/tags/Cpp/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://snowylake.net/tags/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://snowylake.net/tags/%E9%97%B2%E8%B0%88/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://snowylake.net/tags/Compute-Graphics/</loc>
-    <lastmod>2024-06-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://snowylake.net/tags/Unreal/</loc>
-    <lastmod>2024-06-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://snowylake.net/tags/Rendering/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://snowylake.net/tags/SnowyArk-Engine/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://snowylake.net/tags/Unreal/</loc>
+    <lastmod>2024-07-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://snowylake.net/tags/Rendering/</loc>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://snowylake.net/tags/Unity/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://snowylake.net/tags/URP/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://snowylake.net/tags/CSharp/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -263,190 +254,190 @@
 
   
   <url>
-    <loc>http://snowylake.net/categories/Programming-Language/</loc>
-    <lastmod>2024-06-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://snowylake.net/categories/Game-Engine/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://snowylake.net/categories/Programming-Language/Cpp/</loc>
-    <lastmod>2024-06-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://snowylake.net/categories/Others/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <loc>http://snowylake.net/categories/Programming-Language/</loc>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://snowylake.net/categories/Game-Engine/Unity/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://snowylake.net/categories/Game-Engine/Unreal/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <loc>http://snowylake.net/categories/Others/</loc>
+    <lastmod>2024-07-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://snowylake.net/categories/Programming-Language/Cpp/</loc>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://snowylake.net/categories/Game-Engine/SnowyArk/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://snowylake.net/categories/Others/%E9%97%B2%E8%B0%88/</loc>
-    <lastmod>2024-06-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://snowylake.net/categories/Others/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <loc>http://snowylake.net/categories/Game-Engine/Unreal/</loc>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://snowylake.net/categories/Game-Engine/Unity/URP-SnowyOwl/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://snowylake.net/categories/Others/%E9%97%B2%E8%B0%88/</loc>
+    <lastmod>2024-07-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://snowylake.net/categories/Others/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/</loc>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://snowylake.net/categories/Game-Engine/Unity/HDRP/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://snowylake.net/categories/Game-Engine/Unreal/SnowyFalcon/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://snowylake.net/categories/GPU-Programming/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://snowylake.net/categories/GPU-Programming/Graphics-API/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://snowylake.net/categories/GPU-Programming/Graphics-API/OpenGL/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://snowylake.net/categories/GPU-Programming/Graphics-API/Vulkan/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://snowylake.net/categories/GPU-Programming/Graphics-API/DirectX-11/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://snowylake.net/categories/GPU-Programming/Graphics-API/DirectX-12/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://snowylake.net/categories/GPU-Programming/CUDA/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://snowylake.net/categories/Programming-Language/CSharp/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://snowylake.net/categories/Programming-Language/TypeScript/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://snowylake.net/categories/DCC/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://snowylake.net/categories/DCC/3ds-Max/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://snowylake.net/categories/DCC/Blender/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://snowylake.net/categories/DCC/PCG/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://snowylake.net/categories/DCC/PCG/Houdini/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://snowylake.net/categories/DCC/PCG/Substance-Designer/</loc>
-    <lastmod>2024-06-30</lastmod>
+    <lastmod>2024-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
