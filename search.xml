@@ -1,17 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>一个用来ghs的、使用了concept、折叠表达式、模板形参包做基类列表等技巧的模板元编程Mixin Demo</title>
+    <url>/post/cpp20_ghs_concept_foldexpression_mixin.html</url>
+    <content><![CDATA[<p>昨天看Mixin时突发奇想，写着玩的。图一乐。</p>
+<span id="more"></span>
+<p>直接上代码，受限于平台，Show()部分自行脑补。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;concepts&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">concept</span> IsSexuality = <span class="keyword">requires</span>&#123; T::<span class="built_in">Show</span>(); &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;IsSexuality... Sexuality&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">GirlFriend</span> :<span class="keyword">private</span> Sexuality...</span><br><span class="line">&#123;</span><br><span class="line">	<span class="function"><span class="keyword">constexpr</span> <span class="title">GirlFriend</span><span class="params">()</span> :Sexuality()... &#123;</span>&#125;</span><br><span class="line">	<span class="function"><span class="keyword">constexpr</span> <span class="type">void</span> <span class="title">ShowSexuality</span><span class="params">()</span> <span class="type">const</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;I have a girl friend.\n&quot;</span>;</span><br><span class="line">		<span class="function"><span class="keyword">if</span> <span class="title">constexpr</span> <span class="params">(<span class="keyword">sizeof</span>...(Sexuality) &gt; <span class="number">0</span>)</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			std::cout &lt;&lt; <span class="string">&quot;She can:\n&quot;</span>;</span><br><span class="line">			((Sexuality::<span class="built_in">Show</span>()), ...);</span><br><span class="line">		&#125; <span class="keyword">else</span></span><br><span class="line">		&#123; std::cout &lt;&lt; <span class="string">&quot;She was a virgin.\n&quot;</span>; &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">MakeLoveable</span></span><br><span class="line">&#123; <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;Make love with me.\n&quot;</span>; &#125; &#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">BlowJobable</span></span><br><span class="line">&#123; <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;BlowJob.\n&quot;</span>; &#125; &#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">FootJobable</span></span><br><span class="line">&#123; <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;FootJob.\n&quot;</span>; &#125; &#125;;</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">concept</span> IsSexSkill = IsSexuality&lt;T&gt; &amp;&amp; !std::same_as&lt;T, MakeLoveable&gt;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;IsSexSkill... SexSkills&gt;</span><br><span class="line"><span class="keyword">using</span> ReallyGirlFriend = GirlFriend&lt;MakeLoveable, SexSkills...&gt;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">constexpr</span> GirlFriend girlFriend;</span><br><span class="line">	<span class="keyword">constexpr</span> ReallyGirlFriend&lt;&gt; reallyGirlFriend;</span><br><span class="line">	<span class="keyword">constexpr</span> ReallyGirlFriend&lt;BlowJobable, FootJobable&gt; sexyGirlFriend;</span><br><span class="line">	girlFriend.<span class="built_in">ShowSexuality</span>();</span><br><span class="line">	reallyGirlFriend.<span class="built_in">ShowSexuality</span>();</span><br><span class="line">	sexyGirlFriend.<span class="built_in">ShowSexuality</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//output:</span></span><br><span class="line"><span class="comment">/*------------------------</span></span><br><span class="line"><span class="comment">I have a girl friend.</span></span><br><span class="line"><span class="comment">She was a virgin.</span></span><br><span class="line"><span class="comment">I have a girl friend.</span></span><br><span class="line"><span class="comment">She can:</span></span><br><span class="line"><span class="comment">Make love with me.</span></span><br><span class="line"><span class="comment">I have a girl friend.</span></span><br><span class="line"><span class="comment">She can:</span></span><br><span class="line"><span class="comment">Make love with me.</span></span><br><span class="line"><span class="comment">BlowJob.</span></span><br><span class="line"><span class="comment">FootJob.</span></span><br><span class="line"><span class="comment">------------------------*/</span></span><br></pre></td></tr></table></figure>
+<p><img src="/post/cpp20_ghs_concept_foldexpression_mixin.html../cpp20_ghs_concept_foldexpression_mixin/image.png" alt="Alt text"></p>
+<blockquote>
+<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/460970247">https://zhuanlan.zhihu.com/p/460970247</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Programming Language</category>
+        <category>Cpp</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>技术杂谈</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CategoryCollection</title>
     <url>/post/category_collection.html</url>
     <content><![CDATA[<span id="more"></span>]]></content>
       <categories>
-        <category>Game Engine</category>
         <category>Programming Language</category>
+        <category>Game Engine</category>
+        <category>Cpp</category>
         <category>Others</category>
         <category>Unity</category>
-        <category>Cpp</category>
-        <category>SnowyArk</category>
         <category>Unreal</category>
+        <category>SnowyArk</category>
         <category>闲谈</category>
         <category>URP/SnowyOwl</category>
         <category>技术杂谈</category>
@@ -35,27 +56,6 @@
       </categories>
   </entry>
   <entry>
-    <title>一个用来ghs的、使用了concept、折叠表达式、模板形参包做基类列表等技巧的模板元编程Mixin Demo</title>
-    <url>/post/cpp20_ghs_concept_foldexpression_mixin.html</url>
-    <content><![CDATA[<p>昨天看Mixin时突发奇想，写着玩的。图一乐。</p>
-<span id="more"></span>
-<p>直接上代码，受限于平台，Show()部分自行脑补。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;concepts&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">concept</span> IsSexuality = <span class="keyword">requires</span>&#123; T::<span class="built_in">Show</span>(); &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;IsSexuality... Sexuality&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">GirlFriend</span> :<span class="keyword">private</span> Sexuality...</span><br><span class="line">&#123;</span><br><span class="line">	<span class="function"><span class="keyword">constexpr</span> <span class="title">GirlFriend</span><span class="params">()</span> :Sexuality()... &#123;</span>&#125;</span><br><span class="line">	<span class="function"><span class="keyword">constexpr</span> <span class="type">void</span> <span class="title">ShowSexuality</span><span class="params">()</span> <span class="type">const</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;I have a girl friend.\n&quot;</span>;</span><br><span class="line">		<span class="function"><span class="keyword">if</span> <span class="title">constexpr</span> <span class="params">(<span class="keyword">sizeof</span>...(Sexuality) &gt; <span class="number">0</span>)</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			std::cout &lt;&lt; <span class="string">&quot;She can:\n&quot;</span>;</span><br><span class="line">			((Sexuality::<span class="built_in">Show</span>()), ...);</span><br><span class="line">		&#125; <span class="keyword">else</span></span><br><span class="line">		&#123; std::cout &lt;&lt; <span class="string">&quot;She was a virgin.\n&quot;</span>; &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">MakeLoveable</span></span><br><span class="line">&#123; <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;Make love with me.\n&quot;</span>; &#125; &#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">BlowJobable</span></span><br><span class="line">&#123; <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;BlowJob.\n&quot;</span>; &#125; &#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">FootJobable</span></span><br><span class="line">&#123; <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;FootJob.\n&quot;</span>; &#125; &#125;;</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">concept</span> IsSexSkill = IsSexuality&lt;T&gt; &amp;&amp; !std::same_as&lt;T, MakeLoveable&gt;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;IsSexSkill... SexSkills&gt;</span><br><span class="line"><span class="keyword">using</span> ReallyGirlFriend = GirlFriend&lt;MakeLoveable, SexSkills...&gt;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">constexpr</span> GirlFriend girlFriend;</span><br><span class="line">	<span class="keyword">constexpr</span> ReallyGirlFriend&lt;&gt; reallyGirlFriend;</span><br><span class="line">	<span class="keyword">constexpr</span> ReallyGirlFriend&lt;BlowJobable, FootJobable&gt; sexyGirlFriend;</span><br><span class="line">	girlFriend.<span class="built_in">ShowSexuality</span>();</span><br><span class="line">	reallyGirlFriend.<span class="built_in">ShowSexuality</span>();</span><br><span class="line">	sexyGirlFriend.<span class="built_in">ShowSexuality</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//output:</span></span><br><span class="line"><span class="comment">/*------------------------</span></span><br><span class="line"><span class="comment">I have a girl friend.</span></span><br><span class="line"><span class="comment">She was a virgin.</span></span><br><span class="line"><span class="comment">I have a girl friend.</span></span><br><span class="line"><span class="comment">She can:</span></span><br><span class="line"><span class="comment">Make love with me.</span></span><br><span class="line"><span class="comment">I have a girl friend.</span></span><br><span class="line"><span class="comment">She can:</span></span><br><span class="line"><span class="comment">Make love with me.</span></span><br><span class="line"><span class="comment">BlowJob.</span></span><br><span class="line"><span class="comment">FootJob.</span></span><br><span class="line"><span class="comment">------------------------*/</span></span><br></pre></td></tr></table></figure>
-<p><img src="/post/cpp20_ghs_concept_foldexpression_mixin.html../cpp20_ghs_concept_foldexpression_mixin/image.png" alt="Alt text"></p>
-<blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/460970247">https://zhuanlan.zhihu.com/p/460970247</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Programming Language</category>
-        <category>Cpp</category>
-      </categories>
-      <tags>
-        <tag>Cpp</tag>
-        <tag>技术杂谈</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>一个C++20下的string split实现</title>
     <url>/post/cpp20_stringsplit.html</url>
     <content><![CDATA[<p>众所周知，C++一直没有一个官方提供的string split用于分割字符串，在过去（C++20之前）我们可能需要使用std::regex、std::string::find系列方法、甚至是继承自C的strtok函数来自行封装一个split，非常繁琐与不便。<br>然而，这一切都在C++20中发生了变化。C++20引入了范围库ranges，其中提供的两个范围适配器std::split、std::lazy_split可以使我们以一种更为优雅的形式实现split。</p>
@@ -77,23 +77,6 @@
       <tags>
         <tag>Cpp</tag>
         <tag>技术杂谈</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>来点图程破防乐子</title>
-    <url>/post/graphics_developer_joke.html</url>
-    <content><![CDATA[<p>快过年了，不要再讨论什么C++，图形学，模板元之类的了，你带你的C++语言的设计与演化回到家并不能给你带来任何实质性作用，朋友们打开UE4连连看就做出了好看的特效，你默默的在家里瞪着两眼看GAMES、may佬和侯捷的视频。<br>亲戚朋友们吃饭问你收获了什么，你说我读完了RTR4和PBRT，系统的研究了基于物理的渲染和非真实感渲染，还用C++20重构了自己的渲染器。亲戚们懵逼了，你还在心里默默嘲笑他们，笑他们不懂C++和计算机图形学，不懂光照方程，不懂RAII和CRTP，也笑他们连Shader是什么都不知道。<br>你父母的同事都在说自己儿女一年的收获，有的用Java做了个网站后端赚到了第一笔外快，有的用Python做了点数据可视化发到B站成了up主，有的学了Unity和C#做独立游戏已经发售了。<br>你的父母默默无言，说我的儿子买了一整套的Effective C++，上Stack Overflow痛骂了C++标准委员会，写了一堆狗屁不通报错几百几千行的模板元编程代码，还对着谷歌翻译啃Ray Tracing the Rest of Your Life，人也越来越魔怔了。</p>
-<blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/456526193">https://zhuanlan.zhihu.com/p/456526193</a></p>
-</blockquote>
-<span id="more"></span>]]></content>
-      <categories>
-        <category>Others</category>
-        <category>闲谈</category>
-      </categories>
-      <tags>
-        <tag>闲谈</tag>
-        <tag>Compute Graphics</tag>
       </tags>
   </entry>
   <entry>
@@ -139,6 +122,58 @@
       <tags>
         <tag>Cpp</tag>
         <tag>技术杂谈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>来点图程破防乐子</title>
+    <url>/post/graphics_developer_joke.html</url>
+    <content><![CDATA[<p>快过年了，不要再讨论什么C++，图形学，模板元之类的了，你带你的C++语言的设计与演化回到家并不能给你带来任何实质性作用，朋友们打开UE4连连看就做出了好看的特效，你默默的在家里瞪着两眼看GAMES、may佬和侯捷的视频。<br>亲戚朋友们吃饭问你收获了什么，你说我读完了RTR4和PBRT，系统的研究了基于物理的渲染和非真实感渲染，还用C++20重构了自己的渲染器。亲戚们懵逼了，你还在心里默默嘲笑他们，笑他们不懂C++和计算机图形学，不懂光照方程，不懂RAII和CRTP，也笑他们连Shader是什么都不知道。<br>你父母的同事都在说自己儿女一年的收获，有的用Java做了个网站后端赚到了第一笔外快，有的用Python做了点数据可视化发到B站成了up主，有的学了Unity和C#做独立游戏已经发售了。<br>你的父母默默无言，说我的儿子买了一整套的Effective C++，上Stack Overflow痛骂了C++标准委员会，写了一堆狗屁不通报错几百几千行的模板元编程代码，还对着谷歌翻译啃Ray Tracing the Rest of Your Life，人也越来越魔怔了。</p>
+<blockquote>
+<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/456526193">https://zhuanlan.zhihu.com/p/456526193</a></p>
+</blockquote>
+<span id="more"></span>]]></content>
+      <categories>
+        <category>Others</category>
+        <category>闲谈</category>
+      </categories>
+      <tags>
+        <tag>闲谈</tag>
+        <tag>Compute Graphics</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello world!</title>
+    <url>/post/helloworld.html</url>
+    <content><![CDATA[<p>花有重开日, 人无再少年.</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout &lt;&lt; std::format(<span class="string">&quot;Hello world!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p><img src="/post/helloworld.html../helloworld/image.jpg" alt="HelloWorld"></p>
+]]></content>
+      <categories>
+        <category>Others</category>
+        <category>闲谈</category>
+      </categories>
+      <tags>
+        <tag>闲谈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UE5.1移动端延迟渲染管线测试与剖析</title>
+    <url>/post/ue51_mobile_deferred.html</url>
+    <content><![CDATA[<span id="more"></span>
+<p>待搬运, 内容详见原文链接.</p>
+<blockquote>
+<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/575618981">https://zhuanlan.zhihu.com/p/575618981</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Game Engine</category>
+        <category>Unreal</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>Unreal</tag>
+        <tag>Rendering</tag>
       </tags>
   </entry>
   <entry>
@@ -197,22 +232,6 @@
       <tags>
         <tag>Cpp</tag>
         <tag>技术杂谈</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello world!</title>
-    <url>/post/helloworld.html</url>
-    <content><![CDATA[<p>花有重开日, 人无再少年.</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout &lt;&lt; std::format(<span class="string">&quot;Hello world!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p><img src="/post/helloworld.html../helloworld/image.jpg" alt="HelloWorld"></p>
-]]></content>
-      <categories>
-        <category>Others</category>
-        <category>闲谈</category>
-      </categories>
-      <tags>
-        <tag>闲谈</tag>
       </tags>
   </entry>
   <entry>
@@ -299,12 +318,12 @@
       </tags>
   </entry>
   <entry>
-    <title>UE5.1移动端延迟渲染管线测试与剖析</title>
-    <url>/post/ue51_mobile_deferred.html</url>
+    <title>浅谈UE5的C++程序化生成Shader</title>
+    <url>/post/ue5_cpp_generate_shader.html</url>
     <content><![CDATA[<span id="more"></span>
 <p>待搬运, 内容详见原文链接.</p>
 <blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/575618981">https://zhuanlan.zhihu.com/p/575618981</a></p>
+<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/574551808">https://zhuanlan.zhihu.com/p/574551808</a></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -324,25 +343,6 @@
 <p>待搬运, 内容详见原文链接.</p>
 <blockquote>
 <p>原文链接: <a href="https://zhuanlan.zhihu.com/p/577239276">https://zhuanlan.zhihu.com/p/577239276</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Game Engine</category>
-        <category>Unreal</category>
-      </categories>
-      <tags>
-        <tag>Cpp</tag>
-        <tag>Unreal</tag>
-        <tag>Rendering</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>浅谈UE5的C++程序化生成Shader</title>
-    <url>/post/ue5_cpp_generate_shader.html</url>
-    <content><![CDATA[<span id="more"></span>
-<p>待搬运, 内容详见原文链接.</p>
-<blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/574551808">https://zhuanlan.zhihu.com/p/574551808</a></p>
 </blockquote>
 ]]></content>
       <categories>
