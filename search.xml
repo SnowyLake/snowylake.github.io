@@ -7,13 +7,13 @@
       <categories>
         <category>Game Engine</category>
         <category>Programming Language</category>
-        <category>Unity</category>
         <category>Others</category>
+        <category>Unity</category>
         <category>Cpp</category>
         <category>SnowyArk</category>
         <category>Unreal</category>
-        <category>URP/SnowyOwl</category>
         <category>闲谈</category>
+        <category>URP/SnowyOwl</category>
         <category>技术杂谈</category>
         <category>HDRP</category>
         <category>SnowyFalcon</category>
@@ -56,6 +56,47 @@
       </tags>
   </entry>
   <entry>
+    <title>一个C++20下的string split实现</title>
+    <url>/post/cpp20_stringsplit.html</url>
+    <content><![CDATA[<p>众所周知，C++一直没有一个官方提供的string split用于分割字符串，在过去（C++20之前）我们可能需要使用std::regex、std::string::find系列方法、甚至是继承自C的strtok函数来自行封装一个split，非常繁琐与不便。<br>然而，这一切都在C++20中发生了变化。C++20引入了范围库ranges，其中提供的两个范围适配器std::split、std::lazy_split可以使我们以一种更为优雅的形式实现split。</p>
+<span id="more"></span>
+
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;concept&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ranges&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;format&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> stdr  std::ranges</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> stdrv std::ranges::views</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> Container = std::vector, <span class="keyword">typename</span> Arg = std::string_view&gt;</span><br><span class="line"><span class="keyword">auto</span> <span class="built_in">Split</span>(std::string_view str, std::string_view delimiter)</span><br><span class="line">&#123;</span><br><span class="line">	Container&lt;Arg&gt; myCont;</span><br><span class="line">	<span class="keyword">auto</span> temp = str </span><br><span class="line">		| stdrv::<span class="built_in">split</span>(delimiter)</span><br><span class="line">		| stdrv::<span class="built_in">transform</span>([](<span class="keyword">auto</span>&amp;&amp; r)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="built_in">Arg</span>(std::<span class="built_in">addressof</span>(*r.<span class="built_in">begin</span>()), stdr::<span class="built_in">distance</span>(r));</span><br><span class="line">			&#125;);</span><br><span class="line">	<span class="keyword">auto</span> iter = std::<span class="built_in">inserter</span>(myCont, myCont.<span class="built_in">end</span>());</span><br><span class="line">	stdr::for_each(temp, [&amp;](<span class="keyword">auto</span>&amp;&amp; x) &#123; iter = &#123;x.<span class="built_in">begin</span>(), x.<span class="built_in">end</span>()&#125;; &#125;);</span><br><span class="line">	<span class="keyword">return</span> myCont;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::string str = <span class="string">&quot;Hello233C++20233and233New233Spilt&quot;</span>;</span><br><span class="line">	std::string delimiter = <span class="string">&quot;233&quot;</span>;</span><br><span class="line">	<span class="keyword">auto</span>&amp;&amp; strCont = <span class="built_in">Split</span>&lt;std::list, std::string&gt;(str, delimiter);</span><br><span class="line">	stdr::for_each(strCont, [](<span class="keyword">auto</span>&amp;&amp; x) &#123; std::cout &lt;&lt; std::format(<span class="string">&quot;&#123;&#125; &quot;</span>, x); &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//output: Hello C++20 and New Spilt</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>PS：std::split与std::lazy_split存在细微区别，在此不作详细说明，感兴趣可以参考：<br><a href="https://stackoverflow.com/questions/68067612/what-is-the-difference-between-the-split-view-and-the-lazy-split-view-in-c">https://stackoverflow.com/questions/68067612/what-is-the-difference-between-the-split-view-and-the-lazy-split-view-in-c</a><br>PS2：C++20没有提供关键的ranges::to<container>函数，导致demo中还需要额外封装并手写for_each来写入数据，等到C++23实装了该函数，split的实现会比现在简洁优雅的多，真正做到方便泛用、无需封装：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span>&amp;&amp; strCont = str</span><br><span class="line">	| stdrv::<span class="built_in">lazy_split</span>(delimiter)</span><br><span class="line">	| stdr ::to&lt;std::vector&lt;std::string&gt;&gt;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/474447289">https://zhuanlan.zhihu.com/p/474447289</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Programming Language</category>
+        <category>Cpp</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>技术杂谈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>来点图程破防乐子</title>
+    <url>/post/graphics_developer_joke.html</url>
+    <content><![CDATA[<p>快过年了，不要再讨论什么C++，图形学，模板元之类的了，你带你的C++语言的设计与演化回到家并不能给你带来任何实质性作用，朋友们打开UE4连连看就做出了好看的特效，你默默的在家里瞪着两眼看GAMES、may佬和侯捷的视频。<br>亲戚朋友们吃饭问你收获了什么，你说我读完了RTR4和PBRT，系统的研究了基于物理的渲染和非真实感渲染，还用C++20重构了自己的渲染器。亲戚们懵逼了，你还在心里默默嘲笑他们，笑他们不懂C++和计算机图形学，不懂光照方程，不懂RAII和CRTP，也笑他们连Shader是什么都不知道。<br>你父母的同事都在说自己儿女一年的收获，有的用Java做了个网站后端赚到了第一笔外快，有的用Python做了点数据可视化发到B站成了up主，有的学了Unity和C#做独立游戏已经发售了。<br>你的父母默默无言，说我的儿子买了一整套的Effective C++，上Stack Overflow痛骂了C++标准委员会，写了一堆狗屁不通报错几百几千行的模板元编程代码，还对着谷歌翻译啃Ray Tracing the Rest of Your Life，人也越来越魔怔了。</p>
+<blockquote>
+<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/456526193">https://zhuanlan.zhihu.com/p/456526193</a></p>
+</blockquote>
+<span id="more"></span>]]></content>
+      <categories>
+        <category>Others</category>
+        <category>闲谈</category>
+      </categories>
+      <tags>
+        <tag>闲谈</tag>
+        <tag>Compute Graphics</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>从auto_ptr到unique_ptr：浅谈C++右值引用、移动语义与智能指针</title>
     <url>/post/cpp_autoptr_to_uniqueptr.html</url>
     <content><![CDATA[<p>std::auto_ptr是C++03对智能指针的第一次尝试，作为一个失败品，其甚至已然在后续的标准中被移除，但时至今日，我们依然可以透过它一窥C++发展史的一角。</p>
@@ -89,30 +130,6 @@
 <p>故此就有了这篇不成气候的随笔，希望能够给予初学者们一些思路与帮助。</p>
 <blockquote>
 <p>原文链接: <a href="https://zhuanlan.zhihu.com/p/551883955">https://zhuanlan.zhihu.com/p/551883955</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Programming Language</category>
-        <category>Cpp</category>
-      </categories>
-      <tags>
-        <tag>Cpp</tag>
-        <tag>技术杂谈</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>一个C++20下的string split实现</title>
-    <url>/post/cpp20_stringsplit.html</url>
-    <content><![CDATA[<p>众所周知，C++一直没有一个官方提供的string split用于分割字符串，在过去（C++20之前）我们可能需要使用std::regex、std::string::find系列方法、甚至是继承自C的strtok函数来自行封装一个split，非常繁琐与不便。<br>然而，这一切都在C++20中发生了变化。C++20引入了范围库ranges，其中提供的两个范围适配器std::split、std::lazy_split可以使我们以一种更为优雅的形式实现split。</p>
-<span id="more"></span>
-
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;concept&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ranges&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;format&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> stdr  std::ranges</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> stdrv std::ranges::views</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> Container = std::vector, <span class="keyword">typename</span> Arg = std::string_view&gt;</span><br><span class="line"><span class="keyword">auto</span> <span class="built_in">Split</span>(std::string_view str, std::string_view delimiter)</span><br><span class="line">&#123;</span><br><span class="line">	Container&lt;Arg&gt; myCont;</span><br><span class="line">	<span class="keyword">auto</span> temp = str </span><br><span class="line">		| stdrv::<span class="built_in">split</span>(delimiter)</span><br><span class="line">		| stdrv::<span class="built_in">transform</span>([](<span class="keyword">auto</span>&amp;&amp; r)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="built_in">Arg</span>(std::<span class="built_in">addressof</span>(*r.<span class="built_in">begin</span>()), stdr::<span class="built_in">distance</span>(r));</span><br><span class="line">			&#125;);</span><br><span class="line">	<span class="keyword">auto</span> iter = std::<span class="built_in">inserter</span>(myCont, myCont.<span class="built_in">end</span>());</span><br><span class="line">	stdr::for_each(temp, [&amp;](<span class="keyword">auto</span>&amp;&amp; x) &#123; iter = &#123;x.<span class="built_in">begin</span>(), x.<span class="built_in">end</span>()&#125;; &#125;);</span><br><span class="line">	<span class="keyword">return</span> myCont;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::string str = <span class="string">&quot;Hello233C++20233and233New233Spilt&quot;</span>;</span><br><span class="line">	std::string delimiter = <span class="string">&quot;233&quot;</span>;</span><br><span class="line">	<span class="keyword">auto</span>&amp;&amp; strCont = <span class="built_in">Split</span>&lt;std::list, std::string&gt;(str, delimiter);</span><br><span class="line">	stdr::for_each(strCont, [](<span class="keyword">auto</span>&amp;&amp; x) &#123; std::cout &lt;&lt; std::format(<span class="string">&quot;&#123;&#125; &quot;</span>, x); &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//output: Hello C++20 and New Spilt</span></span><br></pre></td></tr></table></figure>
-<hr>
-<p>PS：std::split与std::lazy_split存在细微区别，在此不作详细说明，感兴趣可以参考：<br><a href="https://stackoverflow.com/questions/68067612/what-is-the-difference-between-the-split-view-and-the-lazy-split-view-in-c">https://stackoverflow.com/questions/68067612/what-is-the-difference-between-the-split-view-and-the-lazy-split-view-in-c</a><br>PS2：C++20没有提供关键的ranges::to<container>函数，导致demo中还需要额外封装并手写for_each来写入数据，等到C++23实装了该函数，split的实现会比现在简洁优雅的多，真正做到方便泛用、无需封装：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span>&amp;&amp; strCont = str</span><br><span class="line">	| stdrv::<span class="built_in">lazy_split</span>(delimiter)</span><br><span class="line">	| stdr ::to&lt;std::vector&lt;std::string&gt;&gt;;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/474447289">https://zhuanlan.zhihu.com/p/474447289</a></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -199,6 +216,19 @@
       </tags>
   </entry>
   <entry>
+    <title>SnowyArkEngine开发笔记[0x00]: 写在最前</title>
+    <url>/post/snowyark_dev_0x00.html</url>
+    <content><![CDATA[<span id="more"></span>]]></content>
+      <categories>
+        <category>Game Engine</category>
+        <category>SnowyArk</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>SnowyArk Engine</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>建站记录</title>
     <url>/post/site_build_note.html</url>
     <content><![CDATA[<p>建这个网站的初衷是因为自己知乎被连续封了几次, 以至于让我对这类非可控的平台产生了大量不信任感, 再加之我个人的知乎账号掺杂了大量的非技术相关内容, 所以尽管我在知乎也写了一些技术文章, 但仍并不方便将来贴在简历上.<br>总总原因驱使下, 在综合考量了<strong>云服务器+Wordpress</strong>和<strong>GitHubPages+Hexo</strong>两种方案后, 我还是选择了更为轻便的后者, 毕竟对我而言只是需要一个发布文章与随想的、完全可控的平台罢了, 没必要去折腾什么服务器.<br>技术选型到此为止, 剩下的便是具体实现了. 这篇文章便是用来记录我的建站流程以及踩到的一些小坑.<br><strong>顺便一提, 这个网站就叫作SnowyLakeSide好了, 中文名雪之湖畔, 一个独属于我(SnowyLake&#x2F;雪湖)、面向互联网的小小浅滩.</strong></p>
@@ -269,36 +299,6 @@
       </tags>
   </entry>
   <entry>
-    <title>来点图程破防乐子</title>
-    <url>/post/graphics_developer_joke.html</url>
-    <content><![CDATA[<p>快过年了，不要再讨论什么C++，图形学，模板元之类的了，你带你的C++语言的设计与演化回到家并不能给你带来任何实质性作用，朋友们打开UE4连连看就做出了好看的特效，你默默的在家里瞪着两眼看GAMES、may佬和侯捷的视频。<br>亲戚朋友们吃饭问你收获了什么，你说我读完了RTR4和PBRT，系统的研究了基于物理的渲染和非真实感渲染，还用C++20重构了自己的渲染器。亲戚们懵逼了，你还在心里默默嘲笑他们，笑他们不懂C++和计算机图形学，不懂光照方程，不懂RAII和CRTP，也笑他们连Shader是什么都不知道。<br>你父母的同事都在说自己儿女一年的收获，有的用Java做了个网站后端赚到了第一笔外快，有的用Python做了点数据可视化发到B站成了up主，有的学了Unity和C#做独立游戏已经发售了。<br>你的父母默默无言，说我的儿子买了一整套的Effective C++，上Stack Overflow痛骂了C++标准委员会，写了一堆狗屁不通报错几百几千行的模板元编程代码，还对着谷歌翻译啃Ray Tracing the Rest of Your Life，人也越来越魔怔了。</p>
-<blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/456526193">https://zhuanlan.zhihu.com/p/456526193</a></p>
-</blockquote>
-<span id="more"></span>]]></content>
-      <categories>
-        <category>Others</category>
-        <category>闲谈</category>
-      </categories>
-      <tags>
-        <tag>闲谈</tag>
-        <tag>Compute Graphics</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SnowyArkEngine开发笔记[0x00]: 写在最前</title>
-    <url>/post/snowyark_dev_0x00.html</url>
-    <content><![CDATA[<span id="more"></span>]]></content>
-      <categories>
-        <category>Game Engine</category>
-        <category>SnowyArk</category>
-      </categories>
-      <tags>
-        <tag>Cpp</tag>
-        <tag>SnowyArk Engine</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>UE5.1移动端延迟渲染管线测试与剖析</title>
     <url>/post/ue51_mobile_deferred.html</url>
     <content><![CDATA[<span id="more"></span>
@@ -318,12 +318,12 @@
       </tags>
   </entry>
   <entry>
-    <title>浅谈UE5的C++程序化生成Shader</title>
-    <url>/post/ue5_cpp_generate_shader.html</url>
+    <title>UE5.1移动端延迟管线基于Light Channels模拟Unity Rendering Layers</title>
+    <url>/post/ue51_mobile_deferred_lightchannels.html</url>
     <content><![CDATA[<span id="more"></span>
 <p>待搬运, 内容详见原文链接.</p>
 <blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/574551808">https://zhuanlan.zhihu.com/p/574551808</a></p>
+<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/577239276">https://zhuanlan.zhihu.com/p/577239276</a></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -337,12 +337,12 @@
       </tags>
   </entry>
   <entry>
-    <title>UE5.1移动端延迟管线基于Light Channels模拟Unity Rendering Layers</title>
-    <url>/post/ue51_mobile_deferred_lightchannels.html</url>
+    <title>浅谈UE5的C++程序化生成Shader</title>
+    <url>/post/ue5_cpp_generate_shader.html</url>
     <content><![CDATA[<span id="more"></span>
 <p>待搬运, 内容详见原文链接.</p>
 <blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/577239276">https://zhuanlan.zhihu.com/p/577239276</a></p>
+<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/574551808">https://zhuanlan.zhihu.com/p/574551808</a></p>
 </blockquote>
 ]]></content>
       <categories>
