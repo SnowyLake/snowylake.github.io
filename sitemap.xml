@@ -2,15 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://snowylake.net/post/cpp20_stringsplit.html</loc>
-    
-    <lastmod>2024-07-01</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://snowylake.net/post/urp_deferred_nativerenderpass.html</loc>
     
     <lastmod>2024-07-01</lastmod>
@@ -21,15 +12,6 @@
   
   <url>
     <loc>http://snowylake.net/post/cpp20_ghs_concept_foldexpression_mixin.html</loc>
-    
-    <lastmod>2024-07-01</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://snowylake.net/post/cpp_stdoptional_overhead.html</loc>
     
     <lastmod>2024-07-01</lastmod>
     
@@ -57,15 +39,6 @@
   
   <url>
     <loc>http://snowylake.net/post/ue5_toonshading_0x00_base.html</loc>
-    
-    <lastmod>2024-07-01</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://snowylake.net/post/helloworld.html</loc>
     
     <lastmod>2024-07-01</lastmod>
     
