@@ -22,7 +22,7 @@
     <meta name="description" content="众所周知，C++一直没有一个官方提供的string split用于分割字符串，在过去（C++20之前）我们可能需要使用std::regex、std::string::find系列方法、甚至是继承自C的strtok函数来自行封装一个split，非常繁琐与不便。然而，这一切都在C++20中发生了变化。C++20引入了范围库ranges，其中提供的两个范围适配器std::split、std::lazy_">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一个C++20下的string split实现">
-<meta property="og:url" content="http://snowylake.net/post/Cpp20_StringSplit.html">
+<meta property="og:url" content="http://snowylake.net/post/cpp20_stringsplit.html">
 <meta property="og:site_name" content="雪之湖畔-SnowyLakeSide">
 <meta property="og:description" content="众所周知，C++一直没有一个官方提供的string split用于分割字符串，在过去（C++20之前）我们可能需要使用std::regex、std::string::find系列方法、甚至是继承自C的strtok函数来自行封装一个split，非常繁琐与不便。然而，这一切都在C++20中发生了变化。C++20引入了范围库ranges，其中提供的两个范围适配器std::split、std::lazy_">
 <meta property="og:locale" content="zh_CN">
@@ -34,11 +34,11 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://snowylake.net/post/Cpp20_StringSplit.html">
+<link rel="canonical" href="http://snowylake.net/post/cpp20_stringsplit.html">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://snowylake.net/post/Cpp20_StringSplit.html","path":"post/Cpp20_StringSplit.html","title":"一个C++20下的string split实现"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://snowylake.net/post/cpp20_stringsplit.html","path":"post/cpp20_stringsplit.html","title":"一个C++20下的string split实现"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>一个C++20下的string split实现 | 雪之湖畔-SnowyLakeSide</title>
@@ -208,28 +208,28 @@
             </div>
             <ul class="popular-posts">
                     <li class="popular-posts-item">
-                        <a class="popular-posts-link" href="/post/GraphicsDeveloperFun.html" rel="bookmark">
+                        <a class="popular-posts-link" href="/post/graphics_developer_joke.html" rel="bookmark">
                           <time class="popular-posts-time">2023-06-24</time>
                           <br>
                         来点图程破防乐子
                         </a>
                     </li>
                     <li class="popular-posts-item">
-                        <a class="popular-posts-link" href="/post/UE51_Mobile_DeferredRendering.html" rel="bookmark">
+                        <a class="popular-posts-link" href="/post/ue51_mobile_deferred.html" rel="bookmark">
                           <time class="popular-posts-time">2023-09-11</time>
                           <br>
                         UE5.1移动端延迟渲染管线测试与剖析
                         </a>
                     </li>
                     <li class="popular-posts-item">
-                        <a class="popular-posts-link" href="/post/URP_Analysis_0x00_PipelineFramework.html" rel="bookmark">
+                        <a class="popular-posts-link" href="/post/urp_analysis_0x00_pipeline_framework.html" rel="bookmark">
                           <time class="popular-posts-time">2023-06-12</time>
                           <br>
                         为美好的URP献上解析[0x00]: 管线架构
                         </a>
                     </li>
                     <li class="popular-posts-item">
-                        <a class="popular-posts-link" href="/post/URP_DeferredRendering_NativeRenderpass.html" rel="bookmark">
+                        <a class="popular-posts-link" href="/post/urp_deferred_nativerenderpass.html" rel="bookmark">
                           <time class="popular-posts-time">2023-09-11</time>
                           <br>
                         URP延迟渲染+Native Renderpass踩坑记录
@@ -255,7 +255,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://snowylake.net/post/Cpp20_StringSplit.html">
+    <link itemprop="mainEntityOfPage" href="http://snowylake.net/post/cpp20_stringsplit.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/snowylake.png">
@@ -366,7 +366,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="http://snowylake.net/post/Cpp20_StringSplit.html" title="一个C++20下的string split实现">http://snowylake.net/post/Cpp20_StringSplit.html</a>
+      <a href="http://snowylake.net/post/cpp20_stringsplit.html" title="一个C++20下的string split实现">http://snowylake.net/post/cpp20_stringsplit.html</a>
   </li>
   <li class="post-copyright-license">
       <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -383,7 +383,7 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/post/UE51_Mobile_DeferredRendering_LightChannels.html" rel="prev" title="UE5.1移动端延迟管线基于Light Channels模拟Unity Rendering Layers">
+                <a href="/post/ue51_mobile_deferred_lightchannels.html" rel="prev" title="UE5.1移动端延迟管线基于Light Channels模拟Unity Rendering Layers">
                   <i class="fa fa-chevron-left"></i> UE5.1移动端延迟管线基于Light Channels模拟Unity Rendering Layers
                 </a>
             </div>
