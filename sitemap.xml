@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://snowylake.net/post/site_build_note.html</loc>
+    <loc>http://snowylake.net/post/ue5_rendering_plugin_0x00_shader_remapping.html</loc>
     
     <lastmod>2024-07-13</lastmod>
     
@@ -11,9 +11,9 @@
   </url>
   
   <url>
-    <loc>http://snowylake.net/post/ue5_rendering_plugin_0x00_shader_remapping.html</loc>
+    <loc>http://snowylake.net/post/site_build_note.html</loc>
     
-    <lastmod>2024-07-11</lastmod>
+    <lastmod>2024-07-13</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
