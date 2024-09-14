@@ -1,36 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>一个用来ghs的、使用了concept、折叠表达式、模板形参包做基类列表等技巧的模板元编程Mixin Demo</title>
-    <url>/post/cpp20_ghs_concept_foldexpression_mixin.html</url>
-    <content><![CDATA[<p>昨天看Mixin时突发奇想，写着玩的。图一乐。</p>
-<span id="more"></span>
-<p>直接上代码，受限于平台，Show()部分自行脑补。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;concepts&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">concept</span> IsSexuality = <span class="keyword">requires</span>&#123; T::<span class="built_in">Show</span>(); &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;IsSexuality... Sexuality&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">GirlFriend</span> :<span class="keyword">private</span> Sexuality...</span><br><span class="line">&#123;</span><br><span class="line">	<span class="function"><span class="keyword">constexpr</span> <span class="title">GirlFriend</span><span class="params">()</span> :Sexuality()... &#123;</span>&#125;</span><br><span class="line">	<span class="function"><span class="keyword">constexpr</span> <span class="type">void</span> <span class="title">ShowSexuality</span><span class="params">()</span> <span class="type">const</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;I have a girl friend.\n&quot;</span>;</span><br><span class="line">		<span class="function"><span class="keyword">if</span> <span class="title">constexpr</span> <span class="params">(<span class="keyword">sizeof</span>...(Sexuality) &gt; <span class="number">0</span>)</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			std::cout &lt;&lt; <span class="string">&quot;She can:\n&quot;</span>;</span><br><span class="line">			((Sexuality::<span class="built_in">Show</span>()), ...);</span><br><span class="line">		&#125; <span class="keyword">else</span></span><br><span class="line">		&#123; std::cout &lt;&lt; <span class="string">&quot;She was a virgin.\n&quot;</span>; &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">MakeLoveable</span></span><br><span class="line">&#123; <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;Make love with me.\n&quot;</span>; &#125; &#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">BlowJobable</span></span><br><span class="line">&#123; <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;BlowJob.\n&quot;</span>; &#125; &#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">FootJobable</span></span><br><span class="line">&#123; <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;FootJob.\n&quot;</span>; &#125; &#125;;</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">concept</span> IsSexSkill = IsSexuality&lt;T&gt; &amp;&amp; !std::same_as&lt;T, MakeLoveable&gt;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;IsSexSkill... SexSkills&gt;</span><br><span class="line"><span class="keyword">using</span> ReallyGirlFriend = GirlFriend&lt;MakeLoveable, SexSkills...&gt;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">constexpr</span> GirlFriend girlFriend;</span><br><span class="line">	<span class="keyword">constexpr</span> ReallyGirlFriend&lt;&gt; reallyGirlFriend;</span><br><span class="line">	<span class="keyword">constexpr</span> ReallyGirlFriend&lt;BlowJobable, FootJobable&gt; sexyGirlFriend;</span><br><span class="line">	girlFriend.<span class="built_in">ShowSexuality</span>();</span><br><span class="line">	reallyGirlFriend.<span class="built_in">ShowSexuality</span>();</span><br><span class="line">	sexyGirlFriend.<span class="built_in">ShowSexuality</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//output:</span></span><br><span class="line"><span class="comment">/*------------------------</span></span><br><span class="line"><span class="comment">I have a girl friend.</span></span><br><span class="line"><span class="comment">She was a virgin.</span></span><br><span class="line"><span class="comment">I have a girl friend.</span></span><br><span class="line"><span class="comment">She can:</span></span><br><span class="line"><span class="comment">Make love with me.</span></span><br><span class="line"><span class="comment">I have a girl friend.</span></span><br><span class="line"><span class="comment">She can:</span></span><br><span class="line"><span class="comment">Make love with me.</span></span><br><span class="line"><span class="comment">BlowJob.</span></span><br><span class="line"><span class="comment">FootJob.</span></span><br><span class="line"><span class="comment">------------------------*/</span></span><br></pre></td></tr></table></figure>
-<img src="/post/cpp20_ghs_concept_foldexpression_mixin/image.png" class="" title="Alt text">
-
-<blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/460970247">https://zhuanlan.zhihu.com/p/460970247</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Programming Language</category>
-        <category>Cpp</category>
-      </categories>
-      <tags>
-        <tag>Cpp</tag>
-        <tag>技术杂谈</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CategoryCollection</title>
     <url>/post/category_collection.html</url>
-    <content><![CDATA[<span id="more"></span>]]></content>
+    <content><![CDATA[<span id="more"></span>
+]]></content>
       <categories>
-        <category>Programming Language</category>
         <category>Game Engine</category>
-        <category>Cpp</category>
+        <category>Programming Language</category>
         <category>Unity</category>
+        <category>Cpp</category>
         <category>URP/SnowyOwl</category>
         <category>HDRP</category>
         <category>Unreal</category>
@@ -57,39 +36,66 @@
       </categories>
   </entry>
   <entry>
+    <title>一个用来ghs的、使用了concept、折叠表达式、模板形参包做基类列表等技巧的模板元编程Mixin Demo</title>
+    <url>/post/cpp20_ghs_concept_foldexpression_mixin.html</url>
+    <content><![CDATA[<p>昨天看Mixin时突发奇想，写着玩的。图一乐。 <span id="more"></span>
+直接上代码，受限于平台，Show()部分自行脑补。 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;concepts&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">concept</span> IsSexuality = <span class="keyword">requires</span>&#123; T::<span class="built_in">Show</span>(); &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;IsSexuality... Sexuality&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">GirlFriend</span> :<span class="keyword">private</span> Sexuality...</span><br><span class="line">&#123;</span><br><span class="line">	<span class="function"><span class="keyword">constexpr</span> <span class="title">GirlFriend</span><span class="params">()</span> :Sexuality()... &#123;</span>&#125;</span><br><span class="line">	<span class="function"><span class="keyword">constexpr</span> <span class="type">void</span> <span class="title">ShowSexuality</span><span class="params">()</span> <span class="type">const</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;I have a girl friend.\n&quot;</span>;</span><br><span class="line">		<span class="function"><span class="keyword">if</span> <span class="title">constexpr</span> <span class="params">(<span class="keyword">sizeof</span>...(Sexuality) &gt; <span class="number">0</span>)</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			std::cout &lt;&lt; <span class="string">&quot;She can:\n&quot;</span>;</span><br><span class="line">			((Sexuality::<span class="built_in">Show</span>()), ...);</span><br><span class="line">		&#125; <span class="keyword">else</span></span><br><span class="line">		&#123; std::cout &lt;&lt; <span class="string">&quot;She was a virgin.\n&quot;</span>; &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">MakeLoveable</span></span><br><span class="line">&#123; <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;Make love with me.\n&quot;</span>; &#125; &#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">BlowJobable</span></span><br><span class="line">&#123; <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;BlowJob.\n&quot;</span>; &#125; &#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">FootJobable</span></span><br><span class="line">&#123; <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;FootJob.\n&quot;</span>; &#125; &#125;;</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">concept</span> IsSexSkill = IsSexuality&lt;T&gt; &amp;&amp; !std::same_as&lt;T, MakeLoveable&gt;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;IsSexSkill... SexSkills&gt;</span><br><span class="line"><span class="keyword">using</span> ReallyGirlFriend = GirlFriend&lt;MakeLoveable, SexSkills...&gt;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">constexpr</span> GirlFriend girlFriend;</span><br><span class="line">	<span class="keyword">constexpr</span> ReallyGirlFriend&lt;&gt; reallyGirlFriend;</span><br><span class="line">	<span class="keyword">constexpr</span> ReallyGirlFriend&lt;BlowJobable, FootJobable&gt; sexyGirlFriend;</span><br><span class="line">	girlFriend.<span class="built_in">ShowSexuality</span>();</span><br><span class="line">	reallyGirlFriend.<span class="built_in">ShowSexuality</span>();</span><br><span class="line">	sexyGirlFriend.<span class="built_in">ShowSexuality</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//output:</span></span><br><span class="line"><span class="comment">/*------------------------</span></span><br><span class="line"><span class="comment">I have a girl friend.</span></span><br><span class="line"><span class="comment">She was a virgin.</span></span><br><span class="line"><span class="comment">I have a girl friend.</span></span><br><span class="line"><span class="comment">She can:</span></span><br><span class="line"><span class="comment">Make love with me.</span></span><br><span class="line"><span class="comment">I have a girl friend.</span></span><br><span class="line"><span class="comment">She can:</span></span><br><span class="line"><span class="comment">Make love with me.</span></span><br><span class="line"><span class="comment">BlowJob.</span></span><br><span class="line"><span class="comment">FootJob.</span></span><br><span class="line"><span class="comment">------------------------*/</span></span><br></pre></td></tr></table></figure>
+<img src="/post/cpp20_ghs_concept_foldexpression_mixin/image.png" class="" title="Alt text"></p>
+<blockquote>
+<p>原文链接: https://zhuanlan.zhihu.com/p/460970247</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Programming Language</category>
+        <category>Cpp</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>技术杂谈</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>从auto_ptr到unique_ptr：浅谈C++右值引用、移动语义与智能指针</title>
     <url>/post/cpp_autoptr_to_uniqueptr.html</url>
-    <content><![CDATA[<p>std::auto_ptr是C++03对智能指针的第一次尝试，作为一个失败品，其甚至已然在后续的标准中被移除，但时至今日，我们依然可以透过它一窥C++发展史的一角。</p>
+    <content><![CDATA[<p>std::auto_ptr是C++03对智能指针的第一次尝试，作为一个失败品，其甚至已然在后续的标准中被移除，但时至今日，我们依然可以透过它一窥C++发展史的一角。
 <span id="more"></span>
-<p>出于方便、严谨起见，下文所提及类与函数，如未特别标明命名空间，均为std或其子命名空间下的标准库设施。</p>
-<h1 id="std-auto-ptr的失败之处"><a href="#std-auto-ptr的失败之处" class="headerlink" title="std::auto_ptr的失败之处"></a>std::auto_ptr的失败之处</h1><p>auto_ptr在语义上是有些类似它的后辈unique_ptr的，其拷贝构造&#x2F;赋值函数并非深拷贝或浅拷贝，而是被设计成了资产的所有权转移即move语义，从而保证一份资源同时只能被一根auto_ptr所持有：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">_Ty</span>&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">auto_ptr</span> </span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">auto_ptr</span>(auto_ptr&amp; _Right) <span class="keyword">noexcept</span> : _Myptr(_Right.<span class="built_in">release</span>()) &#123;&#125;</span><br><span class="line">    <span class="function">_Ty* <span class="title">release</span><span class="params">()</span> <span class="keyword">noexcept</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        _Ty* _Tmp = _Myptr;</span><br><span class="line">        _Myptr    = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">return</span> _Tmp;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    _Ty* _Myptr; <span class="comment">// the wrapped object pointer</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以看到，auto_ptr的copy ctor实际上执行的是C++11及以后的move ctor的工作，为此，其参数特意取消了const限定。这看似是个好设计，然而却有着致命的缺陷。考虑以下场景：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::vector&lt;std::auto_ptr&lt;<span class="type">int</span>&gt;&gt; aptrVec;</span><br><span class="line"><span class="function">std::auto_ptr&lt;<span class="type">int</span>&gt; <span class="title">aptr</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>(<span class="number">1</span>))</span></span>;</span><br><span class="line">aptrVec.<span class="built_in">push_back</span>(aptr);</span><br></pre></td></tr></table></figure>
-
+出于方便、严谨起见，下文所提及类与函数，如未特别标明命名空间，均为std或其子命名空间下的标准库设施。</p>
+<h1 id="stdauto_ptr的失败之处">std::auto_ptr的失败之处</h1>
+<p>auto_ptr在语义上是有些类似它的后辈unique_ptr的，其拷贝构造/赋值函数并非深拷贝或浅拷贝，而是被设计成了资产的所有权转移即move语义，从而保证一份资源同时只能被一根auto_ptr所持有：
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">_Ty</span>&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">auto_ptr</span> </span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">auto_ptr</span>(auto_ptr&amp; _Right) <span class="keyword">noexcept</span> : _Myptr(_Right.<span class="built_in">release</span>()) &#123;&#125;</span><br><span class="line">    <span class="function">_Ty* <span class="title">release</span><span class="params">()</span> <span class="keyword">noexcept</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        _Ty* _Tmp = _Myptr;</span><br><span class="line">        _Myptr    = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">return</span> _Tmp;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    _Ty* _Myptr; <span class="comment">// the wrapped object pointer</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，auto_ptr的copy ctor实际上执行的是C++11及以后的move
+ctor的工作，为此，其参数特意取消了const限定。这看似是个好设计，然而却有着致命的缺陷。考虑以下场景：
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::vector&lt;std::auto_ptr&lt;<span class="type">int</span>&gt;&gt; aptrVec;</span><br><span class="line"><span class="function">std::auto_ptr&lt;<span class="type">int</span>&gt; <span class="title">aptr</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>(<span class="number">1</span>))</span></span>;</span><br><span class="line">aptrVec.<span class="built_in">push_back</span>(aptr);</span><br></pre></td></tr></table></figure></p>
 <p>或许难以想象，但这段理所应当的代码是实实在在的编译不过的。其原因是push_back时会发生拷贝构造的，而push_back的参数为<code>const _Ty&amp; _Val</code>，在发生拷贝构造时const限定的参数自然无法传入非const限定的拷贝构造函数中，从而编译失败。</p>
 <p>堂堂智能指针，竟然无法放到任何一个容器中去，何其荒诞可笑。更何况除此以外，auto_ptr依旧存在很多缺陷——这里不一一赘述，总之，在十多年前的那会儿，C++急需一套完备的智能指针来替换掉auto_ptr这个笑话。</p>
-<h1 id="std-unique-ptr如何成功？"><a href="#std-unique-ptr如何成功？" class="headerlink" title="std::unique_ptr如何成功？"></a>std::unique_ptr如何成功？</h1><blockquote>
-<p>C++标准委员会说要有unique_ptr，于是就有了unique_ptr。<br>C++标准委员会说unique_ptr是好的，于是……于是他们就忘了在C++11里加上make_unique了 :)</p>
+<h1 id="stdunique_ptr如何成功">std::unique_ptr如何成功？</h1>
+<blockquote>
+<p>C++标准委员会说要有unique_ptr，于是就有了unique_ptr。
+C++标准委员会说unique_ptr是好的，于是……于是他们就忘了在C++11里加上make_unique了
+:)</p>
 </blockquote>
-<p>前面说到，auto_ptr想用copy ctor实现move语义，但却与容器库冲突，惨遭失败。想要一雪前耻，那么就需要C++11的重量级特性右值引用了。</p>
-<p>虽然我们常说，右值引用的作用是“延长右值生命周期”，即：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">Type&amp;&amp; t = Type&#123;&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>但实际上右值引用更为重要的作用是区分copy与move语义，而这一点又着重体现在C++11中由过去三法则演变而来的五法则上：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Fuxk</span></span><br><span class="line">&#123;	</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Fuxk</span>();</span><br><span class="line">    ~<span class="built_in">Fuxk</span>();</span><br><span class="line">    <span class="built_in">Fuxk</span>(<span class="type">const</span> Fuxk&amp;);</span><br><span class="line">    <span class="built_in">Fuxk</span>(Fuxk&amp;&amp;) <span class="keyword">noexcept</span>;</span><br><span class="line">    Fuxk&amp; <span class="keyword">operator</span>=(<span class="type">const</span> Fuxk&amp;);</span><br><span class="line">    Fuxk&amp; <span class="keyword">operator</span>=(Fuxk&amp;&amp;) <span class="keyword">noexcept</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>相比与C++11之前的三法则dtor、copy ctor、copy op&#x3D;，C++11新增了以右值引用作为参数的move ctor和move op&#x3D;，正式将copy语义与move语义分隔开，使得用户可以更加自由的对内存所有权进行管理。</p>
+<p>前面说到，auto_ptr想用copy
+ctor实现move语义，但却与容器库冲突，惨遭失败。想要一雪前耻，那么就需要C++11的重量级特性右值引用了。</p>
+<p>虽然我们常说，右值引用的作用是“延长右值生命周期”，即：
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">Type&amp;&amp; t = Type&#123;&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>但实际上右值引用更为重要的作用是区分copy与move语义，而这一点又着重体现在C++11中由过去三法则演变而来的五法则上：
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Fuxk</span></span><br><span class="line">&#123;	</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Fuxk</span>();</span><br><span class="line">    ~<span class="built_in">Fuxk</span>();</span><br><span class="line">    <span class="built_in">Fuxk</span>(<span class="type">const</span> Fuxk&amp;);</span><br><span class="line">    <span class="built_in">Fuxk</span>(Fuxk&amp;&amp;) <span class="keyword">noexcept</span>;</span><br><span class="line">    Fuxk&amp; <span class="keyword">operator</span>=(<span class="type">const</span> Fuxk&amp;);</span><br><span class="line">    Fuxk&amp; <span class="keyword">operator</span>=(Fuxk&amp;&amp;) <span class="keyword">noexcept</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>相比与C++11之前的三法则dtor、copy ctor、copy
+op=，C++11新增了以右值引用作为参数的move ctor和move
+op=，正式将copy语义与move语义分隔开，使得用户可以更加自由的对内存所有权进行管理。</p>
 <p>而这一切最直接的受益者之一，就是std::unique_ptr了。</p>
-<p>前面我们说，auto_ptr的目标是既要“保证一份资源同时只能被一根auto_ptr所持有”又要“支持资产所有权的转移”，这是只依靠copy语义无法完成的，而在C++11中，通过copy move语义的拆分，我们可以很自然而然的delete掉copy ctor&#x2F;op&#x3D;来保证所有权的唯一性，同时提供move ctor&#x2F;op&#x3D;来支持所有权的转移。</p>
-<p>我并没有精力去搜寻资料与论文去考据当年右值引用被提出的理由，但站在现在的视角来看，经受住了时间的考验、成功的智能指针系统毫无疑问是建立在右值引用存在的基础之上的，其二者有着千丝万缕的联系，他们共同构成了Modern C++的基石。</p>
-<hr>
-<p>这篇文章并非什么语法的辨析与讲解，讨论的也是十年前C++11的一些老东西，单纯是我在学习与思考C++发展过程中的一些发散。</p>
-<p>一直以来大多数讲述Modern C++特性的教程&#x2F;文章都会将智能指针与右值引用&#x2F;移动语义&#x2F;完美转发分成两个单独的part来讲解、而忽略其它们之间的联系，同时又几乎不约而同地忽略了失败品auto_ptr，使初学者难以领会到C++十几年间的演化历程，于是经常会看到新人开发者在社区中提问——“C++为什么要有XXX？”</p>
+<p>前面我们说，auto_ptr的目标是既要“保证一份资源同时只能被一根auto_ptr所持有”又要“支持资产所有权的转移”，这是只依靠copy语义无法完成的，而在C++11中，通过copy
+move语义的拆分，我们可以很自然而然的delete掉copy
+ctor/op=来保证所有权的唯一性，同时提供move
+ctor/op=来支持所有权的转移。</p>
+<p>我并没有精力去搜寻资料与论文去考据当年右值引用被提出的理由，但站在现在的视角来看，经受住了时间的考验、成功的智能指针系统毫无疑问是建立在右值引用存在的基础之上的，其二者有着千丝万缕的联系，他们共同构成了Modern
+C++的基石。 ___
+这篇文章并非什么语法的辨析与讲解，讨论的也是十年前C++11的一些老东西，单纯是我在学习与思考C++发展过程中的一些发散。</p>
+<p>一直以来大多数讲述Modern
+C++特性的教程/文章都会将智能指针与右值引用/移动语义/完美转发分成两个单独的part来讲解、而忽略其它们之间的联系，同时又几乎不约而同地忽略了失败品auto_ptr，使初学者难以领会到C++十几年间的演化历程，于是经常会看到新人开发者在社区中提问——“C++为什么要有XXX？”</p>
 <p>故此就有了这篇不成气候的随笔，希望能够给予初学者们一些思路与帮助。</p>
 <blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/551883955">https://zhuanlan.zhihu.com/p/551883955</a></p>
+<p>原文链接: https://zhuanlan.zhihu.com/p/551883955</p>
 </blockquote>
 ]]></content>
       <categories>
@@ -104,16 +110,17 @@
   <entry>
     <title>一个C++20下的string split实现</title>
     <url>/post/cpp20_stringsplit.html</url>
-    <content><![CDATA[<p>众所周知，C++一直没有一个官方提供的string split用于分割字符串，在过去（C++20之前）我们可能需要使用std::regex、std::string::find系列方法、甚至是继承自C的strtok函数来自行封装一个split，非常繁琐与不便。<br>然而，这一切都在C++20中发生了变化。C++20引入了范围库ranges，其中提供的两个范围适配器std::split、std::lazy_split可以使我们以一种更为优雅的形式实现split。x</p>
-<span id="more"></span>
-
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;concept&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ranges&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;format&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> stdr  std::ranges</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> stdrv std::ranges::views</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> Container = std::vector, <span class="keyword">typename</span> Arg = std::string_view&gt;</span><br><span class="line"><span class="keyword">auto</span> <span class="built_in">Split</span>(std::string_view str, std::string_view delimiter)</span><br><span class="line">&#123;</span><br><span class="line">	Container&lt;Arg&gt; myCont;</span><br><span class="line">	<span class="keyword">auto</span> temp = str </span><br><span class="line">		| stdrv::<span class="built_in">split</span>(delimiter)</span><br><span class="line">		| stdrv::<span class="built_in">transform</span>([](<span class="keyword">auto</span>&amp;&amp; r)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="built_in">Arg</span>(std::<span class="built_in">addressof</span>(*r.<span class="built_in">begin</span>()), stdr::<span class="built_in">distance</span>(r));</span><br><span class="line">			&#125;);</span><br><span class="line">	<span class="keyword">auto</span> iter = std::<span class="built_in">inserter</span>(myCont, myCont.<span class="built_in">end</span>());</span><br><span class="line">	stdr::for_each(temp, [&amp;](<span class="keyword">auto</span>&amp;&amp; x) &#123; iter = &#123;x.<span class="built_in">begin</span>(), x.<span class="built_in">end</span>()&#125;; &#125;);</span><br><span class="line">	<span class="keyword">return</span> myCont;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::string str = <span class="string">&quot;Hello233C++20233and233New233Spilt&quot;</span>;</span><br><span class="line">	std::string delimiter = <span class="string">&quot;233&quot;</span>;</span><br><span class="line">	<span class="keyword">auto</span>&amp;&amp; strCont = <span class="built_in">Split</span>&lt;std::list, std::string&gt;(str, delimiter);</span><br><span class="line">	stdr::for_each(strCont, [](<span class="keyword">auto</span>&amp;&amp; x) &#123; std::cout &lt;&lt; std::format(<span class="string">&quot;&#123;&#125; &quot;</span>, x); &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//output: Hello C++20 and New Spilt</span></span><br></pre></td></tr></table></figure>
-<hr>
-<p>PS：std::split与std::lazy_split存在细微区别，在此不作详细说明，感兴趣可以参考：<br><a href="https://stackoverflow.com/questions/68067612/what-is-the-difference-between-the-split-view-and-the-lazy-split-view-in-c">https://stackoverflow.com/questions/68067612/what-is-the-difference-between-the-split-view-and-the-lazy-split-view-in-c</a><br>PS2：C++20没有提供关键的ranges::to<container>函数，导致demo中还需要额外封装并手写for_each来写入数据，等到C++23实装了该函数，split的实现会比现在简洁优雅的多，真正做到方便泛用、无需封装：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span>&amp;&amp; strCont = str</span><br><span class="line">	| stdrv::<span class="built_in">lazy_split</span>(delimiter)</span><br><span class="line">	| stdr ::to&lt;std::vector&lt;std::string&gt;&gt;;</span><br></pre></td></tr></table></figure>
-
+    <content><![CDATA[<p>众所周知，C++一直没有一个官方提供的string
+split用于分割字符串，在过去（C++20之前）我们可能需要使用std::regex、std::string::find系列方法、甚至是继承自C的strtok函数来自行封装一个split，非常繁琐与不便。
+然而，这一切都在C++20中发生了变化。C++20引入了范围库ranges，其中提供的两个范围适配器std::split、std::lazy_split可以使我们以一种更为优雅的形式实现split。x
+<span id="more"></span></p>
+<h2 id="section"><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;concept&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ranges&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;format&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> stdr  std::ranges</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> stdrv std::ranges::views</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> Container = std::vector, <span class="keyword">typename</span> Arg = std::string_view&gt;</span><br><span class="line"><span class="keyword">auto</span> <span class="built_in">Split</span>(std::string_view str, std::string_view delimiter)</span><br><span class="line">&#123;</span><br><span class="line">	Container&lt;Arg&gt; myCont;</span><br><span class="line">	<span class="keyword">auto</span> temp = str </span><br><span class="line">		| stdrv::<span class="built_in">split</span>(delimiter)</span><br><span class="line">		| stdrv::<span class="built_in">transform</span>([](<span class="keyword">auto</span>&amp;&amp; r)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="built_in">Arg</span>(std::<span class="built_in">addressof</span>(*r.<span class="built_in">begin</span>()), stdr::<span class="built_in">distance</span>(r));</span><br><span class="line">			&#125;);</span><br><span class="line">	<span class="keyword">auto</span> iter = std::<span class="built_in">inserter</span>(myCont, myCont.<span class="built_in">end</span>());</span><br><span class="line">	stdr::for_each(temp, [&amp;](<span class="keyword">auto</span>&amp;&amp; x) &#123; iter = &#123;x.<span class="built_in">begin</span>(), x.<span class="built_in">end</span>()&#125;; &#125;);</span><br><span class="line">	<span class="keyword">return</span> myCont;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::string str = <span class="string">&quot;Hello233C++20233and233New233Spilt&quot;</span>;</span><br><span class="line">	std::string delimiter = <span class="string">&quot;233&quot;</span>;</span><br><span class="line">	<span class="keyword">auto</span>&amp;&amp; strCont = <span class="built_in">Split</span>&lt;std::list, std::string&gt;(str, delimiter);</span><br><span class="line">	stdr::for_each(strCont, [](<span class="keyword">auto</span>&amp;&amp; x) &#123; std::cout &lt;&lt; std::format(<span class="string">&quot;&#123;&#125; &quot;</span>, x); &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//output: Hello C++20 and New Spilt</span></span><br></pre></td></tr></table></figure></h2>
+<p>PS：std::split与std::lazy_split存在细微区别，在此不作详细说明，感兴趣可以参考：
+https://stackoverflow.com/questions/68067612/what-is-the-difference-between-the-split-view-and-the-lazy-split-view-in-c
+PS2：C++20没有提供关键的ranges::to<container>函数，导致demo中还需要额外封装并手写for_each来写入数据，等到C++23实装了该函数，split的实现会比现在简洁优雅的多，真正做到方便泛用、无需封装：
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span>&amp;&amp; strCont = str</span><br><span class="line">	| stdrv::<span class="built_in">lazy_split</span>(delimiter)</span><br><span class="line">	| stdr ::to&lt;std::vector&lt;std::string&gt;&gt;;</span><br></pre></td></tr></table></figure></p>
 <blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/474447289">https://zhuanlan.zhihu.com/p/474447289</a></p>
+<p>原文链接: https://zhuanlan.zhihu.com/p/474447289</p>
 </blockquote>
 ]]></content>
       <categories>
@@ -128,50 +135,58 @@
   <entry>
     <title>关于std::optional传递开销的讨论与优化</title>
     <url>/post/cpp_stdoptional_overhead.html</url>
-    <content><![CDATA[<p>在讨论std::optional之前，我们应该先适当谈论一下“可空类型”。</p>
+    <content><![CDATA[<p>在讨论std::optional之前，我们应该先适当谈论一下“可空类型”。
 <span id="more"></span>
-<p>我们知道，在传统的C++中，是不存在现代编程语言中常见的“可空类型”（如C#中的Nullable<T>)的，这就导致很多情况下我们无法给一个指针以外的变量或返回值设置一个安全的空值（实际上C++11之前用于指针空值的NULL也并不安全），而需要设置一个人为规定的标记值（Sentinel Value）来将其标识为空。</p>
+我们知道，在传统的C++中，是不存在现代编程语言中常见的“可空类型”（如C#中的Nullable<T>)的，这就导致很多情况下我们无法给一个指针以外的变量或返回值设置一个安全的空值（实际上C++11之前用于指针空值的NULL也并不安全），而需要设置一个人为规定的标记值（Sentinel
+Value）来将其标识为空。</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//C#</span></span><br><span class="line"><span class="comment">//size理应为非负</span></span><br><span class="line">uint? size = null;  <span class="comment">//OK, 通过C#语法糖[int?]标记size可为空，并将size设置为空</span></span><br><span class="line"><span class="comment">//C++</span></span><br><span class="line"><span class="comment">//因为需要考虑Sentinel Value，故size无法为unsigned int</span></span><br><span class="line"><span class="comment">//当size == -1时，size为空</span></span><br><span class="line"><span class="type">int</span> size = <span class="number">-1</span>;  <span class="comment">//OK，通过人为设定标记值来将size设置为空</span></span><br></pre></td></tr></table></figure>
 <p>显而易见，传统C++使用标记值来对某一变量设置为空的行为相比现代语言是存在问题、丑陋且不安全的：</p>
 <ul>
-<li>某些情况下为了考虑标记值不得不放弃最为合适的数据类型（比如unsigned int之于size）</li>
+<li>某些情况下为了考虑标记值不得不放弃最为合适的数据类型（比如unsigned
+int之于size）</li>
 <li>其他使用者容易忘记甚至不了解标记值的含义</li>
 <li>……</li>
 </ul>
-<h1 id="std-optional"><a href="#std-optional" class="headerlink" title="std::optional"></a>std::optional</h1><p>为了解决这一问题，C++17中引入了std::optional，实现了安全的可空值。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::optional&lt;<span class="type">unsigned</span> <span class="type">int</span>&gt; size = std::<span class="literal">nullopt</span>;  <span class="comment">//通过std::nullopt将size设置为空</span></span><br></pre></td></tr></table></figure>
-<p>这很好，极大提高了代码的安全性与严谨性。<br>但同时又引入了一个新问题，当我们将一个对象（比如std::string）做参数传递时，我们总想避免传递过程中无意义的拷贝、移动等操作带来的额外开销，比如：</p>
+<h1 id="stdoptional">std::optional</h1>
+<p>为了解决这一问题，C++17中引入了std::optional，实现了安全的可空值。
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::optional&lt;<span class="type">unsigned</span> <span class="type">int</span>&gt; size = std::<span class="literal">nullopt</span>;  <span class="comment">//通过std::nullopt将size设置为空</span></span><br></pre></td></tr></table></figure> 这很好，极大提高了代码的安全性与严谨性。
+但同时又引入了一个新问题，当我们将一个对象（比如std::string）做参数传递时，我们总想避免传递过程中无意义的拷贝、移动等操作带来的额外开销，比如：
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Func</span><span class="params">(<span class="type">const</span> std::string&amp; str)</span></span>;  <span class="comment">//引用传递，不会发生拷贝，当Func不改变str时将其修饰为const</span></span><br></pre></td></tr></table></figure>
-<p>那么在使用optional做参数、返回值传递时，optional包裹着的对象是否会进行拷贝、移动等增大程序开销的操作呢？如果会，该如何避免？</p>
-<h1 id="开销测试与优化"><a href="#开销测试与优化" class="headerlink" title="开销测试与优化"></a>开销测试与优化</h1><p>为了解决这个问题，我编写了如下测试代码。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//测试类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	std::string s = <span class="string">&quot;Fuxk Cpp.&quot;</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">Test</span>()</span><br><span class="line">	&#123; std::cout &lt;&lt; <span class="string">&quot;\tctor\n&quot;</span>; &#125;</span><br><span class="line">	~<span class="built_in">Test</span>() </span><br><span class="line">	&#123; std::cout &lt;&lt; <span class="string">&quot;\tdtor\n&quot;</span>; &#125;</span><br><span class="line">	<span class="built_in">Test</span>(<span class="type">const</span> Test&amp;) </span><br><span class="line">	&#123; std::cout &lt;&lt; <span class="string">&quot;\tcopy ctor\n&quot;</span>; &#125;</span><br><span class="line">	<span class="built_in">Test</span>(Test&amp;&amp;) <span class="keyword">noexcept</span></span><br><span class="line">	&#123; std::cout &lt;&lt; <span class="string">&quot;\tmove ctor\n&quot;</span>; &#125;</span><br><span class="line">	Test&amp; <span class="keyword">operator</span>=(<span class="type">const</span> Test&amp;) </span><br><span class="line">	&#123; std::cout &lt;&lt; <span class="string">&quot;\tcopy op= \n&quot;</span>; <span class="keyword">return</span> *<span class="keyword">this</span>; &#125;</span><br><span class="line">	Test&amp; <span class="keyword">operator</span>=(Test&amp;&amp;) <span class="keyword">noexcept</span></span><br><span class="line">	&#123; std::cout &lt;&lt; <span class="string">&quot;\tmove op= \n&quot;</span>; <span class="keyword">return</span> *<span class="keyword">this</span>; &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>首先是一个很简单的测试类，包含一个std::string类型的字段s，以及基于五法则编写的用于debug的析构函数、拷贝&#x2F;移动构造函数和重载op&#x3D;运算符。<br>然后是用于测试的部分：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//测试函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">OptFunc</span><span class="params">(std::optional&lt;Test&gt; x)</span></span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">	std::cout &lt;&lt; std::format(<span class="string">&quot;\t&#123;&#125;\n&quot;</span>, x-&gt;s);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DefaultFunc</span><span class="params">(<span class="type">const</span> Test&amp; x)</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">	std::cout &lt;&lt; std::format(<span class="string">&quot;\t&#123;&#125;\n&quot;</span>, x.s);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//测试代码</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Test t0;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;-----------------------------------------\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Use Optional:\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;copy:\n&quot;</span>;</span><br><span class="line">	<span class="built_in">OptFunc</span>(t0);</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;-------------\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;move:\n&quot;</span>;</span><br><span class="line">	<span class="built_in">OptFunc</span>(<span class="built_in">Test</span>());</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;-----------------------------------------\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Not use Optional:\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;copy:\n&quot;</span>;</span><br><span class="line">	<span class="built_in">DefaultFunc</span>(t0);</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;-----------------\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;move:\n&quot;</span>;</span><br><span class="line">	<span class="built_in">DefaultFunc</span>(<span class="built_in">Test</span>());</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;-----------------------------------------\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这段代码定义了两个函数OptFunc()和DefaultFunc()，以分别表示形参使用和不使用optional的情况。<br>在Vsiual Studio 2022 17.0.2，&#x2F;std:c++latest下的运行结果为：</p>
+那么在使用optional做参数、返回值传递时，optional包裹着的对象是否会进行拷贝、移动等增大程序开销的操作呢？如果会，该如何避免？
+# 开销测试与优化 为了解决这个问题，我编写了如下测试代码。 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//测试类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	std::string s = <span class="string">&quot;Fuxk Cpp.&quot;</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">Test</span>()</span><br><span class="line">	&#123; std::cout &lt;&lt; <span class="string">&quot;\tctor\n&quot;</span>; &#125;</span><br><span class="line">	~<span class="built_in">Test</span>() </span><br><span class="line">	&#123; std::cout &lt;&lt; <span class="string">&quot;\tdtor\n&quot;</span>; &#125;</span><br><span class="line">	<span class="built_in">Test</span>(<span class="type">const</span> Test&amp;) </span><br><span class="line">	&#123; std::cout &lt;&lt; <span class="string">&quot;\tcopy ctor\n&quot;</span>; &#125;</span><br><span class="line">	<span class="built_in">Test</span>(Test&amp;&amp;) <span class="keyword">noexcept</span></span><br><span class="line">	&#123; std::cout &lt;&lt; <span class="string">&quot;\tmove ctor\n&quot;</span>; &#125;</span><br><span class="line">	Test&amp; <span class="keyword">operator</span>=(<span class="type">const</span> Test&amp;) </span><br><span class="line">	&#123; std::cout &lt;&lt; <span class="string">&quot;\tcopy op= \n&quot;</span>; <span class="keyword">return</span> *<span class="keyword">this</span>; &#125;</span><br><span class="line">	Test&amp; <span class="keyword">operator</span>=(Test&amp;&amp;) <span class="keyword">noexcept</span></span><br><span class="line">	&#123; std::cout &lt;&lt; <span class="string">&quot;\tmove op= \n&quot;</span>; <span class="keyword">return</span> *<span class="keyword">this</span>; &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+首先是一个很简单的测试类，包含一个std::string类型的字段s，以及基于五法则编写的用于debug的析构函数、拷贝/移动构造函数和重载op=运算符。
+然后是用于测试的部分： <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//测试函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">OptFunc</span><span class="params">(std::optional&lt;Test&gt; x)</span></span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">	std::cout &lt;&lt; std::format(<span class="string">&quot;\t&#123;&#125;\n&quot;</span>, x-&gt;s);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DefaultFunc</span><span class="params">(<span class="type">const</span> Test&amp; x)</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">	std::cout &lt;&lt; std::format(<span class="string">&quot;\t&#123;&#125;\n&quot;</span>, x.s);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//测试代码</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Test t0;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;-----------------------------------------\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Use Optional:\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;copy:\n&quot;</span>;</span><br><span class="line">	<span class="built_in">OptFunc</span>(t0);</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;-------------\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;move:\n&quot;</span>;</span><br><span class="line">	<span class="built_in">OptFunc</span>(<span class="built_in">Test</span>());</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;-----------------------------------------\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Not use Optional:\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;copy:\n&quot;</span>;</span><br><span class="line">	<span class="built_in">DefaultFunc</span>(t0);</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;-----------------\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;move:\n&quot;</span>;</span><br><span class="line">	<span class="built_in">DefaultFunc</span>(<span class="built_in">Test</span>());</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;-----------------------------------------\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+这段代码定义了两个函数OptFunc()和DefaultFunc()，以分别表示形参使用和不使用optional的情况。
+在Vsiual Studio 2022 17.0.2，/std:c++latest下的运行结果为：
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">        ctor</span><br><span class="line">-----------------------------------------</span><br><span class="line">Use Optional:</span><br><span class="line">copy:</span><br><span class="line">        copy ctor</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">        dtor</span><br><span class="line">-------------</span><br><span class="line">move:</span><br><span class="line">        ctor</span><br><span class="line">        move ctor</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">        dtor</span><br><span class="line">        dtor</span><br><span class="line">-----------------------------------------</span><br><span class="line">Not use Optional:</span><br><span class="line">copy:</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">-----------------</span><br><span class="line">move:</span><br><span class="line">        ctor</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">        dtor</span><br><span class="line">-----------------------------------------</span><br><span class="line">        dtor</span><br></pre></td></tr></table></figure>
-<p>可以很明显的看出，在使用std::optional作为形参的情况下，调用两个测试函数分别多了一次拷贝&#x2F;移动构造函数和析构函数，这很显然不是我们想看到的。<br>那么有什么方案解决这个问题吗？</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">OptFunc</span><span class="params">(<span class="type">const</span> std::optional&lt;Test&gt;&amp; x)</span></span>;  <span class="comment">//这样？</span></span><br></pre></td></tr></table></figure>
-<p>不行，虽然在形式上这与const Test&amp;非常相似，但实际上当Test类型的参数传入时，将会被拷贝到std::optional<Test>类型的对象x中，之后x将以引用的形式继续传递到函数中。所以实际上在这种写法中我们并没有避免x的拷贝开销，当然，如果你的传入参数本身就是optional时，这或许会有用——不过一般这种情况非常罕见。<br>那么这样呢？</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">OptFunc</span><span class="params">(std::optional&lt;<span class="type">const</span> Test&amp;&gt; x)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>这看起来好像是可行的，既然修饰optional不行，那么我们就对原对象下手。然而很遗憾的是，C++并不支持这样做，即std::optional&lt;Test&amp;&gt;。</p>
-<blockquote>
-<p>若以引用类型实例化optional则程序非良构。 </p>
-</blockquote>
-<p>这样一来好像走到了死胡同。但C++还是给我们留了一个缺口，即std::reference_wrapper。  </p>
-<blockquote>
-<p>std::reference_wrapper是包装引用于可复制、可赋值对象的类模板。它常用作将引用存储入无法正常保有引用的标准容器（类似std::vector）的机制。<br>可用T类型的std::reference_wrapper的optional保有引用。 </p>
-</blockquote>
-<p>通过reference_wrapper，我们可以做到等同于std::optional&lt;const Test&amp;&gt;的效果，我们添加一个函数并编写新的测试代码：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//新添加测试函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">OptWithRefWrapperFunc</span><span class="params">(std::optional&lt;std::reference_wrapper&lt;<span class="type">const</span> Test&gt;&gt; x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::cout &lt;&lt; std::format(<span class="string">&quot;\t&#123;&#125;\n&quot;</span>, x-&gt;<span class="built_in">get</span>().s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//新添加测试代码</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Use Optional with std::reference_wrapper:\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;copy:\n&quot;</span>;</span><br><span class="line">	<span class="built_in">OptWithRefWrapperFunc</span>(t0);</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;-----------------\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;move:\n&quot;</span>;</span><br><span class="line">	<span class="comment">//FuncOptWithRefWrapper(Test());</span></span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;-----------------------------------------\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>再次运行：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">        ctor</span><br><span class="line">-----------------------------------------</span><br><span class="line">Use Optional:</span><br><span class="line">copy:</span><br><span class="line">        copy ctor</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">        dotr</span><br><span class="line">-------------</span><br><span class="line">move:</span><br><span class="line">        cotr</span><br><span class="line">        move cotr</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">        dtor</span><br><span class="line">        dtor</span><br><span class="line">-----------------------------------------</span><br><span class="line">Not use Optional:</span><br><span class="line">copy:</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">-----------------</span><br><span class="line">move:</span><br><span class="line">        ctor</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">        dtor</span><br><span class="line">-----------------------------------------</span><br><span class="line">Use Optional with std::reference_wrapper:</span><br><span class="line">copy:</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">-----------------</span><br><span class="line">move:</span><br><span class="line">-----------------------------------------</span><br><span class="line">        dtor</span><br></pre></td></tr></table></figure>
-<p>可以看到，这样一来，我们终于在optional<T>上实现了传统的const T&amp;的效果。但同时需要注意的是，正如无法使用一个Test&amp;类型的对象接收一个右值（如Test()），std::reference_wrapper同样无法接收一个右值，所以我们看到，在新的测试代码中，尝试将右值传入函数的FuncOptWithRefWrapper(Test())被注释掉了。</p>
-<h1 id="最后一件事"><a href="#最后一件事" class="headerlink" title="最后一件事"></a>最后一件事</h1><p>虽然我们最终通过std::optional&lt;std::reference_wrapper<const T>&gt;的形式实现了安全可空同时兼顾开销的参数传递，但不可否认的是这样写出的代码实在太过复杂繁琐。（虽然很多情况下复杂和繁琐本身就是C++体验的一环）<br>所以说——或许看到这里的很多朋友也已经发现，上述这一串复杂冗余的代码其实就等价于const T<em>，指针也早在C++11就拥有了安全的空值nullptr（实际上reference_wrapper的本质就是把引用保存为指针），甚至T</em>占用的内存还要比std::optional&lt;std::reference_wrapper<T>&gt;小。</p>
+可以很明显的看出，在使用std::optional作为形参的情况下，调用两个测试函数分别多了一次拷贝/移动构造函数和析构函数，这很显然不是我们想看到的。
+那么有什么方案解决这个问题吗？ <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">OptFunc</span><span class="params">(<span class="type">const</span> std::optional&lt;Test&gt;&amp; x)</span></span>;  <span class="comment">//这样？</span></span><br></pre></td></tr></table></figure> 不行，虽然在形式上这与const
+Test&amp;非常相似，但实际上当Test类型的参数传入时，将会被拷贝到std::optional<Test>类型的对象x中，之后x将以引用的形式继续传递到函数中。所以实际上在这种写法中我们并没有避免x的拷贝开销，当然，如果你的传入参数本身就是optional时，这或许会有用——不过一般这种情况非常罕见。
+那么这样呢？ <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">OptFunc</span><span class="params">(std::optional&lt;<span class="type">const</span> Test&amp;&gt; x)</span></span>;</span><br></pre></td></tr></table></figure>
+这看起来好像是可行的，既然修饰optional不行，那么我们就对原对象下手。然而很遗憾的是，C++并不支持这样做，即std::optional&lt;Test&amp;&gt;。
+&gt; 若以引用类型实例化optional则程序非良构。</p>
+<p>这样一来好像走到了死胡同。但C++还是给我们留了一个缺口，即std::reference_wrapper。<br />
+&gt;
+std::reference_wrapper是包装引用于可复制、可赋值对象的类模板。它常用作将引用存储入无法正常保有引用的标准容器（类似std::vector）的机制。
+可用T类型的std::reference_wrapper的optional保有引用。</p>
+<p>通过reference_wrapper，我们可以做到等同于std::optional&lt;const
+Test&amp;&gt;的效果，我们添加一个函数并编写新的测试代码： <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//新添加测试函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">OptWithRefWrapperFunc</span><span class="params">(std::optional&lt;std::reference_wrapper&lt;<span class="type">const</span> Test&gt;&gt; x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::cout &lt;&lt; std::format(<span class="string">&quot;\t&#123;&#125;\n&quot;</span>, x-&gt;<span class="built_in">get</span>().s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//新添加测试代码</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Use Optional with std::reference_wrapper:\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;copy:\n&quot;</span>;</span><br><span class="line">	<span class="built_in">OptWithRefWrapperFunc</span>(t0);</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;-----------------\n&quot;</span>;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;move:\n&quot;</span>;</span><br><span class="line">	<span class="comment">//FuncOptWithRefWrapper(Test());</span></span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;-----------------------------------------\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+再次运行： <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">        ctor</span><br><span class="line">-----------------------------------------</span><br><span class="line">Use Optional:</span><br><span class="line">copy:</span><br><span class="line">        copy ctor</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">        dotr</span><br><span class="line">-------------</span><br><span class="line">move:</span><br><span class="line">        cotr</span><br><span class="line">        move cotr</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">        dtor</span><br><span class="line">        dtor</span><br><span class="line">-----------------------------------------</span><br><span class="line">Not use Optional:</span><br><span class="line">copy:</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">-----------------</span><br><span class="line">move:</span><br><span class="line">        ctor</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">        dtor</span><br><span class="line">-----------------------------------------</span><br><span class="line">Use Optional with std::reference_wrapper:</span><br><span class="line">copy:</span><br><span class="line">        Fuxk Cpp.</span><br><span class="line">-----------------</span><br><span class="line">move:</span><br><span class="line">-----------------------------------------</span><br><span class="line">        dtor</span><br></pre></td></tr></table></figure>
+可以看到，这样一来，我们终于在optional<T>上实现了传统的const
+T&amp;的效果。但同时需要注意的是，正如无法使用一个Test&amp;类型的对象接收一个右值（如Test()），std::reference_wrapper同样无法接收一个右值，所以我们看到，在新的测试代码中，尝试将右值传入函数的FuncOptWithRefWrapper(Test())被注释掉了。
+# 最后一件事
+虽然我们最终通过std::optional&lt;std::reference_wrapper<const T>&gt;的形式实现了安全可空同时兼顾开销的参数传递，但不可否认的是这样写出的代码实在太过复杂繁琐。（虽然很多情况下复杂和繁琐本身就是C++体验的一环）
+所以说——或许看到这里的很多朋友也已经发现，上述这一串复杂冗余的代码其实就等价于const
+T<em>，指针也早在C++11就拥有了安全的空值nullptr（实际上reference_wrapper的本质就是把引用保存为指针），甚至T</em>占用的内存还要比std::optional&lt;std::reference_wrapper<T>&gt;小。
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">std::cout &lt;&lt; std::format(<span class="string">&quot;&#123;&#125;, &#123;&#125;\n&quot;</span>, <span class="built_in">sizeof</span>(<span class="type">const</span> Test*), </span><br><span class="line">			<span class="built_in">sizeof</span>(std::optional&lt;std::reference_wrapper&lt;<span class="type">const</span> Test&gt;&gt;));</span><br><span class="line"><span class="comment">//output:</span></span><br><span class="line"><span class="comment">//x86: 4, 8</span></span><br><span class="line"><span class="comment">//x64: 8, 16</span></span><br></pre></td></tr></table></figure>
-<p>如果真要说有什么使用上的优势，那么应该就是相比T<em>表义更为清晰、以及在传参时不需要加取地址符&amp;了吧，或许这对部分人来说很重要，但为了方便一般还是推荐使用T</em>，只在传递足够小的对象比如int时，使用std::optional。</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://abseil.io/tips/171">https://abseil.io/tips/171</a><br><a href="https://zh.cppreference.com/w/cpp/utility/optional">https://zh.cppreference.com/w/cpp/utility/optional</a><br><a href="https://stackoverflow.com/a/47842325/12822957">https://stackoverflow.com/a/47842325/12822957</a><br><a href="https://abseil.io/tips/163">https://abseil.io/tips/163</a><br><a href="https://zh.cppreference.com/w/cpp/utility/functional/reference_wrapper">https://zh.cppreference.com/w/cpp/utility/functional/reference_wrapper</a></p>
+如果真要说有什么使用上的优势，那么应该就是相比T<em>表义更为清晰、以及在传参时不需要加取地址符&amp;了吧，或许这对部分人来说很重要，但为了方便一般还是推荐使用T</em>，只在传递足够小的对象比如int时，使用std::optional。</p>
+<h1 id="reference">Reference</h1>
+<p>https://abseil.io/tips/171
+https://zh.cppreference.com/w/cpp/utility/optional
+https://stackoverflow.com/a/47842325/12822957 https://abseil.io/tips/163
+https://zh.cppreference.com/w/cpp/utility/functional/reference_wrapper</p>
 <blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/438821425">https://zhuanlan.zhihu.com/p/438821425</a></p>
+<p>原文链接: https://zhuanlan.zhihu.com/p/438821425</p>
 </blockquote>
 ]]></content>
       <categories>
@@ -184,29 +199,9 @@
       </tags>
   </entry>
   <entry>
-    <title>来点图程破防乐子</title>
-    <url>/post/graphics_developer_joke.html</url>
-    <content><![CDATA[<p>快过年了，不要再讨论什么C++，图形学，模板元之类的了，你带你的C++语言的设计与演化回到家并不能给你带来任何实质性作用，朋友们打开UE4连连看就做出了好看的特效，你默默的在家里瞪着两眼看GAMES、may佬和侯捷的视频。<br>亲戚朋友们吃饭问你收获了什么，你说我读完了RTR4和PBRT，系统的研究了基于物理的渲染和非真实感渲染，还用C++20重构了自己的渲染器。亲戚们懵逼了，你还在心里默默嘲笑他们，笑他们不懂C++和计算机图形学，不懂光照方程，不懂RAII和CRTP，也笑他们连Shader是什么都不知道。<br>你父母的同事都在说自己儿女一年的收获，有的用Java做了个网站后端赚到了第一笔外快，有的用Python做了点数据可视化发到B站成了up主，有的学了Unity和C#做独立游戏已经发售了。<br>你的父母默默无言，说我的儿子买了一整套的Effective C++，上Stack Overflow痛骂了C++标准委员会，写了一堆狗屁不通报错几百几千行的模板元编程代码，还对着谷歌翻译啃Ray Tracing the Rest of Your Life，人也越来越魔怔了。</p>
-<blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/456526193">https://zhuanlan.zhihu.com/p/456526193</a></p>
-</blockquote>
-<span id="more"></span>]]></content>
-      <categories>
-        <category>Others</category>
-        <category>闲谈</category>
-      </categories>
-      <tags>
-        <tag>闲谈</tag>
-        <tag>Compute Graphics</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hello world!</title>
     <url>/post/helloworld.html</url>
-    <content><![CDATA[<p>花有重开日, 人无再少年.</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout &lt;&lt; std::format(<span class="string">&quot;Hello world!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<img src="/post/helloworld/image.jpg" class="" title="HelloWorld">
+    <content><![CDATA[<p>花有重开日, 人无再少年. <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout &lt;&lt; std::format(<span class="string">&quot;Hello world!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> <span id="more"></span> <img src="/post/helloworld/image.jpg" class="" title="HelloWorld"></p>
 ]]></content>
       <categories>
         <category>Others</category>
@@ -219,100 +214,112 @@
   <entry>
     <title>建站记录</title>
     <url>/post/site_build_note.html</url>
-    <content><![CDATA[<p>建这个网站的初衷是因为自己知乎被连续封了几次, 以至于让我对这类非可控的平台产生了大量不信任感, 再加之我个人的知乎账号掺杂了大量的非技术相关内容, 所以尽管我在知乎也写了一些技术文章, 但仍并不方便将来贴在简历上.<br>总总原因驱使下, 在综合考量了<strong>云服务器+Wordpress</strong>和<strong>GitHubPages+Hexo</strong>两种方案后, 我还是选择了更为轻便的后者, 毕竟对我而言只是需要一个发布文章与随想的、完全可控的平台罢了, 没必要去折腾什么服务器.<br>技术选型到此为止, 剩下的便是具体实现了. 这篇文章便是用来记录我的建站流程以及踩到的一些小坑.<br><strong>顺便一提, 这个网站就叫作SnowyLakeSide好了, 中文名雪之湖畔, 一个独属于我(SnowyLake&#x2F;雪湖)、面向互联网的小小浅滩.</strong></p>
-<span id="more"></span>
-
-<h2 id="Github-Pages创建"><a href="#Github-Pages创建" class="headerlink" title="Github Pages创建"></a>Github Pages创建</h2><p>这一步非常简单, 其实本质就是创建一个名为 snowylake.github.io 的repo, 只是要求前缀与github用户名相同. 创建之后实际上我们就已经可以通过repo名访问网站了, 但应该是空空如也的.<br>然后就可以暂时放在这里不管了, 甚至都不需要clone到本地.</p>
-<h2 id="应用Hexo框架本地搭建部署环境"><a href="#应用Hexo框架本地搭建部署环境" class="headerlink" title="应用Hexo框架本地搭建部署环境"></a>应用Hexo框架本地搭建部署环境</h2><p>Hexo是一个基于Github Pages的博客发布工具, 支持Markdown, 功能简洁而强大, 生态繁荣插件众多, 久经验证, 是基于Github Pages建站的不二之选.</p>
-<h3 id="安装与初始化"><a href="#安装与初始化" class="headerlink" title="安装与初始化"></a>安装与初始化</h3><p>在安装Hexo之前, 还是需要先装一个Node.js才行: <a href="https://nodejs.org/zh-cn/download">https://nodejs.org/zh-cn/download</a><br>装好之后进入命令行安装Hexo:</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install -g hexo</span></span><br></pre></td></tr></table></figure>
-<p>本地创建一个文件夹用来部署Hexo和存放网站内容, cd进去初始化Hexo:</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> D:/Workspace/Blog</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo init</span></span><br></pre></td></tr></table></figure>
-<p>初始化之后的文件结构大概是这样的:(下图已经是生成完毕后的工程目录了)</p>
-<img src="/post/site_build_note/image.png" class="" title="Alt text">
-<p>几个比较重要的部分:</p>
-<ul>
-<li>.deploy_git: 最终生成的github repo</li>
-<li>node_modules: 通过npm安装的各种包</li>
-<li>public: 生成的网页文件夹</li>
-<li>scaffolds: 创建新博客用的模板</li>
-<li>source: 网站实际内容, 以md的格式保存, 通过这个文件夹去生成public</li>
-<li>_config.yml: Hexo的配置文件, 各种设置都需要在这里开启</li>
-</ul>
-<h3 id="生成与推送"><a href="#生成与推送" class="headerlink" title="生成与推送"></a>生成与推送</h3><p>第一次初始化的时候hexo已经帮我们写了一篇名为Hello World的文章, 不过这里还是尝试自己创建一篇.<br>首先在_config文件中配置网站的基础内容:</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">雪之湖畔-SnowyLakeSide</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">&#x27;Before it begins, the war we all fear.&#x27;</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">&#x27;Graphics Developer, Talk Artist.&#x27;</span></span><br><span class="line"><span class="attr">keywords:</span> <span class="string">&quot;&quot;</span> <span class="comment">#貌似没用?</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">SnowyLake</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">zh-CN</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">&#x27;Asia/Shanghai&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 自己网站的地址</span></span><br><span class="line"><span class="attr">url:</span> <span class="string">http://snowylake.net</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span> <span class="string">git@github.com:SnowyLake/snowylake.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure>
-<p>在开始正式创建网页时, 还需要装两个包:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-renderer-marked --save</span><br><span class="line">$ npm install hexo-relative-link --save</span><br></pre></td></tr></table></figure>
-<p>以及在_config页面修改&#x2F;添加:</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Writing</span></span><br><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 以下为添加内容</span></span><br><span class="line"><span class="attr">marked:</span></span><br><span class="line">  <span class="attr">prependRoot:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">postAsset:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p>这部分修改可以使创建博客时自动创建同名文件夹用于存放图片, 并可以通过以下形式在本地和网页中正常引用图片:</p>
-<img src="/post/site_build_note/image-5.png" class="" title="Alt text">
-<p>同时, 如果md编辑器是VSCode的话, 还需进行如下设置, 保证向文本中copy图片可以直接保存到同名文件夹下:</p>
-<img src="/post/site_build_note/image-1.png" class="" title="Alt text">
-<p>准备工作完成后, 就可通过此命令创建博客了, 命令将在Blog&#x2F;source&#x2F;_post下创建HelloWorld.md文件和同名文件夹.</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo new <span class="string">&quot;HelloWorld&quot;</span></span></span><br></pre></td></tr></table></figure>
-<p>之后就可以进行第一次的生成与推送:</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo g</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo d</span></span><br></pre></td></tr></table></figure>
-<p>常用Hexo命令:</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">生成public文件夹</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo generate</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo g <span class="comment">#简写</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">向github推送</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo deploy</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo d <span class="comment">#简写</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">本地预览网站</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo server</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo s <span class="comment">#简写</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo s --debug <span class="comment">#debug状态下本地预览网站</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">新建文章</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo new <span class="string">&quot;postName&quot;</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">新建页面(后续演示)</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo new page <span class="string">&quot;postName&quot;</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">生成并本地预览</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo s -g</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">生成并推送</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo d -g</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Next主题配置"><a href="#Next主题配置" class="headerlink" title="Next主题配置"></a>Next主题配置</h2><h3 id="安装与配置Next"><a href="#安装与配置Next" class="headerlink" title="安装与配置Next"></a>安装与配置Next</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> D:/Workspace/Blog</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git <span class="built_in">clone</span> https://github.com/next-theme/hexo-theme-next themes/next</span></span><br></pre></td></tr></table></figure>
-<p>在Hexo目录下的_config.yml(hexo config)中添加配置:</p>
-<img src="/post/site_build_note/image-4.png" class="" title="Alt text">
-<p>切换主题:</p>
-<img src="/post/site_build_note/image-9.png" class="" title="Alt text">
-<h3 id="添加博客头像、背景与透明"><a href="#添加博客头像、背景与透明" class="headerlink" title="添加博客头像、背景与透明"></a>添加博客头像、背景与透明</h3><p>将博客头像保存在在Blog&#x2F;themes&#x2F;next&#x2F;source&#x2F;uploads下, 然后在themes&#x2F;next目录下的_config.yml(主题config)中配置:</p>
-<img src="/post/site_build_note/image-8.png" class="" title="Alt text">
-<p>将网站的背景图片保存在Blog&#x2F;source&#x2F;images下;<br>在Blog&#x2F;source下新建文件夹_data, 并创建文件styles.styl:</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="string">//背景图片设置</span></span><br><span class="line"><span class="string">body</span> &#123;</span><br><span class="line">    <span class="attr">background-image:</span> <span class="string">url(/images/background.jpg);</span></span><br><span class="line">    <span class="attr">background-repeat:</span> <span class="literal">no</span><span class="string">-repeat;</span></span><br><span class="line">    <span class="attr">background-attachment:</span> <span class="string">fixed;</span></span><br><span class="line">    <span class="attr">background-size:</span> <span class="string">cover;</span></span><br><span class="line">    <span class="attr">background-position:</span> <span class="string">center;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">//整体透明</span></span><br><span class="line"><span class="string">:root</span> &#123;</span><br><span class="line">  <span class="string">--content-bg-color:</span> <span class="string">rgba(255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.8</span><span class="string">);</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">//文章背板的颜色rgb</span></span><br><span class="line"><span class="string">.main-inner</span> <span class="string">&gt;</span> <span class="string">.sub-menu,</span> <span class="string">.main-inner</span> <span class="string">&gt;</span> <span class="string">.post-block,</span> <span class="string">.main-inner</span> <span class="string">&gt;</span> <span class="string">.tabs-comment,</span> <span class="string">.main-inner</span> <span class="string">&gt;</span> <span class="string">.comments,</span> <span class="string">.main-inner</span> <span class="string">&gt;</span> </span><br><span class="line"><span class="string">.pagination&#123;</span> <span class="string">&#125;</span></span><br><span class="line"><span class="string">//主体字体颜色</span></span><br><span class="line"><span class="string">body&#123;</span>                               </span><br><span class="line">  <span class="attr">color:</span> <span class="string">rgba(0,</span> <span class="number">0</span><span class="string">,</span> <span class="number">0</span><span class="string">,</span> <span class="number">1</span><span class="string">);</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">//文章标题颜色</span></span><br><span class="line"><span class="string">.posts-expand</span> <span class="string">.post-title-link</span> &#123;    </span><br><span class="line">    <span class="attr">color:</span> <span class="string">rgba(0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span><span class="string">);</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">//搜索框透明</span></span><br><span class="line"><span class="string">.popup</span> &#123;        </span><br><span class="line">  <span class="attr">opacity:</span> <span class="number">0.9</span><span class="string">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在主题的config中配置该styl文件:</p>
-<img src="/post/site_build_note/image-10.png" class="" title="Alt text">
-<h3 id="添加菜单"><a href="#添加菜单" class="headerlink" title="添加菜单"></a>添加菜单</h3><p>在主题的config中取消相应菜单的注释:</p>
-<img src="/post/site_build_note/image-11.png" class="" title="Alt text">
-<p>使用<code>hexo new page</code>命令创建对应的菜单, 之后<code>hexo g</code>重新生成即可.</p>
-<h3 id="修改侧边栏宽度"><a href="#修改侧边栏宽度" class="headerlink" title="修改侧边栏宽度"></a>修改侧边栏宽度</h3><p>主题config中修改width数值.</p>
-<img src="/post/site_build_note/image-12.png" class="" title="Alt text">
-<h3 id="添加社交网站链接"><a href="#添加社交网站链接" class="headerlink" title="添加社交网站链接"></a>添加社交网站链接</h3><img src="/post/site_build_note/image-13.png" class="" title="Alt text">
-<h3 id="添加搜索功能"><a href="#添加搜索功能" class="headerlink" title="添加搜索功能"></a>添加搜索功能</h3><p>Blog根目录下命令行安装插件:</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install hexo-generator-searchdb --save</span></span><br></pre></td></tr></table></figure>
-<p>主题config中设置:</p>
-<img src="/post/site_build_note/image-14.png" class="" title="Alt text">
-<p>hexo的config中添加配置:</p>
-<img src="/post/site_build_note/image-15.png" class="" title="Alt text">
-<p>之后重新生成.</p>
-<h3 id="添加文章字数与阅读时长统计"><a href="#添加文章字数与阅读时长统计" class="headerlink" title="添加文章字数与阅读时长统计"></a>添加文章字数与阅读时长统计</h3><p>Blog根目录下命令行安装插件:</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install hexo-symbols-count-time --save</span></span><br></pre></td></tr></table></figure>
-<p>hexo的config中添加设置:</p>
-<img src="/post/site_build_note/image-16.png" class="" title="Alt text">
-<p>主题的config中设置:</p>
-<img src="/post/site_build_note/image-17.png" class="" title="Alt text">
-<p>之后重新生成.</p>
-<h3 id="添加网站观看人数统计"><a href="#添加网站观看人数统计" class="headerlink" title="添加网站观看人数统计"></a>添加网站观看人数统计</h3><p>主题config中设置.</p>
-<img src="/post/site_build_note/image-18.png" class="" title="Alt text">
-<h3 id="添加网站图标"><a href="#添加网站图标" class="headerlink" title="添加网站图标"></a>添加网站图标</h3><p>将网站图标保存到Blog&#x2F;themes&#x2F;next&#x2F;source&#x2F;uploads下, 在主题config中设置.</p>
-<img src="/post/site_build_note/image-19.png" class="" title="Alt text">
-<h3 id="添加文末版权声明"><a href="#添加文末版权声明" class="headerlink" title="添加文末版权声明"></a>添加文末版权声明</h3><p>主题config中设置.</p>
-<img src="/post/site_build_note/image-20.png" class="" title="Alt text">
-<h3 id="默认展开目录"><a href="#默认展开目录" class="headerlink" title="默认展开目录"></a>默认展开目录</h3><p>主题config中设置.</p>
-<img src="/post/site_build_note/image-21.png" class="" title="Alt text">
-
-<h2 id="博客写作功能"><a href="#博客写作功能" class="headerlink" title="博客写作功能"></a>博客写作功能</h2><h3 id="声明文章摘要"><a href="#声明文章摘要" class="headerlink" title="声明文章摘要"></a>声明文章摘要</h3><p>在想要截止的地方添加<code>&lt;!--more--&gt;</code>标记即可, 标记之上的内容便是文章的摘要.<br>方便起见可以将这个标记加入到文章模板中去.</p>
-<img src="/post/site_build_note/image-22.png" class="" title="Alt text">
-<h3 id="配置自定义模板"><a href="#配置自定义模板" class="headerlink" title="配置自定义模板"></a>配置自定义模板</h3><p>每次新建的文章模板被保存在Blog&#x2F;scaffolds下, post就是’hexo new’命令创建博客时使用的模板.<br>根据需求自定义即可, 我这里添加了tag和category, 以及每篇文章都要用到的摘要标签.</p>
-<img src="/post/site_build_note/image-23.png" class="" title="Alt text">
-<h3 id="文章分类与标签"><a href="#文章分类与标签" class="headerlink" title="文章分类与标签"></a>文章分类与标签</h3><p>详细规则参考:<br><a href="https://hexo.io/zh-cn/docs/front-matter">https://hexo.io/zh-cn/docs/front-matter</a></p>
-<h2 id="自定义域名"><a href="#自定义域名" class="headerlink" title="自定义域名"></a>自定义域名</h2><p>这里我是通过 <a href="http://www.dynadot.com/">www.dynadot.com</a> 购买的域名.<br>首先要对域名进行dns解析, 为了白嫖Github提供的https证书, 这里需要填上四个A作为主域名连接到github提供的ip地址上, 同时用CNAME把www的子域名也给解析了.</p>
-<img src="/post/site_build_note/image-6.png" class="" title="Alt text">
-<p>之后在source文件夹下创建一个CNAME文件, 注意不要加文件扩展名, 在里面输入要自定义的域名, 比如我的就是 snowylake.net :</p>
-<img src="/post/site_build_note/image-3.png" class="" title="Alt text">
-<p>之后执行hexo d -g, 生成并提交.<br>进入github repo页面, 点击setting找到pages, 将域名输入到Custom domain中, 点击save.<br>同时github还将自动为你的域名申请https证书, 等待片刻后即可勾选Enforce HTTPS.</p>
-<img src="/post/site_build_note/image-7.png" class="" title="Alt text">
-
-<h2 id="搜索引擎索引"><a href="#搜索引擎索引" class="headerlink" title="搜索引擎索引"></a>搜索引擎索引</h2><h3 id="添加索引"><a href="#添加索引" class="headerlink" title="添加索引"></a>添加索引</h3><p>需要为搜索引擎添加索引, 才能让网站被各大搜索引擎所收录.<br>登录<a href="https://search.google.com/search-console">https://search.google.com/search-console</a>, 输入网站地址, 选择HTML验证.<br>将下载的HTML文件拷贝到source文件夹, <code>hexo g</code>, 之后再进入public文件夹, 这时public文件夹中生成的HTML文件是错误的, 需要手动将source文件夹中正确的内容拷过去, 之后再执行<code>hexo d</code>即可通过验证.<br>Bing端的索引信息在Google完成后可以同步过来, 不需要重复操作.</p>
-<h3 id="生成网站地图"><a href="#生成网站地图" class="headerlink" title="生成网站地图"></a>生成网站地图</h3><p>Blog根目录下执行命令:</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install hexo-generator-sitemap --save</span></span><br></pre></td></tr></table></figure>
-<p>之后每次生成都会生成新的sitemap.</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://www.lfzxb.top/the-record-of-build-site-based-on-hexo/">https://www.lfzxb.top/the-record-of-build-site-based-on-hexo/</a><br><a href="https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html">https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html</a><br><a href="https://zhuanlan.zhihu.com/p/618864711">https://zhuanlan.zhihu.com/p/618864711</a><br><a href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a><br><a href="https://hexo-next.readthedocs.io/zh_CN/latest/">https://hexo-next.readthedocs.io/zh_CN/latest/</a></p>
+    <content><![CDATA[<p>建这个网站的初衷是因为自己知乎被连续封了几次,
+以至于让我对这类非可控的平台产生了大量不信任感,
+再加之我个人的知乎账号掺杂了大量的非技术相关内容,
+所以尽管我在知乎也写了一些技术文章, 但仍并不方便将来贴在简历上.
+总总原因驱使下,
+在综合考量了<strong>云服务器+Wordpress</strong>和<strong>GitHubPages+Hexo</strong>两种方案后,
+我还是选择了更为轻便的后者,
+毕竟对我而言只是需要一个发布文章与随想的、完全可控的平台罢了,
+没必要去折腾什么服务器. 技术选型到此为止, 剩下的便是具体实现了.
+这篇文章便是用来记录我的建站流程以及踩到的一些小坑. <strong>顺便一提,
+这个网站就叫作SnowyLakeSide好了, 中文名雪之湖畔,
+一个独属于我(SnowyLake/雪湖)、面向互联网的小小浅滩.</strong>
+<span id="more"></span></p>
+<h2 id="github-pages创建">Github Pages创建</h2>
+<p>这一步非常简单, 其实本质就是创建一个名为 snowylake.github.io 的repo,
+只是要求前缀与github用户名相同.
+创建之后实际上我们就已经可以通过repo名访问网站了, 但应该是空空如也的.
+然后就可以暂时放在这里不管了, 甚至都不需要clone到本地.</p>
+<h2 id="应用hexo框架本地搭建部署环境">应用Hexo框架本地搭建部署环境</h2>
+<p>Hexo是一个基于Github Pages的博客发布工具, 支持Markdown,
+功能简洁而强大, 生态繁荣插件众多, 久经验证, 是基于Github
+Pages建站的不二之选.</p>
+<h3 id="安装与初始化">安装与初始化</h3>
+<p>在安装Hexo之前, 还是需要先装一个Node.js才行:
+https://nodejs.org/zh-cn/download 装好之后进入命令行安装Hexo:
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install -g hexo</span></span><br></pre></td></tr></table></figure> 本地创建一个文件夹用来部署Hexo和存放网站内容,
+cd进去初始化Hexo: <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> D:/Workspace/Blog</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo init</span></span><br></pre></td></tr></table></figure>
+初始化之后的文件结构大概是这样的:(下图已经是生成完毕后的工程目录了)
+<img src="/post/site_build_note/image.png" class="" title="Alt text"> 几个比较重要的部分: - .deploy_git: 最终生成的github repo
+- node_modules: 通过npm安装的各种包 - public: 生成的网页文件夹 -
+scaffolds: 创建新博客用的模板 - source: 网站实际内容, 以md的格式保存,
+通过这个文件夹去生成public - _config.yml: Hexo的配置文件,
+各种设置都需要在这里开启</p>
+<h3 id="生成与推送">生成与推送</h3>
+<p>第一次初始化的时候hexo已经帮我们写了一篇名为Hello World的文章,
+不过这里还是尝试自己创建一篇. 首先在_config文件中配置网站的基础内容:
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">雪之湖畔-SnowyLakeSide</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">&#x27;Before it begins, the war we all fear.&#x27;</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">&#x27;Graphics Developer, Talk Artist.&#x27;</span></span><br><span class="line"><span class="attr">keywords:</span> <span class="string">&quot;&quot;</span> <span class="comment">#貌似没用?</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">SnowyLake</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">zh-CN</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">&#x27;Asia/Shanghai&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 自己网站的地址</span></span><br><span class="line"><span class="attr">url:</span> <span class="string">http://snowylake.net</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span> <span class="string">git@github.com:SnowyLake/snowylake.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure> 在开始正式创建网页时, 还需要装两个包: <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-renderer-marked --save</span><br><span class="line">$ npm install hexo-relative-link --save</span><br></pre></td></tr></table></figure>
+以及在_config页面修改/添加: <figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Writing</span></span><br><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 以下为添加内容</span></span><br><span class="line"><span class="attr">marked:</span></span><br><span class="line">  <span class="attr">prependRoot:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">postAsset:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+这部分修改可以使创建博客时自动创建同名文件夹用于存放图片,
+并可以通过以下形式在本地和网页中正常引用图片: <img src="/post/site_build_note/image-5.png" class="" title="Alt text"> 同时,
+如果md编辑器是VSCode的话, 还需进行如下设置,
+保证向文本中copy图片可以直接保存到同名文件夹下: <img src="/post/site_build_note/image-1.png" class="" title="Alt text">
+准备工作完成后, 就可通过此命令创建博客了,
+命令将在Blog/source/_post下创建HelloWorld.md文件和同名文件夹.
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo new <span class="string">&quot;HelloWorld&quot;</span></span></span><br></pre></td></tr></table></figure> 之后就可以进行第一次的生成与推送: <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo g</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo d</span></span><br></pre></td></tr></table></figure>
+常用Hexo命令: <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">生成public文件夹</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo generate</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo g <span class="comment">#简写</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">向github推送</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo deploy</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo d <span class="comment">#简写</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">本地预览网站</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo server</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo s <span class="comment">#简写</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo s --debug <span class="comment">#debug状态下本地预览网站</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">新建文章</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo new <span class="string">&quot;postName&quot;</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">新建页面(后续演示)</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo new page <span class="string">&quot;postName&quot;</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">生成并本地预览</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo s -g</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">生成并推送</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo d -g</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="next主题配置">Next主题配置</h2>
+<h3 id="安装与配置next">安装与配置Next</h3>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> D:/Workspace/Blog</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git <span class="built_in">clone</span> https://github.com/next-theme/hexo-theme-next themes/next</span></span><br></pre></td></tr></table></figure>
+<p>在Hexo目录下的_config.yml(hexo config)中添加配置: <img src="/post/site_build_note/image-4.png" class="" title="Alt text">
+切换主题: <img src="/post/site_build_note/image-9.png" class="" title="Alt text"> ### 添加博客头像、背景与透明
+将博客头像保存在在Blog/themes/next/source/uploads下,
+然后在themes/next目录下的_config.yml(主题config)中配置: <img src="/post/site_build_note/image-8.png" class="" title="Alt text">
+将网站的背景图片保存在Blog/source/images下;
+在Blog/source下新建文件夹_data, 并创建文件styles.styl: <figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="string">//背景图片设置</span></span><br><span class="line"><span class="string">body</span> &#123;</span><br><span class="line">    <span class="attr">background-image:</span> <span class="string">url(/images/background.jpg);</span></span><br><span class="line">    <span class="attr">background-repeat:</span> <span class="literal">no</span><span class="string">-repeat;</span></span><br><span class="line">    <span class="attr">background-attachment:</span> <span class="string">fixed;</span></span><br><span class="line">    <span class="attr">background-size:</span> <span class="string">cover;</span></span><br><span class="line">    <span class="attr">background-position:</span> <span class="string">center;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">//整体透明</span></span><br><span class="line"><span class="string">:root</span> &#123;</span><br><span class="line">  <span class="string">--content-bg-color:</span> <span class="string">rgba(255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.8</span><span class="string">);</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">//文章背板的颜色rgb</span></span><br><span class="line"><span class="string">.main-inner</span> <span class="string">&gt;</span> <span class="string">.sub-menu,</span> <span class="string">.main-inner</span> <span class="string">&gt;</span> <span class="string">.post-block,</span> <span class="string">.main-inner</span> <span class="string">&gt;</span> <span class="string">.tabs-comment,</span> <span class="string">.main-inner</span> <span class="string">&gt;</span> <span class="string">.comments,</span> <span class="string">.main-inner</span> <span class="string">&gt;</span> </span><br><span class="line"><span class="string">.pagination&#123;</span> <span class="string">&#125;</span></span><br><span class="line"><span class="string">//主体字体颜色</span></span><br><span class="line"><span class="string">body&#123;</span>                               </span><br><span class="line">  <span class="attr">color:</span> <span class="string">rgba(0,</span> <span class="number">0</span><span class="string">,</span> <span class="number">0</span><span class="string">,</span> <span class="number">1</span><span class="string">);</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">//文章标题颜色</span></span><br><span class="line"><span class="string">.posts-expand</span> <span class="string">.post-title-link</span> &#123;    </span><br><span class="line">    <span class="attr">color:</span> <span class="string">rgba(0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span><span class="string">);</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">//搜索框透明</span></span><br><span class="line"><span class="string">.popup</span> &#123;        </span><br><span class="line">  <span class="attr">opacity:</span> <span class="number">0.9</span><span class="string">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+在主题的config中配置该styl文件: <img src="/post/site_build_note/image-10.png" class="" title="Alt text"> ### 添加菜单
+在主题的config中取消相应菜单的注释: <img src="/post/site_build_note/image-11.png" class="" title="Alt text">
+使用<code>hexo new page</code>命令创建对应的菜单,
+之后<code>hexo g</code>重新生成即可. ### 修改侧边栏宽度
+主题config中修改width数值. <img src="/post/site_build_note/image-12.png" class="" title="Alt text"> ### 添加社交网站链接
+<img src="/post/site_build_note/image-13.png" class="" title="Alt text"> ### 添加搜索功能 Blog根目录下命令行安装插件:
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install hexo-generator-searchdb --save</span></span><br></pre></td></tr></table></figure> 主题config中设置: <img src="/post/site_build_note/image-14.png" class="" title="Alt text"> hexo的config中添加配置:
+<img src="/post/site_build_note/image-15.png" class="" title="Alt text"> 之后重新生成. ### 添加文章字数与阅读时长统计
+Blog根目录下命令行安装插件: <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install hexo-symbols-count-time --save</span></span><br></pre></td></tr></table></figure> hexo的config中添加设置:
+<img src="/post/site_build_note/image-16.png" class="" title="Alt text"> 主题的config中设置: <img src="/post/site_build_note/image-17.png" class="" title="Alt text"> 之后重新生成. ###
+添加网站观看人数统计 主题config中设置. <img src="/post/site_build_note/image-18.png" class="" title="Alt text"> ### 添加网站图标
+将网站图标保存到Blog/themes/next/source/uploads下, 在主题config中设置.
+<img src="/post/site_build_note/image-19.png" class="" title="Alt text"> ### 添加文末版权声明 主题config中设置. <img src="/post/site_build_note/image-20.png" class="" title="Alt text"> ###
+默认展开目录 主题config中设置. <img src="/post/site_build_note/image-21.png" class="" title="Alt text"></p>
+<h2 id="博客写作功能">博客写作功能</h2>
+<h3 id="声明文章摘要">声明文章摘要</h3>
+<p>在想要截止的地方添加<code>&lt;!--more--&gt;</code>标记即可,
+标记之上的内容便是文章的摘要. 方便起见可以将这个标记加入到文章模板中去.
+<img src="/post/site_build_note/image-22.png" class="" title="Alt text"> ### 配置自定义模板
+每次新建的文章模板被保存在Blog/scaffolds下, post就是'hexo
+new'命令创建博客时使用的模板. 根据需求自定义即可,
+我这里添加了tag和category, 以及每篇文章都要用到的摘要标签.
+<img src="/post/site_build_note/image-23.png" class="" title="Alt text"> ### 文章分类与标签 详细规则参考:
+https://hexo.io/zh-cn/docs/front-matter</p>
+<h2 id="自定义域名">自定义域名</h2>
+<p>这里我是通过 www.dynadot.com 购买的域名. 首先要对域名进行dns解析,
+为了白嫖Github提供的https证书,
+这里需要填上四个A作为主域名连接到github提供的ip地址上,
+同时用CNAME把www的子域名也给解析了. <img src="/post/site_build_note/image-6.png" class="" title="Alt text">
+之后在source文件夹下创建一个CNAME文件, 注意不要加文件扩展名,
+在里面输入要自定义的域名, 比如我的就是 snowylake.net : <img src="/post/site_build_note/image-3.png" class="" title="Alt text">
+之后执行hexo d -g, 生成并提交. 进入github repo页面,
+点击setting找到pages, 将域名输入到Custom domain中, 点击save.
+同时github还将自动为你的域名申请https证书, 等待片刻后即可勾选Enforce
+HTTPS. <img src="/post/site_build_note/image-7.png" class="" title="Alt text"></p>
+<h2 id="搜索引擎索引">搜索引擎索引</h2>
+<h3 id="添加索引">添加索引</h3>
+<p>需要为搜索引擎添加索引, 才能让网站被各大搜索引擎所收录.
+登录https://search.google.com/search-console, 输入网站地址,
+选择HTML验证. 将下载的HTML文件拷贝到source文件夹, <code>hexo g</code>,
+之后再进入public文件夹, 这时public文件夹中生成的HTML文件是错误的,
+需要手动将source文件夹中正确的内容拷过去,
+之后再执行<code>hexo d</code>即可通过验证.
+Bing端的索引信息在Google完成后可以同步过来, 不需要重复操作. ###
+生成网站地图 Blog根目录下执行命令: <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install hexo-generator-sitemap --save</span></span><br></pre></td></tr></table></figure>
+之后每次生成都会生成新的sitemap.</p>
+<h2 id="reference">Reference</h2>
+<p>https://www.lfzxb.top/the-record-of-build-site-based-on-hexo/
+https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html
+https://zhuanlan.zhihu.com/p/618864711 https://hexo.io/zh-cn/docs/
+https://hexo-next.readthedocs.io/zh_CN/latest/</p>
 ]]></content>
       <categories>
         <category>Others</category>
@@ -323,9 +330,30 @@
       </tags>
   </entry>
   <entry>
+    <title>来点图程破防乐子</title>
+    <url>/post/graphics_developer_joke.html</url>
+    <content><![CDATA[<p>快过年了，不要再讨论什么C++，图形学，模板元之类的了，你带你的C++语言的设计与演化回到家并不能给你带来任何实质性作用，朋友们打开UE4连连看就做出了好看的特效，你默默的在家里瞪着两眼看GAMES、may佬和侯捷的视频。
+亲戚朋友们吃饭问你收获了什么，你说我读完了RTR4和PBRT，系统的研究了基于物理的渲染和非真实感渲染，还用C++20重构了自己的渲染器。亲戚们懵逼了，你还在心里默默嘲笑他们，笑他们不懂C++和计算机图形学，不懂光照方程，不懂RAII和CRTP，也笑他们连Shader是什么都不知道。
+你父母的同事都在说自己儿女一年的收获，有的用Java做了个网站后端赚到了第一笔外快，有的用Python做了点数据可视化发到B站成了up主，有的学了Unity和C#做独立游戏已经发售了。
+你的父母默默无言，说我的儿子买了一整套的Effective C++，上Stack
+Overflow痛骂了C++标准委员会，写了一堆狗屁不通报错几百几千行的模板元编程代码，还对着谷歌翻译啃Ray
+Tracing the Rest of Your Life，人也越来越魔怔了。 &gt; 原文链接:
+https://zhuanlan.zhihu.com/p/456526193 <span id="more"></span></p>
+]]></content>
+      <categories>
+        <category>Others</category>
+        <category>闲谈</category>
+      </categories>
+      <tags>
+        <tag>闲谈</tag>
+        <tag>Compute Graphics</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SnowyArkEngine开发笔记[0x00]: 写在最前</title>
     <url>/post/snowyark_dev_0x00.html</url>
-    <content><![CDATA[<span id="more"></span>]]></content>
+    <content><![CDATA[<span id="more"></span>
+]]></content>
       <categories>
         <category>Game Engine</category>
         <category>SnowyArk</category>
@@ -336,13 +364,11 @@
       </tags>
   </entry>
   <entry>
-    <title>UE5.1移动端延迟管线基于Light Channels模拟Unity Rendering Layers</title>
-    <url>/post/ue51_mobile_deferred_lightchannels.html</url>
+    <title>UE5.1移动端延迟渲染管线测试与剖析</title>
+    <url>/post/ue51_mobile_deferred.html</url>
     <content><![CDATA[<span id="more"></span>
-<p>待搬运, 内容详见原文链接.</p>
-<blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/577239276">https://zhuanlan.zhihu.com/p/577239276</a></p>
-</blockquote>
+<p>待搬运, 内容详见原文链接. &gt; 原文链接:
+https://zhuanlan.zhihu.com/p/575618981</p>
 ]]></content>
       <categories>
         <category>Game Engine</category>
@@ -355,13 +381,11 @@
       </tags>
   </entry>
   <entry>
-    <title>UE5.1移动端延迟渲染管线测试与剖析</title>
-    <url>/post/ue51_mobile_deferred.html</url>
+    <title>UE5.1移动端延迟管线基于Light Channels模拟Unity Rendering Layers</title>
+    <url>/post/ue51_mobile_deferred_lightchannels.html</url>
     <content><![CDATA[<span id="more"></span>
-<p>待搬运, 内容详见原文链接.</p>
-<blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/575618981">https://zhuanlan.zhihu.com/p/575618981</a></p>
-</blockquote>
+<p>待搬运, 内容详见原文链接. &gt; 原文链接:
+https://zhuanlan.zhihu.com/p/577239276</p>
 ]]></content>
       <categories>
         <category>Game Engine</category>
@@ -377,9 +401,61 @@
     <title>浅谈UE5的C++程序化生成Shader</title>
     <url>/post/ue5_cpp_generate_shader.html</url>
     <content><![CDATA[<span id="more"></span>
-<p>待搬运, 内容详见原文链接.</p>
+<p>待搬运, 内容详见原文链接. &gt; 原文链接:
+https://zhuanlan.zhihu.com/p/574551808</p>
+]]></content>
+      <categories>
+        <category>Game Engine</category>
+        <category>Unreal</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>Unreal</tag>
+        <tag>Rendering</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>从零开始的UE5卡通渲染0x00：理论基础</title>
+    <url>/post/ue5_toonshading_0x00_base.html</url>
+    <content><![CDATA[<p>最近在研究基于UE5的卡通渲染，颇有收获。正巧前段时间与同事吃饭，聊到知乎，深感自己知乎各种不正经的东西实在太多了，而我又是个懒得腾出时间写正经东西的懒狗，遂决定趁编译Shader的空闲，写点学习笔记、心得与分享。
+<span id="more"></span>
+虽然卡渲本身的知识不算很多，但放到UE5上就是不得不改动源码的大工程了，不由得让人怀念起自由的Unity，令人感叹……扯远了，总之UE5卡渲这块我准备分成多篇文章，多水一水。</p>
+<p>目前的大(feng)致(kuang)计(hua)划(bing)如下：</p>
+<ul>
+<li>卡通渲染理论基础</li>
+<li>修改源码的卡渲光照模型实现</li>
+<li>基于卷积矩阵的卡渲描边实现、添加子Mesh的Backface卡渲描边实现</li>
+<li>修改源码自定义Pass的Backface卡渲描边实现 ……
+次世代卡渲/独立的Hair、Skin卡渲光照模型/UE5复刻原神ShadingModel……(或许会有？)
+废话不多说了，进入正题。 ---
+提到卡通渲染，很多了解不多的朋友可能就会将其与NPR(Non-Photorealistic
+Rendering)混为一谈，可实际上这两者并不能划等号。事实上NPR是个非常广泛的概念，不止是卡渲，油画、水墨风等等等等各种特殊的渲染风格都可以算作是NPR的一部分，而整个卡渲大类也只是NPR的一个分支罢了，更不用说卡渲自己还有分有各种流派，比如日式赛璐璐风格、有明显明暗分界的Cel
+Shading和琪亚娜极乐净土中明暗渐变连续的Tone based
+Shading，以及结合pbr的次世代卡通渲染等。 <img src="/post/ue5_toonshading_0x00_base/image.png" class="" title="Alt text"> &gt;
+GGX采用的就是Cel Shading，可以看到角色身上明显的明暗分界</li>
+</ul>
+<img src="/post/ue5_toonshading_0x00_base/image-1.png" class="" title="Alt text">
 <blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/574551808">https://zhuanlan.zhihu.com/p/574551808</a></p>
+<p>琪亚娜的皮肤很显然是Tone based Shading……虫虫，我的虫虫，嘿嘿嘿</p>
+</blockquote>
+<p>那么说到流派，既然要研究卡渲，那我们自然要选择一个流派去研究，这里我选择当然的是前面拿来举例、卡渲领域典中之典的罪恶装备(以下简称GGX，注意不是Cook-Torrance
+BRDF里那个GGX，笑)作为参考。
+作为卡渲领域的里程碑作品，GGX的材质模型其实非常的简单，主要使用了三张贴图：BaseColor，ilm和SSS：
+- BaseColor：提供基础颜色 <img src="/post/ue5_toonshading_0x00_base/image-3.png" class="" title="Alt text"> -
+ilm：提供高光、阴影与内描边信息 <img src="/post/ue5_toonshading_0x00_base/image-5.png" class="" title="Alt text"> -
+SSS：提供模型阴影颜色信息，模型阴影颜色即为SSS * BaseColor <img src="/post/ue5_toonshading_0x00_base/image-4.png" class="" title="Alt text">
+其中，最值得详谈的是ilm贴图，其RGBA四个通道分别存储了高光强度、阴影阈值、高光范围与内描边信息：</p>
+<ul>
+<li><p>R通道： <img src="/post/ue5_toonshading_0x00_base/image-6.png" class="" title="Alt text"> 高光强度，没什么好说的；</p></li>
+<li><p>G通道： <img src="/post/ue5_toonshading_0x00_base/image-7.png" class="" title="Alt text">
+阴影阈值，基于128灰度的底色，控制材质进入阴影的倾向强弱。</p></li>
+<li><p>B通道 <img src="/post/ue5_toonshading_0x00_base/image-8.png" class="" title="Alt text"> 高光区域，决定了高光的范围。</p></li>
+<li><p>A通道 <img src="/post/ue5_toonshading_0x00_base/image-9.png" class="" title="Alt text"> 内描边信息，著名的本村线；</p></li>
+</ul>
+<p>除此以外，实际上GGX的卡渲方案还用到了一些贴图，比如角色的伤痕等，但这些对于ShadingModel来说都不重要，我们暂不去考虑。本来打算把卡渲的算法部分放在这里讲，但想了想不如丢到实现部分直接结合代码来讲……而且如果只是做一个简单卡渲模型的话，倒也不需要什么复杂的算法。</p>
+<p>那么作为序言的第一篇就到此为止，下一篇开始，我们将在UE5内通过修改源码来实现第一个卡渲模型。</p>
+<blockquote>
+<p>原文链接: https://zhuanlan.zhihu.com/p/544141830</p>
 </blockquote>
 ]]></content>
       <categories>
@@ -395,63 +471,83 @@
   <entry>
     <title>从插件开始的UE渲染开发0x00: Shader路径重定向</title>
     <url>/post/ue5_rendering_plugin_0x00_shader_remapping.html</url>
-    <content><![CDATA[<p>UE 渲染开发一直以来都是个很蛋疼的话题, 拜屎山一般的渲染系统所赐, 想要加点什么东西基本就只有改源码一条路可走, 以至于网上搜十个改源码的文章可能九个都是教你怎么加 ShadingModel 或 MeshPass.</p>
-<p>我自己也曾在这类重复且枯燥的工作上花费大量的时间, 深切感受到这玩意到底有多恶心. 而且源码修改一时爽, 后续维护火葬场, 将来如果要升级引擎版本, 面对茫茫多的 diff 那才叫一个痛不欲生.</p>
-<p>所以这个系列从 UE 的插件系统(Plugin)入手, 尝试探索在不改动源码的情况下, 如何最大限度的自定义渲染.</p>
+    <content><![CDATA[<p>UE 渲染开发一直以来都是个很蛋疼的话题, 拜屎山一般的渲染系统所赐,
+想要加点什么东西基本就只有改源码一条路可走,
+以至于网上搜十个改源码的文章可能九个都是教你怎么加 ShadingModel 或
+MeshPass.</p>
+<p>我自己也曾在这类重复且枯燥的工作上花费大量的时间,
+深切感受到这玩意到底有多恶心. 而且源码修改一时爽, 后续维护火葬场,
+将来如果要升级引擎版本, 面对茫茫多的 diff 那才叫一个痛不欲生.</p>
+<p>所以这个系列从 UE 的插件系统(Plugin)入手,
+尝试探索在不改动源码的情况下, 如何最大限度的自定义渲染.</p>
 <span id="more"></span>
-
-
-<p>虽说不改 C++ 源码, 但 Shader 该改还是要改. 不过直接去引擎路径下改 Shader 就很恶心, 可能我只想为当前项目改动某部分 Shader, 但引擎路径下 Shader 的改动却会影响到本地的所有项目. 如果能像 Unity 那样每个项目自己有一份 Shader 就好了——正确的, 我们就先来把这个功能做了.</p>
+<p>虽说不改 C++ 源码, 但 Shader 该改还是要改. 不过直接去引擎路径下改
+Shader 就很恶心, 可能我只想为当前项目改动某部分 Shader, 但引擎路径下
+Shader 的改动却会影响到本地的所有项目. 如果能像 Unity
+那样每个项目自己有一份 Shader 就好了——正确的,
+我们就先来把这个功能做了.</p>
 <p>在动工之前, 需要先理解 UE Shader 的路径引用原理.</p>
-<p>UE shader 代码中 include 的文件路径并非真实的路径, 而是”虚拟路径”. 比如在 Shader 中:</p>
+<p>UE shader 代码中 include 的文件路径并非真实的路径, 而是"虚拟路径".
+比如在 Shader 中:</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;/Engine/Private/Common.ush&quot;</span></span></span><br></pre></td></tr></table></figure>
-
-<p>然而 Common.ush 文件真实路径是 ($LocalPath)&#x2F;Engine&#x2F;Shaders&#x2F;Private&#x2F;Common.ush , 这其中就是由 UE 做了一遍 Shader 虚拟路径到真实路径的映射.</p>
-<p>把 shader 文件中使用的”&#x2F;Engine”路径映射到了本地环境下的”($LocalPath)&#x2F;Engine&#x2F;Shaders”.</p>
-<p>通过翻阅源码, 可以得知引擎在启动阶段会通过 AddShaderSourceDirectoryMapping()函数注册全部的 Shader 路径映射到一个全局变量 <strong>GShaderSourceDirectoryMappings</strong> 中:</p>
+<p>然而 Common.ush 文件真实路径是
+($LocalPath)/Engine/Shaders/Private/Common.ush , 这其中就是由 UE
+做了一遍 Shader 虚拟路径到真实路径的映射.</p>
+<p>把 shader
+文件中使用的"/Engine"路径映射到了本地环境下的"($LocalPath)/Engine/Shaders".</p>
+<p>通过翻阅源码, 可以得知引擎在启动阶段会通过
+AddShaderSourceDirectoryMapping()函数注册全部的 Shader
+路径映射到一个全局变量 <strong>GShaderSourceDirectoryMappings</strong>
+中:</p>
 <p>ShaderCore.h</p>
 <img src="/post/ue5_rendering_plugin_0x00_shader_remapping/Jop2bkBPJo91lHxuyAdc7hk1ntc.png" class="">
-
 <p>ShaderCore.cpp</p>
 <img src="/post/ue5_rendering_plugin_0x00_shader_remapping/UWNfbEEZDouqCmxrYjBceyulnxc.png" class="">
-
-<p>包括各个插件的自定义 Shader 也均通过这个接口向引擎注册自己的 Shader:</p>
+<p>包括各个插件的自定义 Shader 也均通过这个接口向引擎注册自己的
+Shader:</p>
 <p>MobileFSRModule.cpp</p>
 <img src="/post/ue5_rendering_plugin_0x00_shader_remapping/PPZQbaWIMoz0LjxTyU5cT5DlnFb.png" class="">
-
-<p>而引擎自己的内置 Shader 则是在 LaunchEngineLoop.cpp 中的 FEngineLoop::PreInitPreStartupScreen()函数中注册:</p>
+<p>而引擎自己的内置 Shader 则是在 LaunchEngineLoop.cpp 中的
+FEngineLoop::PreInitPreStartupScreen()函数中注册:</p>
 <img src="/post/ue5_rendering_plugin_0x00_shader_remapping/QWDRbaEQ2oDLMMxlnOzcO0qAnGc.png" class="">
-
-<p>那这样就好办了, 只需要在引擎 Shader 注册之后、Shader 编译之前把”&#x2F;Engine”对应的 shader 实际路径替换成项目自己魔改过后的 shader 路径即可.</p>
-<p>而我们也正好可以通过插件中模块启动时的 StartupModule()函数做到这一点, 只需要将模块的 LoadingPhase 设为 PostConfigInit.</p>
+<p>那这样就好办了, 只需要在引擎 Shader 注册之后、Shader
+编译之前把"/Engine"对应的 shader 实际路径替换成项目自己魔改过后的 shader
+路径即可.</p>
+<p>而我们也正好可以通过插件中模块启动时的 StartupModule()函数做到这一点,
+只需要将模块的 LoadingPhase 设为 PostConfigInit.</p>
 <p>UE 启动调用链:</p>
 <ul>
-<li>WinMain()<ul>
-<li>LaunchWindowsStartup()<ul>
-<li>GuardedMain()<ul>
-<li>EnginePreInit()<ul>
-<li>GEngineLoop.PreInit()<ul>
-<li>PreInitPreStartupScreen()<ul>
-<li>AddShaderSourceDirectoryMapping(TEXT(“&#x2F;Engine”), FPlatformProcess::ShaderDir()) <strong>← 引擎 Shader 虚拟路径注册</strong></li>
-<li>AppInit()<ul>
-<li>ProjectManager.LoadModulesForProject(ELoadingPhase::PostConfigInit)** ← PostConfigInit 模块加载**</li>
-</ul>
-</li>
+<li>WinMain()
+<ul>
+<li>LaunchWindowsStartup()
+<ul>
+<li>GuardedMain()
+<ul>
+<li>EnginePreInit()
+<ul>
+<li>GEngineLoop.PreInit()
+<ul>
+<li>PreInitPreStartupScreen()
+<ul>
+<li>AddShaderSourceDirectoryMapping(TEXT("/Engine"),
+FPlatformProcess::ShaderDir()) <strong>← 引擎 Shader
+虚拟路径注册</strong></li>
+<li>AppInit()
+<ul>
+<li>ProjectManager.LoadModulesForProject(ELoadingPhase::PostConfigInit)**
+← PostConfigInit 模块加载**</li>
+</ul></li>
 <li>CompileGlobalShaderMap() <strong>← 全局 Shader 编译</strong></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>在模块的 StartupModule()函数中拿到 <strong>GShaderSourceDirectoryMappings</strong> 并强行替换掉虚拟路径”&#x2F;Engine”对应的 shader 实际路径即可.</p>
+<p>在模块的 StartupModule()函数中拿到
+<strong>GShaderSourceDirectoryMappings</strong>
+并强行替换掉虚拟路径"/Engine"对应的 shader 实际路径即可.</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">FSnowyFalconModule::StartupModule</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span>&amp;&amp; ShaderSourceDirectoryMappings = <span class="keyword">const_cast</span>&lt;TMap&lt;FString, FString&gt;&amp;&gt;(<span class="built_in">AllShaderSourceDirectoryMappings</span>());</span><br><span class="line">     </span><br><span class="line">    FString ShaderRemappingRealDir = <span class="comment">//项目自定义Shader路径</span></span><br><span class="line">    <span class="keyword">if</span> (FPaths::<span class="built_in">DirectoryExists</span>(ShaderRemappingRealDir))</span><br><span class="line">    &#123;</span><br><span class="line">        ShaderSourceDirectoryMappings[EngineShaderVirtualDir] = ShaderRemappingRealDir;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">FSnowyFalconModule::ShutdownModule</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span>&amp;&amp; ShaderSourceDirectoryMappings = <span class="keyword">const_cast</span>&lt;TMap&lt;FString, FString&gt;&amp;&gt;(<span class="built_in">AllShaderSourceDirectoryMappings</span>());</span><br><span class="line">    ShaderSourceDirectoryMappings[EngineShaderVirtualDir] = EngineShaderRealDir;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
@@ -468,79 +564,11 @@
       </tags>
   </entry>
   <entry>
-    <title>从零开始的UE5卡通渲染【一】：理论基础</title>
-    <url>/post/ue5_toonshading_0x00_base.html</url>
-    <content><![CDATA[<p>最近在研究基于UE5的卡通渲染，颇有收获。正巧前段时间与同事吃饭，聊到知乎，深感自己知乎各种不正经的东西实在太多了，而我又是个懒得腾出时间写正经东西的懒狗，遂决定趁编译Shader的空闲，写点学习笔记、心得与分享。</p>
-<span id="more"></span>
-<p>虽然卡渲本身的知识不算很多，但放到UE5上就是不得不改动源码的大工程了，不由得让人怀念起自由的Unity，令人感叹……扯远了，总之UE5卡渲这块我准备分成多篇文章，多水一水。</p>
-<p>目前的大(feng)致(kuang)计(hua)划(bing)如下：</p>
-<ul>
-<li>卡通渲染理论基础</li>
-<li>修改源码的卡渲光照模型实现</li>
-<li>基于卷积矩阵的卡渲描边实现、添加子Mesh的Backface卡渲描边实现</li>
-<li>修改源码自定义Pass的Backface卡渲描边实现<br>……<br>次世代卡渲&#x2F;独立的Hair、Skin卡渲光照模型&#x2F;UE5复刻原神ShadingModel……(或许会有？)<br>废话不多说了，进入正题。</li>
-</ul>
-<hr>
-<p>提到卡通渲染，很多了解不多的朋友可能就会将其与NPR(Non-Photorealistic Rendering)混为一谈，可实际上这两者并不能划等号。事实上NPR是个非常广泛的概念，不止是卡渲，油画、水墨风等等等等各种特殊的渲染风格都可以算作是NPR的一部分，而整个卡渲大类也只是NPR的一个分支罢了，更不用说卡渲自己还有分有各种流派，比如日式赛璐璐风格、有明显明暗分界的Cel Shading和琪亚娜极乐净土中明暗渐变连续的Tone based Shading，以及结合pbr的次世代卡通渲染等。</p>
-<img src="/post/ue5_toonshading_0x00_base/image.png" class="" title="Alt text">
-<blockquote>
-<p>GGX采用的就是Cel Shading，可以看到角色身上明显的明暗分界</p>
-</blockquote>
-<img src="/post/ue5_toonshading_0x00_base/image-1.png" class="" title="Alt text">
-<blockquote>
-<p>琪亚娜的皮肤很显然是Tone based Shading……虫虫，我的虫虫，嘿嘿嘿</p>
-</blockquote>
-<p>那么说到流派，既然要研究卡渲，那我们自然要选择一个流派去研究，这里我选择当然的是前面拿来举例、卡渲领域典中之典的罪恶装备(以下简称GGX，注意不是Cook-Torrance BRDF里那个GGX，笑)作为参考。<br>作为卡渲领域的里程碑作品，GGX的材质模型其实非常的简单，主要使用了三张贴图：BaseColor，ilm和SSS：</p>
-<ul>
-<li><p>BaseColor：提供基础颜色</p>
-<img src="/post/ue5_toonshading_0x00_base/image-3.png" class="" title="Alt text"></li>
-<li><p>ilm：提供高光、阴影与内描边信息</p>
-<img src="/post/ue5_toonshading_0x00_base/image-5.png" class="" title="Alt text"></li>
-<li><p>SSS：提供模型阴影颜色信息，模型阴影颜色即为SSS * BaseColor</p>
-<img src="/post/ue5_toonshading_0x00_base/image-4.png" class="" title="Alt text">
-<p>其中，最值得详谈的是ilm贴图，其RGBA四个通道分别存储了高光强度、阴影阈值、高光范围与内描边信息：</p>
-</li>
-<li><p>R通道：</p>
-<img src="/post/ue5_toonshading_0x00_base/image-6.png" class="" title="Alt text">
-<p>高光强度，没什么好说的；</p>
-</li>
-<li><p>G通道：</p>
-<img src="/post/ue5_toonshading_0x00_base/image-7.png" class="" title="Alt text">
-<p>阴影阈值，基于128灰度的底色，控制材质进入阴影的倾向强弱。</p>
-</li>
-<li><p>B通道</p>
-<img src="/post/ue5_toonshading_0x00_base/image-8.png" class="" title="Alt text">
-<p>高光区域，决定了高光的范围。</p>
-</li>
-<li><p>A通道</p>
-<img src="/post/ue5_toonshading_0x00_base/image-9.png" class="" title="Alt text">
-<p>内描边信息，著名的本村线；</p>
-</li>
-</ul>
-<p>除此以外，实际上GGX的卡渲方案还用到了一些贴图，比如角色的伤痕等，但这些对于ShadingModel来说都不重要，我们暂不去考虑。本来打算把卡渲的算法部分放在这里讲，但想了想不如丢到实现部分直接结合代码来讲……而且如果只是做一个简单卡渲模型的话，倒也不需要什么复杂的算法。</p>
-<p>那么作为序言的第一篇就到此为止，下一篇开始，我们将在UE5内通过修改源码来实现第一个卡渲模型。</p>
-<blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/544141830">https://zhuanlan.zhihu.com/p/544141830</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Game Engine</category>
-        <category>Unreal</category>
-      </categories>
-      <tags>
-        <tag>Cpp</tag>
-        <tag>Unreal</tag>
-        <tag>Rendering</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>从零开始的UE5卡通渲染【二】：自定义着色模型</title>
+    <title>从零开始的UE5卡通渲染0x01：自定义着色模型</title>
     <url>/post/ue5_toonshading_0x01_custom_shadingmodel.html</url>
     <content><![CDATA[<span id="more"></span>
-<p>待搬运, 内容详见原文链接.</p>
-<blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/551343308">https://zhuanlan.zhihu.com/p/551343308</a></p>
-</blockquote>
+<p>待搬运, 内容详见原文链接. &gt; 原文链接:
+https://zhuanlan.zhihu.com/p/551343308</p>
 ]]></content>
       <categories>
         <category>Game Engine</category>
@@ -555,7 +583,8 @@
   <entry>
     <title>为美好的URP献上解析[0x00]: 管线架构</title>
     <url>/post/urp_analysis_0x00_pipeline_framework.html</url>
-    <content><![CDATA[<span id="more"></span>]]></content>
+    <content><![CDATA[<span id="more"></span>
+]]></content>
       <categories>
         <category>Game Engine</category>
         <category>Unity</category>
@@ -571,49 +600,88 @@
   <entry>
     <title>URP延迟渲染+Native Renderpass踩坑记录</title>
     <url>/post/urp_deferred_nativerenderpass.html</url>
-    <content><![CDATA[<p>过去两周多折腾URP Deferred + Native Renderpass, 踩了无数的坑, 翻遍国内国外的社区也找不到太多可供参考的资料. 于是在这里简述一下一些不可回避的问题以及其解决方案, 也算是为社区做点贡献.</p>
-<span id="more"></span>
-<p>在开始之前, 我想延迟渲染这种烂大街的玩意就没什么讲的必要了, 而Native Renderpass可能不少人没听过, 这东西底层调用的其实就是vulkan的renderpass&#x2F;subpass API(metal也有类似的一套), 简单来说就是利用移动端TB(D)R的硬件架构, 相比于传统延迟管线在basepass结束后将gbuffer store回system memory, 之后再在lightpass中load回来这种带宽压力极大的方案, Native Renderpass可以在每个tile的basepass结束后将gbuffer保存在On-Chip Memory上, 以供接下来的lightpass直接使用, 直接优化掉了两个pass之间的store&#x2F;load操作, 极大减缓了带宽压力, 这种形式的rt也被称之为memoryless.</p>
-<p>简单科普到此为止, 详细内容可以看vulkan官方讲subpass的ppt(很好找)或者是其他知乎大佬的文章.</p>
-<p>那么接下来就直接讲我踩到的几个坑以及解决方案. 因为是项目素材所以截图是肯定不能放的, 感兴趣可以自己试试去复现, 当然只是URP源码部分的代码我会贴出来.</p>
-<h1 id="开启Native-RenderPass时激活SceneView窗口导致Native-RenderPass失效"><a href="#开启Native-RenderPass时激活SceneView窗口导致Native-RenderPass失效" class="headerlink" title="开启Native RenderPass时激活SceneView窗口导致Native RenderPass失效"></a>开启Native RenderPass时激活SceneView窗口导致Native RenderPass失效</h1><p>很诡异的问题, 不只是在Editor中会这样, 甚至还会影响打包的结果.<br>开始以为是Bug, 分析源码后发现其原因在于源码中对Native RenderPass的开启做了两次二重判定:</p>
-<figure class="highlight cs"><table><tr><td class="code"><pre><span class="line"><span class="comment">// UniversalRenderer.cs</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">Setup</span>(<span class="params">ScriptableRenderContext context, <span class="keyword">ref</span> RenderingData renderingData</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="keyword">if</span> (cameraData.cameraType != CameraType.Game)</span><br><span class="line">        useRenderPassEnabled = <span class="literal">false</span>;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// DeferredLights.cs</span></span><br><span class="line"><span class="function"><span class="keyword">internal</span> <span class="keyword">void</span> <span class="title">SetupLights</span>(<span class="params">ScriptableRenderContext context, <span class="keyword">ref</span> RenderingData renderingData</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    CoreUtils.SetKeyword(cmd, ShaderKeywordStrings.RenderPassEnabled, <span class="keyword">this</span>.UseRenderPass &amp;&amp; renderingData.cameraData.cameraType == CameraType.Game);</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>也就是说在Scene窗口激活时, 即使开启Native RenderPass(useRenderPassEnabled &#x3D;&#x3D; true), 也是无效的.</p>
-<p>虽然通过修改代码可以强行开启, 但Scene窗口会渲染异常, 同时疯狂报错. 所以解决方案就是framedebug&#x2F;打包等等操作时找个窗口盖住scene窗口, 然后重新开关Native Rednerpass即可.</p>
-<p>充分怀疑是SceneViewCamera存在Unity暂时解决不了的Bug或没有对vk renderpass做适配.</p>
+    <content><![CDATA[<p>过去两周多折腾URP Deferred + Native Renderpass, 踩了无数的坑,
+翻遍国内国外的社区也找不到太多可供参考的资料.
+于是在这里简述一下一些不可回避的问题以及其解决方案,
+也算是为社区做点贡献. <span id="more"></span> 在开始之前,
+我想延迟渲染这种烂大街的玩意就没什么讲的必要了, 而Native
+Renderpass可能不少人没听过,
+这东西底层调用的其实就是vulkan的renderpass/subpass
+API(metal也有类似的一套), 简单来说就是利用移动端TB(D)R的硬件架构,
+相比于传统延迟管线在basepass结束后将gbuffer store回system memory,
+之后再在lightpass中load回来这种带宽压力极大的方案, Native
+Renderpass可以在每个tile的basepass结束后将gbuffer保存在On-Chip Memory上,
+以供接下来的lightpass直接使用, 直接优化掉了两个pass之间的store/load操作,
+极大减缓了带宽压力, 这种形式的rt也被称之为memoryless.</p>
+<p>简单科普到此为止,
+详细内容可以看vulkan官方讲subpass的ppt(很好找)或者是其他知乎大佬的文章.</p>
+<p>那么接下来就直接讲我踩到的几个坑以及解决方案.
+因为是项目素材所以截图是肯定不能放的, 感兴趣可以自己试试去复现,
+当然只是URP源码部分的代码我会贴出来.</p>
+<h1
+id="开启native-renderpass时激活sceneview窗口导致native-renderpass失效">开启Native
+RenderPass时激活SceneView窗口导致Native RenderPass失效</h1>
+<p>很诡异的问题, 不只是在Editor中会这样, 甚至还会影响打包的结果.
+开始以为是Bug, 分析源码后发现其原因在于源码中对Native
+RenderPass的开启做了两次二重判定: <figure class="highlight cs"><table><tr><td class="code"><pre><span class="line"><span class="comment">// UniversalRenderer.cs</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">Setup</span>(<span class="params">ScriptableRenderContext context, <span class="keyword">ref</span> RenderingData renderingData</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="keyword">if</span> (cameraData.cameraType != CameraType.Game)</span><br><span class="line">        useRenderPassEnabled = <span class="literal">false</span>;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// DeferredLights.cs</span></span><br><span class="line"><span class="function"><span class="keyword">internal</span> <span class="keyword">void</span> <span class="title">SetupLights</span>(<span class="params">ScriptableRenderContext context, <span class="keyword">ref</span> RenderingData renderingData</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    CoreUtils.SetKeyword(cmd, ShaderKeywordStrings.RenderPassEnabled, <span class="keyword">this</span>.UseRenderPass &amp;&amp; renderingData.cameraData.cameraType == CameraType.Game);</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+也就是说在Scene窗口激活时, 即使开启Native
+RenderPass(useRenderPassEnabled == true), 也是无效的.</p>
+<p>虽然通过修改代码可以强行开启, 但Scene窗口会渲染异常, 同时疯狂报错.
+所以解决方案就是framedebug/打包等等操作时找个窗口盖住scene窗口,
+然后重新开关Native Rednerpass即可.</p>
+<p>充分怀疑是SceneViewCamera存在Unity暂时解决不了的Bug或没有对vk
+renderpass做适配.</p>
 <blockquote>
 <p>吐槽: 这么重要的问题文档一句不提???</p>
 </blockquote>
-<h1 id="开启Native-RenderPass后自定义的RendererFeature渲染出错"><a href="#开启Native-RenderPass后自定义的RendererFeature渲染出错" class="headerlink" title="开启Native RenderPass后自定义的RendererFeature渲染出错"></a>开启Native RenderPass后自定义的RendererFeature渲染出错</h1><p>图就不放了, 总之打包到移动端真机后哪个tile用到了自定义的RendererFeature哪个tile就马赛克, 完全炸了.</p>
-<p>原因是ScriptableRenderer.cs里特别定义了变量用于控制RendererFeature的Native Renderpass的开闭:</p>
-<figure class="highlight cs"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Temporary variable to disable custom passes using render pass ( due to it potentially breaking projects with custom render features )</span></span><br><span class="line"><span class="comment">// To enable it - override SupportsNativeRenderPass method in the feature and return true</span></span><br><span class="line"><span class="keyword">internal</span> <span class="built_in">bool</span> disableNativeRenderPassInFeatures = <span class="literal">false</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">AddRenderPasses</span>(<span class="params"><span class="keyword">ref</span> RenderingData renderingData</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="comment">// Add render passes from custom renderer features</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; rendererFeatures.Count; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!rendererFeatures[i].isActive)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">if</span> (!rendererFeatures[i].SupportsNativeRenderPass())</span><br><span class="line">            disableNativeRenderPassInFeatures = <span class="literal">true</span>;</span><br><span class="line"> </span><br><span class="line">        rendererFeatures[i].AddRenderPasses(<span class="keyword">this</span>, <span class="keyword">ref</span> renderingData);</span><br><span class="line">        disableNativeRenderPassInFeatures = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// ScriptableRendererFeature.AddRenderPasses()内部调用ScriptableRenderer.EnqueuePass():</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">EnqueuePass</span>(<span class="params">ScriptableRenderPass pass</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    m_ActiveRenderPassQueue.Add(pass);</span><br><span class="line">    <span class="keyword">if</span> (disableNativeRenderPassInFeatures)</span><br><span class="line">        pass.useNativeRenderPass = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>解决方案是在自定义的RendererFeature里重写SupportsNativeRenderPass()函数, 在明确知道符合原条件的情况下, 直接返回ture即可.</p>
-<figure class="highlight cs"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="built_in">bool</span> <span class="title">SupportsNativeRenderPass</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 原判断条件</span></span><br><span class="line">    <span class="comment">// return settings.Event &lt;= RenderPassEvent.BeforeRenderingPostProcessing;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里需要注意的是父类ScriptableRendererFeature里定义的SupportsNativeRenderPass()函数的访问级别是internal, 想要在自己的命名空间里重写该函数就要全改成public.</p>
+<h1
+id="开启native-renderpass后自定义的rendererfeature渲染出错">开启Native
+RenderPass后自定义的RendererFeature渲染出错</h1>
+<p>图就不放了,
+总之打包到移动端真机后哪个tile用到了自定义的RendererFeature哪个tile就马赛克,
+完全炸了.</p>
+<p>原因是ScriptableRenderer.cs里特别定义了变量用于控制RendererFeature的Native
+Renderpass的开闭: <figure class="highlight cs"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Temporary variable to disable custom passes using render pass ( due to it potentially breaking projects with custom render features )</span></span><br><span class="line"><span class="comment">// To enable it - override SupportsNativeRenderPass method in the feature and return true</span></span><br><span class="line"><span class="keyword">internal</span> <span class="built_in">bool</span> disableNativeRenderPassInFeatures = <span class="literal">false</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">AddRenderPasses</span>(<span class="params"><span class="keyword">ref</span> RenderingData renderingData</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="comment">// Add render passes from custom renderer features</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; rendererFeatures.Count; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!rendererFeatures[i].isActive)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">if</span> (!rendererFeatures[i].SupportsNativeRenderPass())</span><br><span class="line">            disableNativeRenderPassInFeatures = <span class="literal">true</span>;</span><br><span class="line"> </span><br><span class="line">        rendererFeatures[i].AddRenderPasses(<span class="keyword">this</span>, <span class="keyword">ref</span> renderingData);</span><br><span class="line">        disableNativeRenderPassInFeatures = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// ScriptableRendererFeature.AddRenderPasses()内部调用ScriptableRenderer.EnqueuePass():</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">EnqueuePass</span>(<span class="params">ScriptableRenderPass pass</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    m_ActiveRenderPassQueue.Add(pass);</span><br><span class="line">    <span class="keyword">if</span> (disableNativeRenderPassInFeatures)</span><br><span class="line">        pass.useNativeRenderPass = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+解决方案是在自定义的RendererFeature里重写SupportsNativeRenderPass()函数,
+在明确知道符合原条件的情况下, 直接返回ture即可. <figure class="highlight cs"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="built_in">bool</span> <span class="title">SupportsNativeRenderPass</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 原判断条件</span></span><br><span class="line">    <span class="comment">// return settings.Event &lt;= RenderPassEvent.BeforeRenderingPostProcessing;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+这里需要注意的是父类ScriptableRendererFeature里定义的SupportsNativeRenderPass()函数的访问级别是internal,
+想要在自己的命名空间里重写该函数就要全改成public.</p>
 <blockquote>
 <p>吐槽: 这种函数为什么要internal? 不考虑用户扩展?</p>
 </blockquote>
-<h1 id="开启Native-RenderPass后移动Camera-Light-Layer会出现错位-x2F-拖影"><a href="#开启Native-RenderPass后移动Camera-Light-Layer会出现错位-x2F-拖影" class="headerlink" title="开启Native RenderPass后移动Camera, Light Layer会出现错位&#x2F;拖影"></a>开启Native RenderPass后移动Camera, Light Layer会出现错位&#x2F;拖影</h1><p>逆天大坑, 感兴趣的朋友可以自己试试开个默认场景然后改改light layer再往手机上打个包, 简单说就是在移动camera时会出现light layer不同步的拖影, 实际表现就像是light layer的屏幕空间位置刷新跟不上角色的刷新一样.</p>
+<h1
+id="开启native-renderpass后移动camera-light-layer会出现错位拖影">开启Native
+RenderPass后移动Camera, Light Layer会出现错位/拖影</h1>
+<p>逆天大坑, 感兴趣的朋友可以自己试试开个默认场景然后改改light
+layer再往手机上打个包, 简单说就是在移动camera时会出现light
+layer不同步的拖影, 实际表现就像是light
+layer的屏幕空间位置刷新跟不上角色的刷新一样.</p>
 <p>折腾了很久后终于排查到了问题所在:</p>
-<p><strong>因为Vulkan的一个renderpass会在所有subpass结束后再把要store回system memory的数据store, 也就是说LightPass里load进来的并不是同一帧里前一个subpass(BasePass)生成的light layer, 而是上一帧renderpass结束后store回system memory的light layer, 故而导致移动摄像机时会拖影.</strong></p>
-<img src="/post/urp_deferred_nativerenderpass/image.png" class="" title="Alt text">
-
-<p>解决方案: 在DeferredLights.cs的Setup()函数中修改以下两处定义为:</p>
-<figure class="highlight cs"><table><tr><td class="code"><pre><span class="line"><span class="comment">//this.DeferredInputAttachments = new RenderTargetIdentifier[4]</span></span><br><span class="line"><span class="comment">//&#123;</span></span><br><span class="line"><span class="comment">//    this.GbufferAttachmentIdentifiers[0], this.GbufferAttachmentIdentifiers[1],</span></span><br><span class="line"><span class="comment">//    this.GbufferAttachmentIdentifiers[2], this.GbufferAttachmentIdentifiers[4]</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"><span class="keyword">this</span>.DeferredInputAttachments = <span class="keyword">new</span> RenderTargetIdentifier[<span class="number">5</span>]</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">this</span>.GbufferAttachmentIdentifiers[<span class="number">0</span>], <span class="keyword">this</span>.GbufferAttachmentIdentifiers[<span class="number">1</span>],</span><br><span class="line">    <span class="keyword">this</span>.GbufferAttachmentIdentifiers[<span class="number">2</span>], <span class="keyword">this</span>.GbufferAttachmentIdentifiers[<span class="number">4</span>],</span><br><span class="line">    <span class="keyword">this</span>.GbufferAttachmentIdentifiers[<span class="number">5</span>]</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//this.DeferredInputIsTransient = new bool[4]</span></span><br><span class="line"><span class="comment">//&#123;</span></span><br><span class="line"><span class="comment">//    true, true, true, false</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"><span class="keyword">this</span>.DeferredInputIsTransient = <span class="keyword">new</span> <span class="built_in">bool</span>[<span class="number">5</span>]</span><br><span class="line">&#123;</span><br><span class="line">    <span class="literal">true</span>, <span class="literal">true</span>, <span class="literal">true</span>, <span class="literal">false</span>, <span class="literal">true</span>   <span class="comment">// DeferredInputIsTransient[3]也就是Depth as Color貌似也可以写成true</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>可以看到URP在源码里写死了InputAttachment最大数量为4, 通过DeferredInputAttachments数组指定其为gbuffer0&#x2F;1&#x2F;2&#x2F;4, 并通过DeferredInputIsTransient数组指定对应的gbuffer是否为memoryless, 所以导致light layer只能从system memroy load上一帧的结果. 这恐怕也是因为Unity考虑到要兼容部分只支持四张InputAttachment的Vulkan设备而做的妥协.</p>
-<p>C#端开启完毕后, 就可以在shader里用InputAttachment的方式从On-Chip Memory里读取当前帧在basepass生成的lightlayer了:</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// StencilDeferred.shader</span></span><br><span class="line"><span class="meta">#<span class="keyword">if</span> _RENDER_PASS_ENABLED</span></span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> GBUFFER0 0</span></span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> GBUFFER1 1</span></span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> GBUFFER2 2</span></span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> GBUFFER3 3</span></span><br><span class="line">    <span class="meta">#<span class="keyword">ifdef</span> _LIGHT_LAYERS</span></span><br><span class="line">        <span class="meta">#<span class="keyword">define</span> GBUFFER4 4</span></span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"> </span><br><span class="line">    <span class="built_in">FRAMEBUFFER_INPUT_HALF</span>(GBUFFER0);</span><br><span class="line">    <span class="built_in">FRAMEBUFFER_INPUT_HALF</span>(GBUFFER1);</span><br><span class="line">    <span class="built_in">FRAMEBUFFER_INPUT_HALF</span>(GBUFFER2);</span><br><span class="line">    <span class="built_in">FRAMEBUFFER_INPUT_FLOAT</span>(GBUFFER3);</span><br><span class="line">    <span class="meta">#<span class="keyword">ifdef</span> _LIGHT_LAYERS</span></span><br><span class="line">        <span class="built_in">FRAMEBUFFER_INPUT_HALF</span>(GBUFFER4);</span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">    <span class="meta">#<span class="keyword">ifdef</span> GBUFFER_OPTIONAL_SLOT_1</span></span><br><span class="line">    <span class="built_in">TEXTURE2D_X_HALF</span>(_GBuffer4);</span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"> </span><br><span class="line">    <span class="meta">#<span class="keyword">if</span> defined(GBUFFER_OPTIONAL_SLOT_2) &amp;&amp; _RENDER_PASS_ENABLED</span></span><br><span class="line">    <span class="comment">//TEXTURE2D_X_HALF(_GBuffer5);</span></span><br><span class="line">    <span class="meta">#<span class="keyword">elif</span> defined(GBUFFER_OPTIONAL_SLOT_2)</span></span><br><span class="line">    <span class="built_in">TEXTURE2D_X</span>(_GBuffer5);</span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    <span class="meta">#<span class="keyword">ifdef</span> GBUFFER_OPTIONAL_SLOT_3</span></span><br><span class="line">    <span class="built_in">TEXTURE2D_X</span>(_GBuffer6);</span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"> </span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"> </span><br><span class="line"><span class="function">half4 <span class="title">DeferredShading</span><span class="params">(Varyings input)</span> : SV_Target</span></span><br><span class="line"><span class="function">&#123;</span></span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="meta">#<span class="keyword">ifdef</span> _LIGHT_LAYERS</span></span><br><span class="line">        <span class="meta">#<span class="keyword">ifdef</span> _RENDER_PASS_ENABLED</span></span><br><span class="line">        float4 renderingLayers = <span class="built_in">LOAD_FRAMEBUFFER_INPUT</span>(GBUFFER4, input.positionCS.xy);</span><br><span class="line">        <span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">        float4 renderingLayers = <span class="built_in">LOAD_TEXTURE2D_X_LOD</span>(<span class="built_in">MERGE_NAME</span>(_, GBUFFER_LIGHT_LAYERS), input.positionCS.xy, <span class="number">0</span>);</span><br><span class="line">        <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    uint meshRenderingLayers = <span class="built_in">uint</span>(renderingLayers.r * <span class="number">255.5</span>);</span><br><span class="line">    <span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">    uint meshRenderingLayers = DEFAULT_LIGHT_LAYERS;</span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这样一来gbuffer5就成功被设置成了memoryless, 再次打包发现light layer错位&#x2F;拖影的现象已经消失了.</p>
-<img src="/post/urp_deferred_nativerenderpass/image-1.png" class="" title="Alt text">
-<img src="/post/urp_deferred_nativerenderpass/image-2.png" class="" title="Alt text">
-
-<p>不过真机测试时, Redmi K30 Pro(865)是可以正常渲染的, 而Mi 8(845)就会出现花屏. 具体是不是因为845不支持大于四张的InputAttachment还有待验证与查阅资料.</p>
+<p><strong>因为Vulkan的一个renderpass会在所有subpass结束后再把要store回system
+memory的数据store,
+也就是说LightPass里load进来的并不是同一帧里前一个subpass(BasePass)生成的light
+layer, 而是上一帧renderpass结束后store回system memory的light layer,
+故而导致移动摄像机时会拖影.</strong> <img src="/post/urp_deferred_nativerenderpass/image.png" class="" title="Alt text"></p>
+<p>解决方案: 在DeferredLights.cs的Setup()函数中修改以下两处定义为:
+<figure class="highlight cs"><table><tr><td class="code"><pre><span class="line"><span class="comment">//this.DeferredInputAttachments = new RenderTargetIdentifier[4]</span></span><br><span class="line"><span class="comment">//&#123;</span></span><br><span class="line"><span class="comment">//    this.GbufferAttachmentIdentifiers[0], this.GbufferAttachmentIdentifiers[1],</span></span><br><span class="line"><span class="comment">//    this.GbufferAttachmentIdentifiers[2], this.GbufferAttachmentIdentifiers[4]</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"><span class="keyword">this</span>.DeferredInputAttachments = <span class="keyword">new</span> RenderTargetIdentifier[<span class="number">5</span>]</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">this</span>.GbufferAttachmentIdentifiers[<span class="number">0</span>], <span class="keyword">this</span>.GbufferAttachmentIdentifiers[<span class="number">1</span>],</span><br><span class="line">    <span class="keyword">this</span>.GbufferAttachmentIdentifiers[<span class="number">2</span>], <span class="keyword">this</span>.GbufferAttachmentIdentifiers[<span class="number">4</span>],</span><br><span class="line">    <span class="keyword">this</span>.GbufferAttachmentIdentifiers[<span class="number">5</span>]</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//this.DeferredInputIsTransient = new bool[4]</span></span><br><span class="line"><span class="comment">//&#123;</span></span><br><span class="line"><span class="comment">//    true, true, true, false</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"><span class="keyword">this</span>.DeferredInputIsTransient = <span class="keyword">new</span> <span class="built_in">bool</span>[<span class="number">5</span>]</span><br><span class="line">&#123;</span><br><span class="line">    <span class="literal">true</span>, <span class="literal">true</span>, <span class="literal">true</span>, <span class="literal">false</span>, <span class="literal">true</span>   <span class="comment">// DeferredInputIsTransient[3]也就是Depth as Color貌似也可以写成true</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure> 可以看到URP在源码里写死了InputAttachment最大数量为4,
+通过DeferredInputAttachments数组指定其为gbuffer0/1/2/4,
+并通过DeferredInputIsTransient数组指定对应的gbuffer是否为memoryless,
+所以导致light layer只能从system memroy load上一帧的结果.
+这恐怕也是因为Unity考虑到要兼容部分只支持四张InputAttachment的Vulkan设备而做的妥协.</p>
+<p>C#端开启完毕后, 就可以在shader里用InputAttachment的方式从On-Chip
+Memory里读取当前帧在basepass生成的lightlayer了: <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// StencilDeferred.shader</span></span><br><span class="line"><span class="meta">#<span class="keyword">if</span> _RENDER_PASS_ENABLED</span></span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> GBUFFER0 0</span></span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> GBUFFER1 1</span></span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> GBUFFER2 2</span></span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> GBUFFER3 3</span></span><br><span class="line">    <span class="meta">#<span class="keyword">ifdef</span> _LIGHT_LAYERS</span></span><br><span class="line">        <span class="meta">#<span class="keyword">define</span> GBUFFER4 4</span></span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"> </span><br><span class="line">    <span class="built_in">FRAMEBUFFER_INPUT_HALF</span>(GBUFFER0);</span><br><span class="line">    <span class="built_in">FRAMEBUFFER_INPUT_HALF</span>(GBUFFER1);</span><br><span class="line">    <span class="built_in">FRAMEBUFFER_INPUT_HALF</span>(GBUFFER2);</span><br><span class="line">    <span class="built_in">FRAMEBUFFER_INPUT_FLOAT</span>(GBUFFER3);</span><br><span class="line">    <span class="meta">#<span class="keyword">ifdef</span> _LIGHT_LAYERS</span></span><br><span class="line">        <span class="built_in">FRAMEBUFFER_INPUT_HALF</span>(GBUFFER4);</span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">    <span class="meta">#<span class="keyword">ifdef</span> GBUFFER_OPTIONAL_SLOT_1</span></span><br><span class="line">    <span class="built_in">TEXTURE2D_X_HALF</span>(_GBuffer4);</span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"> </span><br><span class="line">    <span class="meta">#<span class="keyword">if</span> defined(GBUFFER_OPTIONAL_SLOT_2) &amp;&amp; _RENDER_PASS_ENABLED</span></span><br><span class="line">    <span class="comment">//TEXTURE2D_X_HALF(_GBuffer5);</span></span><br><span class="line">    <span class="meta">#<span class="keyword">elif</span> defined(GBUFFER_OPTIONAL_SLOT_2)</span></span><br><span class="line">    <span class="built_in">TEXTURE2D_X</span>(_GBuffer5);</span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    <span class="meta">#<span class="keyword">ifdef</span> GBUFFER_OPTIONAL_SLOT_3</span></span><br><span class="line">    <span class="built_in">TEXTURE2D_X</span>(_GBuffer6);</span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"> </span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"> </span><br><span class="line"><span class="function">half4 <span class="title">DeferredShading</span><span class="params">(Varyings input)</span> : SV_Target</span></span><br><span class="line"><span class="function">&#123;</span></span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="meta">#<span class="keyword">ifdef</span> _LIGHT_LAYERS</span></span><br><span class="line">        <span class="meta">#<span class="keyword">ifdef</span> _RENDER_PASS_ENABLED</span></span><br><span class="line">        float4 renderingLayers = <span class="built_in">LOAD_FRAMEBUFFER_INPUT</span>(GBUFFER4, input.positionCS.xy);</span><br><span class="line">        <span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">        float4 renderingLayers = <span class="built_in">LOAD_TEXTURE2D_X_LOD</span>(<span class="built_in">MERGE_NAME</span>(_, GBUFFER_LIGHT_LAYERS), input.positionCS.xy, <span class="number">0</span>);</span><br><span class="line">        <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    uint meshRenderingLayers = <span class="built_in">uint</span>(renderingLayers.r * <span class="number">255.5</span>);</span><br><span class="line">    <span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">    uint meshRenderingLayers = DEFAULT_LIGHT_LAYERS;</span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+这样一来gbuffer5就成功被设置成了memoryless, 再次打包发现light
+layer错位/拖影的现象已经消失了. <img src="/post/urp_deferred_nativerenderpass/image-1.png" class="" title="Alt text"> <img src="/post/urp_deferred_nativerenderpass/image-2.png" class="" title="Alt text"></p>
+<p>不过真机测试时, Redmi K30 Pro(865)是可以正常渲染的, 而Mi
+8(845)就会出现花屏.
+具体是不是因为845不支持大于四张的InputAttachment还有待验证与查阅资料.</p>
 <blockquote>
-<p>吐槽: 前面那种小坑文档不说明也就算了, 这种也不说明? 全靠用户琢磨, 你以为你是UE?</p>
+<p>吐槽: 前面那种小坑文档不说明也就算了, 这种也不说明? 全靠用户琢磨,
+你以为你是UE?</p>
 </blockquote>
 <p>大概就是这样, 希望可以帮到遇到同样问题的朋友.</p>
 <blockquote>
-<p>原文链接: <a href="https://zhuanlan.zhihu.com/p/574540329">https://zhuanlan.zhihu.com/p/574540329</a></p>
+<p>原文链接: https://zhuanlan.zhihu.com/p/574540329</p>
 </blockquote>
 ]]></content>
       <categories>
@@ -626,6 +694,143 @@
         <tag>Unity</tag>
         <tag>URP</tag>
         <tag>CSharp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>聊聊UI分辨率分离与线性空间下的GammaUI</title>
+    <url>/post/urp_ui_resolution_split_and_gamma_ui.html</url>
+    <content><![CDATA[<p>整理了下近期以及过去做过的这方面的一些功能,
+挑出点有意思的东西或思路谈谈. 这篇没有什么代码之类的东西,
+就纯是碎碎念.</p>
+<span id="more"></span>
+<h1 id="ui-分辨率分离">UI 分辨率分离</h1>
+<p>这年头在移动端做 3D 游戏, 分辨率基本是没可能拉满的,
+最高基本也就八九百这样子, 低配下甚至六百多都有可能.
+虽然场景怎么低分辨率怎么糊都好说, 但 UI 是万万不能糊的,
+一糊这游戏也别玩了. 所以场景&amp;UI 分辨率分离就成了一个项目必需的
+feature.</p>
+<p>最简单也是最直接的方案就是给 UI 单独来一张 RT, 我们叫他 UITarget.
+场景在低分辨率的 CameraAttachment 上渲完后 Blit 到高分辨率的 UITarget
+上, 再交给 UI 相机绘制 UI.</p>
+<p>听着很美好, 但实际并不能用.
+因为这个方案对于带宽本就不富裕的移动端打击是致命的, 多一张 1080p 的 RT
+简直是要了手机的老命.</p>
+<p>于是就有了优化方案, 借用系统提供的 Backbuffer 作为 UITarget.
+Backbuffer 默认为手机硬件的原生分辨率,
+无论任何情况下渲染管线的最终目标都会是它, 在 URP 正常的流程中,
+管线会在最后一个相机渲染完后调用 FinalBlit 将当前的 CameraAttechment
+Blit 到 Backbuffer 上.</p>
+<p>考虑一个常规情况, 即同时存在主相机(开后处理)与 UI 相机(不开后处理),
+那么 URP 的默认流程是这样的:</p>
+<ul>
+<li>MainCamera[Opaque/Transparent Pass]: 场景渲染到
+CameraColorAttachmentA</li>
+<li>MainCamera[UberPost]: CameraColorAttachmentA 渲染到
+CameraColorAttachmentB</li>
+<li>UICamera[Transparent Pass]: UI 渲染到 CameraColorAttachmentB</li>
+<li>UICamera[Final Blit]: CameraColorAttachmentB 渲染到 Backbuffer</li>
+</ul>
+<p>我们只需要稍微改动一下管线, 让主相机做完后处理后直接 Blit 到
+Backbuffer:</p>
+<ul>
+<li>MainCamera[Opaque/Transparent Pass]: 场景渲染到
+CameraColorAttachmentA</li>
+<li>MainCamera[UberPost]: CameraColorAttachmentA 渲染到 Backbuffer</li>
+<li>UICamera[Transparent Pass]: UI 直接渲染到 Backbuffer</li>
+</ul>
+<p>这样一来, 不仅在没有性能开销的情况下实现了 UI 分辨率分离,
+甚至还优化掉了 FinalBlit 的带宽, 可以说是可喜可贺. 后续可以通过
+Screen.SetResolution()调整 Backbuffer 也就是 UI 的分辨率,
+然后在其基础上调整 RenderScale 也就是场景分辨率.</p>
+<p>这个方案有一些注意事项和技术限制:</p>
+<p>其一, <strong>非 UI 相机的后处理 RenderTarget, 只有最后一个非 UI
+相机的后处理才应该且必需 Blit 到 Backbuffer.</strong>
+这个基本就是工程问题, 处理完善管线中相关的逻辑代码就好.</p>
+<p>其二, <strong>UI 相机必须是最后一个相机且不支持后处理.</strong>
+前者没什么好说的, 但后者还是有些蛋疼.</p>
+<p>一般来说 Backbuffer 是无法 SetTexture 到材质的, 也就无法做后处理
+Blit. 但如果是调用 cmd.Blit()且当前的 RenderTarget 就是 Backbuffer 的话,
+就可以神奇的拿到 Backbuffer! 此时 FrameDebug 上显示是 Grab
+RenderTexture, 原因是 cmd.Blit()内部对此做了特殊处理, 将操作改为了曾经
+Bulitin 时代的 GrabPass.(大概)</p>
+<p>所以拿 Backbuffer 直接做后处理也并非不行...但因为要 Blit, 之前省掉的
+RT 和带宽又回来了...那这可能还不如上一个方案, GrabPass 说不定比 Blit
+还要更耗. 所以这一块就得和项目组好好对一下了, 如果说 UI
+后处理只是在过剧情时出现、用完就关, 那开启 UI
+后处理时动态关掉这个功能也不是不行.</p>
+<p>此外, Linear 空间下 Backbuffer 的格式应该是 RGBA32_SRGB,
+有些设备或模拟器并不支持 SRGB 格式的 Backbuffer, 提供的是 RGBA32_UNorm.
+URP 原本的做法是在 FinalBlit 时判断一下
+CameraData.requireSrgbConversion, 如果为 true 则表示 Backbuffer 为
+RGBA32_UNorm 需要手动做 LinearToSRGB 也就是常说的
+GammaCorrection(Pow0.45). 我个人测试下来的结果貌似目前只有在模拟器上
+SRGB Backbuffer 是不受支持的, 问题不大, 干脆不支持就不开这功能得了.</p>
+<p>还有就是因为 Backbuffer 不支持 HDR, 所以 UI 材质上也不能用 HDR 颜色,
+这个应该无伤大雅.</p>
+<h1 id="线性空间下的-gammaui">线性空间下的 GammaUI</h1>
+<p>聊完 UI 分辨率分离, 再来聊聊 UI 的颜色空间.</p>
+<p>进入 PBR 时代以后, 3D 游戏的 ColorSpace 基本就都是 Linear 了.
+这当然很好, 可以有正确的光照, 更接近物理世界的结果. 但美术们在 PS 中制作
+UI 时, 却是在 Gamma 空间下工作的——这也合理, 即使在线性工作流下,
+涉及视觉颜色的贴图也应该是 sRGB 的, 就比如 BaseColor.</p>
+<p>问题在于 UI 与 BaseColor 不同, 是要层与层之间做混合的. 美术在
+PS(Gamma 空间)中得出了他们认为正确的结果, 丢到引擎中效果就不对了,
+因为引擎是在 Linear 空间, 二者的混合算法不同.</p>
+<p>在 Gamma 空间下, SrcAlpha-OneMinusSrcAlpha 混合的公式是:</p>
+<p><span class="math display">\[
+c = Src.rgb*Src.a+Dst.rgb*(1-Src.a)
+\]</span></p>
+<p>而在 Linear 空间下, Unity 会为勾选了 sRGB 的贴图做一次
+RemoveGammaCorrection(Pow2.2)将其转换到 Linear 空间, 并在 Shader 输出(到
+SRGB 格式的 RT)时再做一次 GammaCorrection(Pow0.45)将其矫正回 Gamma 空间.
+即:</p>
+<p><span class="math display">\[
+c = (Src.rgb^{2.2}*Src.a+Dst.rgb^{2.2}*(1-Src.a))^{0.45}
+\]</span></p>
+<p>解决方案大致分为两种.</p>
+<p>第一种是修改美术工作流, 把美术 PS 改成线性空间,
+让美术直接在线性空间下制作 UI. 这个也是很多项目的做法,
+美术虽然会不爽但时间长了也就接受了, 总之就是再苦一苦美术.</p>
+<p>第二种也就是今天要着重谈的, 让 UI 相机在 Gamma 空间工作.</p>
+<p>也就是给 UI 单独一张 RT——没错, 又回到了上一节的论点,
+这也是为什么我把这两块技术放在一起谈的原因.</p>
+<p>思路也很简单, 既然 RGBA32_SRGB 的 Backbuffer 会自动做
+GammaCorrection(Pow0.45), 那么我只要申请一张 RGBA32_UNrom 格式的
+UITarget, 再把 UI 贴图取消勾选 sRGB, 然后:</p>
+<ul>
+<li>MainCamera[UberPost]: CameraColorAttachment 渲染到 UITarget, 手动
+LinearToSRGB(Pow0.45)</li>
+<li>UICamera[Transparent Pass]: UI 渲染到 UITarget, 贴图取消勾选 sRGB,
+在 Unorm 贴图上正确的 Gamma 混合</li>
+<li>UICamera[Final Blit]: UITarget 渲染到 Backbuffer 并手动做一次
+SRGBToLinear(Pow2.2). 对于 UI, Pow2.2 抵消了 Backbuffer 的自动
+GammaCorrection(Pow0.45), 而对于场景, 本就需要 Backbuffer 的自动
+GammaCorrection, 所以前后两次手动矫正正好互相抵消.</li>
+</ul>
+<p>很好很完美, 但还是上一节的问题——带宽压力变大了. 能不能和做 UI
+分辨率分离时一样不申请额外 RT, 直接在 Backbuffer 做呢?</p>
+<p>理论上当然可以, 我们知道, Unity 会根据项目所选的颜色空间来选择
+Backbuffer 格式, 若为 Gamma 则 Backbuffer 为 RGBA32_UNorm, 若为 Linear
+则 Backbuffer 为 RGBA32_SRGB(前提是设备支持, 否则回退到
+RGBA32_UNorm).</p>
+<p>而想要在 SRGB 格式的 Backbuffer 上直接绘制 UI 并做正确的 Gamma
+空间混合是不可能的, 除非我们能把 Linear 颜色空间下的 Backbuffer 也改为
+RGBA32_UNorm, 这样一来我们只需要在场景渲染结束后, 对 CameraAttechment
+手动做一次 LinearToSRGB(Pow0.45)Blit 到 Backbuffer 即可, 之后在
+Backbuffer 上正常绘制 UI 就行.</p>
+<p>那么可以改吗? 可以, 但得加钱, 改源码~</p>
+]]></content>
+      <categories>
+        <category>Game Engine</category>
+        <category>Unity</category>
+        <category>URP/SnowyOwl</category>
+      </categories>
+      <tags>
+        <tag>Rendering</tag>
+        <tag>Unity</tag>
+        <tag>URP</tag>
+        <tag>CSharp</tag>
+        <tag>UI</tag>
       </tags>
   </entry>
 </search>

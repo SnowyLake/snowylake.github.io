@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"snowylake.net","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","width":280,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="建这个网站的初衷是因为自己知乎被连续封了几次, 以至于让我对这类非可控的平台产生了大量不信任感, 再加之我个人的知乎账号掺杂了大量的非技术相关内容, 所以尽管我在知乎也写了一些技术文章, 但仍并不方便将来贴在简历上.总总原因驱使下, 在综合考量了云服务器+Wordpress和GitHubPages+Hexo两种方案后, 我还是选择了更为轻便的后者, 毕竟对我而言只是需要一个发布文章与随想的、完全可">
+    <meta name="description" content="建这个网站的初衷是因为自己知乎被连续封了几次, 以至于让我对这类非可控的平台产生了大量不信任感, 再加之我个人的知乎账号掺杂了大量的非技术相关内容, 所以尽管我在知乎也写了一些技术文章, 但仍并不方便将来贴在简历上. 总总原因驱使下, 在综合考量了云服务器+Wordpress和GitHubPages+Hexo两种方案后, 我还是选择了更为轻便的后者, 毕竟对我而言只是需要一个发布文章">
 <meta property="og:type" content="article">
 <meta property="og:title" content="建站记录">
 <meta property="og:url" content="http://snowylake.net/post/site_build_note.html">
 <meta property="og:site_name" content="雪之湖畔-SnowyLakeSide">
-<meta property="og:description" content="建这个网站的初衷是因为自己知乎被连续封了几次, 以至于让我对这类非可控的平台产生了大量不信任感, 再加之我个人的知乎账号掺杂了大量的非技术相关内容, 所以尽管我在知乎也写了一些技术文章, 但仍并不方便将来贴在简历上.总总原因驱使下, 在综合考量了云服务器+Wordpress和GitHubPages+Hexo两种方案后, 我还是选择了更为轻便的后者, 毕竟对我而言只是需要一个发布文章与随想的、完全可">
+<meta property="og:description" content="建这个网站的初衷是因为自己知乎被连续封了几次, 以至于让我对这类非可控的平台产生了大量不信任感, 再加之我个人的知乎账号掺杂了大量的非技术相关内容, 所以尽管我在知乎也写了一些技术文章, 但仍并不方便将来贴在简历上. 总总原因驱使下, 在综合考量了云服务器+Wordpress和GitHubPages+Hexo两种方案后, 我还是选择了更为轻便的后者, 毕竟对我而言只是需要一个发布文章">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://snowylake.net/post/site_build_note/image.png">
 <meta property="og:image" content="http://snowylake.net/post/site_build_note/image-5.png">
@@ -112,7 +112,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">27</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">12</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">17</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">27</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">13</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">18</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -163,7 +163,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Github-Pages%E5%88%9B%E5%BB%BA"><span class="nav-number">1.</span> <span class="nav-text">Github Pages创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8Hexo%E6%A1%86%E6%9E%B6%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">应用Hexo框架本地搭建部署环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.1.</span> <span class="nav-text">安装与初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E4%B8%8E%E6%8E%A8%E9%80%81"><span class="nav-number">2.2.</span> <span class="nav-text">生成与推送</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Next%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">Next主题配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AENext"><span class="nav-number">3.1.</span> <span class="nav-text">安装与配置Next</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%8D%9A%E5%AE%A2%E5%A4%B4%E5%83%8F%E3%80%81%E8%83%8C%E6%99%AF%E4%B8%8E%E9%80%8F%E6%98%8E"><span class="nav-number">3.2.</span> <span class="nav-text">添加博客头像、背景与透明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E8%8F%9C%E5%8D%95"><span class="nav-number">3.3.</span> <span class="nav-text">添加菜单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E4%BE%A7%E8%BE%B9%E6%A0%8F%E5%AE%BD%E5%BA%A6"><span class="nav-number">3.4.</span> <span class="nav-text">修改侧边栏宽度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E7%A4%BE%E4%BA%A4%E7%BD%91%E7%AB%99%E9%93%BE%E6%8E%A5"><span class="nav-number">3.5.</span> <span class="nav-text">添加社交网站链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD"><span class="nav-number">3.6.</span> <span class="nav-text">添加搜索功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E5%AD%97%E6%95%B0%E4%B8%8E%E9%98%85%E8%AF%BB%E6%97%B6%E9%95%BF%E7%BB%9F%E8%AE%A1"><span class="nav-number">3.7.</span> <span class="nav-text">添加文章字数与阅读时长统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E7%BD%91%E7%AB%99%E8%A7%82%E7%9C%8B%E4%BA%BA%E6%95%B0%E7%BB%9F%E8%AE%A1"><span class="nav-number">3.8.</span> <span class="nav-text">添加网站观看人数统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E7%BD%91%E7%AB%99%E5%9B%BE%E6%A0%87"><span class="nav-number">3.9.</span> <span class="nav-text">添加网站图标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%96%87%E6%9C%AB%E7%89%88%E6%9D%83%E5%A3%B0%E6%98%8E"><span class="nav-number">3.10.</span> <span class="nav-text">添加文末版权声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E5%B1%95%E5%BC%80%E7%9B%AE%E5%BD%95"><span class="nav-number">3.11.</span> <span class="nav-text">默认展开目录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%9A%E5%AE%A2%E5%86%99%E4%BD%9C%E5%8A%9F%E8%83%BD"><span class="nav-number">4.</span> <span class="nav-text">博客写作功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A3%B0%E6%98%8E%E6%96%87%E7%AB%A0%E6%91%98%E8%A6%81"><span class="nav-number">4.1.</span> <span class="nav-text">声明文章摘要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E6%9D%BF"><span class="nav-number">4.2.</span> <span class="nav-text">配置自定义模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E5%88%86%E7%B1%BB%E4%B8%8E%E6%A0%87%E7%AD%BE"><span class="nav-number">4.3.</span> <span class="nav-text">文章分类与标签</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D"><span class="nav-number">5.</span> <span class="nav-text">自定义域名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E7%B4%A2%E5%BC%95"><span class="nav-number">6.</span> <span class="nav-text">搜索引擎索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E7%B4%A2%E5%BC%95"><span class="nav-number">6.1.</span> <span class="nav-text">添加索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E7%BD%91%E7%AB%99%E5%9C%B0%E5%9B%BE"><span class="nav-number">6.2.</span> <span class="nav-text">生成网站地图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">7.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#github-pages%E5%88%9B%E5%BB%BA"><span class="nav-number">1.</span> <span class="nav-text">Github Pages创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8hexo%E6%A1%86%E6%9E%B6%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">应用Hexo框架本地搭建部署环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.1.</span> <span class="nav-text">安装与初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E4%B8%8E%E6%8E%A8%E9%80%81"><span class="nav-number">2.2.</span> <span class="nav-text">生成与推送</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">Next主题配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEnext"><span class="nav-number">3.1.</span> <span class="nav-text">安装与配置Next</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%9A%E5%AE%A2%E5%86%99%E4%BD%9C%E5%8A%9F%E8%83%BD"><span class="nav-number">4.</span> <span class="nav-text">博客写作功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A3%B0%E6%98%8E%E6%96%87%E7%AB%A0%E6%91%98%E8%A6%81"><span class="nav-number">4.1.</span> <span class="nav-text">声明文章摘要</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D"><span class="nav-number">5.</span> <span class="nav-text">自定义域名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E7%B4%A2%E5%BC%95"><span class="nav-number">6.</span> <span class="nav-text">搜索引擎索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E7%B4%A2%E5%BC%95"><span class="nav-number">6.1.</span> <span class="nav-text">添加索引</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">7.</span> <span class="nav-text">Reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -178,7 +178,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -189,7 +189,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -219,8 +219,7 @@
               <i class="fa fa-commenting fa-fw"></i>
               全站公告
             </div>
-            <a class="custom-sidebar-board-text">SnowyLakeSide绝绝绝绝赞更新中!
-不想工作, 苦呀西~
+            <a class="custom-sidebar-board-text">不想工作, 苦呀西———
 </a>
           </div>  
         </div>
@@ -232,13 +231,6 @@
             </div>
             <ul class="popular-posts">
                     <li class="popular-posts-item">
-                        <a class="popular-posts-link" href="/post/graphics_developer_joke.html" rel="bookmark">
-                          <time class="popular-posts-time">2023-06-24</time>
-                          <br>
-                        来点图程破防乐子
-                        </a>
-                    </li>
-                    <li class="popular-posts-item">
                         <a class="popular-posts-link" href="/post/ue51_mobile_deferred.html" rel="bookmark">
                           <time class="popular-posts-time">2023-09-11</time>
                           <br>
@@ -246,17 +238,17 @@
                         </a>
                     </li>
                     <li class="popular-posts-item">
-                        <a class="popular-posts-link" href="/post/urp_analysis_0x00_pipeline_framework.html" rel="bookmark">
-                          <time class="popular-posts-time">2023-06-12</time>
+                        <a class="popular-posts-link" href="/post/ue5_rendering_plugin_0x00_shader_remapping.html" rel="bookmark">
+                          <time class="popular-posts-time">2024-07-12</time>
                           <br>
-                        为美好的URP献上解析[0x00]: 管线架构
+                        从插件开始的UE渲染开发0x00: Shader路径重定向
                         </a>
                     </li>
                     <li class="popular-posts-item">
-                        <a class="popular-posts-link" href="/post/urp_deferred_nativerenderpass.html" rel="bookmark">
-                          <time class="popular-posts-time">2023-09-11</time>
+                        <a class="popular-posts-link" href="/post/urp_ui_resolution_split_and_gamma_ui.html" rel="bookmark">
+                          <time class="popular-posts-time">2024-09-15</time>
                           <br>
-                        URP延迟渲染+Native Renderpass踩坑记录
+                        聊聊UI分辨率分离与线性空间下的GammaUI
                         </a>
                     </li>
             </ul>
@@ -362,100 +354,112 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>建这个网站的初衷是因为自己知乎被连续封了几次, 以至于让我对这类非可控的平台产生了大量不信任感, 再加之我个人的知乎账号掺杂了大量的非技术相关内容, 所以尽管我在知乎也写了一些技术文章, 但仍并不方便将来贴在简历上.<br>总总原因驱使下, 在综合考量了<strong>云服务器+Wordpress</strong>和<strong>GitHubPages+Hexo</strong>两种方案后, 我还是选择了更为轻便的后者, 毕竟对我而言只是需要一个发布文章与随想的、完全可控的平台罢了, 没必要去折腾什么服务器.<br>技术选型到此为止, 剩下的便是具体实现了. 这篇文章便是用来记录我的建站流程以及踩到的一些小坑.<br><strong>顺便一提, 这个网站就叫作SnowyLakeSide好了, 中文名雪之湖畔, 一个独属于我(SnowyLake&#x2F;雪湖)、面向互联网的小小浅滩.</strong></p>
-<span id="more"></span>
-
-<h2 id="Github-Pages创建"><a href="#Github-Pages创建" class="headerlink" title="Github Pages创建"></a>Github Pages创建</h2><p>这一步非常简单, 其实本质就是创建一个名为 snowylake.github.io 的repo, 只是要求前缀与github用户名相同. 创建之后实际上我们就已经可以通过repo名访问网站了, 但应该是空空如也的.<br>然后就可以暂时放在这里不管了, 甚至都不需要clone到本地.</p>
-<h2 id="应用Hexo框架本地搭建部署环境"><a href="#应用Hexo框架本地搭建部署环境" class="headerlink" title="应用Hexo框架本地搭建部署环境"></a>应用Hexo框架本地搭建部署环境</h2><p>Hexo是一个基于Github Pages的博客发布工具, 支持Markdown, 功能简洁而强大, 生态繁荣插件众多, 久经验证, 是基于Github Pages建站的不二之选.</p>
-<h3 id="安装与初始化"><a href="#安装与初始化" class="headerlink" title="安装与初始化"></a>安装与初始化</h3><p>在安装Hexo之前, 还是需要先装一个Node.js才行: <a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn/download">https://nodejs.org/zh-cn/download</a><br>装好之后进入命令行安装Hexo:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install -g hexo</span></span><br></pre></td></tr></table></figure>
-<p>本地创建一个文件夹用来部署Hexo和存放网站内容, cd进去初始化Hexo:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> D:/Workspace/Blog</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo init</span></span><br></pre></td></tr></table></figure>
-<p>初始化之后的文件结构大概是这样的:(下图已经是生成完毕后的工程目录了)</p>
-<img src="/post/site_build_note/image.png" class="" title="Alt text">
-<p>几个比较重要的部分:</p>
-<ul>
-<li>.deploy_git: 最终生成的github repo</li>
-<li>node_modules: 通过npm安装的各种包</li>
-<li>public: 生成的网页文件夹</li>
-<li>scaffolds: 创建新博客用的模板</li>
-<li>source: 网站实际内容, 以md的格式保存, 通过这个文件夹去生成public</li>
-<li>_config.yml: Hexo的配置文件, 各种设置都需要在这里开启</li>
-</ul>
-<h3 id="生成与推送"><a href="#生成与推送" class="headerlink" title="生成与推送"></a>生成与推送</h3><p>第一次初始化的时候hexo已经帮我们写了一篇名为Hello World的文章, 不过这里还是尝试自己创建一篇.<br>首先在_config文件中配置网站的基础内容:</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">雪之湖畔-SnowyLakeSide</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">&#x27;Before it begins, the war we all fear.&#x27;</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">&#x27;Graphics Developer, Talk Artist.&#x27;</span></span><br><span class="line"><span class="attr">keywords:</span> <span class="string">&quot;&quot;</span> <span class="comment">#貌似没用?</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">SnowyLake</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">zh-CN</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">&#x27;Asia/Shanghai&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 自己网站的地址</span></span><br><span class="line"><span class="attr">url:</span> <span class="string">http://snowylake.net</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span> <span class="string">git@github.com:SnowyLake/snowylake.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure>
-<p>在开始正式创建网页时, 还需要装两个包:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-renderer-marked --save</span><br><span class="line">$ npm install hexo-relative-link --save</span><br></pre></td></tr></table></figure>
-<p>以及在_config页面修改&#x2F;添加:</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Writing</span></span><br><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 以下为添加内容</span></span><br><span class="line"><span class="attr">marked:</span></span><br><span class="line">  <span class="attr">prependRoot:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">postAsset:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p>这部分修改可以使创建博客时自动创建同名文件夹用于存放图片, 并可以通过以下形式在本地和网页中正常引用图片:</p>
-<img src="/post/site_build_note/image-5.png" class="" title="Alt text">
-<p>同时, 如果md编辑器是VSCode的话, 还需进行如下设置, 保证向文本中copy图片可以直接保存到同名文件夹下:</p>
-<img src="/post/site_build_note/image-1.png" class="" title="Alt text">
-<p>准备工作完成后, 就可通过此命令创建博客了, 命令将在Blog&#x2F;source&#x2F;_post下创建HelloWorld.md文件和同名文件夹.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo new <span class="string">&quot;HelloWorld&quot;</span></span></span><br></pre></td></tr></table></figure>
-<p>之后就可以进行第一次的生成与推送:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo g</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo d</span></span><br></pre></td></tr></table></figure>
-<p>常用Hexo命令:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">生成public文件夹</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo generate</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo g <span class="comment">#简写</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">向github推送</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo deploy</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo d <span class="comment">#简写</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">本地预览网站</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo server</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo s <span class="comment">#简写</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo s --debug <span class="comment">#debug状态下本地预览网站</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">新建文章</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo new <span class="string">&quot;postName&quot;</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">新建页面(后续演示)</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo new page <span class="string">&quot;postName&quot;</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">生成并本地预览</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo s -g</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">生成并推送</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo d -g</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Next主题配置"><a href="#Next主题配置" class="headerlink" title="Next主题配置"></a>Next主题配置</h2><h3 id="安装与配置Next"><a href="#安装与配置Next" class="headerlink" title="安装与配置Next"></a>安装与配置Next</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> D:/Workspace/Blog</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git <span class="built_in">clone</span> https://github.com/next-theme/hexo-theme-next themes/next</span></span><br></pre></td></tr></table></figure>
-<p>在Hexo目录下的_config.yml(hexo config)中添加配置:</p>
-<img src="/post/site_build_note/image-4.png" class="" title="Alt text">
-<p>切换主题:</p>
-<img src="/post/site_build_note/image-9.png" class="" title="Alt text">
-<h3 id="添加博客头像、背景与透明"><a href="#添加博客头像、背景与透明" class="headerlink" title="添加博客头像、背景与透明"></a>添加博客头像、背景与透明</h3><p>将博客头像保存在在Blog&#x2F;themes&#x2F;next&#x2F;source&#x2F;uploads下, 然后在themes&#x2F;next目录下的_config.yml(主题config)中配置:</p>
-<img src="/post/site_build_note/image-8.png" class="" title="Alt text">
-<p>将网站的背景图片保存在Blog&#x2F;source&#x2F;images下;<br>在Blog&#x2F;source下新建文件夹_data, 并创建文件styles.styl:</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">//背景图片设置</span></span><br><span class="line"><span class="string">body</span> &#123;</span><br><span class="line">    <span class="attr">background-image:</span> <span class="string">url(/images/background.jpg);</span></span><br><span class="line">    <span class="attr">background-repeat:</span> <span class="literal">no</span><span class="string">-repeat;</span></span><br><span class="line">    <span class="attr">background-attachment:</span> <span class="string">fixed;</span></span><br><span class="line">    <span class="attr">background-size:</span> <span class="string">cover;</span></span><br><span class="line">    <span class="attr">background-position:</span> <span class="string">center;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">//整体透明</span></span><br><span class="line"><span class="string">:root</span> &#123;</span><br><span class="line">  <span class="string">--content-bg-color:</span> <span class="string">rgba(255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.8</span><span class="string">);</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">//文章背板的颜色rgb</span></span><br><span class="line"><span class="string">.main-inner</span> <span class="string">&gt;</span> <span class="string">.sub-menu,</span> <span class="string">.main-inner</span> <span class="string">&gt;</span> <span class="string">.post-block,</span> <span class="string">.main-inner</span> <span class="string">&gt;</span> <span class="string">.tabs-comment,</span> <span class="string">.main-inner</span> <span class="string">&gt;</span> <span class="string">.comments,</span> <span class="string">.main-inner</span> <span class="string">&gt;</span> </span><br><span class="line"><span class="string">.pagination&#123;</span> <span class="string">&#125;</span></span><br><span class="line"><span class="string">//主体字体颜色</span></span><br><span class="line"><span class="string">body&#123;</span>                               </span><br><span class="line">  <span class="attr">color:</span> <span class="string">rgba(0,</span> <span class="number">0</span><span class="string">,</span> <span class="number">0</span><span class="string">,</span> <span class="number">1</span><span class="string">);</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">//文章标题颜色</span></span><br><span class="line"><span class="string">.posts-expand</span> <span class="string">.post-title-link</span> &#123;    </span><br><span class="line">    <span class="attr">color:</span> <span class="string">rgba(0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span><span class="string">);</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">//搜索框透明</span></span><br><span class="line"><span class="string">.popup</span> &#123;        </span><br><span class="line">  <span class="attr">opacity:</span> <span class="number">0.9</span><span class="string">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在主题的config中配置该styl文件:</p>
-<img src="/post/site_build_note/image-10.png" class="" title="Alt text">
-<h3 id="添加菜单"><a href="#添加菜单" class="headerlink" title="添加菜单"></a>添加菜单</h3><p>在主题的config中取消相应菜单的注释:</p>
-<img src="/post/site_build_note/image-11.png" class="" title="Alt text">
-<p>使用<code>hexo new page</code>命令创建对应的菜单, 之后<code>hexo g</code>重新生成即可.</p>
-<h3 id="修改侧边栏宽度"><a href="#修改侧边栏宽度" class="headerlink" title="修改侧边栏宽度"></a>修改侧边栏宽度</h3><p>主题config中修改width数值.</p>
-<img src="/post/site_build_note/image-12.png" class="" title="Alt text">
-<h3 id="添加社交网站链接"><a href="#添加社交网站链接" class="headerlink" title="添加社交网站链接"></a>添加社交网站链接</h3><img src="/post/site_build_note/image-13.png" class="" title="Alt text">
-<h3 id="添加搜索功能"><a href="#添加搜索功能" class="headerlink" title="添加搜索功能"></a>添加搜索功能</h3><p>Blog根目录下命令行安装插件:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install hexo-generator-searchdb --save</span></span><br></pre></td></tr></table></figure>
-<p>主题config中设置:</p>
-<img src="/post/site_build_note/image-14.png" class="" title="Alt text">
-<p>hexo的config中添加配置:</p>
-<img src="/post/site_build_note/image-15.png" class="" title="Alt text">
-<p>之后重新生成.</p>
-<h3 id="添加文章字数与阅读时长统计"><a href="#添加文章字数与阅读时长统计" class="headerlink" title="添加文章字数与阅读时长统计"></a>添加文章字数与阅读时长统计</h3><p>Blog根目录下命令行安装插件:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install hexo-symbols-count-time --save</span></span><br></pre></td></tr></table></figure>
-<p>hexo的config中添加设置:</p>
-<img src="/post/site_build_note/image-16.png" class="" title="Alt text">
-<p>主题的config中设置:</p>
-<img src="/post/site_build_note/image-17.png" class="" title="Alt text">
-<p>之后重新生成.</p>
-<h3 id="添加网站观看人数统计"><a href="#添加网站观看人数统计" class="headerlink" title="添加网站观看人数统计"></a>添加网站观看人数统计</h3><p>主题config中设置.</p>
-<img src="/post/site_build_note/image-18.png" class="" title="Alt text">
-<h3 id="添加网站图标"><a href="#添加网站图标" class="headerlink" title="添加网站图标"></a>添加网站图标</h3><p>将网站图标保存到Blog&#x2F;themes&#x2F;next&#x2F;source&#x2F;uploads下, 在主题config中设置.</p>
-<img src="/post/site_build_note/image-19.png" class="" title="Alt text">
-<h3 id="添加文末版权声明"><a href="#添加文末版权声明" class="headerlink" title="添加文末版权声明"></a>添加文末版权声明</h3><p>主题config中设置.</p>
-<img src="/post/site_build_note/image-20.png" class="" title="Alt text">
-<h3 id="默认展开目录"><a href="#默认展开目录" class="headerlink" title="默认展开目录"></a>默认展开目录</h3><p>主题config中设置.</p>
-<img src="/post/site_build_note/image-21.png" class="" title="Alt text">
-
-<h2 id="博客写作功能"><a href="#博客写作功能" class="headerlink" title="博客写作功能"></a>博客写作功能</h2><h3 id="声明文章摘要"><a href="#声明文章摘要" class="headerlink" title="声明文章摘要"></a>声明文章摘要</h3><p>在想要截止的地方添加<code>&lt;!--more--&gt;</code>标记即可, 标记之上的内容便是文章的摘要.<br>方便起见可以将这个标记加入到文章模板中去.</p>
-<img src="/post/site_build_note/image-22.png" class="" title="Alt text">
-<h3 id="配置自定义模板"><a href="#配置自定义模板" class="headerlink" title="配置自定义模板"></a>配置自定义模板</h3><p>每次新建的文章模板被保存在Blog&#x2F;scaffolds下, post就是’hexo new’命令创建博客时使用的模板.<br>根据需求自定义即可, 我这里添加了tag和category, 以及每篇文章都要用到的摘要标签.</p>
-<img src="/post/site_build_note/image-23.png" class="" title="Alt text">
-<h3 id="文章分类与标签"><a href="#文章分类与标签" class="headerlink" title="文章分类与标签"></a>文章分类与标签</h3><p>详细规则参考:<br><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/front-matter">https://hexo.io/zh-cn/docs/front-matter</a></p>
-<h2 id="自定义域名"><a href="#自定义域名" class="headerlink" title="自定义域名"></a>自定义域名</h2><p>这里我是通过 <a target="_blank" rel="noopener" href="http://www.dynadot.com/">www.dynadot.com</a> 购买的域名.<br>首先要对域名进行dns解析, 为了白嫖Github提供的https证书, 这里需要填上四个A作为主域名连接到github提供的ip地址上, 同时用CNAME把www的子域名也给解析了.</p>
-<img src="/post/site_build_note/image-6.png" class="" title="Alt text">
-<p>之后在source文件夹下创建一个CNAME文件, 注意不要加文件扩展名, 在里面输入要自定义的域名, 比如我的就是 snowylake.net :</p>
-<img src="/post/site_build_note/image-3.png" class="" title="Alt text">
-<p>之后执行hexo d -g, 生成并提交.<br>进入github repo页面, 点击setting找到pages, 将域名输入到Custom domain中, 点击save.<br>同时github还将自动为你的域名申请https证书, 等待片刻后即可勾选Enforce HTTPS.</p>
-<img src="/post/site_build_note/image-7.png" class="" title="Alt text">
-
-<h2 id="搜索引擎索引"><a href="#搜索引擎索引" class="headerlink" title="搜索引擎索引"></a>搜索引擎索引</h2><h3 id="添加索引"><a href="#添加索引" class="headerlink" title="添加索引"></a>添加索引</h3><p>需要为搜索引擎添加索引, 才能让网站被各大搜索引擎所收录.<br>登录<a target="_blank" rel="noopener" href="https://search.google.com/search-console">https://search.google.com/search-console</a>, 输入网站地址, 选择HTML验证.<br>将下载的HTML文件拷贝到source文件夹, <code>hexo g</code>, 之后再进入public文件夹, 这时public文件夹中生成的HTML文件是错误的, 需要手动将source文件夹中正确的内容拷过去, 之后再执行<code>hexo d</code>即可通过验证.<br>Bing端的索引信息在Google完成后可以同步过来, 不需要重复操作.</p>
-<h3 id="生成网站地图"><a href="#生成网站地图" class="headerlink" title="生成网站地图"></a>生成网站地图</h3><p>Blog根目录下执行命令:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install hexo-generator-sitemap --save</span></span><br></pre></td></tr></table></figure>
-<p>之后每次生成都会生成新的sitemap.</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://www.lfzxb.top/the-record-of-build-site-based-on-hexo/">https://www.lfzxb.top/the-record-of-build-site-based-on-hexo/</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html">https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/618864711">https://zhuanlan.zhihu.com/p/618864711</a><br><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a><br><a target="_blank" rel="noopener" href="https://hexo-next.readthedocs.io/zh_CN/latest/">https://hexo-next.readthedocs.io/zh_CN/latest/</a></p>
+    <div class="post-body" itemprop="articleBody"><p>建这个网站的初衷是因为自己知乎被连续封了几次,
+以至于让我对这类非可控的平台产生了大量不信任感,
+再加之我个人的知乎账号掺杂了大量的非技术相关内容,
+所以尽管我在知乎也写了一些技术文章, 但仍并不方便将来贴在简历上.
+总总原因驱使下,
+在综合考量了<strong>云服务器+Wordpress</strong>和<strong>GitHubPages+Hexo</strong>两种方案后,
+我还是选择了更为轻便的后者,
+毕竟对我而言只是需要一个发布文章与随想的、完全可控的平台罢了,
+没必要去折腾什么服务器. 技术选型到此为止, 剩下的便是具体实现了.
+这篇文章便是用来记录我的建站流程以及踩到的一些小坑. <strong>顺便一提,
+这个网站就叫作SnowyLakeSide好了, 中文名雪之湖畔,
+一个独属于我(SnowyLake/雪湖)、面向互联网的小小浅滩.</strong>
+<span id="more"></span></p>
+<h2 id="github-pages创建">Github Pages创建</h2>
+<p>这一步非常简单, 其实本质就是创建一个名为 snowylake.github.io 的repo,
+只是要求前缀与github用户名相同.
+创建之后实际上我们就已经可以通过repo名访问网站了, 但应该是空空如也的.
+然后就可以暂时放在这里不管了, 甚至都不需要clone到本地.</p>
+<h2 id="应用hexo框架本地搭建部署环境">应用Hexo框架本地搭建部署环境</h2>
+<p>Hexo是一个基于Github Pages的博客发布工具, 支持Markdown,
+功能简洁而强大, 生态繁荣插件众多, 久经验证, 是基于Github
+Pages建站的不二之选.</p>
+<h3 id="安装与初始化">安装与初始化</h3>
+<p>在安装Hexo之前, 还是需要先装一个Node.js才行:
+https://nodejs.org/zh-cn/download 装好之后进入命令行安装Hexo:
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install -g hexo</span></span><br></pre></td></tr></table></figure> 本地创建一个文件夹用来部署Hexo和存放网站内容,
+cd进去初始化Hexo: <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> D:/Workspace/Blog</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo init</span></span><br></pre></td></tr></table></figure>
+初始化之后的文件结构大概是这样的:(下图已经是生成完毕后的工程目录了)
+<img src="/post/site_build_note/image.png" class="" title="Alt text"> 几个比较重要的部分: - .deploy_git: 最终生成的github repo
+- node_modules: 通过npm安装的各种包 - public: 生成的网页文件夹 -
+scaffolds: 创建新博客用的模板 - source: 网站实际内容, 以md的格式保存,
+通过这个文件夹去生成public - _config.yml: Hexo的配置文件,
+各种设置都需要在这里开启</p>
+<h3 id="生成与推送">生成与推送</h3>
+<p>第一次初始化的时候hexo已经帮我们写了一篇名为Hello World的文章,
+不过这里还是尝试自己创建一篇. 首先在_config文件中配置网站的基础内容:
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">雪之湖畔-SnowyLakeSide</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">&#x27;Before it begins, the war we all fear.&#x27;</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">&#x27;Graphics Developer, Talk Artist.&#x27;</span></span><br><span class="line"><span class="attr">keywords:</span> <span class="string">&quot;&quot;</span> <span class="comment">#貌似没用?</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">SnowyLake</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">zh-CN</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">&#x27;Asia/Shanghai&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 自己网站的地址</span></span><br><span class="line"><span class="attr">url:</span> <span class="string">http://snowylake.net</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span> <span class="string">git@github.com:SnowyLake/snowylake.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure> 在开始正式创建网页时, 还需要装两个包: <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-renderer-marked --save</span><br><span class="line">$ npm install hexo-relative-link --save</span><br></pre></td></tr></table></figure>
+以及在_config页面修改/添加: <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Writing</span></span><br><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 以下为添加内容</span></span><br><span class="line"><span class="attr">marked:</span></span><br><span class="line">  <span class="attr">prependRoot:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">postAsset:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+这部分修改可以使创建博客时自动创建同名文件夹用于存放图片,
+并可以通过以下形式在本地和网页中正常引用图片: <img src="/post/site_build_note/image-5.png" class="" title="Alt text"> 同时,
+如果md编辑器是VSCode的话, 还需进行如下设置,
+保证向文本中copy图片可以直接保存到同名文件夹下: <img src="/post/site_build_note/image-1.png" class="" title="Alt text">
+准备工作完成后, 就可通过此命令创建博客了,
+命令将在Blog/source/_post下创建HelloWorld.md文件和同名文件夹.
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo new <span class="string">&quot;HelloWorld&quot;</span></span></span><br></pre></td></tr></table></figure> 之后就可以进行第一次的生成与推送: <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo g</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo d</span></span><br></pre></td></tr></table></figure>
+常用Hexo命令: <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">生成public文件夹</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo generate</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo g <span class="comment">#简写</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">向github推送</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo deploy</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo d <span class="comment">#简写</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">本地预览网站</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo server</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo s <span class="comment">#简写</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo s --debug <span class="comment">#debug状态下本地预览网站</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">新建文章</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo new <span class="string">&quot;postName&quot;</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">新建页面(后续演示)</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo new page <span class="string">&quot;postName&quot;</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">生成并本地预览</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo s -g</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">生成并推送</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo d -g</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="next主题配置">Next主题配置</h2>
+<h3 id="安装与配置next">安装与配置Next</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> D:/Workspace/Blog</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git <span class="built_in">clone</span> https://github.com/next-theme/hexo-theme-next themes/next</span></span><br></pre></td></tr></table></figure>
+<p>在Hexo目录下的_config.yml(hexo config)中添加配置: <img src="/post/site_build_note/image-4.png" class="" title="Alt text">
+切换主题: <img src="/post/site_build_note/image-9.png" class="" title="Alt text"> ### 添加博客头像、背景与透明
+将博客头像保存在在Blog/themes/next/source/uploads下,
+然后在themes/next目录下的_config.yml(主题config)中配置: <img src="/post/site_build_note/image-8.png" class="" title="Alt text">
+将网站的背景图片保存在Blog/source/images下;
+在Blog/source下新建文件夹_data, 并创建文件styles.styl: <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">//背景图片设置</span></span><br><span class="line"><span class="string">body</span> &#123;</span><br><span class="line">    <span class="attr">background-image:</span> <span class="string">url(/images/background.jpg);</span></span><br><span class="line">    <span class="attr">background-repeat:</span> <span class="literal">no</span><span class="string">-repeat;</span></span><br><span class="line">    <span class="attr">background-attachment:</span> <span class="string">fixed;</span></span><br><span class="line">    <span class="attr">background-size:</span> <span class="string">cover;</span></span><br><span class="line">    <span class="attr">background-position:</span> <span class="string">center;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">//整体透明</span></span><br><span class="line"><span class="string">:root</span> &#123;</span><br><span class="line">  <span class="string">--content-bg-color:</span> <span class="string">rgba(255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.8</span><span class="string">);</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">//文章背板的颜色rgb</span></span><br><span class="line"><span class="string">.main-inner</span> <span class="string">&gt;</span> <span class="string">.sub-menu,</span> <span class="string">.main-inner</span> <span class="string">&gt;</span> <span class="string">.post-block,</span> <span class="string">.main-inner</span> <span class="string">&gt;</span> <span class="string">.tabs-comment,</span> <span class="string">.main-inner</span> <span class="string">&gt;</span> <span class="string">.comments,</span> <span class="string">.main-inner</span> <span class="string">&gt;</span> </span><br><span class="line"><span class="string">.pagination&#123;</span> <span class="string">&#125;</span></span><br><span class="line"><span class="string">//主体字体颜色</span></span><br><span class="line"><span class="string">body&#123;</span>                               </span><br><span class="line">  <span class="attr">color:</span> <span class="string">rgba(0,</span> <span class="number">0</span><span class="string">,</span> <span class="number">0</span><span class="string">,</span> <span class="number">1</span><span class="string">);</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">//文章标题颜色</span></span><br><span class="line"><span class="string">.posts-expand</span> <span class="string">.post-title-link</span> &#123;    </span><br><span class="line">    <span class="attr">color:</span> <span class="string">rgba(0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span><span class="string">);</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">//搜索框透明</span></span><br><span class="line"><span class="string">.popup</span> &#123;        </span><br><span class="line">  <span class="attr">opacity:</span> <span class="number">0.9</span><span class="string">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+在主题的config中配置该styl文件: <img src="/post/site_build_note/image-10.png" class="" title="Alt text"> ### 添加菜单
+在主题的config中取消相应菜单的注释: <img src="/post/site_build_note/image-11.png" class="" title="Alt text">
+使用<code>hexo new page</code>命令创建对应的菜单,
+之后<code>hexo g</code>重新生成即可. ### 修改侧边栏宽度
+主题config中修改width数值. <img src="/post/site_build_note/image-12.png" class="" title="Alt text"> ### 添加社交网站链接
+<img src="/post/site_build_note/image-13.png" class="" title="Alt text"> ### 添加搜索功能 Blog根目录下命令行安装插件:
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install hexo-generator-searchdb --save</span></span><br></pre></td></tr></table></figure> 主题config中设置: <img src="/post/site_build_note/image-14.png" class="" title="Alt text"> hexo的config中添加配置:
+<img src="/post/site_build_note/image-15.png" class="" title="Alt text"> 之后重新生成. ### 添加文章字数与阅读时长统计
+Blog根目录下命令行安装插件: <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install hexo-symbols-count-time --save</span></span><br></pre></td></tr></table></figure> hexo的config中添加设置:
+<img src="/post/site_build_note/image-16.png" class="" title="Alt text"> 主题的config中设置: <img src="/post/site_build_note/image-17.png" class="" title="Alt text"> 之后重新生成. ###
+添加网站观看人数统计 主题config中设置. <img src="/post/site_build_note/image-18.png" class="" title="Alt text"> ### 添加网站图标
+将网站图标保存到Blog/themes/next/source/uploads下, 在主题config中设置.
+<img src="/post/site_build_note/image-19.png" class="" title="Alt text"> ### 添加文末版权声明 主题config中设置. <img src="/post/site_build_note/image-20.png" class="" title="Alt text"> ###
+默认展开目录 主题config中设置. <img src="/post/site_build_note/image-21.png" class="" title="Alt text"></p>
+<h2 id="博客写作功能">博客写作功能</h2>
+<h3 id="声明文章摘要">声明文章摘要</h3>
+<p>在想要截止的地方添加<code>&lt;!--more--&gt;</code>标记即可,
+标记之上的内容便是文章的摘要. 方便起见可以将这个标记加入到文章模板中去.
+<img src="/post/site_build_note/image-22.png" class="" title="Alt text"> ### 配置自定义模板
+每次新建的文章模板被保存在Blog/scaffolds下, post就是'hexo
+new'命令创建博客时使用的模板. 根据需求自定义即可,
+我这里添加了tag和category, 以及每篇文章都要用到的摘要标签.
+<img src="/post/site_build_note/image-23.png" class="" title="Alt text"> ### 文章分类与标签 详细规则参考:
+https://hexo.io/zh-cn/docs/front-matter</p>
+<h2 id="自定义域名">自定义域名</h2>
+<p>这里我是通过 www.dynadot.com 购买的域名. 首先要对域名进行dns解析,
+为了白嫖Github提供的https证书,
+这里需要填上四个A作为主域名连接到github提供的ip地址上,
+同时用CNAME把www的子域名也给解析了. <img src="/post/site_build_note/image-6.png" class="" title="Alt text">
+之后在source文件夹下创建一个CNAME文件, 注意不要加文件扩展名,
+在里面输入要自定义的域名, 比如我的就是 snowylake.net : <img src="/post/site_build_note/image-3.png" class="" title="Alt text">
+之后执行hexo d -g, 生成并提交. 进入github repo页面,
+点击setting找到pages, 将域名输入到Custom domain中, 点击save.
+同时github还将自动为你的域名申请https证书, 等待片刻后即可勾选Enforce
+HTTPS. <img src="/post/site_build_note/image-7.png" class="" title="Alt text"></p>
+<h2 id="搜索引擎索引">搜索引擎索引</h2>
+<h3 id="添加索引">添加索引</h3>
+<p>需要为搜索引擎添加索引, 才能让网站被各大搜索引擎所收录.
+登录https://search.google.com/search-console, 输入网站地址,
+选择HTML验证. 将下载的HTML文件拷贝到source文件夹, <code>hexo g</code>,
+之后再进入public文件夹, 这时public文件夹中生成的HTML文件是错误的,
+需要手动将source文件夹中正确的内容拷过去,
+之后再执行<code>hexo d</code>即可通过验证.
+Bing端的索引信息在Google完成后可以同步过来, 不需要重复操作. ###
+生成网站地图 Blog根目录下执行命令: <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install hexo-generator-sitemap --save</span></span><br></pre></td></tr></table></figure>
+之后每次生成都会生成新的sitemap.</p>
+<h2 id="reference">Reference</h2>
+<p>https://www.lfzxb.top/the-record-of-build-site-based-on-hexo/
+https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html
+https://zhuanlan.zhihu.com/p/618864711 https://hexo.io/zh-cn/docs/
+https://hexo-next.readthedocs.io/zh_CN/latest/</p>
 
     </div>
 
@@ -575,6 +579,12 @@
   <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 

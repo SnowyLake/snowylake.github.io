@@ -19,30 +19,32 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"snowylake.net","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","width":280,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="待搬运, 内容详见原文链接. &gt; 原文链接: https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;574551808">
+    <meta name="description" content="整理了下近期以及过去做过的这方面的一些功能, 挑出点有意思的东西或思路谈谈. 这篇没有什么代码之类的东西, 就纯是碎碎念.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浅谈UE5的C++程序化生成Shader">
-<meta property="og:url" content="http://snowylake.net/post/ue5_cpp_generate_shader.html">
+<meta property="og:title" content="聊聊UI分辨率分离与线性空间下的GammaUI">
+<meta property="og:url" content="http://snowylake.net/post/urp_ui_resolution_split_and_gamma_ui.html">
 <meta property="og:site_name" content="雪之湖畔-SnowyLakeSide">
-<meta property="og:description" content="待搬运, 内容详见原文链接. &gt; 原文链接: https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;574551808">
+<meta property="og:description" content="整理了下近期以及过去做过的这方面的一些功能, 挑出点有意思的东西或思路谈谈. 这篇没有什么代码之类的东西, 就纯是碎碎念.">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-09-10T21:08:14.000Z">
-<meta property="article:modified_time" content="2024-06-30T18:00:58.659Z">
+<meta property="article:published_time" content="2024-09-14T19:15:00.000Z">
+<meta property="article:modified_time" content="2024-09-14T19:36:53.243Z">
 <meta property="article:author" content="SnowyLake">
-<meta property="article:tag" content="Cpp">
-<meta property="article:tag" content="Unreal">
 <meta property="article:tag" content="Rendering">
+<meta property="article:tag" content="Unity">
+<meta property="article:tag" content="URP">
+<meta property="article:tag" content="CSharp">
+<meta property="article:tag" content="UI">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://snowylake.net/post/ue5_cpp_generate_shader.html">
+<link rel="canonical" href="http://snowylake.net/post/urp_ui_resolution_split_and_gamma_ui.html">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://snowylake.net/post/ue5_cpp_generate_shader.html","path":"post/ue5_cpp_generate_shader.html","title":"浅谈UE5的C++程序化生成Shader"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://snowylake.net/post/urp_ui_resolution_split_and_gamma_ui.html","path":"post/urp_ui_resolution_split_and_gamma_ui.html","title":"聊聊UI分辨率分离与线性空间下的GammaUI"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>浅谈UE5的C++程序化生成Shader | 雪之湖畔-SnowyLakeSide</title>
+<title>聊聊UI分辨率分离与线性空间下的GammaUI | 雪之湖畔-SnowyLakeSide</title>
   
 
 
@@ -128,7 +130,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -141,6 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ui-%E5%88%86%E8%BE%A8%E7%8E%87%E5%88%86%E7%A6%BB"><span class="nav-number">1.</span> <span class="nav-text">UI 分辨率分离</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E7%A9%BA%E9%97%B4%E4%B8%8B%E7%9A%84-gammaui"><span class="nav-number">2.</span> <span class="nav-text">线性空间下的 GammaUI</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -248,7 +251,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://snowylake.net/post/ue5_cpp_generate_shader.html">
+    <link itemprop="mainEntityOfPage" href="http://snowylake.net/post/urp_ui_resolution_split_and_gamma_ui.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/snowylake.png">
@@ -261,12 +264,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="浅谈UE5的C++程序化生成Shader | 雪之湖畔-SnowyLakeSide">
+      <meta itemprop="name" content="聊聊UI分辨率分离与线性空间下的GammaUI | 雪之湖畔-SnowyLakeSide">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          浅谈UE5的C++程序化生成Shader
+          聊聊UI分辨率分离与线性空间下的GammaUI
         </h1>
 
         <div class="post-meta-container">
@@ -276,15 +279,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2023-09-11 05:08:14" itemprop="dateCreated datePublished" datetime="2023-09-11T05:08:14+08:00">2023-09-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-07-01 02:00:58" itemprop="dateModified" datetime="2024-07-01T02:00:58+08:00">2024-07-01</time>
+      <time title="创建时间：2024-09-15 03:15:00 / 修改时间：03:36:53" itemprop="dateCreated datePublished" datetime="2024-09-15T03:15:00+08:00">2024-09-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -296,7 +293,11 @@
         </span>
           ，
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Game-Engine/Unreal/" itemprop="url" rel="index"><span itemprop="name">Unreal</span></a>
+          <a href="/categories/Game-Engine/Unity/" itemprop="url" rel="index"><span itemprop="name">Unity</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Game-Engine/Unity/URP-SnowyOwl/" itemprop="url" rel="index"><span itemprop="name">URP/SnowyOwl</span></a>
         </span>
     </span>
 
@@ -314,14 +315,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>60</span>
+      <span>3.5k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>6 分钟</span>
     </span>
 </div>
 
@@ -331,9 +332,126 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><span id="more"></span>
-<p>待搬运, 内容详见原文链接. &gt; 原文链接:
-https://zhuanlan.zhihu.com/p/574551808</p>
+    <div class="post-body" itemprop="articleBody"><p>整理了下近期以及过去做过的这方面的一些功能,
+挑出点有意思的东西或思路谈谈. 这篇没有什么代码之类的东西,
+就纯是碎碎念.</p>
+<span id="more"></span>
+<h1 id="ui-分辨率分离">UI 分辨率分离</h1>
+<p>这年头在移动端做 3D 游戏, 分辨率基本是没可能拉满的,
+最高基本也就八九百这样子, 低配下甚至六百多都有可能.
+虽然场景怎么低分辨率怎么糊都好说, 但 UI 是万万不能糊的,
+一糊这游戏也别玩了. 所以场景&amp;UI 分辨率分离就成了一个项目必需的
+feature.</p>
+<p>最简单也是最直接的方案就是给 UI 单独来一张 RT, 我们叫他 UITarget.
+场景在低分辨率的 CameraAttachment 上渲完后 Blit 到高分辨率的 UITarget
+上, 再交给 UI 相机绘制 UI.</p>
+<p>听着很美好, 但实际并不能用.
+因为这个方案对于带宽本就不富裕的移动端打击是致命的, 多一张 1080p 的 RT
+简直是要了手机的老命.</p>
+<p>于是就有了优化方案, 借用系统提供的 Backbuffer 作为 UITarget.
+Backbuffer 默认为手机硬件的原生分辨率,
+无论任何情况下渲染管线的最终目标都会是它, 在 URP 正常的流程中,
+管线会在最后一个相机渲染完后调用 FinalBlit 将当前的 CameraAttechment
+Blit 到 Backbuffer 上.</p>
+<p>考虑一个常规情况, 即同时存在主相机(开后处理)与 UI 相机(不开后处理),
+那么 URP 的默认流程是这样的:</p>
+<ul>
+<li>MainCamera[Opaque/Transparent Pass]: 场景渲染到
+CameraColorAttachmentA</li>
+<li>MainCamera[UberPost]: CameraColorAttachmentA 渲染到
+CameraColorAttachmentB</li>
+<li>UICamera[Transparent Pass]: UI 渲染到 CameraColorAttachmentB</li>
+<li>UICamera[Final Blit]: CameraColorAttachmentB 渲染到 Backbuffer</li>
+</ul>
+<p>我们只需要稍微改动一下管线, 让主相机做完后处理后直接 Blit 到
+Backbuffer:</p>
+<ul>
+<li>MainCamera[Opaque/Transparent Pass]: 场景渲染到
+CameraColorAttachmentA</li>
+<li>MainCamera[UberPost]: CameraColorAttachmentA 渲染到 Backbuffer</li>
+<li>UICamera[Transparent Pass]: UI 直接渲染到 Backbuffer</li>
+</ul>
+<p>这样一来, 不仅在没有性能开销的情况下实现了 UI 分辨率分离,
+甚至还优化掉了 FinalBlit 的带宽, 可以说是可喜可贺. 后续可以通过
+Screen.SetResolution()调整 Backbuffer 也就是 UI 的分辨率,
+然后在其基础上调整 RenderScale 也就是场景分辨率.</p>
+<p>这个方案有一些注意事项和技术限制:</p>
+<p>其一, <strong>非 UI 相机的后处理 RenderTarget, 只有最后一个非 UI
+相机的后处理才应该且必需 Blit 到 Backbuffer.</strong>
+这个基本就是工程问题, 处理完善管线中相关的逻辑代码就好.</p>
+<p>其二, <strong>UI 相机必须是最后一个相机且不支持后处理.</strong>
+前者没什么好说的, 但后者还是有些蛋疼.</p>
+<p>一般来说 Backbuffer 是无法 SetTexture 到材质的, 也就无法做后处理
+Blit. 但如果是调用 cmd.Blit()且当前的 RenderTarget 就是 Backbuffer 的话,
+就可以神奇的拿到 Backbuffer! 此时 FrameDebug 上显示是 Grab
+RenderTexture, 原因是 cmd.Blit()内部对此做了特殊处理, 将操作改为了曾经
+Bulitin 时代的 GrabPass.(大概)</p>
+<p>所以拿 Backbuffer 直接做后处理也并非不行...但因为要 Blit, 之前省掉的
+RT 和带宽又回来了...那这可能还不如上一个方案, GrabPass 说不定比 Blit
+还要更耗. 所以这一块就得和项目组好好对一下了, 如果说 UI
+后处理只是在过剧情时出现、用完就关, 那开启 UI
+后处理时动态关掉这个功能也不是不行.</p>
+<p>此外, Linear 空间下 Backbuffer 的格式应该是 RGBA32_SRGB,
+有些设备或模拟器并不支持 SRGB 格式的 Backbuffer, 提供的是 RGBA32_UNorm.
+URP 原本的做法是在 FinalBlit 时判断一下
+CameraData.requireSrgbConversion, 如果为 true 则表示 Backbuffer 为
+RGBA32_UNorm 需要手动做 LinearToSRGB 也就是常说的
+GammaCorrection(Pow0.45). 我个人测试下来的结果貌似目前只有在模拟器上
+SRGB Backbuffer 是不受支持的, 问题不大, 干脆不支持就不开这功能得了.</p>
+<p>还有就是因为 Backbuffer 不支持 HDR, 所以 UI 材质上也不能用 HDR 颜色,
+这个应该无伤大雅.</p>
+<h1 id="线性空间下的-gammaui">线性空间下的 GammaUI</h1>
+<p>聊完 UI 分辨率分离, 再来聊聊 UI 的颜色空间.</p>
+<p>进入 PBR 时代以后, 3D 游戏的 ColorSpace 基本就都是 Linear 了.
+这当然很好, 可以有正确的光照, 更接近物理世界的结果. 但美术们在 PS 中制作
+UI 时, 却是在 Gamma 空间下工作的——这也合理, 即使在线性工作流下,
+涉及视觉颜色的贴图也应该是 sRGB 的, 就比如 BaseColor.</p>
+<p>问题在于 UI 与 BaseColor 不同, 是要层与层之间做混合的. 美术在
+PS(Gamma 空间)中得出了他们认为正确的结果, 丢到引擎中效果就不对了,
+因为引擎是在 Linear 空间, 二者的混合算法不同.</p>
+<p>在 Gamma 空间下, SrcAlpha-OneMinusSrcAlpha 混合的公式是:</p>
+<p><span class="math display">\[
+c = Src.rgb*Src.a+Dst.rgb*(1-Src.a)
+\]</span></p>
+<p>而在 Linear 空间下, Unity 会为勾选了 sRGB 的贴图做一次
+RemoveGammaCorrection(Pow2.2)将其转换到 Linear 空间, 并在 Shader 输出(到
+SRGB 格式的 RT)时再做一次 GammaCorrection(Pow0.45)将其矫正回 Gamma 空间.
+即:</p>
+<p><span class="math display">\[
+c = (Src.rgb^{2.2}*Src.a+Dst.rgb^{2.2}*(1-Src.a))^{0.45}
+\]</span></p>
+<p>解决方案大致分为两种.</p>
+<p>第一种是修改美术工作流, 把美术 PS 改成线性空间,
+让美术直接在线性空间下制作 UI. 这个也是很多项目的做法,
+美术虽然会不爽但时间长了也就接受了, 总之就是再苦一苦美术.</p>
+<p>第二种也就是今天要着重谈的, 让 UI 相机在 Gamma 空间工作.</p>
+<p>也就是给 UI 单独一张 RT——没错, 又回到了上一节的论点,
+这也是为什么我把这两块技术放在一起谈的原因.</p>
+<p>思路也很简单, 既然 RGBA32_SRGB 的 Backbuffer 会自动做
+GammaCorrection(Pow0.45), 那么我只要申请一张 RGBA32_UNrom 格式的
+UITarget, 再把 UI 贴图取消勾选 sRGB, 然后:</p>
+<ul>
+<li>MainCamera[UberPost]: CameraColorAttachment 渲染到 UITarget, 手动
+LinearToSRGB(Pow0.45)</li>
+<li>UICamera[Transparent Pass]: UI 渲染到 UITarget, 贴图取消勾选 sRGB,
+在 Unorm 贴图上正确的 Gamma 混合</li>
+<li>UICamera[Final Blit]: UITarget 渲染到 Backbuffer 并手动做一次
+SRGBToLinear(Pow2.2). 对于 UI, Pow2.2 抵消了 Backbuffer 的自动
+GammaCorrection(Pow0.45), 而对于场景, 本就需要 Backbuffer 的自动
+GammaCorrection, 所以前后两次手动矫正正好互相抵消.</li>
+</ul>
+<p>很好很完美, 但还是上一节的问题——带宽压力变大了. 能不能和做 UI
+分辨率分离时一样不申请额外 RT, 直接在 Backbuffer 做呢?</p>
+<p>理论上当然可以, 我们知道, Unity 会根据项目所选的颜色空间来选择
+Backbuffer 格式, 若为 Gamma 则 Backbuffer 为 RGBA32_UNorm, 若为 Linear
+则 Backbuffer 为 RGBA32_SRGB(前提是设备支持, 否则回退到
+RGBA32_UNorm).</p>
+<p>而想要在 SRGB 格式的 Backbuffer 上直接绘制 UI 并做正确的 Gamma
+空间混合是不可能的, 除非我们能把 Linear 颜色空间下的 Backbuffer 也改为
+RGBA32_UNorm, 这样一来我们只需要在场景渲染结束后, 对 CameraAttechment
+手动做一次 LinearToSRGB(Pow0.45)Blit 到 Backbuffer 即可, 之后在
+Backbuffer 上正常绘制 UI 就行.</p>
+<p>那么可以改吗? 可以, 但得加钱, 改源码~</p>
 
     </div>
 
@@ -351,7 +469,7 @@ https://zhuanlan.zhihu.com/p/574551808</p>
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="http://snowylake.net/post/ue5_cpp_generate_shader.html" title="浅谈UE5的C++程序化生成Shader">http://snowylake.net/post/ue5_cpp_generate_shader.html</a>
+      <a href="http://snowylake.net/post/urp_ui_resolution_split_and_gamma_ui.html" title="聊聊UI分辨率分离与线性空间下的GammaUI">http://snowylake.net/post/urp_ui_resolution_split_and_gamma_ui.html</a>
   </li>
   <li class="post-copyright-license">
       <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -360,23 +478,22 @@ https://zhuanlan.zhihu.com/p/574551808</p>
 </div>
 
           <div class="post-tags">
-              <a href="/tags/Cpp/" rel="tag"><i class="fa fa-tag"></i> Cpp</a>
-              <a href="/tags/Unreal/" rel="tag"><i class="fa fa-tag"></i> Unreal</a>
               <a href="/tags/Rendering/" rel="tag"><i class="fa fa-tag"></i> Rendering</a>
+              <a href="/tags/Unity/" rel="tag"><i class="fa fa-tag"></i> Unity</a>
+              <a href="/tags/URP/" rel="tag"><i class="fa fa-tag"></i> URP</a>
+              <a href="/tags/CSharp/" rel="tag"><i class="fa fa-tag"></i> CSharp</a>
+              <a href="/tags/UI/" rel="tag"><i class="fa fa-tag"></i> UI</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/post/urp_deferred_nativerenderpass.html" rel="prev" title="URP延迟渲染+Native Renderpass踩坑记录">
-                  <i class="fa fa-chevron-left"></i> URP延迟渲染+Native Renderpass踩坑记录
+                <a href="/post/ue5_rendering_plugin_0x00_shader_remapping.html" rel="prev" title="从插件开始的UE渲染开发0x00: Shader路径重定向">
+                  <i class="fa fa-chevron-left"></i> 从插件开始的UE渲染开发0x00: Shader路径重定向
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/post/ue51_mobile_deferred.html" rel="next" title="UE5.1移动端延迟渲染管线测试与剖析">
-                  UE5.1移动端延迟渲染管线测试与剖析 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>

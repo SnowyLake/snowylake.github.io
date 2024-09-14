@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"snowylake.net","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","width":280,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="过去两周多折腾URP Deferred + Native Renderpass, 踩了无数的坑, 翻遍国内国外的社区也找不到太多可供参考的资料. 于是在这里简述一下一些不可回避的问题以及其解决方案, 也算是为社区做点贡献.">
+    <meta name="description" content="过去两周多折腾URP Deferred + Native Renderpass, 踩了无数的坑, 翻遍国内国外的社区也找不到太多可供参考的资料. 于是在这里简述一下一些不可回避的问题以及其解决方案, 也算是为社区做点贡献.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="URP延迟渲染+Native Renderpass踩坑记录">
 <meta property="og:url" content="http://snowylake.net/post/urp_deferred_nativerenderpass.html">
 <meta property="og:site_name" content="雪之湖畔-SnowyLakeSide">
-<meta property="og:description" content="过去两周多折腾URP Deferred + Native Renderpass, 踩了无数的坑, 翻遍国内国外的社区也找不到太多可供参考的资料. 于是在这里简述一下一些不可回避的问题以及其解决方案, 也算是为社区做点贡献.">
+<meta property="og:description" content="过去两周多折腾URP Deferred + Native Renderpass, 踩了无数的坑, 翻遍国内国外的社区也找不到太多可供参考的资料. 于是在这里简述一下一些不可回避的问题以及其解决方案, 也算是为社区做点贡献.">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://snowylake.net/post/urp_deferred_nativerenderpass/image.png">
 <meta property="og:image" content="http://snowylake.net/post/urp_deferred_nativerenderpass/image-1.png">
@@ -95,7 +95,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">27</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">12</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">17</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">27</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">13</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">18</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -146,7 +146,10 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E5%90%AFNative-RenderPass%E6%97%B6%E6%BF%80%E6%B4%BBSceneView%E7%AA%97%E5%8F%A3%E5%AF%BC%E8%87%B4Native-RenderPass%E5%A4%B1%E6%95%88"><span class="nav-number">1.</span> <span class="nav-text">开启Native RenderPass时激活SceneView窗口导致Native RenderPass失效</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E5%90%AFNative-RenderPass%E5%90%8E%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84RendererFeature%E6%B8%B2%E6%9F%93%E5%87%BA%E9%94%99"><span class="nav-number">2.</span> <span class="nav-text">开启Native RenderPass后自定义的RendererFeature渲染出错</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E5%90%AFNative-RenderPass%E5%90%8E%E7%A7%BB%E5%8A%A8Camera-Light-Layer%E4%BC%9A%E5%87%BA%E7%8E%B0%E9%94%99%E4%BD%8D-x2F-%E6%8B%96%E5%BD%B1"><span class="nav-number">3.</span> <span class="nav-text">开启Native RenderPass后移动Camera, Light Layer会出现错位&#x2F;拖影</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E5%90%AFnative-renderpass%E6%97%B6%E6%BF%80%E6%B4%BBsceneview%E7%AA%97%E5%8F%A3%E5%AF%BC%E8%87%B4native-renderpass%E5%A4%B1%E6%95%88"><span class="nav-number">1.</span> <span class="nav-text">开启Native
+RenderPass时激活SceneView窗口导致Native RenderPass失效</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E5%90%AFnative-renderpass%E5%90%8E%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84rendererfeature%E6%B8%B2%E6%9F%93%E5%87%BA%E9%94%99"><span class="nav-number">2.</span> <span class="nav-text">开启Native
+RenderPass后自定义的RendererFeature渲染出错</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E5%90%AFnative-renderpass%E5%90%8E%E7%A7%BB%E5%8A%A8camera-light-layer%E4%BC%9A%E5%87%BA%E7%8E%B0%E9%94%99%E4%BD%8D%E6%8B%96%E5%BD%B1"><span class="nav-number">3.</span> <span class="nav-text">开启Native
+RenderPass后移动Camera, Light Layer会出现错位&#x2F;拖影</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -161,7 +164,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -172,7 +175,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -202,8 +205,7 @@
               <i class="fa fa-commenting fa-fw"></i>
               全站公告
             </div>
-            <a class="custom-sidebar-board-text">SnowyLakeSide绝绝绝绝赞更新中!
-不想工作, 苦呀西~
+            <a class="custom-sidebar-board-text">不想工作, 苦呀西———
 </a>
           </div>  
         </div>
@@ -215,13 +217,6 @@
             </div>
             <ul class="popular-posts">
                     <li class="popular-posts-item">
-                        <a class="popular-posts-link" href="/post/graphics_developer_joke.html" rel="bookmark">
-                          <time class="popular-posts-time">2023-06-24</time>
-                          <br>
-                        来点图程破防乐子
-                        </a>
-                    </li>
-                    <li class="popular-posts-item">
                         <a class="popular-posts-link" href="/post/ue51_mobile_deferred.html" rel="bookmark">
                           <time class="popular-posts-time">2023-09-11</time>
                           <br>
@@ -229,17 +224,17 @@
                         </a>
                     </li>
                     <li class="popular-posts-item">
-                        <a class="popular-posts-link" href="/post/urp_analysis_0x00_pipeline_framework.html" rel="bookmark">
-                          <time class="popular-posts-time">2023-06-12</time>
+                        <a class="popular-posts-link" href="/post/ue5_rendering_plugin_0x00_shader_remapping.html" rel="bookmark">
+                          <time class="popular-posts-time">2024-07-12</time>
                           <br>
-                        为美好的URP献上解析[0x00]: 管线架构
+                        从插件开始的UE渲染开发0x00: Shader路径重定向
                         </a>
                     </li>
                     <li class="popular-posts-item">
-                        <a class="popular-posts-link" href="/post/urp_deferred_nativerenderpass.html" rel="bookmark">
-                          <time class="popular-posts-time">2023-09-11</time>
+                        <a class="popular-posts-link" href="/post/urp_ui_resolution_split_and_gamma_ui.html" rel="bookmark">
+                          <time class="popular-posts-time">2024-09-15</time>
                           <br>
-                        URP延迟渲染+Native Renderpass踩坑记录
+                        聊聊UI分辨率分离与线性空间下的GammaUI
                         </a>
                     </li>
             </ul>
@@ -332,7 +327,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>5.9k</span>
+      <span>5.8k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -349,49 +344,88 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>过去两周多折腾URP Deferred + Native Renderpass, 踩了无数的坑, 翻遍国内国外的社区也找不到太多可供参考的资料. 于是在这里简述一下一些不可回避的问题以及其解决方案, 也算是为社区做点贡献.</p>
-<span id="more"></span>
-<p>在开始之前, 我想延迟渲染这种烂大街的玩意就没什么讲的必要了, 而Native Renderpass可能不少人没听过, 这东西底层调用的其实就是vulkan的renderpass&#x2F;subpass API(metal也有类似的一套), 简单来说就是利用移动端TB(D)R的硬件架构, 相比于传统延迟管线在basepass结束后将gbuffer store回system memory, 之后再在lightpass中load回来这种带宽压力极大的方案, Native Renderpass可以在每个tile的basepass结束后将gbuffer保存在On-Chip Memory上, 以供接下来的lightpass直接使用, 直接优化掉了两个pass之间的store&#x2F;load操作, 极大减缓了带宽压力, 这种形式的rt也被称之为memoryless.</p>
-<p>简单科普到此为止, 详细内容可以看vulkan官方讲subpass的ppt(很好找)或者是其他知乎大佬的文章.</p>
-<p>那么接下来就直接讲我踩到的几个坑以及解决方案. 因为是项目素材所以截图是肯定不能放的, 感兴趣可以自己试试去复现, 当然只是URP源码部分的代码我会贴出来.</p>
-<h1 id="开启Native-RenderPass时激活SceneView窗口导致Native-RenderPass失效"><a href="#开启Native-RenderPass时激活SceneView窗口导致Native-RenderPass失效" class="headerlink" title="开启Native RenderPass时激活SceneView窗口导致Native RenderPass失效"></a>开启Native RenderPass时激活SceneView窗口导致Native RenderPass失效</h1><p>很诡异的问题, 不只是在Editor中会这样, 甚至还会影响打包的结果.<br>开始以为是Bug, 分析源码后发现其原因在于源码中对Native RenderPass的开启做了两次二重判定:</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// UniversalRenderer.cs</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">Setup</span>(<span class="params">ScriptableRenderContext context, <span class="keyword">ref</span> RenderingData renderingData</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="keyword">if</span> (cameraData.cameraType != CameraType.Game)</span><br><span class="line">        useRenderPassEnabled = <span class="literal">false</span>;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// DeferredLights.cs</span></span><br><span class="line"><span class="function"><span class="keyword">internal</span> <span class="keyword">void</span> <span class="title">SetupLights</span>(<span class="params">ScriptableRenderContext context, <span class="keyword">ref</span> RenderingData renderingData</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    CoreUtils.SetKeyword(cmd, ShaderKeywordStrings.RenderPassEnabled, <span class="keyword">this</span>.UseRenderPass &amp;&amp; renderingData.cameraData.cameraType == CameraType.Game);</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>也就是说在Scene窗口激活时, 即使开启Native RenderPass(useRenderPassEnabled &#x3D;&#x3D; true), 也是无效的.</p>
-<p>虽然通过修改代码可以强行开启, 但Scene窗口会渲染异常, 同时疯狂报错. 所以解决方案就是framedebug&#x2F;打包等等操作时找个窗口盖住scene窗口, 然后重新开关Native Rednerpass即可.</p>
-<p>充分怀疑是SceneViewCamera存在Unity暂时解决不了的Bug或没有对vk renderpass做适配.</p>
+    <div class="post-body" itemprop="articleBody"><p>过去两周多折腾URP Deferred + Native Renderpass, 踩了无数的坑,
+翻遍国内国外的社区也找不到太多可供参考的资料.
+于是在这里简述一下一些不可回避的问题以及其解决方案,
+也算是为社区做点贡献. <span id="more"></span> 在开始之前,
+我想延迟渲染这种烂大街的玩意就没什么讲的必要了, 而Native
+Renderpass可能不少人没听过,
+这东西底层调用的其实就是vulkan的renderpass/subpass
+API(metal也有类似的一套), 简单来说就是利用移动端TB(D)R的硬件架构,
+相比于传统延迟管线在basepass结束后将gbuffer store回system memory,
+之后再在lightpass中load回来这种带宽压力极大的方案, Native
+Renderpass可以在每个tile的basepass结束后将gbuffer保存在On-Chip Memory上,
+以供接下来的lightpass直接使用, 直接优化掉了两个pass之间的store/load操作,
+极大减缓了带宽压力, 这种形式的rt也被称之为memoryless.</p>
+<p>简单科普到此为止,
+详细内容可以看vulkan官方讲subpass的ppt(很好找)或者是其他知乎大佬的文章.</p>
+<p>那么接下来就直接讲我踩到的几个坑以及解决方案.
+因为是项目素材所以截图是肯定不能放的, 感兴趣可以自己试试去复现,
+当然只是URP源码部分的代码我会贴出来.</p>
+<h1
+id="开启native-renderpass时激活sceneview窗口导致native-renderpass失效">开启Native
+RenderPass时激活SceneView窗口导致Native RenderPass失效</h1>
+<p>很诡异的问题, 不只是在Editor中会这样, 甚至还会影响打包的结果.
+开始以为是Bug, 分析源码后发现其原因在于源码中对Native
+RenderPass的开启做了两次二重判定: <figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// UniversalRenderer.cs</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">Setup</span>(<span class="params">ScriptableRenderContext context, <span class="keyword">ref</span> RenderingData renderingData</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="keyword">if</span> (cameraData.cameraType != CameraType.Game)</span><br><span class="line">        useRenderPassEnabled = <span class="literal">false</span>;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// DeferredLights.cs</span></span><br><span class="line"><span class="function"><span class="keyword">internal</span> <span class="keyword">void</span> <span class="title">SetupLights</span>(<span class="params">ScriptableRenderContext context, <span class="keyword">ref</span> RenderingData renderingData</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    CoreUtils.SetKeyword(cmd, ShaderKeywordStrings.RenderPassEnabled, <span class="keyword">this</span>.UseRenderPass &amp;&amp; renderingData.cameraData.cameraType == CameraType.Game);</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+也就是说在Scene窗口激活时, 即使开启Native
+RenderPass(useRenderPassEnabled == true), 也是无效的.</p>
+<p>虽然通过修改代码可以强行开启, 但Scene窗口会渲染异常, 同时疯狂报错.
+所以解决方案就是framedebug/打包等等操作时找个窗口盖住scene窗口,
+然后重新开关Native Rednerpass即可.</p>
+<p>充分怀疑是SceneViewCamera存在Unity暂时解决不了的Bug或没有对vk
+renderpass做适配.</p>
 <blockquote>
 <p>吐槽: 这么重要的问题文档一句不提???</p>
 </blockquote>
-<h1 id="开启Native-RenderPass后自定义的RendererFeature渲染出错"><a href="#开启Native-RenderPass后自定义的RendererFeature渲染出错" class="headerlink" title="开启Native RenderPass后自定义的RendererFeature渲染出错"></a>开启Native RenderPass后自定义的RendererFeature渲染出错</h1><p>图就不放了, 总之打包到移动端真机后哪个tile用到了自定义的RendererFeature哪个tile就马赛克, 完全炸了.</p>
-<p>原因是ScriptableRenderer.cs里特别定义了变量用于控制RendererFeature的Native Renderpass的开闭:</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Temporary variable to disable custom passes using render pass ( due to it potentially breaking projects with custom render features )</span></span><br><span class="line"><span class="comment">// To enable it - override SupportsNativeRenderPass method in the feature and return true</span></span><br><span class="line"><span class="keyword">internal</span> <span class="built_in">bool</span> disableNativeRenderPassInFeatures = <span class="literal">false</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">AddRenderPasses</span>(<span class="params"><span class="keyword">ref</span> RenderingData renderingData</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="comment">// Add render passes from custom renderer features</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; rendererFeatures.Count; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!rendererFeatures[i].isActive)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">if</span> (!rendererFeatures[i].SupportsNativeRenderPass())</span><br><span class="line">            disableNativeRenderPassInFeatures = <span class="literal">true</span>;</span><br><span class="line"> </span><br><span class="line">        rendererFeatures[i].AddRenderPasses(<span class="keyword">this</span>, <span class="keyword">ref</span> renderingData);</span><br><span class="line">        disableNativeRenderPassInFeatures = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// ScriptableRendererFeature.AddRenderPasses()内部调用ScriptableRenderer.EnqueuePass():</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">EnqueuePass</span>(<span class="params">ScriptableRenderPass pass</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    m_ActiveRenderPassQueue.Add(pass);</span><br><span class="line">    <span class="keyword">if</span> (disableNativeRenderPassInFeatures)</span><br><span class="line">        pass.useNativeRenderPass = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>解决方案是在自定义的RendererFeature里重写SupportsNativeRenderPass()函数, 在明确知道符合原条件的情况下, 直接返回ture即可.</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="built_in">bool</span> <span class="title">SupportsNativeRenderPass</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 原判断条件</span></span><br><span class="line">    <span class="comment">// return settings.Event &lt;= RenderPassEvent.BeforeRenderingPostProcessing;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里需要注意的是父类ScriptableRendererFeature里定义的SupportsNativeRenderPass()函数的访问级别是internal, 想要在自己的命名空间里重写该函数就要全改成public.</p>
+<h1
+id="开启native-renderpass后自定义的rendererfeature渲染出错">开启Native
+RenderPass后自定义的RendererFeature渲染出错</h1>
+<p>图就不放了,
+总之打包到移动端真机后哪个tile用到了自定义的RendererFeature哪个tile就马赛克,
+完全炸了.</p>
+<p>原因是ScriptableRenderer.cs里特别定义了变量用于控制RendererFeature的Native
+Renderpass的开闭: <figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Temporary variable to disable custom passes using render pass ( due to it potentially breaking projects with custom render features )</span></span><br><span class="line"><span class="comment">// To enable it - override SupportsNativeRenderPass method in the feature and return true</span></span><br><span class="line"><span class="keyword">internal</span> <span class="built_in">bool</span> disableNativeRenderPassInFeatures = <span class="literal">false</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">AddRenderPasses</span>(<span class="params"><span class="keyword">ref</span> RenderingData renderingData</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="comment">// Add render passes from custom renderer features</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; rendererFeatures.Count; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!rendererFeatures[i].isActive)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">if</span> (!rendererFeatures[i].SupportsNativeRenderPass())</span><br><span class="line">            disableNativeRenderPassInFeatures = <span class="literal">true</span>;</span><br><span class="line"> </span><br><span class="line">        rendererFeatures[i].AddRenderPasses(<span class="keyword">this</span>, <span class="keyword">ref</span> renderingData);</span><br><span class="line">        disableNativeRenderPassInFeatures = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// ScriptableRendererFeature.AddRenderPasses()内部调用ScriptableRenderer.EnqueuePass():</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">EnqueuePass</span>(<span class="params">ScriptableRenderPass pass</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    m_ActiveRenderPassQueue.Add(pass);</span><br><span class="line">    <span class="keyword">if</span> (disableNativeRenderPassInFeatures)</span><br><span class="line">        pass.useNativeRenderPass = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+解决方案是在自定义的RendererFeature里重写SupportsNativeRenderPass()函数,
+在明确知道符合原条件的情况下, 直接返回ture即可. <figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="built_in">bool</span> <span class="title">SupportsNativeRenderPass</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 原判断条件</span></span><br><span class="line">    <span class="comment">// return settings.Event &lt;= RenderPassEvent.BeforeRenderingPostProcessing;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+这里需要注意的是父类ScriptableRendererFeature里定义的SupportsNativeRenderPass()函数的访问级别是internal,
+想要在自己的命名空间里重写该函数就要全改成public.</p>
 <blockquote>
 <p>吐槽: 这种函数为什么要internal? 不考虑用户扩展?</p>
 </blockquote>
-<h1 id="开启Native-RenderPass后移动Camera-Light-Layer会出现错位-x2F-拖影"><a href="#开启Native-RenderPass后移动Camera-Light-Layer会出现错位-x2F-拖影" class="headerlink" title="开启Native RenderPass后移动Camera, Light Layer会出现错位&#x2F;拖影"></a>开启Native RenderPass后移动Camera, Light Layer会出现错位&#x2F;拖影</h1><p>逆天大坑, 感兴趣的朋友可以自己试试开个默认场景然后改改light layer再往手机上打个包, 简单说就是在移动camera时会出现light layer不同步的拖影, 实际表现就像是light layer的屏幕空间位置刷新跟不上角色的刷新一样.</p>
+<h1
+id="开启native-renderpass后移动camera-light-layer会出现错位拖影">开启Native
+RenderPass后移动Camera, Light Layer会出现错位/拖影</h1>
+<p>逆天大坑, 感兴趣的朋友可以自己试试开个默认场景然后改改light
+layer再往手机上打个包, 简单说就是在移动camera时会出现light
+layer不同步的拖影, 实际表现就像是light
+layer的屏幕空间位置刷新跟不上角色的刷新一样.</p>
 <p>折腾了很久后终于排查到了问题所在:</p>
-<p><strong>因为Vulkan的一个renderpass会在所有subpass结束后再把要store回system memory的数据store, 也就是说LightPass里load进来的并不是同一帧里前一个subpass(BasePass)生成的light layer, 而是上一帧renderpass结束后store回system memory的light layer, 故而导致移动摄像机时会拖影.</strong></p>
-<img src="/post/urp_deferred_nativerenderpass/image.png" class="" title="Alt text">
-
-<p>解决方案: 在DeferredLights.cs的Setup()函数中修改以下两处定义为:</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//this.DeferredInputAttachments = new RenderTargetIdentifier[4]</span></span><br><span class="line"><span class="comment">//&#123;</span></span><br><span class="line"><span class="comment">//    this.GbufferAttachmentIdentifiers[0], this.GbufferAttachmentIdentifiers[1],</span></span><br><span class="line"><span class="comment">//    this.GbufferAttachmentIdentifiers[2], this.GbufferAttachmentIdentifiers[4]</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"><span class="keyword">this</span>.DeferredInputAttachments = <span class="keyword">new</span> RenderTargetIdentifier[<span class="number">5</span>]</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">this</span>.GbufferAttachmentIdentifiers[<span class="number">0</span>], <span class="keyword">this</span>.GbufferAttachmentIdentifiers[<span class="number">1</span>],</span><br><span class="line">    <span class="keyword">this</span>.GbufferAttachmentIdentifiers[<span class="number">2</span>], <span class="keyword">this</span>.GbufferAttachmentIdentifiers[<span class="number">4</span>],</span><br><span class="line">    <span class="keyword">this</span>.GbufferAttachmentIdentifiers[<span class="number">5</span>]</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//this.DeferredInputIsTransient = new bool[4]</span></span><br><span class="line"><span class="comment">//&#123;</span></span><br><span class="line"><span class="comment">//    true, true, true, false</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"><span class="keyword">this</span>.DeferredInputIsTransient = <span class="keyword">new</span> <span class="built_in">bool</span>[<span class="number">5</span>]</span><br><span class="line">&#123;</span><br><span class="line">    <span class="literal">true</span>, <span class="literal">true</span>, <span class="literal">true</span>, <span class="literal">false</span>, <span class="literal">true</span>   <span class="comment">// DeferredInputIsTransient[3]也就是Depth as Color貌似也可以写成true</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>可以看到URP在源码里写死了InputAttachment最大数量为4, 通过DeferredInputAttachments数组指定其为gbuffer0&#x2F;1&#x2F;2&#x2F;4, 并通过DeferredInputIsTransient数组指定对应的gbuffer是否为memoryless, 所以导致light layer只能从system memroy load上一帧的结果. 这恐怕也是因为Unity考虑到要兼容部分只支持四张InputAttachment的Vulkan设备而做的妥协.</p>
-<p>C#端开启完毕后, 就可以在shader里用InputAttachment的方式从On-Chip Memory里读取当前帧在basepass生成的lightlayer了:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// StencilDeferred.shader</span></span><br><span class="line"><span class="meta">#<span class="keyword">if</span> _RENDER_PASS_ENABLED</span></span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> GBUFFER0 0</span></span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> GBUFFER1 1</span></span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> GBUFFER2 2</span></span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> GBUFFER3 3</span></span><br><span class="line">    <span class="meta">#<span class="keyword">ifdef</span> _LIGHT_LAYERS</span></span><br><span class="line">        <span class="meta">#<span class="keyword">define</span> GBUFFER4 4</span></span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"> </span><br><span class="line">    <span class="built_in">FRAMEBUFFER_INPUT_HALF</span>(GBUFFER0);</span><br><span class="line">    <span class="built_in">FRAMEBUFFER_INPUT_HALF</span>(GBUFFER1);</span><br><span class="line">    <span class="built_in">FRAMEBUFFER_INPUT_HALF</span>(GBUFFER2);</span><br><span class="line">    <span class="built_in">FRAMEBUFFER_INPUT_FLOAT</span>(GBUFFER3);</span><br><span class="line">    <span class="meta">#<span class="keyword">ifdef</span> _LIGHT_LAYERS</span></span><br><span class="line">        <span class="built_in">FRAMEBUFFER_INPUT_HALF</span>(GBUFFER4);</span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">    <span class="meta">#<span class="keyword">ifdef</span> GBUFFER_OPTIONAL_SLOT_1</span></span><br><span class="line">    <span class="built_in">TEXTURE2D_X_HALF</span>(_GBuffer4);</span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"> </span><br><span class="line">    <span class="meta">#<span class="keyword">if</span> defined(GBUFFER_OPTIONAL_SLOT_2) &amp;&amp; _RENDER_PASS_ENABLED</span></span><br><span class="line">    <span class="comment">//TEXTURE2D_X_HALF(_GBuffer5);</span></span><br><span class="line">    <span class="meta">#<span class="keyword">elif</span> defined(GBUFFER_OPTIONAL_SLOT_2)</span></span><br><span class="line">    <span class="built_in">TEXTURE2D_X</span>(_GBuffer5);</span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    <span class="meta">#<span class="keyword">ifdef</span> GBUFFER_OPTIONAL_SLOT_3</span></span><br><span class="line">    <span class="built_in">TEXTURE2D_X</span>(_GBuffer6);</span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"> </span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"> </span><br><span class="line"><span class="function">half4 <span class="title">DeferredShading</span><span class="params">(Varyings input)</span> : SV_Target</span></span><br><span class="line"><span class="function">&#123;</span></span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="meta">#<span class="keyword">ifdef</span> _LIGHT_LAYERS</span></span><br><span class="line">        <span class="meta">#<span class="keyword">ifdef</span> _RENDER_PASS_ENABLED</span></span><br><span class="line">        float4 renderingLayers = <span class="built_in">LOAD_FRAMEBUFFER_INPUT</span>(GBUFFER4, input.positionCS.xy);</span><br><span class="line">        <span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">        float4 renderingLayers = <span class="built_in">LOAD_TEXTURE2D_X_LOD</span>(<span class="built_in">MERGE_NAME</span>(_, GBUFFER_LIGHT_LAYERS), input.positionCS.xy, <span class="number">0</span>);</span><br><span class="line">        <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    uint meshRenderingLayers = <span class="built_in">uint</span>(renderingLayers.r * <span class="number">255.5</span>);</span><br><span class="line">    <span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">    uint meshRenderingLayers = DEFAULT_LIGHT_LAYERS;</span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这样一来gbuffer5就成功被设置成了memoryless, 再次打包发现light layer错位&#x2F;拖影的现象已经消失了.</p>
-<img src="/post/urp_deferred_nativerenderpass/image-1.png" class="" title="Alt text">
-<img src="/post/urp_deferred_nativerenderpass/image-2.png" class="" title="Alt text">
-
-<p>不过真机测试时, Redmi K30 Pro(865)是可以正常渲染的, 而Mi 8(845)就会出现花屏. 具体是不是因为845不支持大于四张的InputAttachment还有待验证与查阅资料.</p>
+<p><strong>因为Vulkan的一个renderpass会在所有subpass结束后再把要store回system
+memory的数据store,
+也就是说LightPass里load进来的并不是同一帧里前一个subpass(BasePass)生成的light
+layer, 而是上一帧renderpass结束后store回system memory的light layer,
+故而导致移动摄像机时会拖影.</strong> <img src="/post/urp_deferred_nativerenderpass/image.png" class="" title="Alt text"></p>
+<p>解决方案: 在DeferredLights.cs的Setup()函数中修改以下两处定义为:
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//this.DeferredInputAttachments = new RenderTargetIdentifier[4]</span></span><br><span class="line"><span class="comment">//&#123;</span></span><br><span class="line"><span class="comment">//    this.GbufferAttachmentIdentifiers[0], this.GbufferAttachmentIdentifiers[1],</span></span><br><span class="line"><span class="comment">//    this.GbufferAttachmentIdentifiers[2], this.GbufferAttachmentIdentifiers[4]</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"><span class="keyword">this</span>.DeferredInputAttachments = <span class="keyword">new</span> RenderTargetIdentifier[<span class="number">5</span>]</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">this</span>.GbufferAttachmentIdentifiers[<span class="number">0</span>], <span class="keyword">this</span>.GbufferAttachmentIdentifiers[<span class="number">1</span>],</span><br><span class="line">    <span class="keyword">this</span>.GbufferAttachmentIdentifiers[<span class="number">2</span>], <span class="keyword">this</span>.GbufferAttachmentIdentifiers[<span class="number">4</span>],</span><br><span class="line">    <span class="keyword">this</span>.GbufferAttachmentIdentifiers[<span class="number">5</span>]</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//this.DeferredInputIsTransient = new bool[4]</span></span><br><span class="line"><span class="comment">//&#123;</span></span><br><span class="line"><span class="comment">//    true, true, true, false</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"><span class="keyword">this</span>.DeferredInputIsTransient = <span class="keyword">new</span> <span class="built_in">bool</span>[<span class="number">5</span>]</span><br><span class="line">&#123;</span><br><span class="line">    <span class="literal">true</span>, <span class="literal">true</span>, <span class="literal">true</span>, <span class="literal">false</span>, <span class="literal">true</span>   <span class="comment">// DeferredInputIsTransient[3]也就是Depth as Color貌似也可以写成true</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure> 可以看到URP在源码里写死了InputAttachment最大数量为4,
+通过DeferredInputAttachments数组指定其为gbuffer0/1/2/4,
+并通过DeferredInputIsTransient数组指定对应的gbuffer是否为memoryless,
+所以导致light layer只能从system memroy load上一帧的结果.
+这恐怕也是因为Unity考虑到要兼容部分只支持四张InputAttachment的Vulkan设备而做的妥协.</p>
+<p>C#端开启完毕后, 就可以在shader里用InputAttachment的方式从On-Chip
+Memory里读取当前帧在basepass生成的lightlayer了: <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// StencilDeferred.shader</span></span><br><span class="line"><span class="meta">#<span class="keyword">if</span> _RENDER_PASS_ENABLED</span></span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> GBUFFER0 0</span></span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> GBUFFER1 1</span></span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> GBUFFER2 2</span></span><br><span class="line">    <span class="meta">#<span class="keyword">define</span> GBUFFER3 3</span></span><br><span class="line">    <span class="meta">#<span class="keyword">ifdef</span> _LIGHT_LAYERS</span></span><br><span class="line">        <span class="meta">#<span class="keyword">define</span> GBUFFER4 4</span></span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"> </span><br><span class="line">    <span class="built_in">FRAMEBUFFER_INPUT_HALF</span>(GBUFFER0);</span><br><span class="line">    <span class="built_in">FRAMEBUFFER_INPUT_HALF</span>(GBUFFER1);</span><br><span class="line">    <span class="built_in">FRAMEBUFFER_INPUT_HALF</span>(GBUFFER2);</span><br><span class="line">    <span class="built_in">FRAMEBUFFER_INPUT_FLOAT</span>(GBUFFER3);</span><br><span class="line">    <span class="meta">#<span class="keyword">ifdef</span> _LIGHT_LAYERS</span></span><br><span class="line">        <span class="built_in">FRAMEBUFFER_INPUT_HALF</span>(GBUFFER4);</span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">    <span class="meta">#<span class="keyword">ifdef</span> GBUFFER_OPTIONAL_SLOT_1</span></span><br><span class="line">    <span class="built_in">TEXTURE2D_X_HALF</span>(_GBuffer4);</span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"> </span><br><span class="line">    <span class="meta">#<span class="keyword">if</span> defined(GBUFFER_OPTIONAL_SLOT_2) &amp;&amp; _RENDER_PASS_ENABLED</span></span><br><span class="line">    <span class="comment">//TEXTURE2D_X_HALF(_GBuffer5);</span></span><br><span class="line">    <span class="meta">#<span class="keyword">elif</span> defined(GBUFFER_OPTIONAL_SLOT_2)</span></span><br><span class="line">    <span class="built_in">TEXTURE2D_X</span>(_GBuffer5);</span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    <span class="meta">#<span class="keyword">ifdef</span> GBUFFER_OPTIONAL_SLOT_3</span></span><br><span class="line">    <span class="built_in">TEXTURE2D_X</span>(_GBuffer6);</span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"> </span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"> </span><br><span class="line"><span class="function">half4 <span class="title">DeferredShading</span><span class="params">(Varyings input)</span> : SV_Target</span></span><br><span class="line"><span class="function">&#123;</span></span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="meta">#<span class="keyword">ifdef</span> _LIGHT_LAYERS</span></span><br><span class="line">        <span class="meta">#<span class="keyword">ifdef</span> _RENDER_PASS_ENABLED</span></span><br><span class="line">        float4 renderingLayers = <span class="built_in">LOAD_FRAMEBUFFER_INPUT</span>(GBUFFER4, input.positionCS.xy);</span><br><span class="line">        <span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">        float4 renderingLayers = <span class="built_in">LOAD_TEXTURE2D_X_LOD</span>(<span class="built_in">MERGE_NAME</span>(_, GBUFFER_LIGHT_LAYERS), input.positionCS.xy, <span class="number">0</span>);</span><br><span class="line">        <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    uint meshRenderingLayers = <span class="built_in">uint</span>(renderingLayers.r * <span class="number">255.5</span>);</span><br><span class="line">    <span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">    uint meshRenderingLayers = DEFAULT_LIGHT_LAYERS;</span><br><span class="line">    <span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+这样一来gbuffer5就成功被设置成了memoryless, 再次打包发现light
+layer错位/拖影的现象已经消失了. <img src="/post/urp_deferred_nativerenderpass/image-1.png" class="" title="Alt text"> <img src="/post/urp_deferred_nativerenderpass/image-2.png" class="" title="Alt text"></p>
+<p>不过真机测试时, Redmi K30 Pro(865)是可以正常渲染的, 而Mi
+8(845)就会出现花屏.
+具体是不是因为845不支持大于四张的InputAttachment还有待验证与查阅资料.</p>
 <blockquote>
-<p>吐槽: 前面那种小坑文档不说明也就算了, 这种也不说明? 全靠用户琢磨, 你以为你是UE?</p>
+<p>吐槽: 前面那种小坑文档不说明也就算了, 这种也不说明? 全靠用户琢磨,
+你以为你是UE?</p>
 </blockquote>
 <p>大概就是这样, 希望可以帮到遇到同样问题的朋友.</p>
 <blockquote>
-<p>原文链接: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/574540329">https://zhuanlan.zhihu.com/p/574540329</a></p>
+<p>原文链接: https://zhuanlan.zhihu.com/p/574540329</p>
 </blockquote>
 
     </div>
@@ -429,8 +463,8 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/post/ue5_toonshading_0x01_custom_shadingmodel.html" rel="prev" title="从零开始的UE5卡通渲染【二】：自定义着色模型">
-                  <i class="fa fa-chevron-left"></i> 从零开始的UE5卡通渲染【二】：自定义着色模型
+                <a href="/post/ue5_toonshading_0x01_custom_shadingmodel.html" rel="prev" title="从零开始的UE5卡通渲染0x01：自定义着色模型">
+                  <i class="fa fa-chevron-left"></i> 从零开始的UE5卡通渲染0x01：自定义着色模型
                 </a>
             </div>
             <div class="post-nav-item">
@@ -515,6 +549,12 @@
   <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 

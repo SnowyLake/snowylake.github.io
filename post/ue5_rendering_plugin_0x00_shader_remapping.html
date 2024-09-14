@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"snowylake.net","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","width":280,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="UE 渲染开发一直以来都是个很蛋疼的话题, 拜屎山一般的渲染系统所赐, 想要加点什么东西基本就只有改源码一条路可走, 以至于网上搜十个改源码的文章可能九个都是教你怎么加 ShadingModel 或 MeshPass. 我自己也曾在这类重复且枯燥的工作上花费大量的时间, 深切感受到这玩意到底有多恶心. 而且源码修改一时爽, 后续维护火葬场, 将来如果要升级引擎版本, 面对茫茫多的 diff 那才叫">
+    <meta name="description" content="UE 渲染开发一直以来都是个很蛋疼的话题, 拜屎山一般的渲染系统所赐, 想要加点什么东西基本就只有改源码一条路可走, 以至于网上搜十个改源码的文章可能九个都是教你怎么加 ShadingModel 或 MeshPass. 我自己也曾在这类重复且枯燥的工作上花费大量的时间, 深切感受到这玩意到底有多恶心. 而且源码修改一时爽, 后续维护火葬场, 将来如果要升级引擎版本, 面对茫茫多的 di">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从插件开始的UE渲染开发0x00: Shader路径重定向">
 <meta property="og:url" content="http://snowylake.net/post/ue5_rendering_plugin_0x00_shader_remapping.html">
 <meta property="og:site_name" content="雪之湖畔-SnowyLakeSide">
-<meta property="og:description" content="UE 渲染开发一直以来都是个很蛋疼的话题, 拜屎山一般的渲染系统所赐, 想要加点什么东西基本就只有改源码一条路可走, 以至于网上搜十个改源码的文章可能九个都是教你怎么加 ShadingModel 或 MeshPass. 我自己也曾在这类重复且枯燥的工作上花费大量的时间, 深切感受到这玩意到底有多恶心. 而且源码修改一时爽, 后续维护火葬场, 将来如果要升级引擎版本, 面对茫茫多的 diff 那才叫">
+<meta property="og:description" content="UE 渲染开发一直以来都是个很蛋疼的话题, 拜屎山一般的渲染系统所赐, 想要加点什么东西基本就只有改源码一条路可走, 以至于网上搜十个改源码的文章可能九个都是教你怎么加 ShadingModel 或 MeshPass. 我自己也曾在这类重复且枯燥的工作上花费大量的时间, 深切感受到这玩意到底有多恶心. 而且源码修改一时爽, 后续维护火葬场, 将来如果要升级引擎版本, 面对茫茫多的 di">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://snowylake.net/post/ue5_rendering_plugin_0x00_shader_remapping/Jop2bkBPJo91lHxuyAdc7hk1ntc.png">
 <meta property="og:image" content="http://snowylake.net/post/ue5_rendering_plugin_0x00_shader_remapping/UWNfbEEZDouqCmxrYjBceyulnxc.png">
@@ -97,7 +97,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">27</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">12</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">17</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">27</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">13</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">18</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -162,7 +162,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -173,7 +173,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -203,8 +203,7 @@
               <i class="fa fa-commenting fa-fw"></i>
               全站公告
             </div>
-            <a class="custom-sidebar-board-text">SnowyLakeSide绝绝绝绝赞更新中!
-不想工作, 苦呀西~
+            <a class="custom-sidebar-board-text">不想工作, 苦呀西———
 </a>
           </div>  
         </div>
@@ -216,13 +215,6 @@
             </div>
             <ul class="popular-posts">
                     <li class="popular-posts-item">
-                        <a class="popular-posts-link" href="/post/graphics_developer_joke.html" rel="bookmark">
-                          <time class="popular-posts-time">2023-06-24</time>
-                          <br>
-                        来点图程破防乐子
-                        </a>
-                    </li>
-                    <li class="popular-posts-item">
                         <a class="popular-posts-link" href="/post/ue51_mobile_deferred.html" rel="bookmark">
                           <time class="popular-posts-time">2023-09-11</time>
                           <br>
@@ -230,17 +222,17 @@
                         </a>
                     </li>
                     <li class="popular-posts-item">
-                        <a class="popular-posts-link" href="/post/urp_analysis_0x00_pipeline_framework.html" rel="bookmark">
-                          <time class="popular-posts-time">2023-06-12</time>
+                        <a class="popular-posts-link" href="/post/ue5_rendering_plugin_0x00_shader_remapping.html" rel="bookmark">
+                          <time class="popular-posts-time">2024-07-12</time>
                           <br>
-                        为美好的URP献上解析[0x00]: 管线架构
+                        从插件开始的UE渲染开发0x00: Shader路径重定向
                         </a>
                     </li>
                     <li class="popular-posts-item">
-                        <a class="popular-posts-link" href="/post/urp_deferred_nativerenderpass.html" rel="bookmark">
-                          <time class="popular-posts-time">2023-09-11</time>
+                        <a class="popular-posts-link" href="/post/urp_ui_resolution_split_and_gamma_ui.html" rel="bookmark">
+                          <time class="popular-posts-time">2024-09-15</time>
                           <br>
-                        URP延迟渲染+Native Renderpass踩坑记录
+                        聊聊UI分辨率分离与线性空间下的GammaUI
                         </a>
                     </li>
             </ul>
@@ -350,63 +342,83 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>UE 渲染开发一直以来都是个很蛋疼的话题, 拜屎山一般的渲染系统所赐, 想要加点什么东西基本就只有改源码一条路可走, 以至于网上搜十个改源码的文章可能九个都是教你怎么加 ShadingModel 或 MeshPass.</p>
-<p>我自己也曾在这类重复且枯燥的工作上花费大量的时间, 深切感受到这玩意到底有多恶心. 而且源码修改一时爽, 后续维护火葬场, 将来如果要升级引擎版本, 面对茫茫多的 diff 那才叫一个痛不欲生.</p>
-<p>所以这个系列从 UE 的插件系统(Plugin)入手, 尝试探索在不改动源码的情况下, 如何最大限度的自定义渲染.</p>
+    <div class="post-body" itemprop="articleBody"><p>UE 渲染开发一直以来都是个很蛋疼的话题, 拜屎山一般的渲染系统所赐,
+想要加点什么东西基本就只有改源码一条路可走,
+以至于网上搜十个改源码的文章可能九个都是教你怎么加 ShadingModel 或
+MeshPass.</p>
+<p>我自己也曾在这类重复且枯燥的工作上花费大量的时间,
+深切感受到这玩意到底有多恶心. 而且源码修改一时爽, 后续维护火葬场,
+将来如果要升级引擎版本, 面对茫茫多的 diff 那才叫一个痛不欲生.</p>
+<p>所以这个系列从 UE 的插件系统(Plugin)入手,
+尝试探索在不改动源码的情况下, 如何最大限度的自定义渲染.</p>
 <span id="more"></span>
-
-
-<p>虽说不改 C++ 源码, 但 Shader 该改还是要改. 不过直接去引擎路径下改 Shader 就很恶心, 可能我只想为当前项目改动某部分 Shader, 但引擎路径下 Shader 的改动却会影响到本地的所有项目. 如果能像 Unity 那样每个项目自己有一份 Shader 就好了——正确的, 我们就先来把这个功能做了.</p>
+<p>虽说不改 C++ 源码, 但 Shader 该改还是要改. 不过直接去引擎路径下改
+Shader 就很恶心, 可能我只想为当前项目改动某部分 Shader, 但引擎路径下
+Shader 的改动却会影响到本地的所有项目. 如果能像 Unity
+那样每个项目自己有一份 Shader 就好了——正确的,
+我们就先来把这个功能做了.</p>
 <p>在动工之前, 需要先理解 UE Shader 的路径引用原理.</p>
-<p>UE shader 代码中 include 的文件路径并非真实的路径, 而是”虚拟路径”. 比如在 Shader 中:</p>
+<p>UE shader 代码中 include 的文件路径并非真实的路径, 而是"虚拟路径".
+比如在 Shader 中:</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;/Engine/Private/Common.ush&quot;</span></span></span><br></pre></td></tr></table></figure>
-
-<p>然而 Common.ush 文件真实路径是 ($LocalPath)&#x2F;Engine&#x2F;Shaders&#x2F;Private&#x2F;Common.ush , 这其中就是由 UE 做了一遍 Shader 虚拟路径到真实路径的映射.</p>
-<p>把 shader 文件中使用的”&#x2F;Engine”路径映射到了本地环境下的”($LocalPath)&#x2F;Engine&#x2F;Shaders”.</p>
-<p>通过翻阅源码, 可以得知引擎在启动阶段会通过 AddShaderSourceDirectoryMapping()函数注册全部的 Shader 路径映射到一个全局变量 <strong>GShaderSourceDirectoryMappings</strong> 中:</p>
+<p>然而 Common.ush 文件真实路径是
+($LocalPath)/Engine/Shaders/Private/Common.ush , 这其中就是由 UE
+做了一遍 Shader 虚拟路径到真实路径的映射.</p>
+<p>把 shader
+文件中使用的"/Engine"路径映射到了本地环境下的"($LocalPath)/Engine/Shaders".</p>
+<p>通过翻阅源码, 可以得知引擎在启动阶段会通过
+AddShaderSourceDirectoryMapping()函数注册全部的 Shader
+路径映射到一个全局变量 <strong>GShaderSourceDirectoryMappings</strong>
+中:</p>
 <p>ShaderCore.h</p>
 <img src="/post/ue5_rendering_plugin_0x00_shader_remapping/Jop2bkBPJo91lHxuyAdc7hk1ntc.png" class="">
-
 <p>ShaderCore.cpp</p>
 <img src="/post/ue5_rendering_plugin_0x00_shader_remapping/UWNfbEEZDouqCmxrYjBceyulnxc.png" class="">
-
-<p>包括各个插件的自定义 Shader 也均通过这个接口向引擎注册自己的 Shader:</p>
+<p>包括各个插件的自定义 Shader 也均通过这个接口向引擎注册自己的
+Shader:</p>
 <p>MobileFSRModule.cpp</p>
 <img src="/post/ue5_rendering_plugin_0x00_shader_remapping/PPZQbaWIMoz0LjxTyU5cT5DlnFb.png" class="">
-
-<p>而引擎自己的内置 Shader 则是在 LaunchEngineLoop.cpp 中的 FEngineLoop::PreInitPreStartupScreen()函数中注册:</p>
+<p>而引擎自己的内置 Shader 则是在 LaunchEngineLoop.cpp 中的
+FEngineLoop::PreInitPreStartupScreen()函数中注册:</p>
 <img src="/post/ue5_rendering_plugin_0x00_shader_remapping/QWDRbaEQ2oDLMMxlnOzcO0qAnGc.png" class="">
-
-<p>那这样就好办了, 只需要在引擎 Shader 注册之后、Shader 编译之前把”&#x2F;Engine”对应的 shader 实际路径替换成项目自己魔改过后的 shader 路径即可.</p>
-<p>而我们也正好可以通过插件中模块启动时的 StartupModule()函数做到这一点, 只需要将模块的 LoadingPhase 设为 PostConfigInit.</p>
+<p>那这样就好办了, 只需要在引擎 Shader 注册之后、Shader
+编译之前把"/Engine"对应的 shader 实际路径替换成项目自己魔改过后的 shader
+路径即可.</p>
+<p>而我们也正好可以通过插件中模块启动时的 StartupModule()函数做到这一点,
+只需要将模块的 LoadingPhase 设为 PostConfigInit.</p>
 <p>UE 启动调用链:</p>
 <ul>
-<li>WinMain()<ul>
-<li>LaunchWindowsStartup()<ul>
-<li>GuardedMain()<ul>
-<li>EnginePreInit()<ul>
-<li>GEngineLoop.PreInit()<ul>
-<li>PreInitPreStartupScreen()<ul>
-<li>AddShaderSourceDirectoryMapping(TEXT(“&#x2F;Engine”), FPlatformProcess::ShaderDir()) <strong>← 引擎 Shader 虚拟路径注册</strong></li>
-<li>AppInit()<ul>
-<li>ProjectManager.LoadModulesForProject(ELoadingPhase::PostConfigInit)** ← PostConfigInit 模块加载**</li>
-</ul>
-</li>
+<li>WinMain()
+<ul>
+<li>LaunchWindowsStartup()
+<ul>
+<li>GuardedMain()
+<ul>
+<li>EnginePreInit()
+<ul>
+<li>GEngineLoop.PreInit()
+<ul>
+<li>PreInitPreStartupScreen()
+<ul>
+<li>AddShaderSourceDirectoryMapping(TEXT("/Engine"),
+FPlatformProcess::ShaderDir()) <strong>← 引擎 Shader
+虚拟路径注册</strong></li>
+<li>AppInit()
+<ul>
+<li>ProjectManager.LoadModulesForProject(ELoadingPhase::PostConfigInit)**
+← PostConfigInit 模块加载**</li>
+</ul></li>
 <li>CompileGlobalShaderMap() <strong>← 全局 Shader 编译</strong></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>在模块的 StartupModule()函数中拿到 <strong>GShaderSourceDirectoryMappings</strong> 并强行替换掉虚拟路径”&#x2F;Engine”对应的 shader 实际路径即可.</p>
+<p>在模块的 StartupModule()函数中拿到
+<strong>GShaderSourceDirectoryMappings</strong>
+并强行替换掉虚拟路径"/Engine"对应的 shader 实际路径即可.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">FSnowyFalconModule::StartupModule</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span>&amp;&amp; ShaderSourceDirectoryMappings = <span class="keyword">const_cast</span>&lt;TMap&lt;FString, FString&gt;&amp;&gt;(<span class="built_in">AllShaderSourceDirectoryMappings</span>());</span><br><span class="line">     </span><br><span class="line">    FString ShaderRemappingRealDir = <span class="comment">//项目自定义Shader路径</span></span><br><span class="line">    <span class="keyword">if</span> (FPaths::<span class="built_in">DirectoryExists</span>(ShaderRemappingRealDir))</span><br><span class="line">    &#123;</span><br><span class="line">        ShaderSourceDirectoryMappings[EngineShaderVirtualDir] = ShaderRemappingRealDir;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">FSnowyFalconModule::ShutdownModule</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span>&amp;&amp; ShaderSourceDirectoryMappings = <span class="keyword">const_cast</span>&lt;TMap&lt;FString, FString&gt;&amp;&gt;(<span class="built_in">AllShaderSourceDirectoryMappings</span>());</span><br><span class="line">    ShaderSourceDirectoryMappings[EngineShaderVirtualDir] = EngineShaderRealDir;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
@@ -450,6 +462,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/post/urp_ui_resolution_split_and_gamma_ui.html" rel="next" title="聊聊UI分辨率分离与线性空间下的GammaUI">
+                  聊聊UI分辨率分离与线性空间下的GammaUI <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -528,6 +543,12 @@
   <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 
