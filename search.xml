@@ -112,7 +112,7 @@ C++特性的教程/文章都会将智能指针与右值引用/移动语义/完�
     <url>/post/cpp20_stringsplit.html</url>
     <content><![CDATA[<p>众所周知，C++一直没有一个官方提供的string
 split用于分割字符串，在过去（C++20之前）我们可能需要使用std::regex、std::string::find系列方法、甚至是继承自C的strtok函数来自行封装一个split，非常繁琐与不便。
-然而，这一切都在C++20中发生了变化。C++20引入了范围库ranges，其中提供的两个范围适配器std::split、std::lazy_split可以使我们以一种更为优雅的形式实现split。x
+然而，这一切都在C++20中发生了变化。C++20引入了范围库ranges，其中提供的两个范围适配器std::split、std::lazy_split可以使我们以一种更为优雅的形式实现split。
 <span id="more"></span></p>
 <h2 id="section"><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;concept&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ranges&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;format&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> stdr  std::ranges</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> stdrv std::ranges::views</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> Container = std::vector, <span class="keyword">typename</span> Arg = std::string_view&gt;</span><br><span class="line"><span class="keyword">auto</span> <span class="built_in">Split</span>(std::string_view str, std::string_view delimiter)</span><br><span class="line">&#123;</span><br><span class="line">	Container&lt;Arg&gt; myCont;</span><br><span class="line">	<span class="keyword">auto</span> temp = str </span><br><span class="line">		| stdrv::<span class="built_in">split</span>(delimiter)</span><br><span class="line">		| stdrv::<span class="built_in">transform</span>([](<span class="keyword">auto</span>&amp;&amp; r)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="built_in">Arg</span>(std::<span class="built_in">addressof</span>(*r.<span class="built_in">begin</span>()), stdr::<span class="built_in">distance</span>(r));</span><br><span class="line">			&#125;);</span><br><span class="line">	<span class="keyword">auto</span> iter = std::<span class="built_in">inserter</span>(myCont, myCont.<span class="built_in">end</span>());</span><br><span class="line">	stdr::for_each(temp, [&amp;](<span class="keyword">auto</span>&amp;&amp; x) &#123; iter = &#123;x.<span class="built_in">begin</span>(), x.<span class="built_in">end</span>()&#125;; &#125;);</span><br><span class="line">	<span class="keyword">return</span> myCont;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::string str = <span class="string">&quot;Hello233C++20233and233New233Spilt&quot;</span>;</span><br><span class="line">	std::string delimiter = <span class="string">&quot;233&quot;</span>;</span><br><span class="line">	<span class="keyword">auto</span>&amp;&amp; strCont = <span class="built_in">Split</span>&lt;std::list, std::string&gt;(str, delimiter);</span><br><span class="line">	stdr::for_each(strCont, [](<span class="keyword">auto</span>&amp;&amp; x) &#123; std::cout &lt;&lt; std::format(<span class="string">&quot;&#123;&#125; &quot;</span>, x); &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//output: Hello C++20 and New Spilt</span></span><br></pre></td></tr></table></figure></h2>
 <p>PS：std::split与std::lazy_split存在细微区别，在此不作详细说明，感兴趣可以参考：
@@ -242,21 +242,27 @@ https://nodejs.org/zh-cn/download 装好之后进入命令行安装Hexo:
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install -g hexo</span></span><br></pre></td></tr></table></figure> 本地创建一个文件夹用来部署Hexo和存放网站内容,
 cd进去初始化Hexo: <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> D:/Workspace/Blog</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo init</span></span><br></pre></td></tr></table></figure>
 初始化之后的文件结构大概是这样的:(下图已经是生成完毕后的工程目录了)
-<img src="/post/site_build_note/image.png" class="" title="Alt text"> 几个比较重要的部分: - .deploy_git: 最终生成的github repo
-- node_modules: 通过npm安装的各种包 - public: 生成的网页文件夹 -
-scaffolds: 创建新博客用的模板 - source: 网站实际内容, 以md的格式保存,
-通过这个文件夹去生成public - _config.yml: Hexo的配置文件,
-各种设置都需要在这里开启</p>
+<img src="/post/site_build_note/image.png" class="" title="Alt text"></p>
+<p>几个比较重要的部分:</p>
+<ul>
+<li>.deploy_git: 最终生成的github repo</li>
+<li>node_modules: 通过npm安装的各种包</li>
+<li>public: 生成的网页文件夹</li>
+<li>scaffolds: 创建新博客用的模板</li>
+<li>source: 网站实际内容, 以md的格式保存,
+通过这个文件夹去生成public</li>
+<li>_config.yml: Hexo的配置文件, 各种设置都需要在这里开启</li>
+</ul>
 <h3 id="生成与推送">生成与推送</h3>
 <p>第一次初始化的时候hexo已经帮我们写了一篇名为Hello World的文章,
 不过这里还是尝试自己创建一篇. 首先在_config文件中配置网站的基础内容:
 <figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">雪之湖畔-SnowyLakeSide</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">&#x27;Before it begins, the war we all fear.&#x27;</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">&#x27;Graphics Developer, Talk Artist.&#x27;</span></span><br><span class="line"><span class="attr">keywords:</span> <span class="string">&quot;&quot;</span> <span class="comment">#貌似没用?</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">SnowyLake</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">zh-CN</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">&#x27;Asia/Shanghai&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 自己网站的地址</span></span><br><span class="line"><span class="attr">url:</span> <span class="string">http://snowylake.net</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span> <span class="string">git@github.com:SnowyLake/snowylake.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure> 在开始正式创建网页时, 还需要装两个包: <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-renderer-marked --save</span><br><span class="line">$ npm install hexo-relative-link --save</span><br></pre></td></tr></table></figure>
 以及在_config页面修改/添加: <figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Writing</span></span><br><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 以下为添加内容</span></span><br><span class="line"><span class="attr">marked:</span></span><br><span class="line">  <span class="attr">prependRoot:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">postAsset:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 这部分修改可以使创建博客时自动创建同名文件夹用于存放图片,
-并可以通过以下形式在本地和网页中正常引用图片: <img src="/post/site_build_note/image-5.png" class="" title="Alt text"> 同时,
-如果md编辑器是VSCode的话, 还需进行如下设置,
-保证向文本中copy图片可以直接保存到同名文件夹下: <img src="/post/site_build_note/image-1.png" class="" title="Alt text">
-准备工作完成后, 就可通过此命令创建博客了,
+并可以通过以下形式在本地和网页中正常引用图片: <img src="/post/site_build_note/image-5.png" class="" title="Alt text"></p>
+<p>同时, 如果md编辑器是VSCode的话, 还需进行如下设置,
+保证向文本中copy图片可以直接保存到同名文件夹下: <img src="/post/site_build_note/image-1.png" class="" title="Alt text"></p>
+<p>准备工作完成后, 就可通过此命令创建博客了,
 命令将在Blog/source/_post下创建HelloWorld.md文件和同名文件夹.
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo new <span class="string">&quot;HelloWorld&quot;</span></span></span><br></pre></td></tr></table></figure> 之后就可以进行第一次的生成与推送: <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo g</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo d</span></span><br></pre></td></tr></table></figure>
 常用Hexo命令: <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">生成public文件夹</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo generate</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo g <span class="comment">#简写</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">向github推送</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo deploy</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo d <span class="comment">#简写</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">本地预览网站</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo server</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo s <span class="comment">#简写</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo s --debug <span class="comment">#debug状态下本地预览网站</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">新建文章</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo new <span class="string">&quot;postName&quot;</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">新建页面(后续演示)</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo new page <span class="string">&quot;postName&quot;</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">生成并本地预览</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo s -g</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">生成并推送</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo d -g</span></span><br></pre></td></tr></table></figure></p>
@@ -264,35 +270,49 @@ scaffolds: 创建新博客用的模板 - source: 网站实际内容, 以md的格
 <h3 id="安装与配置next">安装与配置Next</h3>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> D:/Workspace/Blog</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git <span class="built_in">clone</span> https://github.com/next-theme/hexo-theme-next themes/next</span></span><br></pre></td></tr></table></figure>
 <p>在Hexo目录下的_config.yml(hexo config)中添加配置: <img src="/post/site_build_note/image-4.png" class="" title="Alt text">
-切换主题: <img src="/post/site_build_note/image-9.png" class="" title="Alt text"> ### 添加博客头像、背景与透明
-将博客头像保存在在Blog/themes/next/source/uploads下,
-然后在themes/next目录下的_config.yml(主题config)中配置: <img src="/post/site_build_note/image-8.png" class="" title="Alt text">
-将网站的背景图片保存在Blog/source/images下;
-在Blog/source下新建文件夹_data, 并创建文件styles.styl: <figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="string">//背景图片设置</span></span><br><span class="line"><span class="string">body</span> &#123;</span><br><span class="line">    <span class="attr">background-image:</span> <span class="string">url(/images/background.jpg);</span></span><br><span class="line">    <span class="attr">background-repeat:</span> <span class="literal">no</span><span class="string">-repeat;</span></span><br><span class="line">    <span class="attr">background-attachment:</span> <span class="string">fixed;</span></span><br><span class="line">    <span class="attr">background-size:</span> <span class="string">cover;</span></span><br><span class="line">    <span class="attr">background-position:</span> <span class="string">center;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">//整体透明</span></span><br><span class="line"><span class="string">:root</span> &#123;</span><br><span class="line">  <span class="string">--content-bg-color:</span> <span class="string">rgba(255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.8</span><span class="string">);</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">//文章背板的颜色rgb</span></span><br><span class="line"><span class="string">.main-inner</span> <span class="string">&gt;</span> <span class="string">.sub-menu,</span> <span class="string">.main-inner</span> <span class="string">&gt;</span> <span class="string">.post-block,</span> <span class="string">.main-inner</span> <span class="string">&gt;</span> <span class="string">.tabs-comment,</span> <span class="string">.main-inner</span> <span class="string">&gt;</span> <span class="string">.comments,</span> <span class="string">.main-inner</span> <span class="string">&gt;</span> </span><br><span class="line"><span class="string">.pagination&#123;</span> <span class="string">&#125;</span></span><br><span class="line"><span class="string">//主体字体颜色</span></span><br><span class="line"><span class="string">body&#123;</span>                               </span><br><span class="line">  <span class="attr">color:</span> <span class="string">rgba(0,</span> <span class="number">0</span><span class="string">,</span> <span class="number">0</span><span class="string">,</span> <span class="number">1</span><span class="string">);</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">//文章标题颜色</span></span><br><span class="line"><span class="string">.posts-expand</span> <span class="string">.post-title-link</span> &#123;    </span><br><span class="line">    <span class="attr">color:</span> <span class="string">rgba(0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span><span class="string">);</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">//搜索框透明</span></span><br><span class="line"><span class="string">.popup</span> &#123;        </span><br><span class="line">  <span class="attr">opacity:</span> <span class="number">0.9</span><span class="string">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-在主题的config中配置该styl文件: <img src="/post/site_build_note/image-10.png" class="" title="Alt text"> ### 添加菜单
-在主题的config中取消相应菜单的注释: <img src="/post/site_build_note/image-11.png" class="" title="Alt text">
-使用<code>hexo new page</code>命令创建对应的菜单,
-之后<code>hexo g</code>重新生成即可. ### 修改侧边栏宽度
-主题config中修改width数值. <img src="/post/site_build_note/image-12.png" class="" title="Alt text"> ### 添加社交网站链接
-<img src="/post/site_build_note/image-13.png" class="" title="Alt text"> ### 添加搜索功能 Blog根目录下命令行安装插件:
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install hexo-generator-searchdb --save</span></span><br></pre></td></tr></table></figure> 主题config中设置: <img src="/post/site_build_note/image-14.png" class="" title="Alt text"> hexo的config中添加配置:
-<img src="/post/site_build_note/image-15.png" class="" title="Alt text"> 之后重新生成. ### 添加文章字数与阅读时长统计
-Blog根目录下命令行安装插件: <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install hexo-symbols-count-time --save</span></span><br></pre></td></tr></table></figure> hexo的config中添加设置:
-<img src="/post/site_build_note/image-16.png" class="" title="Alt text"> 主题的config中设置: <img src="/post/site_build_note/image-17.png" class="" title="Alt text"> 之后重新生成. ###
-添加网站观看人数统计 主题config中设置. <img src="/post/site_build_note/image-18.png" class="" title="Alt text"> ### 添加网站图标
-将网站图标保存到Blog/themes/next/source/uploads下, 在主题config中设置.
-<img src="/post/site_build_note/image-19.png" class="" title="Alt text"> ### 添加文末版权声明 主题config中设置. <img src="/post/site_build_note/image-20.png" class="" title="Alt text"> ###
-默认展开目录 主题config中设置. <img src="/post/site_build_note/image-21.png" class="" title="Alt text"></p>
+切换主题: <img src="/post/site_build_note/image-9.png" class="" title="Alt text"></p>
+<h3 id="添加博客头像背景与透明">添加博客头像、背景与透明</h3>
+<p>将博客头像保存在在Blog/themes/next/source/uploads下,
+然后在themes/next目录下的_config.yml(主题config)中配置:
+<img src="/post/site_build_note/image-8.png" class="" title="Alt text"></p>
+<p>将网站的背景图片保存在Blog/source/images下;</p>
+<p>在Blog/source下新建文件夹_data, 并创建文件styles.styl: <figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="string">//背景图片设置</span></span><br><span class="line"><span class="string">body</span> &#123;</span><br><span class="line">    <span class="attr">background-image:</span> <span class="string">url(/images/background.jpg);</span></span><br><span class="line">    <span class="attr">background-repeat:</span> <span class="literal">no</span><span class="string">-repeat;</span></span><br><span class="line">    <span class="attr">background-attachment:</span> <span class="string">fixed;</span></span><br><span class="line">    <span class="attr">background-size:</span> <span class="string">cover;</span></span><br><span class="line">    <span class="attr">background-position:</span> <span class="string">center;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">//整体透明</span></span><br><span class="line"><span class="string">:root</span> &#123;</span><br><span class="line">  <span class="string">--content-bg-color:</span> <span class="string">rgba(255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.8</span><span class="string">);</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">//文章背板的颜色rgb</span></span><br><span class="line"><span class="string">.main-inner</span> <span class="string">&gt;</span> <span class="string">.sub-menu,</span> <span class="string">.main-inner</span> <span class="string">&gt;</span> <span class="string">.post-block,</span> <span class="string">.main-inner</span> <span class="string">&gt;</span> <span class="string">.tabs-comment,</span> <span class="string">.main-inner</span> <span class="string">&gt;</span> <span class="string">.comments,</span> <span class="string">.main-inner</span> <span class="string">&gt;</span> </span><br><span class="line"><span class="string">.pagination&#123;</span> <span class="string">&#125;</span></span><br><span class="line"><span class="string">//主体字体颜色</span></span><br><span class="line"><span class="string">body&#123;</span>                               </span><br><span class="line">  <span class="attr">color:</span> <span class="string">rgba(0,</span> <span class="number">0</span><span class="string">,</span> <span class="number">0</span><span class="string">,</span> <span class="number">1</span><span class="string">);</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">//文章标题颜色</span></span><br><span class="line"><span class="string">.posts-expand</span> <span class="string">.post-title-link</span> &#123;    </span><br><span class="line">    <span class="attr">color:</span> <span class="string">rgba(0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span><span class="string">);</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">//搜索框透明</span></span><br><span class="line"><span class="string">.popup</span> &#123;        </span><br><span class="line">  <span class="attr">opacity:</span> <span class="number">0.9</span><span class="string">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+在主题的config中配置该styl文件: <img src="/post/site_build_note/image-10.png" class="" title="Alt text"></p>
+<h3 id="添加菜单">添加菜单</h3>
+<p>在主题的config中取消相应菜单的注释: <img src="/post/site_build_note/image-11.png" class="" title="Alt text"></p>
+<p>使用<code>hexo new page</code>命令创建对应的菜单,
+之后<code>hexo g</code>重新生成即可.</p>
+<h3 id="修改侧边栏宽度">修改侧边栏宽度</h3>
+<p>主题config中修改width数值. <img src="/post/site_build_note/image-12.png" class="" title="Alt text"></p>
+<h3 id="添加社交网站链接">添加社交网站链接</h3>
+<img src="/post/site_build_note/image-13.png" class="" title="Alt text">
+<h3 id="添加搜索功能">添加搜索功能</h3>
+<p>Blog根目录下命令行安装插件: <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install hexo-generator-searchdb --save</span></span><br></pre></td></tr></table></figure> 主题config中设置:
+<img src="/post/site_build_note/image-14.png" class="" title="Alt text"> hexo的config中添加配置: <img src="/post/site_build_note/image-15.png" class="" title="Alt text"> 之后重新生成.</p>
+<h3 id="添加文章字数与阅读时长统计">添加文章字数与阅读时长统计</h3>
+<p>Blog根目录下命令行安装插件: <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install hexo-symbols-count-time --save</span></span><br></pre></td></tr></table></figure> hexo的config中添加设置:
+<img src="/post/site_build_note/image-16.png" class="" title="Alt text"> 主题的config中设置: <img src="/post/site_build_note/image-17.png" class="" title="Alt text"> 之后重新生成.</p>
+<h3 id="添加网站观看人数统计">添加网站观看人数统计</h3>
+<p>主题config中设置. <img src="/post/site_build_note/image-18.png" class="" title="Alt text"></p>
+<h3 id="添加网站图标">添加网站图标</h3>
+<p>将网站图标保存到Blog/themes/next/source/uploads下,
+在主题config中设置. <img src="/post/site_build_note/image-19.png" class="" title="Alt text"></p>
+<h3 id="添加文末版权声明">添加文末版权声明</h3>
+<p>主题config中设置. <img src="/post/site_build_note/image-20.png" class="" title="Alt text"></p>
+<h3 id="默认展开目录">默认展开目录</h3>
+<p>主题config中设置. <img src="/post/site_build_note/image-21.png" class="" title="Alt text"></p>
 <h2 id="博客写作功能">博客写作功能</h2>
 <h3 id="声明文章摘要">声明文章摘要</h3>
 <p>在想要截止的地方添加<code>&lt;!--more--&gt;</code>标记即可,
 标记之上的内容便是文章的摘要. 方便起见可以将这个标记加入到文章模板中去.
-<img src="/post/site_build_note/image-22.png" class="" title="Alt text"> ### 配置自定义模板
-每次新建的文章模板被保存在Blog/scaffolds下, post就是'hexo
+<img src="/post/site_build_note/image-22.png" class="" title="Alt text"></p>
+<h3 id="配置自定义模板">配置自定义模板</h3>
+<p>每次新建的文章模板被保存在Blog/scaffolds下, post就是'hexo
 new'命令创建博客时使用的模板. 根据需求自定义即可,
 我这里添加了tag和category, 以及每篇文章都要用到的摘要标签.
-<img src="/post/site_build_note/image-23.png" class="" title="Alt text"> ### 文章分类与标签 详细规则参考:
-https://hexo.io/zh-cn/docs/front-matter</p>
+<img src="/post/site_build_note/image-23.png" class="" title="Alt text"></p>
+<h3 id="文章分类与标签">文章分类与标签</h3>
+<p>详细规则参考: https://hexo.io/zh-cn/docs/front-matter</p>
 <h2 id="自定义域名">自定义域名</h2>
 <p>这里我是通过 www.dynadot.com 购买的域名. 首先要对域名进行dns解析,
 为了白嫖Github提供的https证书,
@@ -306,20 +326,28 @@ https://hexo.io/zh-cn/docs/front-matter</p>
 HTTPS. <img src="/post/site_build_note/image-7.png" class="" title="Alt text"></p>
 <h2 id="搜索引擎索引">搜索引擎索引</h2>
 <h3 id="添加索引">添加索引</h3>
-<p>需要为搜索引擎添加索引, 才能让网站被各大搜索引擎所收录.
-登录https://search.google.com/search-console, 输入网站地址,
-选择HTML验证. 将下载的HTML文件拷贝到source文件夹, <code>hexo g</code>,
+<p>需要为搜索引擎添加索引, 才能让网站被各大搜索引擎所收录.</p>
+<p>登录https://search.google.com/search-console, 输入网站地址,
+选择HTML验证.</p>
+<p>将下载的HTML文件拷贝到source文件夹, <code>hexo g</code>,
 之后再进入public文件夹, 这时public文件夹中生成的HTML文件是错误的,
 需要手动将source文件夹中正确的内容拷过去,
-之后再执行<code>hexo d</code>即可通过验证.
-Bing端的索引信息在Google完成后可以同步过来, 不需要重复操作. ###
-生成网站地图 Blog根目录下执行命令: <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install hexo-generator-sitemap --save</span></span><br></pre></td></tr></table></figure>
+之后再执行<code>hexo d</code>即可通过验证.</p>
+<p>Bing端的索引信息在Google完成后可以同步过来, 不需要重复操作.</p>
+<h3 id="生成网站地图">生成网站地图</h3>
+<p>Blog根目录下执行命令: <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install hexo-generator-sitemap --save</span></span><br></pre></td></tr></table></figure>
 之后每次生成都会生成新的sitemap.</p>
 <h2 id="reference">Reference</h2>
-<p>https://www.lfzxb.top/the-record-of-build-site-based-on-hexo/
-https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html
-https://zhuanlan.zhihu.com/p/618864711 https://hexo.io/zh-cn/docs/
-https://hexo-next.readthedocs.io/zh_CN/latest/</p>
+<p><a
+href="https://www.lfzxb.top/the-record-of-build-site-based-on-hexo/">https://www.lfzxb.top/the-record-of-build-site-based-on-hexo/</a></p>
+<p><a
+href="https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html">https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html</a></p>
+<p><a
+href="https://zhuanlan.zhihu.com/p/618864711">https://zhuanlan.zhihu.com/p/618864711</a></p>
+<p><a
+href="https://hexo.io/zh-cn/docs/">https://zhuanlan.zhihu.com/p/618864711</a></p>
+<p><a
+href="https://hexo-next.readthedocs.io/zh_CN/latest/">https://hexo-next.readthedocs.io/zh_CN/latest/</a></p>
 ]]></content>
       <categories>
         <category>Others</category>
@@ -337,8 +365,10 @@ https://hexo-next.readthedocs.io/zh_CN/latest/</p>
 你父母的同事都在说自己儿女一年的收获，有的用Java做了个网站后端赚到了第一笔外快，有的用Python做了点数据可视化发到B站成了up主，有的学了Unity和C#做独立游戏已经发售了。
 你的父母默默无言，说我的儿子买了一整套的Effective C++，上Stack
 Overflow痛骂了C++标准委员会，写了一堆狗屁不通报错几百几千行的模板元编程代码，还对着谷歌翻译啃Ray
-Tracing the Rest of Your Life，人也越来越魔怔了。 &gt; 原文链接:
-https://zhuanlan.zhihu.com/p/456526193 <span id="more"></span></p>
+Tracing the Rest of Your Life，人也越来越魔怔了。</p>
+<blockquote>
+<p>原文链接: https://zhuanlan.zhihu.com/p/456526193 <span id="more"></span></p>
+</blockquote>
 ]]></content>
       <categories>
         <category>Others</category>
@@ -367,8 +397,10 @@ https://zhuanlan.zhihu.com/p/456526193 <span id="more"></span></p>
     <title>UE5.1移动端延迟渲染管线测试与剖析</title>
     <url>/post/ue51_mobile_deferred.html</url>
     <content><![CDATA[<span id="more"></span>
-<p>待搬运, 内容详见原文链接. &gt; 原文链接:
-https://zhuanlan.zhihu.com/p/575618981</p>
+<p>待搬运, 内容详见原文链接.</p>
+<blockquote>
+<p>原文链接: https://zhuanlan.zhihu.com/p/575618981</p>
+</blockquote>
 ]]></content>
       <categories>
         <category>Game Engine</category>
@@ -384,8 +416,10 @@ https://zhuanlan.zhihu.com/p/575618981</p>
     <title>UE5.1移动端延迟管线基于Light Channels模拟Unity Rendering Layers</title>
     <url>/post/ue51_mobile_deferred_lightchannels.html</url>
     <content><![CDATA[<span id="more"></span>
-<p>待搬运, 内容详见原文链接. &gt; 原文链接:
-https://zhuanlan.zhihu.com/p/577239276</p>
+<p>待搬运, 内容详见原文链接.</p>
+<blockquote>
+<p>原文链接: https://zhuanlan.zhihu.com/p/577239276</p>
+</blockquote>
 ]]></content>
       <categories>
         <category>Game Engine</category>
@@ -401,8 +435,10 @@ https://zhuanlan.zhihu.com/p/577239276</p>
     <title>浅谈UE5的C++程序化生成Shader</title>
     <url>/post/ue5_cpp_generate_shader.html</url>
     <content><![CDATA[<span id="more"></span>
-<p>待搬运, 内容详见原文链接. &gt; 原文链接:
-https://zhuanlan.zhihu.com/p/574551808</p>
+<p>待搬运, 内容详见原文链接.</p>
+<blockquote>
+<p>原文链接: https://zhuanlan.zhihu.com/p/574551808</p>
+</blockquote>
 ]]></content>
       <categories>
         <category>Game Engine</category>
@@ -567,8 +603,10 @@ FPlatformProcess::ShaderDir()) <strong>← 引擎 Shader
     <title>从零开始的UE5卡通渲染0x01：自定义着色模型</title>
     <url>/post/ue5_toonshading_0x01_custom_shadingmodel.html</url>
     <content><![CDATA[<span id="more"></span>
-<p>待搬运, 内容详见原文链接. &gt; 原文链接:
-https://zhuanlan.zhihu.com/p/551343308</p>
+<p>待搬运, 内容详见原文链接.</p>
+<blockquote>
+<p>原文链接: https://zhuanlan.zhihu.com/p/551343308</p>
+</blockquote>
 ]]></content>
       <categories>
         <category>Game Engine</category>
