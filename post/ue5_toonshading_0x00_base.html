@@ -22,34 +22,34 @@
     <meta name="description" content="最近在研究基于UE5的卡通渲染，颇有收获。正巧前段时间与同事吃饭，聊到知乎，深感自己知乎各种不正经的东西实在太多了，而我又是个懒得腾出时间写正经东西的懒狗，遂决定趁编译Shader的空闲，写点学习笔记、心得与分享。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从零开始的UE5卡通渲染0x00：理论基础">
-<meta property="og:url" content="http://snowylake.net/post/ue5_toonshading_0x00_base.html">
+<meta property="og:url" content="https://snowylake.net/post/ue5_toonshading_0x00_base.html">
 <meta property="og:site_name" content="雪之湖畔-SnowyLakeSide">
 <meta property="og:description" content="最近在研究基于UE5的卡通渲染，颇有收获。正巧前段时间与同事吃饭，聊到知乎，深感自己知乎各种不正经的东西实在太多了，而我又是个懒得腾出时间写正经东西的懒狗，遂决定趁编译Shader的空闲，写点学习笔记、心得与分享。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://snowylake.net/post/ue5_toonshading_0x00_base/image.png">
-<meta property="og:image" content="http://snowylake.net/post/ue5_toonshading_0x00_base/image-1.png">
-<meta property="og:image" content="http://snowylake.net/post/ue5_toonshading_0x00_base/image-3.png">
-<meta property="og:image" content="http://snowylake.net/post/ue5_toonshading_0x00_base/image-5.png">
-<meta property="og:image" content="http://snowylake.net/post/ue5_toonshading_0x00_base/image-4.png">
-<meta property="og:image" content="http://snowylake.net/post/ue5_toonshading_0x00_base/image-6.png">
-<meta property="og:image" content="http://snowylake.net/post/ue5_toonshading_0x00_base/image-7.png">
-<meta property="og:image" content="http://snowylake.net/post/ue5_toonshading_0x00_base/image-8.png">
-<meta property="og:image" content="http://snowylake.net/post/ue5_toonshading_0x00_base/image-9.png">
+<meta property="og:image" content="https://snowylake.net/post/ue5_toonshading_0x00_base/image.png">
+<meta property="og:image" content="https://snowylake.net/post/ue5_toonshading_0x00_base/image-1.png">
+<meta property="og:image" content="https://snowylake.net/post/ue5_toonshading_0x00_base/image-3.png">
+<meta property="og:image" content="https://snowylake.net/post/ue5_toonshading_0x00_base/image-5.png">
+<meta property="og:image" content="https://snowylake.net/post/ue5_toonshading_0x00_base/image-4.png">
+<meta property="og:image" content="https://snowylake.net/post/ue5_toonshading_0x00_base/image-6.png">
+<meta property="og:image" content="https://snowylake.net/post/ue5_toonshading_0x00_base/image-7.png">
+<meta property="og:image" content="https://snowylake.net/post/ue5_toonshading_0x00_base/image-8.png">
+<meta property="og:image" content="https://snowylake.net/post/ue5_toonshading_0x00_base/image-9.png">
 <meta property="article:published_time" content="2023-09-10T21:02:45.000Z">
-<meta property="article:modified_time" content="2024-09-14T19:26:24.158Z">
+<meta property="article:modified_time" content="2024-09-14T19:26:24.000Z">
 <meta property="article:author" content="SnowyLake">
 <meta property="article:tag" content="Cpp">
 <meta property="article:tag" content="Unreal">
 <meta property="article:tag" content="Rendering">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://snowylake.net/post/ue5_toonshading_0x00_base/image.png">
+<meta name="twitter:image" content="https://snowylake.net/post/ue5_toonshading_0x00_base/image.png">
 
 
-<link rel="canonical" href="http://snowylake.net/post/ue5_toonshading_0x00_base.html">
+<link rel="canonical" href="https://snowylake.net/post/ue5_toonshading_0x00_base.html">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://snowylake.net/post/ue5_toonshading_0x00_base.html","path":"post/ue5_toonshading_0x00_base.html","title":"从零开始的UE5卡通渲染0x00：理论基础"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://snowylake.net/post/ue5_toonshading_0x00_base.html","path":"post/ue5_toonshading_0x00_base.html","title":"从零开始的UE5卡通渲染0x00：理论基础"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>从零开始的UE5卡通渲染0x00：理论基础 | 雪之湖畔-SnowyLakeSide</title>
@@ -218,13 +218,6 @@
             </div>
             <ul class="popular-posts">
                     <li class="popular-posts-item">
-                        <a class="popular-posts-link" href="/post/ue51_mobile_deferred.html" rel="bookmark">
-                          <time class="popular-posts-time">2023-09-11</time>
-                          <br>
-                        UE5.1移动端延迟渲染管线测试与剖析
-                        </a>
-                    </li>
-                    <li class="popular-posts-item">
                         <a class="popular-posts-link" href="/post/ue5_rendering_plugin_0x00_shader_remapping.html" rel="bookmark">
                           <time class="popular-posts-time">2024-07-12</time>
                           <br>
@@ -236,6 +229,13 @@
                           <time class="popular-posts-time">2024-09-15</time>
                           <br>
                         聊聊UI分辨率分离与线性空间下的GammaUI
+                        </a>
+                    </li>
+                    <li class="popular-posts-item">
+                        <a class="popular-posts-link" href="/post/ue51_mobile_deferred.html" rel="bookmark">
+                          <time class="popular-posts-time">2023-09-11</time>
+                          <br>
+                        UE5.1移动端延迟渲染管线测试与剖析
                         </a>
                     </li>
             </ul>
@@ -258,7 +258,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://snowylake.net/post/ue5_toonshading_0x00_base.html">
+    <link itemprop="mainEntityOfPage" href="https://snowylake.net/post/ue5_toonshading_0x00_base.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/snowylake.png">
@@ -341,45 +341,57 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>最近在研究基于UE5的卡通渲染，颇有收获。正巧前段时间与同事吃饭，聊到知乎，深感自己知乎各种不正经的东西实在太多了，而我又是个懒得腾出时间写正经东西的懒狗，遂决定趁编译Shader的空闲，写点学习笔记、心得与分享。
+    <div class="post-body" itemprop="articleBody"><p>最近在研究基于UE5的卡通渲染，颇有收获。正巧前段时间与同事吃饭，聊到知乎，深感自己知乎各种不正经的东西实在太多了，而我又是个懒得腾出时间写正经东西的懒狗，遂决定趁编译Shader的空闲，写点学习笔记、心得与分享。</p>
 <span id="more"></span>
-虽然卡渲本身的知识不算很多，但放到UE5上就是不得不改动源码的大工程了，不由得让人怀念起自由的Unity，令人感叹……扯远了，总之UE5卡渲这块我准备分成多篇文章，多水一水。</p>
+<p>虽然卡渲本身的知识不算很多，但放到UE5上就是不得不改动源码的大工程了，不由得让人怀念起自由的Unity，令人感叹……扯远了，总之UE5卡渲这块我准备分成多篇文章，多水一水。</p>
 <p>目前的大(feng)致(kuang)计(hua)划(bing)如下：</p>
 <ul>
 <li>卡通渲染理论基础</li>
 <li>修改源码的卡渲光照模型实现</li>
 <li>基于卷积矩阵的卡渲描边实现、添加子Mesh的Backface卡渲描边实现</li>
-<li>修改源码自定义Pass的Backface卡渲描边实现 ……
-次世代卡渲/独立的Hair、Skin卡渲光照模型/UE5复刻原神ShadingModel……(或许会有？)
-废话不多说了，进入正题。 ---
-提到卡通渲染，很多了解不多的朋友可能就会将其与NPR(Non-Photorealistic
-Rendering)混为一谈，可实际上这两者并不能划等号。事实上NPR是个非常广泛的概念，不止是卡渲，油画、水墨风等等等等各种特殊的渲染风格都可以算作是NPR的一部分，而整个卡渲大类也只是NPR的一个分支罢了，更不用说卡渲自己还有分有各种流派，比如日式赛璐璐风格、有明显明暗分界的Cel
-Shading和琪亚娜极乐净土中明暗渐变连续的Tone based
-Shading，以及结合pbr的次世代卡通渲染等。 <img src="/post/ue5_toonshading_0x00_base/image.png" class="" title="Alt text"> &gt;
-GGX采用的就是Cel Shading，可以看到角色身上明显的明暗分界</li>
+<li>修改源码自定义Pass的Backface卡渲描边实现<br>……<br>次世代卡渲&#x2F;独立的Hair、Skin卡渲光照模型&#x2F;UE5复刻原神ShadingModel……(或许会有？)<br>废话不多说了，进入正题。</li>
 </ul>
+<hr>
+<p>提到卡通渲染，很多了解不多的朋友可能就会将其与NPR(Non-Photorealistic Rendering)混为一谈，可实际上这两者并不能划等号。事实上NPR是个非常广泛的概念，不止是卡渲，油画、水墨风等等等等各种特殊的渲染风格都可以算作是NPR的一部分，而整个卡渲大类也只是NPR的一个分支罢了，更不用说卡渲自己还有分有各种流派，比如日式赛璐璐风格、有明显明暗分界的Cel Shading和琪亚娜极乐净土中明暗渐变连续的Tone based Shading，以及结合pbr的次世代卡通渲染等。</p>
+<img src="/post/ue5_toonshading_0x00_base/image.png" class="" title="Alt text">
+<blockquote>
+<p>GGX采用的就是Cel Shading，可以看到角色身上明显的明暗分界</p>
+</blockquote>
 <img src="/post/ue5_toonshading_0x00_base/image-1.png" class="" title="Alt text">
 <blockquote>
 <p>琪亚娜的皮肤很显然是Tone based Shading……虫虫，我的虫虫，嘿嘿嘿</p>
 </blockquote>
-<p>那么说到流派，既然要研究卡渲，那我们自然要选择一个流派去研究，这里我选择当然的是前面拿来举例、卡渲领域典中之典的罪恶装备(以下简称GGX，注意不是Cook-Torrance
-BRDF里那个GGX，笑)作为参考。
-作为卡渲领域的里程碑作品，GGX的材质模型其实非常的简单，主要使用了三张贴图：BaseColor，ilm和SSS：
-- BaseColor：提供基础颜色 <img src="/post/ue5_toonshading_0x00_base/image-3.png" class="" title="Alt text"> -
-ilm：提供高光、阴影与内描边信息 <img src="/post/ue5_toonshading_0x00_base/image-5.png" class="" title="Alt text"> -
-SSS：提供模型阴影颜色信息，模型阴影颜色即为SSS * BaseColor <img src="/post/ue5_toonshading_0x00_base/image-4.png" class="" title="Alt text">
-其中，最值得详谈的是ilm贴图，其RGBA四个通道分别存储了高光强度、阴影阈值、高光范围与内描边信息：</p>
+<p>那么说到流派，既然要研究卡渲，那我们自然要选择一个流派去研究，这里我选择当然的是前面拿来举例、卡渲领域典中之典的罪恶装备(以下简称GGX，注意不是Cook-Torrance BRDF里那个GGX，笑)作为参考。<br>作为卡渲领域的里程碑作品，GGX的材质模型其实非常的简单，主要使用了三张贴图：BaseColor，ilm和SSS：</p>
 <ul>
-<li><p>R通道： <img src="/post/ue5_toonshading_0x00_base/image-6.png" class="" title="Alt text"> 高光强度，没什么好说的；</p></li>
-<li><p>G通道： <img src="/post/ue5_toonshading_0x00_base/image-7.png" class="" title="Alt text">
-阴影阈值，基于128灰度的底色，控制材质进入阴影的倾向强弱。</p></li>
-<li><p>B通道 <img src="/post/ue5_toonshading_0x00_base/image-8.png" class="" title="Alt text"> 高光区域，决定了高光的范围。</p></li>
-<li><p>A通道 <img src="/post/ue5_toonshading_0x00_base/image-9.png" class="" title="Alt text"> 内描边信息，著名的本村线；</p></li>
+<li><p>BaseColor：提供基础颜色</p>
+<img src="/post/ue5_toonshading_0x00_base/image-3.png" class="" title="Alt text"></li>
+<li><p>ilm：提供高光、阴影与内描边信息</p>
+<img src="/post/ue5_toonshading_0x00_base/image-5.png" class="" title="Alt text"></li>
+<li><p>SSS：提供模型阴影颜色信息，模型阴影颜色即为SSS * BaseColor</p>
+<img src="/post/ue5_toonshading_0x00_base/image-4.png" class="" title="Alt text">
+<p>其中，最值得详谈的是ilm贴图，其RGBA四个通道分别存储了高光强度、阴影阈值、高光范围与内描边信息：</p>
+</li>
+<li><p>R通道：</p>
+<img src="/post/ue5_toonshading_0x00_base/image-6.png" class="" title="Alt text">
+<p>高光强度，没什么好说的；</p>
+</li>
+<li><p>G通道：</p>
+<img src="/post/ue5_toonshading_0x00_base/image-7.png" class="" title="Alt text">
+<p>阴影阈值，基于128灰度的底色，控制材质进入阴影的倾向强弱。</p>
+</li>
+<li><p>B通道</p>
+<img src="/post/ue5_toonshading_0x00_base/image-8.png" class="" title="Alt text">
+<p>高光区域，决定了高光的范围。</p>
+</li>
+<li><p>A通道</p>
+<img src="/post/ue5_toonshading_0x00_base/image-9.png" class="" title="Alt text">
+<p>内描边信息，著名的本村线；</p>
+</li>
 </ul>
 <p>除此以外，实际上GGX的卡渲方案还用到了一些贴图，比如角色的伤痕等，但这些对于ShadingModel来说都不重要，我们暂不去考虑。本来打算把卡渲的算法部分放在这里讲，但想了想不如丢到实现部分直接结合代码来讲……而且如果只是做一个简单卡渲模型的话，倒也不需要什么复杂的算法。</p>
 <p>那么作为序言的第一篇就到此为止，下一篇开始，我们将在UE5内通过修改源码来实现第一个卡渲模型。</p>
 <blockquote>
-<p>原文链接: https://zhuanlan.zhihu.com/p/544141830</p>
+<p>原文链接: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/544141830">https://zhuanlan.zhihu.com/p/544141830</a></p>
 </blockquote>
 
     </div>
@@ -398,7 +410,7 @@ SSS：提供模型阴影颜色信息，模型阴影颜色即为SSS * BaseColor <
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="http://snowylake.net/post/ue5_toonshading_0x00_base.html" title="从零开始的UE5卡通渲染0x00：理论基础">http://snowylake.net/post/ue5_toonshading_0x00_base.html</a>
+      <a href="https://snowylake.net/post/ue5_toonshading_0x00_base.html" title="从零开始的UE5卡通渲染0x00：理论基础">https://snowylake.net/post/ue5_toonshading_0x00_base.html</a>
   </li>
   <li class="post-copyright-license">
       <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -444,7 +456,7 @@ SSS：提供模型阴影颜色信息，模型阴影颜色即为SSS * BaseColor <
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2025</span>
+  <span itemprop="copyrightYear">2026</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
