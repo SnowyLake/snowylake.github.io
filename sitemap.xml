@@ -2,9 +2,72 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://snowylake.net/post/cpp20_stringsplit.html</loc>
+    <loc>https://snowylake.net/post/code-is-cheap-show-me-the-idea.html</loc>
     
-    <lastmod>2025-08-24</lastmod>
+    <lastmod>2026-06-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://snowylake.net/post/urp-deferred-nativerenderpass.html</loc>
+    
+    <lastmod>2026-06-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://snowylake.net/post/ue5-rendering-plugin-0x00-shader-remapping.html</loc>
+    
+    <lastmod>2026-06-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://snowylake.net/post/ue5-toonshading-0x00-base.html</loc>
+    
+    <lastmod>2026-06-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://snowylake.net/post/site-build-note.html</loc>
+    
+    <lastmod>2026-06-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://snowylake.net/post/cpp20-ghs-concept-foldexpression-mixin.html</loc>
+    
+    <lastmod>2026-06-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://snowylake.net/post/cpp20-stringsplit.html</loc>
+    
+    <lastmod>2026-06-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://snowylake.net/post/urp-ui-resolution-split-and-gamma-ui.html</loc>
+    
+    <lastmod>2026-06-12</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -20,7 +83,7 @@
   </url>
   
   <url>
-    <loc>https://snowylake.net/post/site_build_note.html</loc>
+    <loc>https://snowylake.net/post/ue51-mobile-deferred-lightchannels.html</loc>
     
     <lastmod>2024-09-14</lastmod>
     
@@ -29,7 +92,7 @@
   </url>
   
   <url>
-    <loc>https://snowylake.net/post/urp_ui_resolution_split_and_gamma_ui.html</loc>
+    <loc>https://snowylake.net/post/ue5-toonshading-0x01-custom-shadingmodel.html</loc>
     
     <lastmod>2024-09-14</lastmod>
     
@@ -38,7 +101,7 @@
   </url>
   
   <url>
-    <loc>https://snowylake.net/post/ue51_mobile_deferred_lightchannels.html</loc>
+    <loc>https://snowylake.net/post/ue5-cpp-generate-shader.html</loc>
     
     <lastmod>2024-09-14</lastmod>
     
@@ -47,7 +110,7 @@
   </url>
   
   <url>
-    <loc>https://snowylake.net/post/ue5_toonshading_0x01_custom_shadingmodel.html</loc>
+    <loc>https://snowylake.net/post/graphics-developer-joke.html</loc>
     
     <lastmod>2024-09-14</lastmod>
     
@@ -56,45 +119,9 @@
   </url>
   
   <url>
-    <loc>https://snowylake.net/post/ue5_cpp_generate_shader.html</loc>
+    <loc>https://snowylake.net/post/ue51-mobile-deferred.html</loc>
     
     <lastmod>2024-09-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://snowylake.net/post/graphics_developer_joke.html</loc>
-    
-    <lastmod>2024-09-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://snowylake.net/post/ue51_mobile_deferred.html</loc>
-    
-    <lastmod>2024-09-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://snowylake.net/post/ue5_toonshading_0x00_base.html</loc>
-    
-    <lastmod>2024-09-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://snowylake.net/post/ue5_rendering_plugin_0x00_shader_remapping.html</loc>
-    
-    <lastmod>2024-07-13</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -110,7 +137,7 @@
   </url>
   
   <url>
-    <loc>https://snowylake.net/post/snowyark_dev_0x00.html</loc>
+    <loc>https://snowylake.net/post/snowyark-dev-0x00.html</loc>
     
     <lastmod>2024-07-08</lastmod>
     
@@ -119,7 +146,7 @@
   </url>
   
   <url>
-    <loc>https://snowylake.net/post/urp_deferred_nativerenderpass.html</loc>
+    <loc>https://snowylake.net/post/cpp-stdoptional-overhead.html</loc>
     
     <lastmod>2024-07-01</lastmod>
     
@@ -128,7 +155,7 @@
   </url>
   
   <url>
-    <loc>https://snowylake.net/post/cpp20_ghs_concept_foldexpression_mixin.html</loc>
+    <loc>https://snowylake.net/post/cpp-autoptr-to-uniqueptr.html</loc>
     
     <lastmod>2024-07-01</lastmod>
     
@@ -137,25 +164,7 @@
   </url>
   
   <url>
-    <loc>https://snowylake.net/post/cpp_stdoptional_overhead.html</loc>
-    
-    <lastmod>2024-07-01</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://snowylake.net/post/cpp_autoptr_to_uniqueptr.html</loc>
-    
-    <lastmod>2024-07-01</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://snowylake.net/post/category_collection.html</loc>
+    <loc>https://snowylake.net/post/category-collection.html</loc>
     
     <lastmod>2024-05-19</lastmod>
     
@@ -164,7 +173,7 @@
   </url>
   
   <url>
-    <loc>https://snowylake.net/post/urp_analysis_0x00_pipeline_framework.html</loc>
+    <loc>https://snowylake.net/post/urp-analysis-0x00-pipeline-framework.html</loc>
     
     <lastmod>2024-05-19</lastmod>
     
@@ -307,13 +316,6 @@
   </url>
   
   <url>
-    <loc>https://snowylake.net/categories/Game-Engine/Unity/</loc>
-    <lastmod>2026-06-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://snowylake.net/categories/Others/</loc>
     <lastmod>2026-06-12</lastmod>
     <changefreq>weekly</changefreq>
@@ -321,21 +323,14 @@
   </url>
   
   <url>
+    <loc>https://snowylake.net/categories/Game-Engine/Unity/</loc>
+    <lastmod>2026-06-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://snowylake.net/categories/Programming-Language/Cpp/</loc>
-    <lastmod>2026-06-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://snowylake.net/categories/Game-Engine/SnowyArk/</loc>
-    <lastmod>2026-06-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://snowylake.net/categories/Game-Engine/Unity/URP-SnowyOwl/</loc>
     <lastmod>2026-06-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -356,7 +351,7 @@
   </url>
   
   <url>
-    <loc>https://snowylake.net/categories/Game-Engine/Unity/HDRP/</loc>
+    <loc>https://snowylake.net/categories/Game-Engine/SnowyArk/</loc>
     <lastmod>2026-06-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -370,7 +365,21 @@
   </url>
   
   <url>
+    <loc>https://snowylake.net/categories/Game-Engine/Unity/URP-SnowyOwl/</loc>
+    <lastmod>2026-06-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://snowylake.net/categories/Game-Engine/Unreal/SnowyFalcon/</loc>
+    <lastmod>2026-06-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://snowylake.net/categories/Game-Engine/Unity/HDRP/</loc>
     <lastmod>2026-06-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
