@@ -1,555 +1,259 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/snowylake-apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/snowylake-icon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/snowylake-icon-16x16.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
-
-<script class="next-config" data-name="main" type="application/json">{"hostname":"snowylake.net","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","width":280,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-
-    <meta name="description" content="过去软件行业有一句很有名的话： Text1Talk is cheap. Show me the code.  这句话代表了前 AI 时代非常典型的工程文化。空谈没有意义。能跑的代码才是真东西。不要只讲想法，把实现拿出来。 但站在 2026 年的角度看，这句话背后的价值结构正在发生反转。现在越来越像是：Code is cheap. Show me the idea.">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Code is cheap. Show me the idea. | 雪之湖畔-SnowyLakeSide</title><meta name="author" content="SnowyLake"><meta name="copyright" content="SnowyLake"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="过去软件行业有一句很有名的话： Text1Talk is cheap. Show me the code. 这句话代表了前 AI 时代非常典型的工程文化。空谈没有意义。能跑的代码才是真东西。不要只讲想法，把实现拿出来。 但站在 2026 年的角度看，这句话背后的价值结构正在发生反转。现在越来越像是：Code is cheap. Show me the idea.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Code is cheap. Show me the idea.">
 <meta property="og:url" content="https://snowylake.net/post/code-is-cheap-show-me-the-idea.html">
 <meta property="og:site_name" content="雪之湖畔-SnowyLakeSide">
-<meta property="og:description" content="过去软件行业有一句很有名的话： Text1Talk is cheap. Show me the code.  这句话代表了前 AI 时代非常典型的工程文化。空谈没有意义。能跑的代码才是真东西。不要只讲想法，把实现拿出来。 但站在 2026 年的角度看，这句话背后的价值结构正在发生反转。现在越来越像是：Code is cheap. Show me the idea.">
+<meta property="og:description" content="过去软件行业有一句很有名的话： Text1Talk is cheap. Show me the code. 这句话代表了前 AI 时代非常典型的工程文化。空谈没有意义。能跑的代码才是真东西。不要只讲想法，把实现拿出来。 但站在 2026 年的角度看，这句话背后的价值结构正在发生反转。现在越来越像是：Code is cheap. Show me the idea.">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://snowylake.net/images/snowylake.png">
 <meta property="article:published_time" content="2026-06-12T19:08:38.000Z">
 <meta property="article:modified_time" content="2026-06-12T19:09:59.516Z">
 <meta property="article:author" content="SnowyLake">
 <meta property="article:tag" content="技术杂谈">
 <meta name="twitter:card" content="summary">
-
-
-<link rel="canonical" href="https://snowylake.net/post/code-is-cheap-show-me-the-idea.html">
-
-
-
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://snowylake.net/post/code-is-cheap-show-me-the-idea.html","path":"post/code-is-cheap-show-me-the-idea.html","title":"Code is cheap. Show me the idea."}</script>
-
-<script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Code is cheap. Show me the idea. | 雪之湖畔-SnowyLakeSide</title>
-  
-
-
-
-
-
-
-
-
-  <noscript>
-    <link rel="stylesheet" href="/css/noscript.css">
-  </noscript>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
-  <div class="headband"></div>
-
-  <main class="main">
-    <div class="column">
-      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏" role="button">
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <i class="logo-line"></i>
-      <p class="site-title">雪之湖畔-SnowyLakeSide</p>
-      <i class="logo-line"></i>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger" aria-label="搜索" role="button">
-        <i class="fa fa-search fa-fw fa-lg"></i>
-    </div>
-  </div>
-</div>
-
-
-
-<nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">27</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">13</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">19</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
-        </a>
-      </li>
-  </ul>
-</nav>
-
-
-
-  <div class="search-pop-overlay">
-    <div class="popup search-popup"><div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off" maxlength="80"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close" role="button">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="search-result-container no-result">
-  <div class="search-result-icon">
-    <i class="fa fa-spinner fa-pulse fa-5x"></i>
-  </div>
-</div>
-
-    </div>
-  </div>
-
-</header>
-        
-  
-  <aside class="sidebar">
-
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <div class="sidebar-panel-container">
-        <!--noindex-->
-        <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B%E6%AD%A3%E5%9C%A8%E4%BB%8E%E8%84%91%E5%8A%9B-%E4%BD%93%E5%8A%9B%E5%8A%B3%E5%8A%A8%EF%BC%8C%E5%8F%98%E6%88%90%E8%BF%91%E4%B9%8E%E7%BA%AF%E7%B2%B9%E7%9A%84%E8%84%91%E5%8A%9B%E5%8A%B3%E5%8A%A8"><span class="nav-number">1.</span> <span class="nav-text">编程正在从脑力 + 体力劳动，变成近乎纯粹的脑力劳动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%9D%E7%A6%BB"><span class="nav-number">2.</span> <span class="nav-text">距离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E4%BA%BA%E7%9A%84%E4%BB%B7%E5%80%BC%E5%92%8C%E8%A1%8C%E4%B8%9A%E7%9A%84%E4%BA%BA%E6%89%8D%E6%A2%AF%E9%98%9F%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">新人的价值和行业的人才梯队问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%A6%E6%A0%A1%E6%97%A0%E6%B3%95%E6%9B%BF%E4%BB%A3%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83"><span class="nav-number">4.</span> <span class="nav-text">学校无法替代生产环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E6%A0%B8%E5%BF%83%E4%BB%B7%E5%80%BC%E6%AD%A3%E5%9C%A8%E4%BB%8E%E5%AE%9E%E7%8E%B0%E8%83%BD%E5%8A%9B%E8%BD%AC%E5%90%91%E5%88%A4%E6%96%AD%E8%83%BD%E5%8A%9B"><span class="nav-number">5.</span> <span class="nav-text">工程师的核心价值正在从实现能力转向判断能力</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%80%9C%E6%83%B3%E6%B3%95%E2%80%9D%E4%B9%9F%E4%BC%9A%E5%8F%98%E4%BE%BF%E5%AE%9C%EF%BC%8C%E6%9C%80%E7%BB%88%E7%A8%80%E7%BC%BA%E7%9A%84%E6%98%AF%E8%AF%81%E6%8D%AE"><span class="nav-number">6.</span> <span class="nav-text">“想法”也会变便宜，最终稀缺的是证据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E7%A8%8B%E5%BA%8F%E5%91%98%E5%88%B0%E5%B7%A5%E7%A8%8B%E7%BB%84%E7%BB%87%E8%80%85"><span class="nav-number">7.</span> <span class="nav-text">从程序员到工程组织者</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AA%E6%9D%A5%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E6%95%99%E8%82%B2%E5%92%8C%E6%96%B0%E4%BA%BA%E5%9F%B9%E5%85%BB%E9%9C%80%E8%A6%81%E9%87%8D%E6%9E%84"><span class="nav-number">8.</span> <span class="nav-text">未来的软件工程教育和新人培养需要重构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-number">9.</span> <span class="nav-text">结语</span></a></li></ol></div>
-        </div>
-        <!--/noindex-->
-
-        <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="SnowyLake"
-      src="/uploads/snowylake.png">
-  <p class="site-author-name" itemprop="name">SnowyLake</p>
-  <div class="site-description" itemprop="description">Before it begins, the war we all fear.</div>
-</div>
-<div class="site-state-wrap animated">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-        <a href="/archives/">
-          <span class="site-state-item-count">19</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-          <a href="/categories/">
-        <span class="site-state-item-count">27</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-          <a href="/tags/">
-        <span class="site-state-item-count">13</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author animated">
-      <span class="links-of-author-item">
-        <a href="https://github.com/SnowyLake" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SnowyLake" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/people/snowylake" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;snowylake" rel="noopener me" target="_blank"><i class="fab fa-zhihu fa-fw"></i></a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:snowylake.me@outlook.com" title="E-Mail → mailto:snowylake.me@outlook.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
-      </span>
-  </div>
-
-        </div>
-      </div>
-    </div>
-
-    
-
-      <!-- Custom Sidebar -->
-        <div class="sidebar-inner sidebar-post-related">
-          <div class="animated">
-            <div class="links-of-blogroll-title">
-              <i class="fa fa-commenting fa-fw"></i>
-              全站公告
-            </div>
-            <a class="custom-sidebar-board-text">不想工作, 苦呀西———
-</a>
-          </div>  
-        </div>
-        <div class="sidebar-inner sidebar-post-related">
-          <div class="animated">
-            <div class="links-of-blogroll-title">
-                <i class="fa fa-bookmark fa-fw"></i>
-                精选文章
-            </div>
-            <ul class="popular-posts">
-                    <li class="popular-posts-item">
-                        <a class="popular-posts-link" href="/post/ue5-rendering-plugin-0x00-shader-remapping.html" rel="bookmark">
-                          <time class="popular-posts-time">2024-07-12</time>
-                          <br>
-                        从插件开始的UE渲染开发0x00: Shader路径重定向
-                        </a>
-                    </li>
-                    <li class="popular-posts-item">
-                        <a class="popular-posts-link" href="/post/ue51-mobile-deferred.html" rel="bookmark">
-                          <time class="popular-posts-time">2023-09-11</time>
-                          <br>
-                        UE5.1移动端延迟渲染管线测试与剖析
-                        </a>
-                    </li>
-                    <li class="popular-posts-item">
-                        <a class="popular-posts-link" href="/post/urp-ui-resolution-split-and-gamma-ui.html" rel="bookmark">
-                          <time class="popular-posts-time">2024-09-15</time>
-                          <br>
-                        聊聊UI分辨率分离与线性空间下的GammaUI
-                        </a>
-                    </li>
-            </ul>
-          </div>  
-        </div>
-      <!-- Custom Sidebar -->
-  </aside>
-
-
-    </div>
-
-    <div class="main-inner post posts-expand">
-
-
-  
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://snowylake.net/post/code-is-cheap-show-me-the-idea.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/snowylake.png">
-      <meta itemprop="name" content="SnowyLake">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="雪之湖畔-SnowyLakeSide">
-      <meta itemprop="description" content="Before it begins, the war we all fear.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Code is cheap. Show me the idea. | 雪之湖畔-SnowyLakeSide">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          Code is cheap. Show me the idea.
-        </h1>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
+<meta name="twitter:image" content="https://snowylake.net/images/snowylake.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Code is cheap. Show me the idea.",
+  "url": "https://snowylake.net/post/code-is-cheap-show-me-the-idea.html",
+  "image": "https://snowylake.net/images/snowylake.png",
+  "datePublished": "2026-06-12T19:08:38.000Z",
+  "dateModified": "2026-06-12T19:09:59.516Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "SnowyLake",
+      "url": "https://snowylake.net"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/images/snowylake-icon-32x32.png"><link rel="canonical" href="https://snowylake.net/post/code-is-cheap-show-me-the-idea.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css"><script>
+    (() => {
       
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
 
-      <time title="创建时间：2026-06-13 03:08:38 / 修改时间：03:09:59" itemprop="dateCreated datePublished" datetime="2026-06-13T03:08:38+08:00">2026-06-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Others/" itemprop="url" rel="index"><span itemprop="name">Others</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Others/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/" itemprop="url" rel="index"><span itemprop="name">技术杂谈</span></a>
-        </span>
-    </span>
-
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
   
-    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="busuanzi_value_page_pv"></span>
-    </span>
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>3.9k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>7 分钟</span>
-    </span>
-</div>
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
 
-        </div>
-      </header>
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
 
+      const theme = saveToLocal.get('theme')
     
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
     
-    
-    <div class="post-body" itemprop="articleBody"><p>过去软件行业有一句很有名的话：</p>
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Code is cheap. Show me the idea.',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/snowylake.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">27</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/images/background.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">雪之湖畔-SnowyLakeSide</span></a><a class="nav-page-title" href="/"><span class="site-name">Code is cheap. Show me the idea.</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Code is cheap. Show me the idea.</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-06-12T19:08:38.000Z" title="发表于 2026-06-13 03:08:38">2026-06-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-06-12T19:09:59.516Z" title="更新于 2026-06-13 03:09:59">2026-06-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Others/">Others</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Others/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>过去软件行业有一句很有名的话：</p>
 <figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Talk is cheap. Show me the code.</span><br></pre></td></tr></table></figure>
-
 <p>这句话代表了前 AI 时代非常典型的工程文化。空谈没有意义。能跑的代码才是真东西。不要只讲想法，把实现拿出来。</p>
 <p>但站在 2026 年的角度看，这句话背后的价值结构正在发生反转。现在越来越像是：<code>Code is cheap. Show me the idea.</code></p>
 <span id="more"></span>
-
-<p>在过去很长一段时间里，”Talk is cheap. Show me the code.” 是成立的。因为从想法到可运行代码之间，存在巨大的实现成本。很多人可以描述一个系统，但真正能把它稳定实现、接入工程、处理边界条件、修完 Bug，最终交付的人要少得多。</p>
-<h2 id="编程正在从脑力-体力劳动，变成近乎纯粹的脑力劳动"><a href="#编程正在从脑力-体力劳动，变成近乎纯粹的脑力劳动" class="headerlink" title="编程正在从脑力 + 体力劳动，变成近乎纯粹的脑力劳动"></a>编程正在从脑力 + 体力劳动，变成近乎纯粹的脑力劳动</h2><p>如果把程序开发粗略分成两部分：</p>
+<p>在过去很长一段时间里，“Talk is cheap. Show me the code.” 是成立的。因为从想法到可运行代码之间，存在巨大的实现成本。很多人可以描述一个系统，但真正能把它稳定实现、接入工程、处理边界条件、修完 Bug，最终交付的人要少得多。</p>
+<h2 id="编程正在从脑力-体力劳动变成近乎纯粹的脑力劳动"><a class="markdownIt-Anchor" href="#编程正在从脑力-体力劳动变成近乎纯粹的脑力劳动"></a> 编程正在从脑力 + 体力劳动，变成近乎纯粹的脑力劳动</h2>
+<p>如果把程序开发粗略分成两部分：</p>
 <figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">设计 + 实现</span><br></pre></td></tr></table></figure>
-
 <p>那么在前 AI 时代，一个功能的大多数工时往往都消耗在实现上。</p>
 <p>越是复杂的功能，工程实现越像一种体力活。你要写代码、改接口、接系统、补边界、调试、测试、修 Bug，再调试，再测试。即使最初的想法并不复杂，真正把它落地到生产环境里，也常常要付出大量时间。</p>
 <p>这导致一个很现实的问题：系统设计的时间预算通常很低。</p>
-<p>下游催着要功能，实现本身又很耗时，很多时候根本没有足够的时间让工程师好好推敲架构。最后的结果往往是边想边写边改。写到一半发现设计有问题，也会因为改动成本太高而选择将错就错，先把功能交付出去。至于重构，那就是”以后有机会再说”。</p>
+<p>下游催着要功能，实现本身又很耗时，很多时候根本没有足够的时间让工程师好好推敲架构。最后的结果往往是边想边写边改。写到一半发现设计有问题，也会因为改动成本太高而选择将错就错，先把功能交付出去。至于重构，那就是&quot;以后有机会再说&quot;。</p>
 <p>这不是工程师不重视设计，而是现实预算不允许。实现成本太高时，设计空间天然会被压缩。</p>
-<p>而 AI 编程改变的正是这个比例。当大量具体编码工作可以交给 AI 快速完成时，工程师的时间和注意力不再主要消耗在”把代码一行行写出来”上，而是会更多转向目标定义、架构取舍、结果验证和风险判断，繁重的体力劳动包袱被卸下，取而代之的更为纯粹脑力劳动。</p>
+<p>而 AI 编程改变的正是这个比例。当大量具体编码工作可以交给 AI 快速完成时，工程师的时间和注意力不再主要消耗在&quot;把代码一行行写出来&quot;上，而是会更多转向目标定义、架构取舍、结果验证和风险判断，繁重的体力劳动包袱被卸下，取而代之的更为纯粹脑力劳动。</p>
 <p>这是职业的进化，也是行业的革命。</p>
-<h2 id="距离"><a href="#距离" class="headerlink" title="距离"></a>距离</h2><p>AI 编程工具的最大价值，表面上看是代码生成。但更深一层看，它真正改变的是：</p>
+<h2 id="距离"><a class="markdownIt-Anchor" href="#距离"></a> 距离</h2>
+<p>AI 编程工具的最大价值，表面上看是代码生成。但更深一层看，它真正改变的是：</p>
 <figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">想法 → 验证</span><br></pre></td></tr></table></figure>
-
 <p>这条路径的成本。</p>
 <p>过去一个新点子从产生到落地验证，可能需要半天、一天，甚至更久。所以很多想法根本不会进入验证阶段。它们并不是被证明错误，而是因为太贵，还没开始就被放弃了。</p>
 <p>现在情况不同了。一个工程师可以和 AI 一起制定方案，让 AI 快速执行，然后自己 review 结果并继续迭代。原本沉重的编码工作和时间成本被大幅压缩。一个新想法从提出到初步实现，可能只需要十几分钟。</p>
-<p>这带来的变化非常深远。当试错成本足够低时，工程师会更愿意探索多个方案，更敢于推翻已有实现，更容易在早期发现架构问题。过去因为实现成本太高而不得不选择”先凑合交付”的场景，现在有机会变成”先快速验证几个方向，再决定真正采用哪一个”。</p>
+<p>这带来的变化非常深远。当试错成本足够低时，工程师会更愿意探索多个方案，更敢于推翻已有实现，更容易在早期发现架构问题。过去因为实现成本太高而不得不选择&quot;先凑合交付&quot;的场景，现在有机会变成&quot;先快速验证几个方向，再决定真正采用哪一个&quot;。</p>
 <p>AI 让软件工程更接近实验科学。</p>
-<h2 id="新人的价值和行业的人才梯队问题"><a href="#新人的价值和行业的人才梯队问题" class="headerlink" title="新人的价值和行业的人才梯队问题"></a>新人的价值和行业的人才梯队问题</h2><p>AI 对初级工程师的冲击是显而易见的。</p>
+<h2 id="新人的价值和行业的人才梯队问题"><a class="markdownIt-Anchor" href="#新人的价值和行业的人才梯队问题"></a> 新人的价值和行业的人才梯队问题</h2>
+<p>AI 对初级工程师的冲击是显而易见的。</p>
 <p>过去，企业需要大量新人，一个重要原因是资深工程师精力有限。面对复杂系统，他们不得不把一些相对简单的模块实现、工具开发、测试脚本、文档整理、Bug 修复等工作拆分出去。新人通过完成这些工作分摊团队压力，同时在真实项目中成长。</p>
 <p>现在，资深工程师在完成系统设计后，很多实现工作可以交给 AI。AI 做得快，成本低，而且在许多明确任务上质量并不差。从短期生产力的角度看，AI 确实会替代大量原本属于初级岗位的工作。</p>
 <p>但这里存在一个严重的问题：新人最大的价值，从来不只是今天多写几千行代码。</p>
 <p>新人真正的行业价值是：</p>
 <figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">他们是未来的中级工程师、高级工程师、架构师和技术负责人。</span><br></pre></td></tr></table></figure>
-
 <p>如果行业因为 AI 的出现而停止招聘新人，短期看效率可能提高，但长期看会破坏人才供应链。</p>
 <p>高级工程师不是凭空出现的。架构师也不是从学校直接培养出来的。他们是在真实生产环境中，通过不断做决策、承担后果、复盘失败、修正判断，慢慢长出来的。</p>
 <p>如果没有新人进入真实项目，十年后短缺的可能不是会写代码的人，而是能做正确技术决策的人。</p>
-<h2 id="学校无法替代生产环境"><a href="#学校无法替代生产环境" class="headerlink" title="学校无法替代生产环境"></a>学校无法替代生产环境</h2><p>AI 确实会改变新人学习编程的路径。过去新人可能通过大量手写 CRUD、工具脚本和业务模块来成长。未来，他们可能更多通过阅读 AI 生成代码、修改代码、验证方案、管理 Agent 来成长。</p>
+<h2 id="学校无法替代生产环境"><a class="markdownIt-Anchor" href="#学校无法替代生产环境"></a> 学校无法替代生产环境</h2>
+<p>AI 确实会改变新人学习编程的路径。过去新人可能通过大量手写 CRUD、工具脚本和业务模块来成长。未来，他们可能更多通过阅读 AI 生成代码、修改代码、验证方案、管理 Agent 来成长。</p>
 <p>但有一个问题不会改变：真正的工程能力很难在学校里学到。</p>
-<p>学校里的问题大多是封闭问题。有明确输入、明确输出、明确评价标准。但生产环境中的问题通常是开放问题。你面对的不是”怎么实现一个算法”，而是”在预算有限、时间有限、需求变化、历史包袱、团队协作、线上风险都存在的情况下，该牺牲什么，保留什么，优先做什么”。</p>
+<p>学校里的问题大多是封闭问题。有明确输入、明确输出、明确评价标准。但生产环境中的问题通常是开放问题。你面对的不是&quot;怎么实现一个算法&quot;，而是&quot;在预算有限、时间有限、需求变化、历史包袱、团队协作、线上风险都存在的情况下，该牺牲什么，保留什么，优先做什么&quot;。</p>
 <p>这类能力只能在真实项目中锻炼。架构设计能力尤其如此。</p>
 <p>它不是通过看书获得的，而是通过决策和后果训练出来的。当一个设计选择在半年后导致维护困难、性能问题、扩展失败或返工成本时，工程师才会真正理解某些原则为什么重要。</p>
 <p>经验不是工作年限本身。经验是：</p>
 <figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">自己做过决定</span><br><span class="line">↓</span><br><span class="line">看到决定产生后果</span><br><span class="line">↓</span><br><span class="line">从后果中修正判断</span><br></pre></td></tr></table></figure>
-
 <p>AI 可以帮人写代码，但它不能替新人获得真实的项目经验。</p>
-<h2 id="工程师的核心价值正在从实现能力转向判断能力"><a href="#工程师的核心价值正在从实现能力转向判断能力" class="headerlink" title="工程师的核心价值正在从实现能力转向判断能力"></a>工程师的核心价值正在从实现能力转向判断能力</h2><p>当前最重要的变化是，代码实现不再像过去那样稀缺。</p>
-<p>当实现成本下降后，人与人之间的差距会越来越少体现在”谁写代码更快”，而越来越多体现在：</p>
+<h2 id="工程师的核心价值正在从实现能力转向判断能力"><a class="markdownIt-Anchor" href="#工程师的核心价值正在从实现能力转向判断能力"></a> 工程师的核心价值正在从实现能力转向判断能力</h2>
+<p>当前最重要的变化是，代码实现不再像过去那样稀缺。</p>
+<p>当实现成本下降后，人与人之间的差距会越来越少体现在&quot;谁写代码更快&quot;，而越来越多体现在：</p>
 <figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">谁能发现真正的问题</span><br><span class="line">谁能提出有价值的假设</span><br><span class="line">谁能设计合理的实验</span><br><span class="line">谁能理解实验结果</span><br><span class="line">谁能在多个方案之间做正确取舍</span><br></pre></td></tr></table></figure>
-
-<p>在 AI 时代，工程师的工作重心会从”亲手写出所有代码”，逐渐转向”管理软件产生的过程”。</p>
+<p>在 AI 时代，工程师的工作重心会从&quot;亲手写出所有代码&quot;，逐渐转向&quot;管理软件产生的过程&quot;。</p>
 <p>这个过程大概会变成：</p>
 <figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">定义目标</span><br><span class="line">↓</span><br><span class="line">明确约束</span><br><span class="line">↓</span><br><span class="line">提出方案</span><br><span class="line">↓</span><br><span class="line">让 AI 快速实现</span><br><span class="line">↓</span><br><span class="line">验证结果</span><br><span class="line">↓</span><br><span class="line">分析问题</span><br><span class="line">↓</span><br><span class="line">迭代设计</span><br></pre></td></tr></table></figure>
-
 <p>这里最贵的部分不再是代码，而是目标、约束、判断和验证。</p>
-<h2 id="“想法”也会变便宜，最终稀缺的是证据"><a href="#“想法”也会变便宜，最终稀缺的是证据" class="headerlink" title="“想法”也会变便宜，最终稀缺的是证据"></a>“想法”也会变便宜，最终稀缺的是证据</h2><p>不过，仅仅说”show me the idea”还不够。</p>
+<h2 id="想法也会变便宜最终稀缺的是证据"><a class="markdownIt-Anchor" href="#想法也会变便宜最终稀缺的是证据"></a> &quot;想法&quot;也会变便宜，最终稀缺的是证据</h2>
+<p>不过，仅仅说&quot;show me the idea&quot;还不够。</p>
 <p>因为 AI 不只会写代码，它也会生成大量看起来合理的方案。当方案生成也变得便宜时，单纯的 idea 同样会变得泛滥。</p>
 <p>所以更完整的表述也许是：</p>
 <figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Code is cheap. Show me the idea.</span><br><span class="line">Idea is cheap. Show me the judgment.</span><br><span class="line">Judgment is cheap. Show me the evidence.</span><br></pre></td></tr></table></figure>
-
-<p>真正强的工程判断，不能只停留在”我觉得这样更好”。</p>
+<p>真正强的工程判断，不能只停留在&quot;我觉得这样更好&quot;。</p>
 <p>它需要回答：</p>
 <figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">为什么这是值得解决的问题？</span><br><span class="line">为什么这个方案比其他方案更合适？</span><br><span class="line">它牺牲了什么？</span><br><span class="line">它依赖哪些前提？</span><br><span class="line">它如何验证？</span><br><span class="line">成功指标是什么？</span><br><span class="line">失败信号是什么？</span><br><span class="line">如果失败，下一步该怎么调整？</span><br></pre></td></tr></table></figure>
-
 <p>这意味着未来的软件工程会更重视实验设计和证据链。</p>
 <p>一个好的 AI 时代工程流程，不应该只是让 AI 更快地产生代码，而应该让 AI 帮助工程师更快地产生可验证的假设，并围绕这些假设组织实现和实验。</p>
-<h2 id="从程序员到工程组织者"><a href="#从程序员到工程组织者" class="headerlink" title="从程序员到工程组织者"></a>从程序员到工程组织者</h2><p>AI 会让工程师越来越像工程组织者。这里的”组织者”不是管理意义上的领导，而是类似工程项目里理解图纸、组织施工、控制质量和验收结果的人。</p>
+<h2 id="从程序员到工程组织者"><a class="markdownIt-Anchor" href="#从程序员到工程组织者"></a> 从程序员到工程组织者</h2>
+<p>AI 会让工程师越来越像工程组织者。这里的&quot;组织者&quot;不是管理意义上的领导，而是类似工程项目里理解图纸、组织施工、控制质量和验收结果的人。</p>
 <p>过去的工程师更像工匠：</p>
 <figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">设计</span><br><span class="line">↓</span><br><span class="line">亲手制作</span><br><span class="line">↓</span><br><span class="line">交付</span><br></pre></td></tr></table></figure>
-
 <p>未来的工程师会越来越像工程组织者：</p>
 <figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">构思</span><br><span class="line">↓</span><br><span class="line">组织 AI Agent</span><br><span class="line">↓</span><br><span class="line">评审结果</span><br><span class="line">↓</span><br><span class="line">调整方向</span><br><span class="line">↓</span><br><span class="line">建立验证标准</span><br><span class="line">↓</span><br><span class="line">沉淀经验</span><br></pre></td></tr></table></figure>
-
 <p>这不是说工程师不需要懂代码。恰恰相反，工程师必须更懂代码，才懂得如何审查 AI 的实现、识别隐藏风险、判断方案是否可靠。</p>
 <p>但代码不再是工作的全部。它会更像一种被调度的资源。</p>
 <p>真正的核心能力会变成：</p>
 <figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">问题定义能力</span><br><span class="line">方案评估能力</span><br><span class="line">系统建模能力</span><br><span class="line">实验设计能力</span><br><span class="line">结果解释能力</span><br><span class="line">风险控制能力</span><br></pre></td></tr></table></figure>
-
 <p>这些能力过去也重要，只是被大量编码劳动遮蔽了。AI 把实现成本压低之后，它们会变得更加显眼。</p>
-<h2 id="未来的软件工程教育和新人培养需要重构"><a href="#未来的软件工程教育和新人培养需要重构" class="headerlink" title="未来的软件工程教育和新人培养需要重构"></a>未来的软件工程教育和新人培养需要重构</h2><p>如果行业仍然需要未来的高级工程师，那么新人就不能只被 AI 替代，也必须被重新培养。</p>
+<h2 id="未来的软件工程教育和新人培养需要重构"><a class="markdownIt-Anchor" href="#未来的软件工程教育和新人培养需要重构"></a> 未来的软件工程教育和新人培养需要重构</h2>
+<p>如果行业仍然需要未来的高级工程师，那么新人就不能只被 AI 替代，也必须被重新培养。</p>
 <p>未来新人也许不再需要从大量低价值实现工作开始成长，但他们仍然必须进入真实项目。他们需要学习的不只是语法和框架，而是：</p>
 <figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">如何理解需求背后的真实问题</span><br><span class="line">如何识别约束</span><br><span class="line">如何参与技术决策</span><br><span class="line">如何验证方案</span><br><span class="line">如何阅读和修改 AI 生成的代码</span><br><span class="line">如何判断一个实现是否可靠</span><br><span class="line">如何从线上问题和项目失败中复盘</span><br></pre></td></tr></table></figure>
-
 <p>软件行业可能会越来越像医生行业。</p>
 <p>医生不是靠背书成长为主治医生的。他们必须接触真实病例，在更有经验的人指导下参与诊断和治疗，承担逐步增加的责任。</p>
 <p>未来的软件工程新人也许会走类似路线：</p>
 <figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">新人</span><br><span class="line">↓</span><br><span class="line">AI 辅助执行</span><br><span class="line">↓</span><br><span class="line">模块责任</span><br><span class="line">↓</span><br><span class="line">系统责任</span><br><span class="line">↓</span><br><span class="line">技术决策责任</span><br></pre></td></tr></table></figure>
-
 <p>低价值实现工作会减少，但真实生产环境中的责任训练仍然不可替代。</p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>“Talk is cheap. Show me the code.” 属于一个实现能力稀缺的时代。</p>
+<h2 id="结语"><a class="markdownIt-Anchor" href="#结语"></a> 结语</h2>
+<p>“Talk is cheap. Show me the code.” 属于一个实现能力稀缺的时代。</p>
 <p>在那个时代，能把想法变成可运行代码就是很强的过滤器。</p>
 <p>但在 AI 编程工具快速发展的今天，实现本身正在变得越来越便宜。代码仍然重要，但它不再是唯一的稀缺资源。</p>
 <p>新的稀缺资源是：</p>
 <figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">有价值的问题定义</span><br><span class="line">可靠的架构判断</span><br><span class="line">清晰的取舍逻辑</span><br><span class="line">可验证的实验设计</span><br><span class="line">基于证据的工程决策</span><br></pre></td></tr></table></figure>
-
 <p>所以也许我们需要一句新的工程格言：</p>
 <figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Code is cheap. Show me the idea.</span><br></pre></td></tr></table></figure>
-
 <p>但它真正想表达的不是轻视代码。</p>
 <p>而是提醒我们：当代码生成变得越来越容易时，工程师更应该把注意力放在真正困难的事情上。</p>
 <figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">选择正确的问题</span><br><span class="line">设计合理的方案</span><br><span class="line">验证真实的结果</span><br><span class="line">承担长期的后果</span><br></pre></td></tr></table></figure>
-
 <p>这才是 AI 时代软件工程最核心的价值。</p>
-<hr>
+<hr />
 <blockquote>
 <p>本文由我与 GPT-5.5 的一次长谈整理而来。某种意义上，它本身也是 “Code is cheap. Show me the idea.” 的一次实践。</p>
 </blockquote>
-
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-          
-
-<div class="post-copyright">
-<ul>
-  <li class="post-copyright-author">
-      <strong>本文作者： </strong>SnowyLake
-  </li>
-  <li class="post-copyright-link">
-      <strong>本文链接：</strong>
-      <a href="https://snowylake.net/post/code-is-cheap-show-me-the-idea.html" title="Code is cheap. Show me the idea.">https://snowylake.net/post/code-is-cheap-show-me-the-idea.html</a>
-  </li>
-  <li class="post-copyright-license">
-      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
-  </li>
-</ul>
-</div>
-
-          <div class="post-tags">
-              <a href="/tags/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/" rel="tag"><i class="fa fa-tag"></i> 技术杂谈</a>
-          </div>
-
-        
-
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/post/urp-ui-resolution-split-and-gamma-ui.html" rel="prev" title="聊聊UI分辨率分离与线性空间下的GammaUI">
-                  <i class="fa fa-chevron-left"></i> 聊聊UI分辨率分离与线性空间下的GammaUI
-                </a>
-            </div>
-            <div class="post-nav-item">
-            </div>
-          </div>
-    </footer>
-  </article>
-</div>
-
-
-
-
-
-
-</div>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inner">
-
-
-<div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2026</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">SnowyLake</span>
-</div>
-<div class="busuanzi-count">
-    <span class="post-meta-item" id="busuanzi_container_site_uv">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="总访客量">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="总访问量">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
-
-    </div>
-  </footer>
-
-  
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up fa-lg"></i>
-    <span>0%</span>
-  </div>
-
-  <a href="https://github.com/SnowyLake" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
-
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
-
-
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
-<script src="/js/third-party/search/local-search.js"></script>
-
-
-
-
-
-
-
-  
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-
-  <script class="next-config" data-name="enableMath" type="application/json">false</script>
-
-
-</body>
-</html>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://snowylake.net">SnowyLake</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://snowylake.net/post/code-is-cheap-show-me-the-idea.html">https://snowylake.net/post/code-is-cheap-show-me-the-idea.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://snowylake.net" target="_blank">雪之湖畔-SnowyLakeSide</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a></div><div class="post-share"><div class="social-share" data-image="/images/snowylake.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/post/urp-ui-resolution-split-and-gamma-ui.html" title="聊聊UI分辨率分离与线性空间下的GammaUI"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">聊聊UI分辨率分离与线性空间下的GammaUI</div></div><div class="info-2"><div class="info-item-1">整理了下近期以及过去做过的这方面的一些功能, 挑出点有意思的东西或思路谈谈. 这篇没有什么代码之类的东西, 就纯是碎碎念.   UI 分辨率分离 这年头在移动端做 3D 游戏, 分辨率基本是没可能拉满的, 最高基本也就八九百这样子, 低配下甚至六百多都有可能. 虽然场景怎么低分辨率怎么糊都好说, 但 UI 是万万不能糊的, 一糊这游戏也别玩了. 所以场景&amp;UI 分辨率分离就成了一个项目必需的 feature. 最简单也是最直接的方案就是给 UI 单独来一张 RT, 我们叫他 UITarget. 场景在低分辨率的 CameraAttachment 上渲完后 Blit 到高分辨率的 UITarget 上, 再交给 UI 相机绘制 UI. 听着很美好, 但实际并不能用. 因为这个方案对于带宽本就不富裕的移动端打击是致命的, 多一张 1080p 的 RT 简直是要了手机的老命. 于是就有了优化方案, 借用系统提供的 Backbuffer 作为 UITarget. Backbuffer 默认为手机硬件的原生分辨率, 无论任何情况下渲染管线的最终目标都会是它, 在 URP 正常的流程...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/post/cpp-autoptr-to-uniqueptr.html" title="从auto_ptr到unique_ptr：浅谈C++右值引用、移动语义与智能指针"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-24</div><div class="info-item-2">从auto_ptr到unique_ptr：浅谈C++右值引用、移动语义与智能指针</div></div><div class="info-2"><div class="info-item-1">std::auto_ptr是C03对智能指针的第一次尝试，作为一个失败品，其甚至已然在后续的标准中被移除，但时至今日，我们依然可以透过它一窥C发展史的一角。  出于方便、严谨起见，下文所提及类与函数，如未特别标明命名空间，均为std或其子命名空间下的标准库设施。  std::auto_ptr的失败之处 auto_ptr在语义上是有些类似它的后辈unique_ptr的，其拷贝构造/赋值函数并非深拷贝或浅拷贝，而是被设计成了资产的所有权转移即move语义，从而保证一份资源同时只能被一根auto_ptr所持有： 1234567891011121314template &lt;class _Ty&gt;class auto_ptr &#123;public:    auto_ptr(auto_ptr&amp; _Right) noexcept : _Myptr(_Right.release()) &#123;&#125;    _Ty* release() noexcept     &#123;        _Ty* _Tmp = _Myptr;        _Myptr    = ...</div></div></div></a><a class="pagination-related" href="/post/cpp20-stringsplit.html" title="一个C++20下的string split实现"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-11</div><div class="info-item-2">一个C++20下的string split实现</div></div><div class="info-2"><div class="info-item-1">众所周知，C一直没有一个官方提供的string split用于分割字符串，在过去（C20之前）我们可能需要使用std::regex、std::string::find系列方法、甚至是继承自C的strtok函数来自行封装一个split，非常繁琐与不便。 然而，这一切都在C20中发生了变化。C20引入了范围库ranges，其中提供的两个范围适配器std::split、std::lazy_split可以使我们以一种更为优雅的形式实现split。  12345678910111213141516171819202122232425262728293031#include &lt;concept&gt;#include &lt;ranges&gt;#include &lt;algorithm&gt;#include &lt;format&gt;#include &lt;iostream&gt;#define stdr  std::ranges#define stdrv std::ranges::viewstemplate&lt;template&lt;typename&gt; typena...</div></div></div></a><a class="pagination-related" href="/post/cpp-stdoptional-overhead.html" title="关于std::optional传递开销的讨论与优化"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-11</div><div class="info-item-2">关于std::optional传递开销的讨论与优化</div></div><div class="info-2"><div class="info-item-1">在讨论std::optional之前，我们应该先适当谈论一下“可空类型”。  我们知道，在传统的C中，是不存在现代编程语言中常见的“可空类型”（如C#中的Nullable)的，这就导致很多情况下我们无法给一个指针以外的变量或返回值设置一个安全的空值（实际上C11之前用于指针空值的NULL也并不安全），而需要设置一个人为规定的标记值（Sentinel Value）来将其标识为空。 1234567//C#//size理应为非负uint? size = null;  //OK, 通过C#语法糖[int?]标记size可为空，并将size设置为空//C++//因为需要考虑Sentinel Value，故size无法为unsigned int//当size == -1时，size为空int size = -1;  //OK，通过人为设定标记值来将size设置为空 显而易见，传统C++使用标记值来对某一变量设置为空的行为相比现代语言是存在问题、丑陋且不安全的：  某些情况下为了考虑标记值不得不放弃最为合适的数据类型（比如unsigned int之于size） 其他使用者容易忘记甚至不了解标记...</div></div></div></a><a class="pagination-related" href="/post/cpp20-ghs-concept-foldexpression-mixin.html" title="一个用来ghs的、使用了concept、折叠表达式、模板形参包做基类列表等技巧的模板元编程Mixin Demo"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-11</div><div class="info-item-2">一个用来ghs的、使用了concept、折叠表达式、模板形参包做基类列表等技巧的模板元编程Mixin Demo</div></div><div class="info-2"><div class="info-item-1">昨天看Mixin时突发奇想，写着玩的。图一乐。  直接上代码，受限于平台，Show()部分自行脑补。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758#include &lt;concepts&gt;#include &lt;iostream&gt;template&lt;typename T&gt;concept IsSexuality = requires&#123; T::Show(); &#125;;template&lt;IsSexuality... Sexuality&gt;struct GirlFriend :private Sexuality...&#123;	constexpr GirlFriend() :Sexuality()... &#123;&#125;	constexpr void ShowSexuality() const	&#123;		std::cout &lt;&lt; &quot;...</div></div></div></a><a class="pagination-related" href="/post/site-build-note.html" title="建站记录"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-12</div><div class="info-item-2">建站记录</div></div><div class="info-2"><div class="info-item-1">建这个网站的初衷是因为自己知乎被连续封了几次, 以至于让我对这类非可控的平台产生了大量不信任感, 再加之我个人的知乎账号掺杂了大量的非技术相关内容, 所以尽管我在知乎也写了一些技术文章, 但仍并不方便将来贴在简历上. 总总原因驱使下, 在综合考量了云服务器+Wordpress和GitHubPages+Hexo两种方案后, 我还是选择了更为轻便的后者, 毕竟对我而言只是需要一个发布文章与随想的、完全可控的平台罢了, 没必要去折腾什么服务器. 技术选型到此为止, 剩下的便是具体实现了. 这篇文章便是用来记录我的建站流程以及踩到的一些小坑. 顺便一提, 这个网站就叫作SnowyLakeSide好了, 中文名雪之湖畔, 一个独属于我(SnowyLake/雪湖)、面向互联网的小小浅滩.   Github Pages创建 这一步非常简单, 其实本质就是创建一个名为 snowylake.github.io 的repo, 只是要求前缀与github用户名相同. 创建之后实际上我们就已经可以通过repo名访问网站了, 但应该是空空如也的. 然后就可以暂时放在这里不管了, 甚至都不需要clone到本...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/snowylake.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">SnowyLake</div><div class="author-info-description">Don't worry, be happy.</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">27</div></a></div><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/SnowyLake" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="https://www.zhihu.com/people/snowylake" target="_blank" title="Zhihu"><i class="fab fa-zhihu" style="color: #0084ff;"></i></a><a class="social-icon" href="mailto:snowylake.me@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">不想工作, 苦呀西~</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E6%AD%A3%E5%9C%A8%E4%BB%8E%E8%84%91%E5%8A%9B-%E4%BD%93%E5%8A%9B%E5%8A%B3%E5%8A%A8%E5%8F%98%E6%88%90%E8%BF%91%E4%B9%8E%E7%BA%AF%E7%B2%B9%E7%9A%84%E8%84%91%E5%8A%9B%E5%8A%B3%E5%8A%A8"><span class="toc-number">1.</span> <span class="toc-text"> 编程正在从脑力 + 体力劳动，变成近乎纯粹的脑力劳动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%9D%E7%A6%BB"><span class="toc-number">2.</span> <span class="toc-text"> 距离</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E4%BA%BA%E7%9A%84%E4%BB%B7%E5%80%BC%E5%92%8C%E8%A1%8C%E4%B8%9A%E7%9A%84%E4%BA%BA%E6%89%8D%E6%A2%AF%E9%98%9F%E9%97%AE%E9%A2%98"><span class="toc-number">3.</span> <span class="toc-text"> 新人的价值和行业的人才梯队问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E6%A0%A1%E6%97%A0%E6%B3%95%E6%9B%BF%E4%BB%A3%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83"><span class="toc-number">4.</span> <span class="toc-text"> 学校无法替代生产环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E6%A0%B8%E5%BF%83%E4%BB%B7%E5%80%BC%E6%AD%A3%E5%9C%A8%E4%BB%8E%E5%AE%9E%E7%8E%B0%E8%83%BD%E5%8A%9B%E8%BD%AC%E5%90%91%E5%88%A4%E6%96%AD%E8%83%BD%E5%8A%9B"><span class="toc-number">5.</span> <span class="toc-text"> 工程师的核心价值正在从实现能力转向判断能力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%83%B3%E6%B3%95%E4%B9%9F%E4%BC%9A%E5%8F%98%E4%BE%BF%E5%AE%9C%E6%9C%80%E7%BB%88%E7%A8%80%E7%BC%BA%E7%9A%84%E6%98%AF%E8%AF%81%E6%8D%AE"><span class="toc-number">6.</span> <span class="toc-text"> &quot;想法&quot;也会变便宜，最终稀缺的是证据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E7%A8%8B%E5%BA%8F%E5%91%98%E5%88%B0%E5%B7%A5%E7%A8%8B%E7%BB%84%E7%BB%87%E8%80%85"><span class="toc-number">7.</span> <span class="toc-text"> 从程序员到工程组织者</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AA%E6%9D%A5%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E6%95%99%E8%82%B2%E5%92%8C%E6%96%B0%E4%BA%BA%E5%9F%B9%E5%85%BB%E9%9C%80%E8%A6%81%E9%87%8D%E6%9E%84"><span class="toc-number">8.</span> <span class="toc-text"> 未来的软件工程教育和新人培养需要重构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">9.</span> <span class="toc-text"> 结语</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/code-is-cheap-show-me-the-idea.html" title="Code is cheap. Show me the idea.">Code is cheap. Show me the idea.</a><time datetime="2026-06-12T19:08:38.000Z" title="发表于 2026-06-13 03:08:38">2026-06-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/urp-ui-resolution-split-and-gamma-ui.html" title="聊聊UI分辨率分离与线性空间下的GammaUI">聊聊UI分辨率分离与线性空间下的GammaUI</a><time datetime="2024-09-14T19:15:00.000Z" title="发表于 2024-09-15 03:15:00">2024-09-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/ue5-rendering-plugin-0x00-shader-remapping.html" title="从插件开始的UE渲染开发0x00: Shader路径重定向">从插件开始的UE渲染开发0x00: Shader路径重定向</a><time datetime="2024-07-11T16:00:00.000Z" title="发表于 2024-07-12 00:00:00">2024-07-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/cpp20-stringsplit.html" title="一个C++20下的string split实现">一个C++20下的string split实现</a><time datetime="2023-09-10T21:10:07.000Z" title="发表于 2023-09-11 05:10:07">2023-09-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/ue51-mobile-deferred-lightchannels.html" title="UE5.1移动端延迟管线基于Light Channels模拟Unity Rendering Layers">UE5.1移动端延迟管线基于Light Channels模拟Unity Rendering Layers</a><time datetime="2023-09-10T21:08:45.000Z" title="发表于 2023-09-11 05:08:45">2023-09-11</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By SnowyLake</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 6.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5"></script><script src="/js/main.js?v=5.5.5"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.5"></script></div></div></body></html>

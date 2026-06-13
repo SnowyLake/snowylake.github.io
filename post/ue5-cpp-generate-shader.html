@@ -1,31 +1,11 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/snowylake-apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/snowylake-icon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/snowylake-icon-16x16.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
-
-<script class="next-config" data-name="main" type="application/json">{"hostname":"snowylake.net","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","width":280,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-
-    <meta name="description" content="待搬运, 内容详见原文链接.  原文链接: https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;574551808">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>浅谈UE5的C++程序化生成Shader | 雪之湖畔-SnowyLakeSide</title><meta name="author" content="SnowyLake"><meta name="copyright" content="SnowyLake"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="待搬运, 内容详见原文链接.  原文链接: https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;574551808">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈UE5的C++程序化生成Shader">
 <meta property="og:url" content="https://snowylake.net/post/ue5-cpp-generate-shader.html">
 <meta property="og:site_name" content="雪之湖畔-SnowyLakeSide">
 <meta property="og:description" content="待搬运, 内容详见原文链接.  原文链接: https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;574551808">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://snowylake.net/images/snowylake.png">
 <meta property="article:published_time" content="2023-09-10T21:08:14.000Z">
 <meta property="article:modified_time" content="2024-09-14T20:40:15.000Z">
 <meta property="article:author" content="SnowyLake">
@@ -33,434 +13,157 @@
 <meta property="article:tag" content="Unreal">
 <meta property="article:tag" content="Rendering">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://snowylake.net/images/snowylake.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "浅谈UE5的C++程序化生成Shader",
+  "url": "https://snowylake.net/post/ue5-cpp-generate-shader.html",
+  "image": "https://snowylake.net/images/snowylake.png",
+  "datePublished": "2023-09-10T21:08:14.000Z",
+  "dateModified": "2024-09-14T20:40:15.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "SnowyLake",
+      "url": "https://snowylake.net"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/images/snowylake-icon-32x32.png"><link rel="canonical" href="https://snowylake.net/post/ue5-cpp-generate-shader.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
 
-
-<link rel="canonical" href="https://snowylake.net/post/ue5-cpp-generate-shader.html">
-
-
-
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://snowylake.net/post/ue5-cpp-generate-shader.html","path":"post/ue5-cpp-generate-shader.html","title":"浅谈UE5的C++程序化生成Shader"}</script>
-
-<script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>浅谈UE5的C++程序化生成Shader | 雪之湖畔-SnowyLakeSide</title>
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
   
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
 
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
 
-
-
-
-
-
-
-  <noscript>
-    <link rel="stylesheet" href="/css/noscript.css">
-  </noscript>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
-  <div class="headband"></div>
-
-  <main class="main">
-    <div class="column">
-      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏" role="button">
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <i class="logo-line"></i>
-      <p class="site-title">雪之湖畔-SnowyLakeSide</p>
-      <i class="logo-line"></i>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger" aria-label="搜索" role="button">
-        <i class="fa fa-search fa-fw fa-lg"></i>
-    </div>
-  </div>
-</div>
-
-
-
-<nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">27</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">13</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">19</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
-        </a>
-      </li>
-  </ul>
-</nav>
-
-
-
-  <div class="search-pop-overlay">
-    <div class="popup search-popup"><div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off" maxlength="80"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close" role="button">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="search-result-container no-result">
-  <div class="search-result-icon">
-    <i class="fa fa-spinner fa-pulse fa-5x"></i>
-  </div>
-</div>
-
-    </div>
-  </div>
-
-</header>
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
         
-  
-  <aside class="sidebar">
-
-    <div class="sidebar-inner sidebar-overview-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <div class="sidebar-panel-container">
-        <!--noindex-->
-        <div class="post-toc-wrap sidebar-panel">
-        </div>
-        <!--/noindex-->
-
-        <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="SnowyLake"
-      src="/uploads/snowylake.png">
-  <p class="site-author-name" itemprop="name">SnowyLake</p>
-  <div class="site-description" itemprop="description">Before it begins, the war we all fear.</div>
-</div>
-<div class="site-state-wrap animated">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-        <a href="/archives/">
-          <span class="site-state-item-count">19</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-          <a href="/categories/">
-        <span class="site-state-item-count">27</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-          <a href="/tags/">
-        <span class="site-state-item-count">13</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author animated">
-      <span class="links-of-author-item">
-        <a href="https://github.com/SnowyLake" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SnowyLake" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/people/snowylake" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;snowylake" rel="noopener me" target="_blank"><i class="fab fa-zhihu fa-fw"></i></a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:snowylake.me@outlook.com" title="E-Mail → mailto:snowylake.me@outlook.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
-      </span>
-  </div>
-
-        </div>
-      </div>
-    </div>
-
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
     
-
-      <!-- Custom Sidebar -->
-        <div class="sidebar-inner sidebar-post-related">
-          <div class="animated">
-            <div class="links-of-blogroll-title">
-              <i class="fa fa-commenting fa-fw"></i>
-              全站公告
-            </div>
-            <a class="custom-sidebar-board-text">不想工作, 苦呀西———
-</a>
-          </div>  
-        </div>
-        <div class="sidebar-inner sidebar-post-related">
-          <div class="animated">
-            <div class="links-of-blogroll-title">
-                <i class="fa fa-bookmark fa-fw"></i>
-                精选文章
-            </div>
-            <ul class="popular-posts">
-                    <li class="popular-posts-item">
-                        <a class="popular-posts-link" href="/post/ue5-rendering-plugin-0x00-shader-remapping.html" rel="bookmark">
-                          <time class="popular-posts-time">2024-07-12</time>
-                          <br>
-                        从插件开始的UE渲染开发0x00: Shader路径重定向
-                        </a>
-                    </li>
-                    <li class="popular-posts-item">
-                        <a class="popular-posts-link" href="/post/ue51-mobile-deferred.html" rel="bookmark">
-                          <time class="popular-posts-time">2023-09-11</time>
-                          <br>
-                        UE5.1移动端延迟渲染管线测试与剖析
-                        </a>
-                    </li>
-                    <li class="popular-posts-item">
-                        <a class="popular-posts-link" href="/post/urp-ui-resolution-split-and-gamma-ui.html" rel="bookmark">
-                          <time class="popular-posts-time">2024-09-15</time>
-                          <br>
-                        聊聊UI分辨率分离与线性空间下的GammaUI
-                        </a>
-                    </li>
-            </ul>
-          </div>  
-        </div>
-      <!-- Custom Sidebar -->
-  </aside>
-
-
-    </div>
-
-    <div class="main-inner post posts-expand">
-
-
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
   
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://snowylake.net/post/ue5-cpp-generate-shader.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/snowylake.png">
-      <meta itemprop="name" content="SnowyLake">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="雪之湖畔-SnowyLakeSide">
-      <meta itemprop="description" content="Before it begins, the war we all fear.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="浅谈UE5的C++程序化生成Shader | 雪之湖畔-SnowyLakeSide">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          浅谈UE5的C++程序化生成Shader
-        </h1>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-09-11 05:08:14" itemprop="dateCreated datePublished" datetime="2023-09-11T05:08:14+08:00">2023-09-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-09-15 04:40:15" itemprop="dateModified" datetime="2024-09-15T04:40:15+08:00">2024-09-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Game-Engine/" itemprop="url" rel="index"><span itemprop="name">Game Engine</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Game-Engine/Unreal/" itemprop="url" rel="index"><span itemprop="name">Unreal</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="busuanzi_value_page_pv"></span>
-    </span>
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>56</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody"><span id="more"></span>
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '浅谈UE5的C++程序化生成Shader',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/snowylake.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">27</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/images/background.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">雪之湖畔-SnowyLakeSide</span></a><a class="nav-page-title" href="/"><span class="site-name">浅谈UE5的C++程序化生成Shader</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">浅谈UE5的C++程序化生成Shader</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-09-10T21:08:14.000Z" title="发表于 2023-09-11 05:08:14">2023-09-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-09-14T20:40:15.000Z" title="更新于 2024-09-15 04:40:15">2024-09-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Game-Engine/">Game Engine</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Game-Engine/Unreal/">Unreal</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><span id="more"></span>
 <p>待搬运, 内容详见原文链接.</p>
 <blockquote>
 <p>原文链接: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/574551808">https://zhuanlan.zhihu.com/p/574551808</a></p>
 </blockquote>
-
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-          
-
-<div class="post-copyright">
-<ul>
-  <li class="post-copyright-author">
-      <strong>本文作者： </strong>SnowyLake
-  </li>
-  <li class="post-copyright-link">
-      <strong>本文链接：</strong>
-      <a href="https://snowylake.net/post/ue5-cpp-generate-shader.html" title="浅谈UE5的C++程序化生成Shader">https://snowylake.net/post/ue5-cpp-generate-shader.html</a>
-  </li>
-  <li class="post-copyright-license">
-      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
-  </li>
-</ul>
-</div>
-
-          <div class="post-tags">
-              <a href="/tags/Cpp/" rel="tag"><i class="fa fa-tag"></i> Cpp</a>
-              <a href="/tags/Unreal/" rel="tag"><i class="fa fa-tag"></i> Unreal</a>
-              <a href="/tags/Rendering/" rel="tag"><i class="fa fa-tag"></i> Rendering</a>
-          </div>
-
-        
-
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/post/urp-deferred-nativerenderpass.html" rel="prev" title="URP延迟渲染+Native Renderpass踩坑记录">
-                  <i class="fa fa-chevron-left"></i> URP延迟渲染+Native Renderpass踩坑记录
-                </a>
-            </div>
-            <div class="post-nav-item">
-                <a href="/post/ue51-mobile-deferred.html" rel="next" title="UE5.1移动端延迟渲染管线测试与剖析">
-                  UE5.1移动端延迟渲染管线测试与剖析 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
-    </footer>
-  </article>
-</div>
-
-
-
-
-
-
-</div>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inner">
-
-
-<div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2026</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">SnowyLake</span>
-</div>
-<div class="busuanzi-count">
-    <span class="post-meta-item" id="busuanzi_container_site_uv">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="总访客量">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="总访问量">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
-
-    </div>
-  </footer>
-
-  
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up fa-lg"></i>
-    <span>0%</span>
-  </div>
-
-  <a href="https://github.com/SnowyLake" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
-
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
-
-
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
-<script src="/js/third-party/search/local-search.js"></script>
-
-
-
-
-
-
-
-  
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-
-  <script class="next-config" data-name="enableMath" type="application/json">false</script>
-
-
-</body>
-</html>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://snowylake.net">SnowyLake</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://snowylake.net/post/ue5-cpp-generate-shader.html">https://snowylake.net/post/ue5-cpp-generate-shader.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://snowylake.net" target="_blank">雪之湖畔-SnowyLakeSide</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Cpp/">Cpp</a><a class="post-meta__tags" href="/tags/Unreal/">Unreal</a><a class="post-meta__tags" href="/tags/Rendering/">Rendering</a></div><div class="post-share"><div class="social-share" data-image="/images/snowylake.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/post/ue51-mobile-deferred.html" title="UE5.1移动端延迟渲染管线测试与剖析"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">UE5.1移动端延迟渲染管线测试与剖析</div></div><div class="info-2"><div class="info-item-1"> 待搬运, 内容详见原文链接.  原文链接: https://zhuanlan.zhihu.com/p/575618981  </div></div></div></a><a class="pagination-related" href="/post/urp-deferred-nativerenderpass.html" title="URP延迟渲染+Native Renderpass踩坑记录"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">URP延迟渲染+Native Renderpass踩坑记录</div></div><div class="info-2"><div class="info-item-1">过去两周多折腾URP Deferred + Native Renderpass, 踩了无数的坑, 翻遍国内国外的社区也找不到太多可供参考的资料. 于是在这里简述一下一些不可回避的问题以及其解决方案, 也算是为社区做点贡献.  在开始之前, 我想延迟渲染这种烂大街的玩意就没什么讲的必要了, 而Native Renderpass可能不少人没听过, 这东西底层调用的其实就是vulkan的renderpass/subpass API(metal也有类似的一套), 简单来说就是利用移动端TB(D)R的硬件架构, 相比于传统延迟管线在basepass结束后将gbuffer store回system memory, 之后再在lightpass中load回来这种带宽压力极大的方案, Native Renderpass可以在每个tile的basepass结束后将gbuffer保存在On-Chip Memory上, 以供接下来的lightpass直接使用, 直接优化掉了两个pass之间的store/load操作, 极大减缓了带宽压力, 这种形式的rt也被称之为memoryless. 简单科普到此为止...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/post/ue5-toonshading-0x00-base.html" title="从零开始的UE5卡通渲染0x00：理论基础"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-11</div><div class="info-item-2">从零开始的UE5卡通渲染0x00：理论基础</div></div><div class="info-2"><div class="info-item-1">最近在研究基于UE5的卡通渲染，颇有收获。正巧前段时间与同事吃饭，聊到知乎，深感自己知乎各种不正经的东西实在太多了，而我又是个懒得腾出时间写正经东西的懒狗，遂决定趁编译Shader的空闲，写点学习笔记、心得与分享。  虽然卡渲本身的知识不算很多，但放到UE5上就是不得不改动源码的大工程了，不由得让人怀念起自由的Unity，令人感叹……扯远了，总之UE5卡渲这块我准备分成多篇文章，多水一水。 目前的大(feng)致(kuang)计(hua)划(bing)如下：  卡通渲染理论基础 修改源码的卡渲光照模型实现 基于卷积矩阵的卡渲描边实现、添加子Mesh的Backface卡渲描边实现 修改源码自定义Pass的Backface卡渲描边实现 …… 次世代卡渲/独立的Hair、Skin卡渲光照模型/UE5复刻原神ShadingModel……(或许会有？) 废话不多说了，进入正题。   提到卡通渲染，很多了解不多的朋友可能就会将其与NPR(Non-Photorealistic Rendering)混为一谈，可实际上这两者并不能划等号。事实上NPR是个非常广泛的概念，不止是卡渲，油画、水墨风等等...</div></div></div></a><a class="pagination-related" href="/post/ue5-toonshading-0x01-custom-shadingmodel.html" title="从零开始的UE5卡通渲染0x01：自定义着色模型"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-11</div><div class="info-item-2">从零开始的UE5卡通渲染0x01：自定义着色模型</div></div><div class="info-2"><div class="info-item-1"> 待搬运, 内容详见原文链接.  原文链接: https://zhuanlan.zhihu.com/p/551343308  </div></div></div></a><a class="pagination-related" href="/post/ue51-mobile-deferred.html" title="UE5.1移动端延迟渲染管线测试与剖析"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-11</div><div class="info-item-2">UE5.1移动端延迟渲染管线测试与剖析</div></div><div class="info-2"><div class="info-item-1"> 待搬运, 内容详见原文链接.  原文链接: https://zhuanlan.zhihu.com/p/575618981  </div></div></div></a><a class="pagination-related" href="/post/ue51-mobile-deferred-lightchannels.html" title="UE5.1移动端延迟管线基于Light Channels模拟Unity Rendering Layers"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-11</div><div class="info-item-2">UE5.1移动端延迟管线基于Light Channels模拟Unity Rendering Layers</div></div><div class="info-2"><div class="info-item-1"> 待搬运, 内容详见原文链接.  原文链接: https://zhuanlan.zhihu.com/p/577239276  </div></div></div></a><a class="pagination-related" href="/post/ue5-rendering-plugin-0x00-shader-remapping.html" title="从插件开始的UE渲染开发0x00: Shader路径重定向"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-12</div><div class="info-item-2">从插件开始的UE渲染开发0x00: Shader路径重定向</div></div><div class="info-2"><div class="info-item-1">UE 渲染开发一直以来都是个很蛋疼的话题, 拜屎山一般的渲染系统所赐, 想要加点什么东西基本就只有改源码一条路可走, 以至于网上搜十个改源码的文章可能九个都是教你怎么加 ShadingModel 或 MeshPass. 我自己也曾在这类重复且枯燥的工作上花费大量的时间, 深切感受到这玩意到底有多恶心. 而且源码修改一时爽, 后续维护火葬场, 将来如果要升级引擎版本, 面对茫茫多的 diff 那才叫一个痛不欲生. 所以这个系列从 UE 的插件系统(Plugin)入手, 尝试探索在不改动源码的情况下, 如何最大限度的自定义渲染.  虽说不改 C++ 源码, 但 Shader 该改还是要改. 不过直接去引擎路径下改 Shader 就很恶心, 可能我只想为当前项目改动某部分 Shader, 但引擎路径下 Shader 的改动却会影响到本地的所有项目. 如果能像 Unity 那样每个项目自己有一份 Shader 就好了——正确的, 我们就先来把这个功能做了. 在动工之前, 需要先理解 UE Shader 的路径引用原理. UE shader 代码中 include 的文件路径并非真实的路径...</div></div></div></a><a class="pagination-related" href="/post/urp-deferred-nativerenderpass.html" title="URP延迟渲染+Native Renderpass踩坑记录"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-11</div><div class="info-item-2">URP延迟渲染+Native Renderpass踩坑记录</div></div><div class="info-2"><div class="info-item-1">过去两周多折腾URP Deferred + Native Renderpass, 踩了无数的坑, 翻遍国内国外的社区也找不到太多可供参考的资料. 于是在这里简述一下一些不可回避的问题以及其解决方案, 也算是为社区做点贡献.  在开始之前, 我想延迟渲染这种烂大街的玩意就没什么讲的必要了, 而Native Renderpass可能不少人没听过, 这东西底层调用的其实就是vulkan的renderpass/subpass API(metal也有类似的一套), 简单来说就是利用移动端TB(D)R的硬件架构, 相比于传统延迟管线在basepass结束后将gbuffer store回system memory, 之后再在lightpass中load回来这种带宽压力极大的方案, Native Renderpass可以在每个tile的basepass结束后将gbuffer保存在On-Chip Memory上, 以供接下来的lightpass直接使用, 直接优化掉了两个pass之间的store/load操作, 极大减缓了带宽压力, 这种形式的rt也被称之为memoryless. 简单科普到此为止...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/snowylake.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">SnowyLake</div><div class="author-info-description">Don't worry, be happy.</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">27</div></a></div><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/SnowyLake" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="https://www.zhihu.com/people/snowylake" target="_blank" title="Zhihu"><i class="fab fa-zhihu" style="color: #0084ff;"></i></a><a class="social-icon" href="mailto:snowylake.me@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">不想工作, 苦呀西~</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/code-is-cheap-show-me-the-idea.html" title="Code is cheap. Show me the idea.">Code is cheap. Show me the idea.</a><time datetime="2026-06-12T19:08:38.000Z" title="发表于 2026-06-13 03:08:38">2026-06-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/urp-ui-resolution-split-and-gamma-ui.html" title="聊聊UI分辨率分离与线性空间下的GammaUI">聊聊UI分辨率分离与线性空间下的GammaUI</a><time datetime="2024-09-14T19:15:00.000Z" title="发表于 2024-09-15 03:15:00">2024-09-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/ue5-rendering-plugin-0x00-shader-remapping.html" title="从插件开始的UE渲染开发0x00: Shader路径重定向">从插件开始的UE渲染开发0x00: Shader路径重定向</a><time datetime="2024-07-11T16:00:00.000Z" title="发表于 2024-07-12 00:00:00">2024-07-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/cpp20-stringsplit.html" title="一个C++20下的string split实现">一个C++20下的string split实现</a><time datetime="2023-09-10T21:10:07.000Z" title="发表于 2023-09-11 05:10:07">2023-09-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/post/ue51-mobile-deferred-lightchannels.html" title="UE5.1移动端延迟管线基于Light Channels模拟Unity Rendering Layers">UE5.1移动端延迟管线基于Light Channels模拟Unity Rendering Layers</a><time datetime="2023-09-10T21:08:45.000Z" title="发表于 2023-09-11 05:08:45">2023-09-11</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By SnowyLake</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 6.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5"></script><script src="/js/main.js?v=5.5.5"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.5"></script></div></div></body></html>

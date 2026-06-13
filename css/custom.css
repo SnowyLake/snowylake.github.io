@@ -1,0 +1,16 @@
+/* Custom visual overrides for Butterfly theme.
+   Injected via theme inject.head, keeps theme internals untouched. */
+
+/* Semi-transparent local-search dialog. */
+#local-search .search-dialog {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* Disable the rotate-on-hover effect for avatar and aside social icons.
+   The theme rules use high-specificity selectors (e.g. #aside-content ...),
+   so override with matching specificity and !important. */
+.avatar-img img:hover,
+#aside-content .card-info .card-info-social-icons i:hover,
+#card-info-btn:hover {
+  transform: none !important;
+}
