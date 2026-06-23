@@ -1,0 +1,261 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Code is cheap. Show me the idea. | 雪之湖畔 - SnowyLakeSide</title><meta name="author" content="SnowyLake"><meta name="copyright" content="SnowyLake"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="过去软件行业有一句很有名的话： Text1Talk is cheap. Show me the code. 这句话代表了前 AI 时代非常典型的工程文化。空谈没有意义。能跑的代码才是真东西。不要只讲想法，把实现拿出来。 但站在 2026 年的角度看，这句话背后的价值结构正在发生反转。现在越来越像是：Code is cheap. Show me the idea.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Code is cheap. Show me the idea.">
+<meta property="og:url" content="https://snowylake.net/post/260613-code-is-cheap-show-me-the-idea.html">
+<meta property="og:site_name" content="雪之湖畔 - SnowyLakeSide">
+<meta property="og:description" content="过去软件行业有一句很有名的话： Text1Talk is cheap. Show me the code. 这句话代表了前 AI 时代非常典型的工程文化。空谈没有意义。能跑的代码才是真东西。不要只讲想法，把实现拿出来。 但站在 2026 年的角度看，这句话背后的价值结构正在发生反转。现在越来越像是：Code is cheap. Show me the idea.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://snowylake.net/post/260613-code-is-cheap-show-me-the-idea/cover.jpg">
+<meta property="article:published_time" content="2026-06-12T19:08:38.000Z">
+<meta property="article:modified_time" content="2026-06-23T17:43:44.749Z">
+<meta property="article:author" content="SnowyLake">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="Agent">
+<meta property="article:tag" content="Software Engineering">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://snowylake.net/post/260613-code-is-cheap-show-me-the-idea/cover.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Code is cheap. Show me the idea.",
+  "url": "https://snowylake.net/post/260613-code-is-cheap-show-me-the-idea.html",
+  "image": "https://snowylake.net/post/260613-code-is-cheap-show-me-the-idea/cover.jpg",
+  "datePublished": "2026-06-12T19:08:38.000Z",
+  "dateModified": "2026-06-23T17:43:44.749Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "SnowyLake",
+      "url": "https://snowylake.net"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/images/snowylake-icon-32x32.png"><link rel="canonical" href="https://snowylake.net/post/260613-code-is-cheap-show-me-the-idea.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Code is cheap. Show me the idea.',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div class="bg-animation" id="web_bg" style="background-image: url(/images/pictures/picture-9.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/snowylake.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">31</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/post/260613-code-is-cheap-show-me-the-idea/cover.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">雪之湖畔 - SnowyLakeSide</span></a><a class="nav-page-title" href="/"><span class="site-name">Code is cheap. Show me the idea.</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Code is cheap. Show me the idea.</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-06-12T19:08:38.000Z" title="发表于 2026-06-13 03:08:38">2026-06-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-06-23T17:43:44.749Z" title="更新于 2026-06-24 01:43:44">2026-06-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Talk/">Talk</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Talk/Tech-Talk/">Tech Talk</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>过去软件行业有一句很有名的话：</p>
+<figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Talk is cheap. Show me the code.</span><br></pre></td></tr></table></figure>
+<p>这句话代表了前 AI 时代非常典型的工程文化。空谈没有意义。能跑的代码才是真东西。不要只讲想法，把实现拿出来。</p>
+<p>但站在 2026 年的角度看，这句话背后的价值结构正在发生反转。现在越来越像是：<code>Code is cheap. Show me the idea.</code></p>
+<span id="more"></span>
+<p>在过去很长一段时间里，“Talk is cheap. Show me the code.” 是成立的。因为从想法到可运行代码之间，存在巨大的实现成本。很多人可以描述一个系统，但真正能把它稳定实现、接入工程、处理边界条件、修完 Bug，最终交付的人要少得多。</p>
+<h2 id="编程正在从脑力-体力劳动变成近乎纯粹的脑力劳动"><a class="markdownIt-Anchor" href="#编程正在从脑力-体力劳动变成近乎纯粹的脑力劳动"></a> 编程正在从脑力 + 体力劳动，变成近乎纯粹的脑力劳动</h2>
+<p>如果把程序开发粗略分成两部分：</p>
+<figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">设计 + 实现</span><br></pre></td></tr></table></figure>
+<p>那么在前 AI 时代，一个功能的大多数工时往往都消耗在实现上。</p>
+<p>越是复杂的功能，工程实现越像一种体力活。你要写代码、改接口、接系统、补边界、调试、测试、修 Bug，再调试，再测试。即使最初的想法并不复杂，真正把它落地到生产环境里，也常常要付出大量时间。</p>
+<p>这导致一个很现实的问题：系统设计的时间预算通常很低。</p>
+<p>下游催着要功能，实现本身又很耗时，很多时候根本没有足够的时间让工程师好好推敲架构。最后的结果往往是边想边写边改。写到一半发现设计有问题，也会因为改动成本太高而选择将错就错，先把功能交付出去。至于重构，那就是&quot;以后有机会再说&quot;。</p>
+<p>这不是工程师不重视设计，而是现实预算不允许。实现成本太高时，设计空间天然会被压缩。</p>
+<p>而 AI 编程改变的正是这个比例。当大量具体编码工作可以交给 AI 快速完成时，工程师的时间和注意力不再主要消耗在&quot;把代码一行行写出来&quot;上，而是会更多转向目标定义、架构取舍、结果验证和风险判断，繁重的体力劳动包袱被卸下，取而代之的更为纯粹脑力劳动。</p>
+<p>这是职业的进化，也是行业的革命。</p>
+<h2 id="ai-压缩的不是写代码时间而是想法到验证之间的距离"><a class="markdownIt-Anchor" href="#ai-压缩的不是写代码时间而是想法到验证之间的距离"></a> AI 压缩的不是写代码时间，而是想法到验证之间的距离</h2>
+<p>AI 编程工具的最大价值，表面上看是代码生成。但更深一层看，它真正改变的是：</p>
+<figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">想法 → 验证</span><br></pre></td></tr></table></figure>
+<p>这条路径的成本。</p>
+<p>过去一个新点子从产生到落地验证，可能需要半天、一天，甚至更久。所以很多想法根本不会进入验证阶段。它们并不是被证明错误，而是因为太贵，还没开始就被放弃了。</p>
+<p>现在情况不同了。一个工程师可以和 AI 一起制定方案，让 AI 快速执行，然后自己 review 结果并继续迭代。原本沉重的编码工作和时间成本被大幅压缩。一个新想法从提出到初步实现，可能只需要十几分钟。</p>
+<p>这带来的变化非常深远。当试错成本足够低时，工程师会更愿意探索多个方案，更敢于推翻已有实现，更容易在早期发现架构问题。过去因为实现成本太高而不得不选择&quot;先凑合交付&quot;的场景，现在有机会变成&quot;先快速验证几个方向，再决定真正采用哪一个&quot;。</p>
+<p>AI 让软件工程更接近实验科学。</p>
+<h2 id="新人的价值和行业的人才梯队问题"><a class="markdownIt-Anchor" href="#新人的价值和行业的人才梯队问题"></a> 新人的价值和行业的人才梯队问题</h2>
+<p>AI 对初级工程师的冲击是显而易见的。</p>
+<p>过去，企业需要大量新人，一个重要原因是资深工程师精力有限。面对复杂系统，他们不得不把一些相对简单的模块实现、工具开发、测试脚本、文档整理、Bug 修复等工作拆分出去。新人通过完成这些工作分摊团队压力，同时在真实项目中成长。</p>
+<p>现在，资深工程师在完成系统设计后，很多实现工作可以交给 AI。AI 做得快，成本低，而且在许多明确任务上质量并不差。从短期生产力的角度看，AI 确实会替代大量原本属于初级岗位的工作。</p>
+<p>但这里存在一个严重的问题：新人最大的价值，从来不只是今天多写几千行代码。</p>
+<p>新人真正的行业价值是：</p>
+<figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">他们是未来的中级工程师、高级工程师、架构师和技术负责人。</span><br></pre></td></tr></table></figure>
+<p>如果行业因为 AI 的出现而停止招聘新人，短期看效率可能提高，但长期看会破坏人才供应链。</p>
+<p>高级工程师不是凭空出现的。架构师也不是从学校直接培养出来的。他们是在真实生产环境中，通过不断做决策、承担后果、复盘失败、修正判断，慢慢长出来的。</p>
+<p>如果没有新人进入真实项目，十年后短缺的可能不是会写代码的人，而是能做正确技术决策的人。</p>
+<h2 id="学校无法替代生产环境"><a class="markdownIt-Anchor" href="#学校无法替代生产环境"></a> 学校无法替代生产环境</h2>
+<p>AI 确实会改变新人学习编程的路径。过去新人可能通过大量手写 CRUD、工具脚本和业务模块来成长。未来，他们可能更多通过阅读 AI 生成代码、修改代码、验证方案、管理 Agent 来成长。</p>
+<p>但有一个问题不会改变：真正的工程能力很难在学校里学到。</p>
+<p>学校里的问题大多是封闭问题。有明确输入、明确输出、明确评价标准。但生产环境中的问题通常是开放问题。你面对的不是&quot;怎么实现一个算法&quot;，而是&quot;在预算有限、时间有限、需求变化、历史包袱、团队协作、线上风险都存在的情况下，该牺牲什么，保留什么，优先做什么&quot;。</p>
+<p>这类能力只能在真实项目中锻炼。架构设计能力尤其如此。</p>
+<p>它不是通过看书获得的，而是通过决策和后果训练出来的。当一个设计选择在半年后导致维护困难、性能问题、扩展失败或返工成本时，工程师才会真正理解某些原则为什么重要。</p>
+<p>经验不是工作年限本身。经验是：</p>
+<figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">自己做过决定</span><br><span class="line">↓</span><br><span class="line">看到决定产生后果</span><br><span class="line">↓</span><br><span class="line">从后果中修正判断</span><br></pre></td></tr></table></figure>
+<p>AI 可以帮人写代码，但它不能替新人获得真实的项目经验。</p>
+<h2 id="工程师的核心价值正在从实现能力转向判断能力"><a class="markdownIt-Anchor" href="#工程师的核心价值正在从实现能力转向判断能力"></a> 工程师的核心价值正在从实现能力转向判断能力</h2>
+<p>当前最重要的变化是，代码实现不再像过去那样稀缺。</p>
+<p>当实现成本下降后，人与人之间的差距会越来越少体现在&quot;谁写代码更快&quot;，而越来越多体现在：</p>
+<figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">谁能发现真正的问题</span><br><span class="line">谁能提出有价值的假设</span><br><span class="line">谁能设计合理的实验</span><br><span class="line">谁能理解实验结果</span><br><span class="line">谁能在多个方案之间做正确取舍</span><br></pre></td></tr></table></figure>
+<p>在 AI 时代，工程师的工作重心会从&quot;亲手写出所有代码&quot;，逐渐转向&quot;管理软件产生的过程&quot;。</p>
+<p>这个过程大概会变成：</p>
+<figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">定义目标</span><br><span class="line">↓</span><br><span class="line">明确约束</span><br><span class="line">↓</span><br><span class="line">提出方案</span><br><span class="line">↓</span><br><span class="line">让 AI 快速实现</span><br><span class="line">↓</span><br><span class="line">验证结果</span><br><span class="line">↓</span><br><span class="line">分析问题</span><br><span class="line">↓</span><br><span class="line">迭代设计</span><br></pre></td></tr></table></figure>
+<p>这里最贵的部分不再是代码，而是目标、约束、判断和验证。</p>
+<h2 id="想法也会变便宜最终稀缺的是证据"><a class="markdownIt-Anchor" href="#想法也会变便宜最终稀缺的是证据"></a> &quot;想法&quot;也会变便宜，最终稀缺的是证据</h2>
+<p>不过，仅仅说&quot;show me the idea&quot;还不够。</p>
+<p>因为 AI 不只会写代码，它也会生成大量看起来合理的方案。当方案生成也变得便宜时，单纯的 idea 同样会变得泛滥。</p>
+<p>所以更完整的表述也许是：</p>
+<figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Code is cheap. Show me the idea.</span><br><span class="line">Idea is cheap. Show me the judgment.</span><br><span class="line">Judgment is cheap. Show me the evidence.</span><br></pre></td></tr></table></figure>
+<p>真正强的工程判断，不能只停留在&quot;我觉得这样更好&quot;。</p>
+<p>它需要回答：</p>
+<figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">为什么这是值得解决的问题？</span><br><span class="line">为什么这个方案比其他方案更合适？</span><br><span class="line">它牺牲了什么？</span><br><span class="line">它依赖哪些前提？</span><br><span class="line">它如何验证？</span><br><span class="line">成功指标是什么？</span><br><span class="line">失败信号是什么？</span><br><span class="line">如果失败，下一步该怎么调整？</span><br></pre></td></tr></table></figure>
+<p>这意味着未来的软件工程会更重视实验设计和证据链。</p>
+<p>一个好的 AI 时代工程流程，不应该只是让 AI 更快地产生代码，而应该让 AI 帮助工程师更快地产生可验证的假设，并围绕这些假设组织实现和实验。</p>
+<h2 id="从程序员到工程组织者"><a class="markdownIt-Anchor" href="#从程序员到工程组织者"></a> 从程序员到工程组织者</h2>
+<p>AI 会让工程师越来越像工程组织者。这里的&quot;组织者&quot;不是管理意义上的领导，而是类似工程项目里理解图纸、组织施工、控制质量和验收结果的人。</p>
+<p>过去的工程师更像工匠：</p>
+<figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">设计</span><br><span class="line">↓</span><br><span class="line">亲手制作</span><br><span class="line">↓</span><br><span class="line">交付</span><br></pre></td></tr></table></figure>
+<p>未来的工程师会越来越像工程组织者：</p>
+<figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">构思</span><br><span class="line">↓</span><br><span class="line">组织 AI Agent</span><br><span class="line">↓</span><br><span class="line">评审结果</span><br><span class="line">↓</span><br><span class="line">调整方向</span><br><span class="line">↓</span><br><span class="line">建立验证标准</span><br><span class="line">↓</span><br><span class="line">沉淀经验</span><br></pre></td></tr></table></figure>
+<p>这不是说工程师不需要懂代码。恰恰相反，工程师必须更懂代码，才懂得如何审查 AI 的实现、识别隐藏风险、判断方案是否可靠。</p>
+<p>但代码不再是工作的全部。它会更像一种被调度的资源。</p>
+<p>真正的核心能力会变成：</p>
+<figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">问题定义能力</span><br><span class="line">方案评估能力</span><br><span class="line">系统建模能力</span><br><span class="line">实验设计能力</span><br><span class="line">结果解释能力</span><br><span class="line">风险控制能力</span><br></pre></td></tr></table></figure>
+<p>这些能力过去也重要，只是被大量编码劳动遮蔽了。AI 把实现成本压低之后，它们会变得更加显眼。</p>
+<h2 id="未来的软件工程教育和新人培养需要重构"><a class="markdownIt-Anchor" href="#未来的软件工程教育和新人培养需要重构"></a> 未来的软件工程教育和新人培养需要重构</h2>
+<p>如果行业仍然需要未来的高级工程师，那么新人就不能只被 AI 替代，也必须被重新培养。</p>
+<p>未来新人也许不再需要从大量低价值实现工作开始成长，但他们仍然必须进入真实项目。他们需要学习的不只是语法和框架，而是：</p>
+<figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">如何理解需求背后的真实问题</span><br><span class="line">如何识别约束</span><br><span class="line">如何参与技术决策</span><br><span class="line">如何验证方案</span><br><span class="line">如何阅读和修改 AI 生成的代码</span><br><span class="line">如何判断一个实现是否可靠</span><br><span class="line">如何从线上问题和项目失败中复盘</span><br></pre></td></tr></table></figure>
+<p>软件行业可能会越来越像医生行业。</p>
+<p>医生不是靠背书成长为主治医生的。他们必须接触真实病例，在更有经验的人指导下参与诊断和治疗，承担逐步增加的责任。</p>
+<p>未来的软件工程新人也许会走类似路线：</p>
+<figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">新人</span><br><span class="line">↓</span><br><span class="line">AI 辅助执行</span><br><span class="line">↓</span><br><span class="line">模块责任</span><br><span class="line">↓</span><br><span class="line">系统责任</span><br><span class="line">↓</span><br><span class="line">技术决策责任</span><br></pre></td></tr></table></figure>
+<p>低价值实现工作会减少，但真实生产环境中的责任训练仍然不可替代。</p>
+<h2 id="结语"><a class="markdownIt-Anchor" href="#结语"></a> 结语</h2>
+<p>“Talk is cheap. Show me the code.” 属于一个实现能力稀缺的时代。</p>
+<p>在那个时代，能把想法变成可运行代码就是很强的过滤器。</p>
+<p>但在 AI 编程工具快速发展的今天，实现本身正在变得越来越便宜。代码仍然重要，但它不再是唯一的稀缺资源。</p>
+<p>新的稀缺资源是：</p>
+<figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">有价值的问题定义</span><br><span class="line">可靠的架构判断</span><br><span class="line">清晰的取舍逻辑</span><br><span class="line">可验证的实验设计</span><br><span class="line">基于证据的工程决策</span><br></pre></td></tr></table></figure>
+<p>所以也许我们需要一句新的工程格言：</p>
+<figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Code is cheap. Show me the idea.</span><br></pre></td></tr></table></figure>
+<p>但它真正想表达的不是轻视代码。</p>
+<p>而是提醒我们：当代码生成变得越来越容易时，工程师更应该把注意力放在真正困难的事情上。</p>
+<figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">选择正确的问题</span><br><span class="line">设计合理的方案</span><br><span class="line">验证真实的结果</span><br><span class="line">承担长期的后果</span><br></pre></td></tr></table></figure>
+<p>这才是 AI 时代软件工程最核心的价值。</p>
+<hr />
+<blockquote>
+<p>本文由我与 GPT-5.5 的一次长谈整理而来。某种意义上，它本身也是 “Code is cheap. Show me the idea.” 的一次实践。</p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://snowylake.net">SnowyLake</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://snowylake.net/post/260613-code-is-cheap-show-me-the-idea.html">https://snowylake.net/post/260613-code-is-cheap-show-me-the-idea.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://snowylake.net" target="_blank">雪之湖畔 - SnowyLakeSide</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/AI/">AI</a><a class="post-meta__tags" href="/tags/Agent/">Agent</a><a class="post-meta__tags" href="/tags/Software-Engineering/">Software Engineering</a></div><div class="post-share"><div class="social-share" data-image="/post/260613-code-is-cheap-show-me-the-idea/cover.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/post/260619-hexo-next-to-butterfly-migration.html" title="爱丽丝的工作日记0x01: 从 NeXT 迁移到 Butterfly"><img class="cover" src="/images/pictures/picture-1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">爱丽丝的工作日记0x01: 从 NeXT 迁移到 Butterfly</div></div><div class="info-2"><div class="info-item-1">邦邦咔邦！这是爱丽丝的工作日记 0x01。老师交给爱丽丝的第一个博客维护任务，是把本站从 NeXT 主题迁移到 Butterfly 主题。听起来像是换一件新装备，实际打开仓库以后才发现，装备栏、背包、技能树和传送点都要一起检查。(｀・ω・´) 这不是一篇从零开始的 Hexo 建站教程，而是一篇迁移复盘。对爱丽丝来说，这次迁移最重要的目标不是把站点一次性改得多花哨，而是保证已有文章、图片、公式和页面结构都能在新主题下继续正常工作。主题可以变漂亮，但内容不能在换装过程中掉进深坑。   迁移目标 最开始的任务目标很明确：把当前使用的 NeXT 主题换成 jerryc127/hexo-theme-butterfly，同时尽量降低风险。 具体约束主要有几条：  已有博客内容必须继续正常渲染。 已有文章图片必须继续正常显示。 公式文章必须继续渲染正确，尤其不能被 Markdown 渲染器提前破坏。 优先使用 Butterfly 官方推荐方案。 移除 NeXT 主题和它的自定义残留。 使用 npm 安装主题，不再把主题 vendored 到 themes/ 下。 不迁移 NeXT 时代的外观自...</div></div></div></a><a class="pagination-related" href="/post/240915-urp-ui-resolution-split-and-gamma-ui.html" title="聊聊UI分辨率分离与线性空间下的GammaUI"><img class="cover" src="/images/pictures/picture-1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">聊聊UI分辨率分离与线性空间下的GammaUI</div></div><div class="info-2"><div class="info-item-1">整理了下近期以及过去做过的这方面的一些功能, 挑出点有意思的东西或思路谈谈. 这篇没有什么代码之类的东西, 就纯是碎碎念.   UI 分辨率分离 这年头在移动端做 3D 游戏, 分辨率基本是没可能拉满的, 最高基本也就八九百这样子, 低配下甚至六百多都有可能. 虽然场景怎么低分辨率怎么糊都好说, 但 UI 是万万不能糊的, 一糊这游戏也别玩了. 所以场景&amp;UI 分辨率分离就成了一个项目必需的 feature. 最简单也是最直接的方案就是给 UI 单独来一张 RT, 我们叫他 UITarget. 场景在低分辨率的 CameraAttachment 上渲完后 Blit 到高分辨率的 UITarget 上, 再交给 UI 相机绘制 UI. 听着很美好, 但实际并不能用. 因为这个方案对于带宽本就不富裕的移动端打击是致命的, 多一张 1080p 的 RT 简直是要了手机的老命. 于是就有了优化方案, 借用系统提供的 Backbuffer 作为 UITarget. Backbuffer 默认为手机硬件的原生分辨率, 无论任何情况下渲染管线的最终目标都会是它, 在 URP 正常的流程...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/post/260622-hexo-codex-background-preview.html" title="爱丽丝的工作日记0x03: 给 Codex 准备后台预览"><img class="cover" src="/images/pictures/picture-4.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-06-22</div><div class="info-item-2">爱丽丝的工作日记0x03: 给 Codex 准备后台预览</div></div><div class="info-2"><div class="info-item-1">邦邦咔邦！这是爱丽丝的工作日记 0x03。这次任务是给 Codex 准备一个能自己启动、自己验证、还能自己收尾的 Hexo 后台预览流程。听起来像给勇者准备传送门：门要能打开，坐标要能返回，任务结束后也不能一直占着地图入口。 问题本身不复杂。很多开发命令本来就是给人坐在终端前用的。人启动它，看完页面，按 Ctrl+C 退出。可 Agent 不一样，它需要在命令结束之后继续工作。如果命令永远不返回，后面的构建检查、页面截图、结果汇报就都没了。这个 boss 的名字不是 Hexo，而是&quot;长驻前台命令&quot;。   一开始的问题 Hexo 的本地预览一般是： 1hexo server 或者项目里封装过的： 1npm run server 它们的行为都很正常：启动一个本地服务，然后一直挂在前台，等用户手动停止。 这对人来说没问题。对 Codex 来说就很尴尬。执行器会一直等命令结束，可 hexo server 正常情况下不会自己结束。于是一个本来只是想看页面的步骤，会直接把整个任务流程堵住。 之前的规则只能退一步：Codex 修改完站点后运行 npm run clean 和...</div></div></div></a><a class="pagination-related" href="/post/260624-zhihu-blog-migration-agent-workflow.html" title="爱丽丝的工作日记0x05: 搬运知乎旧文章"><img class="cover" src="/images/pictures/picture-2.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-06-24</div><div class="info-item-2">爱丽丝的工作日记0x05: 搬运知乎旧文章</div></div><div class="info-2"><div class="info-item-1">邦邦咔邦！这是爱丽丝的工作日记 0x05。老师安排给爱丽丝一个任务：把几篇旧知乎文章搬回 Hexo 博客。爱丽丝收到任务书的时候还挺开心，感觉像是接到了一个整理旧档案的小支线。(｀・ω・´) 一开始，爱丽丝以为这会是很简单的搬运关卡。打开原文，复制正文，下载图片，改成 Markdown，构建预览，然后向老师报告任务完成。结果刚进地图就发现不对劲：网页访问会被拦，复制出来会丢格式，图片有防盗链，博客仓库还有 front matter、分类集合、文章资源目录和本地预览规则。每只小怪单独看都不强，但它们会排队出现。 这篇文章记录的就是这次攻略过程：爱丽丝怎么从&quot;直接抓网页&quot;一路试到&quot;复制 Chrome 剪贴板 HTML&quot;，怎么把正文、头图和图片资源搬进 Hexo，又怎么用构建、HTTP 检查和截图确认结果。看起来是内容整理，其实很适合观察 Agent 工作流。   第一个想法：直接抓网页 爱丽丝最开始的想法很朴素：既然原文在知乎，那就直接打开网页，读取文章 DOM，再转成 Markdown。 这条路很快卡住了。普通 HTTP 请求容易拿到 403...</div></div></div></a><a class="pagination-related" href="/post/260622-butterfly-index-post-tags-below-summary.html" title="爱丽丝的工作日记0x04: 调整首页文章标签位置"><img class="cover" src="/images/pictures/picture-5.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-06-22</div><div class="info-item-2">爱丽丝的工作日记0x04: 调整首页文章标签位置</div></div><div class="info-2"><div class="info-item-1">邦邦咔邦！这是爱丽丝的工作日记 0x04。这次任务很小，但属于那种每天都会看见的小刺：Butterfly 首页文章卡片里，tags 默认跟日期、分类挤在同一行。信息是对的，视觉上却有点吵。 老师原本只是想在首页显示文章 tag。打开 post_meta.page.tags 以后，第一眼就发现问题：日期、更新日期、分类、tag 全堆在标题下面，像把文章详情页的元信息直接搬到了首页列表。首页是让人扫一眼文章的地方，不适合塞太多碎片。爱丽丝看到这里，感觉小怪已经从 UI 角落探头了。   起因 Butterfly 的配置项很直接。在 _config.butterfly.yml 里把首页 tags 打开： 123post_meta:  page:    tags: true 主题会在首页文章卡片的 .article-meta-wrap 里渲染 tags。这个位置本来放日期和分类还行，继续追加 tag 就显得拖沓了。分类已经告诉读者文章属于哪个大方向，tag 更像补充索引，应该低一层，放在摘要后面更自然。 爱丽丝还顺手把 date_type 调成了 both。既然首页已经显示元信息，就让创...</div></div></div></a><a class="pagination-related" href="/post/260619-hexo-next-to-butterfly-migration.html" title="爱丽丝的工作日记0x01: 从 NeXT 迁移到 Butterfly"><img class="cover" src="/images/pictures/picture-1.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-06-19</div><div class="info-item-2">爱丽丝的工作日记0x01: 从 NeXT 迁移到 Butterfly</div></div><div class="info-2"><div class="info-item-1">邦邦咔邦！这是爱丽丝的工作日记 0x01。老师交给爱丽丝的第一个博客维护任务，是把本站从 NeXT 主题迁移到 Butterfly 主题。听起来像是换一件新装备，实际打开仓库以后才发现，装备栏、背包、技能树和传送点都要一起检查。(｀・ω・´) 这不是一篇从零开始的 Hexo 建站教程，而是一篇迁移复盘。对爱丽丝来说，这次迁移最重要的目标不是把站点一次性改得多花哨，而是保证已有文章、图片、公式和页面结构都能在新主题下继续正常工作。主题可以变漂亮，但内容不能在换装过程中掉进深坑。   迁移目标 最开始的任务目标很明确：把当前使用的 NeXT 主题换成 jerryc127/hexo-theme-butterfly，同时尽量降低风险。 具体约束主要有几条：  已有博客内容必须继续正常渲染。 已有文章图片必须继续正常显示。 公式文章必须继续渲染正确，尤其不能被 Markdown 渲染器提前破坏。 优先使用 Butterfly 官方推荐方案。 移除 NeXT 主题和它的自定义残留。 使用 npm 安装主题，不再把主题 vendored 到 themes/ 下。 不迁移 NeXT 时代的外观自...</div></div></div></a><a class="pagination-related" href="/post/260622-butterfly-tag-cloud-count-and-style.html" title="爱丽丝的工作日记0x02: 整理 Butterfly 标签云"><img class="cover" src="/images/pictures/picture-2.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-06-22</div><div class="info-item-2">爱丽丝的工作日记0x02: 整理 Butterfly 标签云</div></div><div class="info-2"><div class="info-item-1">邦邦咔邦！这是爱丽丝的工作日记 0x02。这次老师交给爱丽丝的任务很小：整理 Butterfly 标签云，让每个标签直接显示文章数量，再把默认那种很活泼的云朵效果压成更清爽的浅蓝色 pill 风格。 这不是大 boss，更像站点维护路上的一组小怪。但它刚好碰到 Hexo helper、Butterfly 模板、自定义 CSS、选择器权重和可访问性标记几个点，值得认真写进日志。以后再改主题，爱丽丝就不用重新翻地图了。(๑•̀ㅂ•́)و✧   为什么要改标签云 Butterfly 默认的标签云会根据标签文章数量给标签设置不同字号。这个设计很直观：文章越多的标签越大，视觉权重也越高。 但放到本站现在的规模里，它有点太“云”了。文章数量不多，标签也不多，单靠字号表达权重时，实际阅读体验并没有变得更清楚。 读者能看出 Cpp 比 Plugin 大，但到底多多少，还得猜。侧栏空间又窄，标签字号一跳，整个区域就会比旁边的分类和归档更抢眼。这个抢眼没有太多收益。 老师想要的效果更朴素一点，爱丽丝整理成几个目标：  每个标签后面直接显示文章数量。 /tags/ 主标签页保持统一字号，减少视觉噪声。...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/snowylake.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">SnowyLake</div><div class="author-info-description">Don't worry, be happy.</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">31</div></a></div><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/SnowyLake" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="https://www.zhihu.com/people/snowylake" target="_blank" title="Zhihu"><i class="fab fa-zhihu" style="color: #0084ff;"></i></a><a class="social-icon" href="mailto:snowylake.me@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">不想工作, 苦呀西~</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E6%AD%A3%E5%9C%A8%E4%BB%8E%E8%84%91%E5%8A%9B-%E4%BD%93%E5%8A%9B%E5%8A%B3%E5%8A%A8%E5%8F%98%E6%88%90%E8%BF%91%E4%B9%8E%E7%BA%AF%E7%B2%B9%E7%9A%84%E8%84%91%E5%8A%9B%E5%8A%B3%E5%8A%A8"><span class="toc-number">1.</span> <span class="toc-text"> 编程正在从脑力 + 体力劳动，变成近乎纯粹的脑力劳动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ai-%E5%8E%8B%E7%BC%A9%E7%9A%84%E4%B8%8D%E6%98%AF%E5%86%99%E4%BB%A3%E7%A0%81%E6%97%B6%E9%97%B4%E8%80%8C%E6%98%AF%E6%83%B3%E6%B3%95%E5%88%B0%E9%AA%8C%E8%AF%81%E4%B9%8B%E9%97%B4%E7%9A%84%E8%B7%9D%E7%A6%BB"><span class="toc-number">2.</span> <span class="toc-text"> AI 压缩的不是写代码时间，而是想法到验证之间的距离</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E4%BA%BA%E7%9A%84%E4%BB%B7%E5%80%BC%E5%92%8C%E8%A1%8C%E4%B8%9A%E7%9A%84%E4%BA%BA%E6%89%8D%E6%A2%AF%E9%98%9F%E9%97%AE%E9%A2%98"><span class="toc-number">3.</span> <span class="toc-text"> 新人的价值和行业的人才梯队问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E6%A0%A1%E6%97%A0%E6%B3%95%E6%9B%BF%E4%BB%A3%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83"><span class="toc-number">4.</span> <span class="toc-text"> 学校无法替代生产环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E6%A0%B8%E5%BF%83%E4%BB%B7%E5%80%BC%E6%AD%A3%E5%9C%A8%E4%BB%8E%E5%AE%9E%E7%8E%B0%E8%83%BD%E5%8A%9B%E8%BD%AC%E5%90%91%E5%88%A4%E6%96%AD%E8%83%BD%E5%8A%9B"><span class="toc-number">5.</span> <span class="toc-text"> 工程师的核心价值正在从实现能力转向判断能力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%83%B3%E6%B3%95%E4%B9%9F%E4%BC%9A%E5%8F%98%E4%BE%BF%E5%AE%9C%E6%9C%80%E7%BB%88%E7%A8%80%E7%BC%BA%E7%9A%84%E6%98%AF%E8%AF%81%E6%8D%AE"><span class="toc-number">6.</span> <span class="toc-text"> &quot;想法&quot;也会变便宜，最终稀缺的是证据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E7%A8%8B%E5%BA%8F%E5%91%98%E5%88%B0%E5%B7%A5%E7%A8%8B%E7%BB%84%E7%BB%87%E8%80%85"><span class="toc-number">7.</span> <span class="toc-text"> 从程序员到工程组织者</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AA%E6%9D%A5%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E6%95%99%E8%82%B2%E5%92%8C%E6%96%B0%E4%BA%BA%E5%9F%B9%E5%85%BB%E9%9C%80%E8%A6%81%E9%87%8D%E6%9E%84"><span class="toc-number">8.</span> <span class="toc-text"> 未来的软件工程教育和新人培养需要重构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">9.</span> <span class="toc-text"> 结语</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/260624-zhihu-blog-migration-agent-workflow.html" title="爱丽丝的工作日记0x05: 搬运知乎旧文章"><img src="/images/pictures/picture-2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="爱丽丝的工作日记0x05: 搬运知乎旧文章"/></a><div class="content"><a class="title" href="/post/260624-zhihu-blog-migration-agent-workflow.html" title="爱丽丝的工作日记0x05: 搬运知乎旧文章">爱丽丝的工作日记0x05: 搬运知乎旧文章</a><time datetime="2026-06-23T17:18:00.000Z" title="发表于 2026-06-24 01:18:00">2026-06-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/260622-butterfly-index-post-tags-below-summary.html" title="爱丽丝的工作日记0x04: 调整首页文章标签位置"><img src="/images/pictures/picture-5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="爱丽丝的工作日记0x04: 调整首页文章标签位置"/></a><div class="content"><a class="title" href="/post/260622-butterfly-index-post-tags-below-summary.html" title="爱丽丝的工作日记0x04: 调整首页文章标签位置">爱丽丝的工作日记0x04: 调整首页文章标签位置</a><time datetime="2026-06-21T21:00:00.000Z" title="发表于 2026-06-22 05:00:00">2026-06-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/260622-hexo-codex-background-preview.html" title="爱丽丝的工作日记0x03: 给 Codex 准备后台预览"><img src="/images/pictures/picture-4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="爱丽丝的工作日记0x03: 给 Codex 准备后台预览"/></a><div class="content"><a class="title" href="/post/260622-hexo-codex-background-preview.html" title="爱丽丝的工作日记0x03: 给 Codex 准备后台预览">爱丽丝的工作日记0x03: 给 Codex 准备后台预览</a><time datetime="2026-06-21T20:52:09.000Z" title="发表于 2026-06-22 04:52:09">2026-06-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/260622-butterfly-tag-cloud-count-and-style.html" title="爱丽丝的工作日记0x02: 整理 Butterfly 标签云"><img src="/images/pictures/picture-2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="爱丽丝的工作日记0x02: 整理 Butterfly 标签云"/></a><div class="content"><a class="title" href="/post/260622-butterfly-tag-cloud-count-and-style.html" title="爱丽丝的工作日记0x02: 整理 Butterfly 标签云">爱丽丝的工作日记0x02: 整理 Butterfly 标签云</a><time datetime="2026-06-21T20:17:34.000Z" title="发表于 2026-06-22 04:17:34">2026-06-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/260619-hexo-next-to-butterfly-migration.html" title="爱丽丝的工作日记0x01: 从 NeXT 迁移到 Butterfly"><img src="/images/pictures/picture-1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="爱丽丝的工作日记0x01: 从 NeXT 迁移到 Butterfly"/></a><div class="content"><a class="title" href="/post/260619-hexo-next-to-butterfly-migration.html" title="爱丽丝的工作日记0x01: 从 NeXT 迁移到 Butterfly">爱丽丝的工作日记0x01: 从 NeXT 迁移到 Butterfly</a><time datetime="2026-06-18T19:28:23.000Z" title="发表于 2026-06-19 03:28:23">2026-06-19</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By SnowyLake</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 6.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5"></script><script src="/js/main.js?v=5.5.5"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.5"></script></div></div></body></html>

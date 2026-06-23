@@ -1,0 +1,193 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>从auto_ptr到unique_ptr：浅谈C++右值引用、移动语义与智能指针 | 雪之湖畔 - SnowyLakeSide</title><meta name="author" content="SnowyLake"><meta name="copyright" content="SnowyLake"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="std::auto_ptr是C++03对智能指针的第一次尝试，作为一个失败品，其甚至已然在后续的标准中被移除，但时至今日，我们依然可以透过它一窥C++发展史的一角。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从auto_ptr到unique_ptr：浅谈C++右值引用、移动语义与智能指针">
+<meta property="og:url" content="https://snowylake.net/post/230624-cpp-autoptr-to-uniqueptr.html">
+<meta property="og:site_name" content="雪之湖畔 - SnowyLakeSide">
+<meta property="og:description" content="std::auto_ptr是C++03对智能指针的第一次尝试，作为一个失败品，其甚至已然在后续的标准中被移除，但时至今日，我们依然可以透过它一窥C++发展史的一角。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://snowylake.net/images/pictures/picture-4.jpg">
+<meta property="article:published_time" content="2023-06-23T22:11:53.000Z">
+<meta property="article:modified_time" content="2026-06-23T17:43:44.726Z">
+<meta property="article:author" content="SnowyLake">
+<meta property="article:tag" content="Cpp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://snowylake.net/images/pictures/picture-4.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "从auto_ptr到unique_ptr：浅谈C++右值引用、移动语义与智能指针",
+  "url": "https://snowylake.net/post/230624-cpp-autoptr-to-uniqueptr.html",
+  "image": "https://snowylake.net/images/pictures/picture-4.jpg",
+  "datePublished": "2023-06-23T22:11:53.000Z",
+  "dateModified": "2026-06-23T17:43:44.726Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "SnowyLake",
+      "url": "https://snowylake.net"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/images/snowylake-icon-32x32.png"><link rel="canonical" href="https://snowylake.net/post/230624-cpp-autoptr-to-uniqueptr.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '从auto_ptr到unique_ptr：浅谈C++右值引用、移动语义与智能指针',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div class="bg-animation" id="web_bg" style="background-image: url(/images/pictures/picture-9.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/snowylake.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">31</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/images/pictures/picture-4.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">雪之湖畔 - SnowyLakeSide</span></a><a class="nav-page-title" href="/"><span class="site-name">从auto_ptr到unique_ptr：浅谈C++右值引用、移动语义与智能指针</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">从auto_ptr到unique_ptr：浅谈C++右值引用、移动语义与智能指针</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-23T22:11:53.000Z" title="发表于 2023-06-24 06:11:53">2023-06-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-06-23T17:43:44.726Z" title="更新于 2026-06-24 01:43:44">2026-06-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Basic/">Basic</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Basic/Cpp/">Cpp</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>std::auto_ptr是C++03对智能指针的第一次尝试，作为一个失败品，其甚至已然在后续的标准中被移除，但时至今日，我们依然可以透过它一窥C++发展史的一角。</p>
+<span id="more"></span>
+<p>出于方便、严谨起见，下文所提及类与函数，如未特别标明命名空间，均为std或其子命名空间下的标准库设施。</p>
+<h1 id="stdauto_ptr的失败之处"><a class="markdownIt-Anchor" href="#stdauto_ptr的失败之处"></a> std::auto_ptr的失败之处</h1>
+<p>auto_ptr在语义上是有些类似它的后辈unique_ptr的，其拷贝构造/赋值函数并非深拷贝或浅拷贝，而是被设计成了资产的所有权转移即move语义，从而保证一份资源同时只能被一根auto_ptr所持有：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">_Ty</span>&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">auto_ptr</span> </span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">auto_ptr</span>(auto_ptr&amp; _Right) <span class="keyword">noexcept</span> : _Myptr(_Right.<span class="built_in">release</span>()) &#123;&#125;</span><br><span class="line">    <span class="function">_Ty* <span class="title">release</span><span class="params">()</span> <span class="keyword">noexcept</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        _Ty* _Tmp = _Myptr;</span><br><span class="line">        _Myptr    = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">return</span> _Tmp;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    _Ty* _Myptr; <span class="comment">// the wrapped object pointer</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到，auto_ptr的copy ctor实际上执行的是C++11及以后的move ctor的工作，为此，其参数特意取消了const限定。这看似是个好设计，然而却有着致命的缺陷。考虑以下场景：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;std::auto_ptr&lt;<span class="type">int</span>&gt;&gt; aptrVec;</span><br><span class="line"><span class="function">std::auto_ptr&lt;<span class="type">int</span>&gt; <span class="title">aptr</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>(<span class="number">1</span>))</span></span>;</span><br><span class="line">aptrVec.<span class="built_in">push_back</span>(aptr);</span><br></pre></td></tr></table></figure>
+<p>或许难以想象，但这段理所应当的代码是实实在在的编译不过的。其原因是push_back时会发生拷贝构造的，而push_back的参数为<code>const _Ty&amp; _Val</code>，在发生拷贝构造时const限定的参数自然无法传入非const限定的拷贝构造函数中，从而编译失败。</p>
+<p>堂堂智能指针，竟然无法放到任何一个容器中去，何其荒诞可笑。更何况除此以外，auto_ptr依旧存在很多缺陷——这里不一一赘述，总之，在十多年前的那会儿，C++急需一套完备的智能指针来替换掉auto_ptr这个笑话。</p>
+<h1 id="stdunique_ptr如何成功"><a class="markdownIt-Anchor" href="#stdunique_ptr如何成功"></a> std::unique_ptr如何成功？</h1>
+<blockquote>
+<p>C++标准委员会说要有unique_ptr，于是就有了unique_ptr。<br />
+C++标准委员会说unique_ptr是好的，于是……于是他们就忘了在C++11里加上make_unique了 😃</p>
+</blockquote>
+<p>前面说到，auto_ptr想用copy ctor实现move语义，但却与容器库冲突，惨遭失败。想要一雪前耻，那么就需要C++11的重量级特性右值引用了。</p>
+<p>虽然我们常说，右值引用的作用是“延长右值生命周期”，即：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Type&amp;&amp; t = Type&#123;&#125;;</span><br></pre></td></tr></table></figure>
+<p>但实际上右值引用更为重要的作用是区分copy与move语义，而这一点又着重体现在C++11中由过去三法则演变而来的五法则上：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Fuxk</span></span><br><span class="line">&#123;	</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Fuxk</span>();</span><br><span class="line">    ~<span class="built_in">Fuxk</span>();</span><br><span class="line">    <span class="built_in">Fuxk</span>(<span class="type">const</span> Fuxk&amp;);</span><br><span class="line">    <span class="built_in">Fuxk</span>(Fuxk&amp;&amp;) <span class="keyword">noexcept</span>;</span><br><span class="line">    Fuxk&amp; <span class="keyword">operator</span>=(<span class="type">const</span> Fuxk&amp;);</span><br><span class="line">    Fuxk&amp; <span class="keyword">operator</span>=(Fuxk&amp;&amp;) <span class="keyword">noexcept</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>相比与C++11之前的三法则dtor、copy ctor、copy op=，C++11新增了以右值引用作为参数的move ctor和move op=，正式将copy语义与move语义分隔开，使得用户可以更加自由的对内存所有权进行管理。</p>
+<p>而这一切最直接的受益者之一，就是std::unique_ptr了。</p>
+<p>前面我们说，auto_ptr的目标是既要“保证一份资源同时只能被一根auto_ptr所持有”又要“支持资产所有权的转移”，这是只依靠copy语义无法完成的，而在C++11中，通过copy move语义的拆分，我们可以很自然而然的delete掉copy ctor/op=来保证所有权的唯一性，同时提供move ctor/op=来支持所有权的转移。</p>
+<p>我并没有精力去搜寻资料与论文去考据当年右值引用被提出的理由，但站在现在的视角来看，经受住了时间的考验、成功的智能指针系统毫无疑问是建立在右值引用存在的基础之上的，其二者有着千丝万缕的联系，他们共同构成了Modern C++的基石。</p>
+<hr />
+<p>这篇文章并非什么语法的辨析与讲解，讨论的也是十年前C++11的一些老东西，单纯是我在学习与思考C++发展过程中的一些发散。</p>
+<p>一直以来大多数讲述Modern C++特性的教程/文章都会将智能指针与右值引用/移动语义/完美转发分成两个单独的part来讲解、而忽略其它们之间的联系，同时又几乎不约而同地忽略了失败品auto_ptr，使初学者难以领会到C++十几年间的演化历程，于是经常会看到新人开发者在社区中提问——“C++为什么要有XXX？”</p>
+<p>故此就有了这篇不成气候的随笔，希望能够给予初学者们一些思路与帮助。</p>
+<blockquote>
+<p>原文链接: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/551883955">https://zhuanlan.zhihu.com/p/551883955</a></p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://snowylake.net">SnowyLake</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://snowylake.net/post/230624-cpp-autoptr-to-uniqueptr.html">https://snowylake.net/post/230624-cpp-autoptr-to-uniqueptr.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://snowylake.net" target="_blank">雪之湖畔 - SnowyLakeSide</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Cpp/">Cpp</a></div><div class="post-share"><div class="social-share" data-image="/images/pictures/picture-4.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/post/230911-cpp-stdoptional-overhead.html" title="关于std::optional传递开销的讨论与优化"><img class="cover" src="/images/pictures/picture-5.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">关于std::optional传递开销的讨论与优化</div></div><div class="info-2"><div class="info-item-1">在讨论std::optional之前，我们应该先适当谈论一下“可空类型”。  我们知道，在传统的C++中，是不存在现代编程语言中常见的“可空类型”（如C#中的Nullable)的，这就导致很多情况下我们无法给一个指针以外的变量或返回值设置一个安全的空值（实际上C++11之前用于指针空值的NULL也并不安全），而需要设置一个人为规定的标记值（Sentinel Value）来将其标识为空。 1234567//C#//size理应为非负uint? size = null;  //OK, 通过C#语法糖[int?]标记size可为空，并将size设置为空//C++//因为需要考虑Sentinel Value，故size无法为unsigned int//当size == -1时，size为空int size = -1;  //OK，通过人为设定标记值来将size设置为空 显而易见，传统C++使用标记值来对某一变量设置为空的行为相比现代语言是存在问题、丑陋且不安全的：  某些情况下为了考虑标记值不得不放弃最为合适的数据类型（比如unsigned int之于size） 其他使用者容易忘记甚至不...</div></div></div></a><a class="pagination-related" href="/post/230624-graphics-developer-joke.html" title="来点图程破防乐子"><img class="cover" src="/images/pictures/picture-2.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">来点图程破防乐子</div></div><div class="info-2"><div class="info-item-1">快过年了，不要再讨论什么C++，图形学，模板元之类的了，你带你的C++语言的设计与演化回到家并不能给你带来任何实质性作用，朋友们打开UE4连连看就做出了好看的特效，你默默的在家里瞪着两眼看GAMES、may佬和侯捷的视频。 亲戚朋友们吃饭问你收获了什么，你说我读完了RTR4和PBRT，系统的研究了基于物理的渲染和非真实感渲染，还用C++20重构了自己的渲染器。亲戚们懵逼了，你还在心里默默嘲笑他们，笑他们不懂C++和计算机图形学，不懂光照方程，不懂RAII和CRTP，也笑他们连Shader是什么都不知道。 你父母的同事都在说自己儿女一年的收获，有的用Java做了个网站后端赚到了第一笔外快，有的用Python做了点数据可视化发到B站成了up主，有的学了Unity和C#做独立游戏已经发售了。 你的父母默默无言，说我的儿子买了一整套的Effective C++，上Stack Overflow痛骂了C++标准委员会，写了一堆狗屁不通报错几百几千行的模板元编程代码，还对着谷歌翻译啃Ray Tracing the Rest of Your Life，人也越来越魔怔了。  原文链接: https...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/post/230911-ue5-toonshading-0x00-base.html" title="从零开始的UE5卡通渲染0x00：理论基础"><img class="cover" src="/images/pictures/picture-3.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-11</div><div class="info-item-2">从零开始的UE5卡通渲染0x00：理论基础</div></div><div class="info-2"><div class="info-item-1">最近在研究基于UE5的卡通渲染，颇有收获。正巧前段时间与同事吃饭，聊到知乎，深感自己知乎各种不正经的东西实在太多了，而我又是个懒得腾出时间写正经东西的懒狗，遂决定趁编译Shader的空闲，写点学习笔记、心得与分享。  虽然卡渲本身的知识不算很多，但放到UE5上就是不得不改动源码的大工程了，不由得让人怀念起自由的Unity，令人感叹……扯远了，总之UE5卡渲这块我准备分成多篇文章，多水一水。 目前的大(feng)致(kuang)计(hua)划(bing)如下：  卡通渲染理论基础 修改源码的卡渲光照模型实现 基于卷积矩阵的卡渲描边实现、添加子Mesh的Backface卡渲描边实现 修改源码自定义Pass的Backface卡渲描边实现 …… 次世代卡渲/独立的Hair、Skin卡渲光照模型/UE5复刻原神ShadingModel……(或许会有？) 废话不多说了，进入正题。   提到卡通渲染，很多了解不多的朋友可能就会将其与NPR(Non-Photorealistic Rendering)混为一谈，可实际上这两者并不能划等号。事实上NPR是个非常广泛的概念，不止是卡渲，油画、水墨风等等...</div></div></div></a><a class="pagination-related" href="/post/230911-cpp20-ghs-concept-foldexpression-mixin.html" title="一个用来ghs的、使用了concept、折叠表达式、模板形参包做基类列表等技巧的模板元编程Mixin Demo"><img class="cover" src="/images/pictures/picture-3.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-11</div><div class="info-item-2">一个用来ghs的、使用了concept、折叠表达式、模板形参包做基类列表等技巧的模板元编程Mixin Demo</div></div><div class="info-2"><div class="info-item-1">昨天看Mixin时突发奇想，写着玩的。图一乐。  直接上代码，受限于平台，Show()部分自行脑补。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758#include &lt;concepts&gt;#include &lt;iostream&gt;template&lt;typename T&gt;concept IsSexuality = requires&#123; T::Show(); &#125;;template&lt;IsSexuality... Sexuality&gt;struct GirlFriend :private Sexuality...&#123;	constexpr GirlFriend() :Sexuality()... &#123;&#125;	constexpr void ShowSexuality() const	&#123;		std::cout &lt;&lt; &quot;...</div></div></div></a><a class="pagination-related" href="/post/230612-snowyark-dev-0x00.html" title="SnowyArkEngine开发笔记[0x00]: 写在最前"><img class="cover" src="/images/pictures/picture-5.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-12</div><div class="info-item-2">SnowyArkEngine开发笔记[0x00]: 写在最前</div></div><div class="info-2"><div class="info-item-1"> </div></div></div></a><a class="pagination-related" href="/post/230911-cpp20-stringsplit.html" title="一个C++20下的string split实现"><img class="cover" src="/images/pictures/picture-2.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-11</div><div class="info-item-2">一个C++20下的string split实现</div></div><div class="info-2"><div class="info-item-1">众所周知，C++一直没有一个官方提供的string split用于分割字符串，在过去（C++20之前）我们可能需要使用std::regex、std::string::find系列方法、甚至是继承自C的strtok函数来自行封装一个split，非常繁琐与不便。 然而，这一切都在C++20中发生了变化。C++20引入了范围库ranges，其中提供的两个范围适配器std::split、std::lazy_split可以使我们以一种更为优雅的形式实现split。  12345678910111213141516171819202122232425262728293031#include &lt;concept&gt;#include &lt;ranges&gt;#include &lt;algorithm&gt;#include &lt;format&gt;#include &lt;iostream&gt;#define stdr  std::ranges#define stdrv std::ranges::viewstemplate&lt;template&lt;typename&gt...</div></div></div></a><a class="pagination-related" href="/post/230911-ue51-mobile-deferred-lightchannels.html" title="UE5.1移动端延迟管线基于Light Channels模拟Unity Rendering Layers"><img class="cover" src="/post/230911-ue51-mobile-deferred-lightchannels/cover.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-11</div><div class="info-item-2">UE5.1移动端延迟管线基于Light Channels模拟Unity Rendering Layers</div></div><div class="info-2"><div class="info-item-1">在实际项目中会有这样一种需求，我们想要对某个或某一类物体，比如角色，单独打光，但同时又想让场景中所有物体的阴影都依赖于同一个主光源。  比如这样，Unity 截图：  上图右边球体不受场景主光，也就是左侧定向光影响，而是单独打光，同时却能通过场景主光投射阴影。这在 Unity 中可以通过 Rendering Layers，也就是 Light Layer + Custom Shadow Layer 轻松实现。 而 UE 并没有像 Unity Rendering Layer 这么方便的系统，只有三个通道的 Light Channels 也并没有那么自由，做不到光源只投射阴影而不着色，至少据我所知。 不过经实验，在 UE5.1 移动端可以钻 Light Channels 的空子来实现这一效果。 UE5.1 对移动端 Light Channels 支持了一波，但依旧有限制，其规则具体来说就是：  一个光源只能有一个 light channel。如果勾选多个 light channel，则着色时应用规则：  light channel[A][B] = light channel[min(A...</div></div></div></a><a class="pagination-related" href="/post/230911-ue5-toonshading-0x01-custom-shadingmodel.html" title="从零开始的UE5卡通渲染0x01：自定义着色模型"><img class="cover" src="/post/230911-ue5-toonshading-0x01-custom-shadingmodel/cover.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-11</div><div class="info-item-2">从零开始的UE5卡通渲染0x01：自定义着色模型</div></div><div class="info-2"><div class="info-item-1">简单写完了第一篇没啥营养的概述后，这一章我们来做一点真东西，通过修改源码添加一个Custom Shading Model，并使其可以集成我们上一篇文章提到的BaseColor、ILM、SSS贴图进行卡通渲染。  这里我使用的引擎版本是UE5.0.2。  拉取源码版UE5并编译 想要对源码做修改，绝对逃不开的第一步自然就是拉源码和编译。关于这一步，知乎上有大量的资料，官方文档写得也非常详细，我这种懒狗肯定不会再写一遍，不过还是有几点需要注意，值得说一下：  源码工程目录一定要放在固态硬盘里 预留大约250G的硬盘空间 建议整块好的CPU，框框越多越好，再多插几根内存条……不然的话等编译的空闲你还可以抽时间去学学Unity 😃   C++部分 C++部分大多都在进行Shading Model注册、开放和修改数据接口的工作，这里直接上截图。  EngineTypes.h \Engine\Source\Runtime\Engine\Classes\Engine\EngineTypes.h 在枚举EMaterialShadingModel 中注册我们的Shading Model：   M...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/snowylake.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">SnowyLake</div><div class="author-info-description">Don't worry, be happy.</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">31</div></a></div><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/SnowyLake" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="https://www.zhihu.com/people/snowylake" target="_blank" title="Zhihu"><i class="fab fa-zhihu" style="color: #0084ff;"></i></a><a class="social-icon" href="mailto:snowylake.me@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">不想工作, 苦呀西~</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#stdauto_ptr%E7%9A%84%E5%A4%B1%E8%B4%A5%E4%B9%8B%E5%A4%84"><span class="toc-number">1.</span> <span class="toc-text"> std::auto_ptr的失败之处</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#stdunique_ptr%E5%A6%82%E4%BD%95%E6%88%90%E5%8A%9F"><span class="toc-number">2.</span> <span class="toc-text"> std::unique_ptr如何成功？</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/260624-zhihu-blog-migration-agent-workflow.html" title="爱丽丝的工作日记0x05: 搬运知乎旧文章"><img src="/images/pictures/picture-2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="爱丽丝的工作日记0x05: 搬运知乎旧文章"/></a><div class="content"><a class="title" href="/post/260624-zhihu-blog-migration-agent-workflow.html" title="爱丽丝的工作日记0x05: 搬运知乎旧文章">爱丽丝的工作日记0x05: 搬运知乎旧文章</a><time datetime="2026-06-23T17:18:00.000Z" title="发表于 2026-06-24 01:18:00">2026-06-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/260622-butterfly-index-post-tags-below-summary.html" title="爱丽丝的工作日记0x04: 调整首页文章标签位置"><img src="/images/pictures/picture-5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="爱丽丝的工作日记0x04: 调整首页文章标签位置"/></a><div class="content"><a class="title" href="/post/260622-butterfly-index-post-tags-below-summary.html" title="爱丽丝的工作日记0x04: 调整首页文章标签位置">爱丽丝的工作日记0x04: 调整首页文章标签位置</a><time datetime="2026-06-21T21:00:00.000Z" title="发表于 2026-06-22 05:00:00">2026-06-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/260622-hexo-codex-background-preview.html" title="爱丽丝的工作日记0x03: 给 Codex 准备后台预览"><img src="/images/pictures/picture-4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="爱丽丝的工作日记0x03: 给 Codex 准备后台预览"/></a><div class="content"><a class="title" href="/post/260622-hexo-codex-background-preview.html" title="爱丽丝的工作日记0x03: 给 Codex 准备后台预览">爱丽丝的工作日记0x03: 给 Codex 准备后台预览</a><time datetime="2026-06-21T20:52:09.000Z" title="发表于 2026-06-22 04:52:09">2026-06-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/260622-butterfly-tag-cloud-count-and-style.html" title="爱丽丝的工作日记0x02: 整理 Butterfly 标签云"><img src="/images/pictures/picture-2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="爱丽丝的工作日记0x02: 整理 Butterfly 标签云"/></a><div class="content"><a class="title" href="/post/260622-butterfly-tag-cloud-count-and-style.html" title="爱丽丝的工作日记0x02: 整理 Butterfly 标签云">爱丽丝的工作日记0x02: 整理 Butterfly 标签云</a><time datetime="2026-06-21T20:17:34.000Z" title="发表于 2026-06-22 04:17:34">2026-06-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/260619-hexo-next-to-butterfly-migration.html" title="爱丽丝的工作日记0x01: 从 NeXT 迁移到 Butterfly"><img src="/images/pictures/picture-1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="爱丽丝的工作日记0x01: 从 NeXT 迁移到 Butterfly"/></a><div class="content"><a class="title" href="/post/260619-hexo-next-to-butterfly-migration.html" title="爱丽丝的工作日记0x01: 从 NeXT 迁移到 Butterfly">爱丽丝的工作日记0x01: 从 NeXT 迁移到 Butterfly</a><time datetime="2026-06-18T19:28:23.000Z" title="发表于 2026-06-19 03:28:23">2026-06-19</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By SnowyLake</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 6.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5"></script><script src="/js/main.js?v=5.5.5"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.5"></script></div></div></body></html>

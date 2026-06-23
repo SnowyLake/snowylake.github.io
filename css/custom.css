@@ -1,0 +1,290 @@
+/* Custom visual overrides for Butterfly theme.
+   Injected via theme inject.head, keeps theme internals untouched. */
+
+/* Semi-transparent local-search dialog. */
+#local-search .search-dialog {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* Blend footer with the site-wide background instead of the default solid blue. */
+#footer {
+  background: rgba(15, 28, 42, 0.38) !important;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+/* Disable the rotate-on-hover effect for avatar and aside social icons.
+   The theme rules use high-specificity selectors (e.g. #aside-content ...),
+   so override with matching specificity and !important. */
+.avatar-img img:hover,
+#aside-content .card-info .card-info-social-icons i:hover,
+#card-info-btn:hover {
+  transform: none !important;
+}
+
+/* Keep tag clouds calm and show each tag's post count as a superscript badge. */
+.tag-cloud-list a.tag-cloud-item {
+  margin: 8px;
+  padding: 5px 13px;
+  overflow: hidden;
+  border: 1px solid rgba(74, 149, 201, 0.32);
+  background: rgba(74, 149, 201, 0.1) !important;
+  color: var(--font-color) !important;
+  box-shadow: none;
+}
+
+.tag-cloud-list a.tag-cloud-item:hover {
+  border-color: rgba(91, 174, 234, 0.72);
+  background: rgba(91, 174, 234, 0.18) !important;
+  color: var(--font-color) !important;
+  box-shadow: 0 6px 16px rgba(74, 149, 201, 0.14);
+}
+
+.tag-cloud-list a.tag-cloud-item sup {
+  position: static;
+  display: inline-block;
+  min-width: auto;
+  height: auto;
+  margin-left: 3px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #4a95c9;
+  font-size: 0.62em;
+  font-weight: 700;
+  line-height: 1;
+  vertical-align: super;
+}
+
+.card-tag-cloud a.tag-cloud-item {
+  display: inline;
+  margin: 0 10px 8px 0;
+  padding: 0;
+  color: #8a8a8a !important;
+  line-height: 1.9;
+}
+
+.card-tag-cloud a.tag-cloud-item sup {
+  position: static;
+  display: inline-block;
+  margin-left: 2px;
+  color: #5baeea;
+  font-size: 0.58em;
+  font-weight: 700;
+  line-height: 1;
+  vertical-align: super;
+}
+
+/* Move homepage article tags out of the meta row and keep them visually quiet. */
+#recent-posts .recent-post-info > .article-index-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  max-height: 2.4em;
+  margin-top: 10px;
+  overflow: hidden;
+  font-size: 0.82em;
+  line-height: 1.7;
+}
+
+#recent-posts .recent-post-info > .article-index-tags .article-index-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 8px;
+  border: 1px solid rgba(74, 149, 201, 0.24);
+  border-radius: 999px;
+  background: rgba(74, 149, 201, 0.08);
+  color: var(--card-meta);
+  text-decoration: none;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+#recent-posts .recent-post-info > .article-index-tags .article-index-tag:hover {
+  border-color: rgba(91, 174, 234, 0.68);
+  background: rgba(91, 174, 234, 0.16);
+  color: var(--theme-color);
+  text-decoration: none;
+}
+
+#recent-posts .recent-post-info > .article-index-tags .article-index-tag i {
+  margin: 0;
+  font-size: 0.9em;
+}
+
+[data-theme='dark'] .tag-cloud-list a.tag-cloud-item {
+  border-color: rgba(91, 174, 234, 0.42);
+  background: rgba(91, 174, 234, 0.14) !important;
+}
+
+[data-theme='dark'] .tag-cloud-list a.tag-cloud-item:hover {
+  border-color: rgba(91, 174, 234, 0.82);
+  background: rgba(91, 174, 234, 0.22) !important;
+}
+
+[data-theme='dark'] #recent-posts .recent-post-info > .article-index-tags .article-index-tag {
+  border-color: rgba(91, 174, 234, 0.34);
+  background: rgba(91, 174, 234, 0.12);
+}
+
+/* VS-style dark code blocks tuned for graphics/code-heavy posts. */
+:root {
+  --snowy-code-bg: #1e1e1e;
+  --snowy-code-tools-bg: #202020;
+  --snowy-code-fg: #d4d4d4;
+  --snowy-code-muted: #858585;
+  --snowy-code-border: #3a3a3a;
+  --snowy-code-comment: #6a9955;
+  --snowy-code-keyword: #569cd6;
+  --snowy-code-type: #4EC9B0;
+  --snowy-code-function: #dcdcaa;
+  --snowy-code-string: #ce9178;
+  --snowy-code-number: #d4d4d4;
+  --snowy-code-meta: #569cd6;
+  --snowy-code-symbol: #9cdcfe;
+  --snowy-code-macro: #b5b5ff;
+  --hl-bg: var(--snowy-code-bg);
+  --hl-color: var(--snowy-code-fg);
+  --hltools-bg: var(--snowy-code-tools-bg);
+  --hltools-color: #c5c8c6;
+  --hlnumber-bg: var(--snowy-code-bg);
+  --hlnumber-color: var(--snowy-code-muted);
+  --hlscrollbar-bg: #424242;
+  --hlexpand-bg: linear-gradient(180deg, rgba(30, 30, 30, 0.6), rgba(30, 30, 30, 0.94));
+}
+
+[data-theme='dark'] {
+  --hl-bg: var(--snowy-code-bg);
+  --hl-color: var(--snowy-code-fg);
+  --hltools-bg: var(--snowy-code-tools-bg);
+  --hltools-color: #c5c8c6;
+  --hlnumber-bg: var(--snowy-code-bg);
+  --hlnumber-color: var(--snowy-code-muted);
+  --hlscrollbar-bg: #424242;
+  --hlexpand-bg: linear-gradient(180deg, rgba(30, 30, 30, 0.6), rgba(30, 30, 30, 0.94));
+}
+
+.container figure.highlight,
+.container pre {
+  background: var(--snowy-code-bg);
+  color: var(--snowy-code-fg);
+}
+
+.container figure.highlight {
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+  box-shadow: none;
+}
+
+.container figure.highlight table {
+  width: 100%;
+  background: var(--snowy-code-bg);
+  border-collapse: collapse;
+}
+
+.container figure.highlight table td {
+  border: 0;
+}
+
+.container figure.highlight .gutter {
+  user-select: none;
+}
+
+.container figure.highlight .gutter pre {
+  padding-right: 12px;
+  padding-left: 12px;
+  border-right: 1px solid var(--snowy-code-border);
+  background: var(--snowy-code-bg);
+  color: var(--snowy-code-muted);
+}
+
+.container figure.highlight .code pre {
+  padding-right: 16px;
+  padding-left: 12px;
+  background: var(--snowy-code-bg);
+  color: var(--snowy-code-fg);
+}
+
+.container figure.highlight pre .line {
+  min-height: 1.6em;
+}
+
+.container .highlight-tools {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  background: var(--snowy-code-tools-bg);
+  color: #c7c7c7;
+}
+
+.container .highlight-tools .code-lang {
+  color: #9da5b4;
+}
+
+figure.highlight pre .comment {
+  color: var(--snowy-code-comment);
+}
+
+figure.highlight pre .keyword,
+figure.highlight pre .meta .keyword {
+  color: var(--snowy-code-keyword);
+}
+
+figure.highlight pre .type,
+figure.highlight pre .tag,
+figure.highlight pre .tag .name {
+  color: var(--snowy-code-type);
+}
+
+figure.highlight pre .function,
+figure.highlight pre .title,
+figure.highlight pre .built_in,
+figure.highlight pre .function .title {
+  color: var(--snowy-code-function);
+}
+
+figure.highlight pre .function .type {
+  color: var(--snowy-code-keyword);
+}
+
+figure.highlight pre .string,
+figure.highlight pre .value,
+figure.highlight pre .subst {
+  color: var(--snowy-code-string);
+}
+
+figure.highlight pre .number,
+figure.highlight pre .literal,
+figure.highlight pre .params,
+figure.highlight pre .constant {
+  color: var(--snowy-code-number);
+}
+
+figure.highlight pre .meta,
+figure.highlight pre .preprocessor {
+  color: var(--snowy-code-meta);
+}
+
+figure.highlight pre .meta .string {
+  color: var(--snowy-code-string);
+}
+
+figure.highlight pre .variable,
+figure.highlight pre .attribute,
+figure.highlight pre .property,
+figure.highlight pre .symbol {
+  color: var(--snowy-code-symbol);
+}
+
+figure.highlight pre .class,
+figure.highlight pre .class .title,
+figure.highlight pre .selector-class {
+  color: var(--snowy-code-type);
+}
+
+figure.highlight pre .emphasis {
+  color: var(--snowy-code-macro);
+  font-style: italic;
+}
+
+.container figure.highlight .line.marked {
+  background: rgba(86, 156, 214, 0.16);
+}

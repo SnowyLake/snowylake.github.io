@@ -1,0 +1,252 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>&#x96EA;&#x4E4B;&#x6E56;&#x7554; - SnowyLakeSide - Don&apos;t worry, be happy.</title><meta name="author" content="SnowyLake"><meta name="copyright" content="SnowyLake"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Don&apos;t worry, be happy.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="&#x96EA;&#x4E4B;&#x6E56;&#x7554; - SnowyLakeSide">
+<meta property="og:url" content="https://snowylake.net/page/3/index.html">
+<meta property="og:site_name" content="&#x96EA;&#x4E4B;&#x6E56;&#x7554; - SnowyLakeSide">
+<meta property="og:description" content="Don&apos;t worry, be happy.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://snowylake.net/images/snowylake.png">
+<meta property="article:author" content="SnowyLake">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://snowylake.net/images/snowylake.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/images/snowylake-icon-32x32.png"><link rel="canonical" href="https://snowylake.net/page/3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css?v=5.5.5"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '雪之湖畔 - SnowyLakeSide',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div class="bg-animation" id="web_bg" style="background-image: url(/images/pictures/picture-9.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/snowylake.png" onerror="this.onerror=null;this.src=&apos;/img/friend_404.gif&apos;" alt="avatar"></div><div class="site-data text-center"><a href="/archives/"><div class="headline">&#x6587;&#x7AE0;</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">&#x6807;&#x7B7E;</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">&#x5206;&#x7C7B;</div><div class="length-num">31</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(/images/pictures/picture-0.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">&#x96EA;&#x4E4B;&#x6E56;&#x7554; - SnowyLakeSide</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> &#x641C;&#x7D22;</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">&#x96EA;&#x4E4B;&#x6E56;&#x7554; - SnowyLakeSide</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/SnowyLake" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="https://www.zhihu.com/people/snowylake" target="_blank" title="Zhihu"><i class="fab fa-zhihu" style="color: #0084ff;"></i></a><a class="social-icon" href="mailto:snowylake.me@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="post_cover left"><a href="/post/230612-urp-analysis-0x00-pipeline-framework.html" title="&#x4E3A;&#x7F8E;&#x597D;&#x7684;URP&#x732E;&#x4E0A;&#x89E3;&#x6790;[0x00]: &#x7BA1;&#x7EBF;&#x67B6;&#x6784;"><img class="post-bg" src="/images/pictures/picture-6.jpg" onerror="this.onerror=null;this.src=&apos;/img/404.jpg&apos;" alt="&#x4E3A;&#x7F8E;&#x597D;&#x7684;URP&#x732E;&#x4E0A;&#x89E3;&#x6790;[0x00]: &#x7BA1;&#x7EBF;&#x67B6;&#x6784;"></a></div><div class="recent-post-info"><a class="article-title" href="/post/230612-urp-analysis-0x00-pipeline-framework.html" title="&#x4E3A;&#x7F8E;&#x597D;&#x7684;URP&#x732E;&#x4E0A;&#x89E3;&#x6790;[0x00]: &#x7BA1;&#x7EBF;&#x67B6;&#x6784;">&#x4E3A;&#x7F8E;&#x597D;&#x7684;URP&#x732E;&#x4E0A;&#x89E3;&#x6790;[0x00]: &#x7BA1;&#x7EBF;&#x67B6;&#x6784;</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">&#x53D1;&#x8868;&#x4E8E;</span><time datetime="2023-06-11T17:35:55.000Z" title="&#x53D1;&#x8868;&#x4E8E; 2023-06-12 01:35:55">2023-06-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Game-Engine/">Game Engine</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Game-Engine/Unity/">Unity</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Game-Engine/Unity/URP/">URP</a></span></div><div class="content"> </div><div class="article-index-tags"><a class="article-index-tag" href="/tags/Rendering/" aria-label="Tag: Rendering"><i class="fas fa-tag" aria-hidden="true"></i>Rendering</a><a class="article-index-tag" href="/tags/CSharp/" aria-label="Tag: CSharp"><i class="fas fa-tag" aria-hidden="true"></i>CSharp</a></div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/post/230612-site-build-note.html" title="&#x5EFA;&#x7AD9;&#x8BB0;&#x5F55;"><img class="post-bg" src="/images/pictures/picture-4.jpg" onerror="this.onerror=null;this.src=&apos;/img/404.jpg&apos;" alt="&#x5EFA;&#x7AD9;&#x8BB0;&#x5F55;"></a></div><div class="recent-post-info"><a class="article-title" href="/post/230612-site-build-note.html" title="&#x5EFA;&#x7AD9;&#x8BB0;&#x5F55;">&#x5EFA;&#x7AD9;&#x8BB0;&#x5F55;</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">&#x53D1;&#x8868;&#x4E8E;</span><time datetime="2023-06-11T17:31:13.000Z" title="&#x53D1;&#x8868;&#x4E8E; 2023-06-12 01:31:13">2023-06-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Talk/">Talk</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Talk/Tech-Talk/">Tech Talk</a></span></div><div class="content">&#x5EFA;&#x8FD9;&#x4E2A;&#x7F51;&#x7AD9;&#x7684;&#x521D;&#x8877;&#x662F;&#x56E0;&#x4E3A;&#x81EA;&#x5DF1;&#x77E5;&#x4E4E;&#x88AB;&#x8FDE;&#x7EED;&#x5C01;&#x4E86;&#x51E0;&#x6B21;, &#x4EE5;&#x81F3;&#x4E8E;&#x8BA9;&#x6211;&#x5BF9;&#x8FD9;&#x7C7B;&#x975E;&#x53EF;&#x63A7;&#x7684;&#x5E73;&#x53F0;&#x4EA7;&#x751F;&#x4E86;&#x5927;&#x91CF;&#x4E0D;&#x4FE1;&#x4EFB;&#x611F;, &#x518D;&#x52A0;&#x4E4B;&#x6211;&#x4E2A;&#x4EBA;&#x7684;&#x77E5;&#x4E4E;&#x8D26;&#x53F7;&#x63BA;&#x6742;&#x4E86;&#x5927;&#x91CF;&#x7684;&#x975E;&#x6280;&#x672F;&#x76F8;&#x5173;&#x5185;&#x5BB9;, &#x6240;&#x4EE5;&#x5C3D;&#x7BA1;&#x6211;&#x5728;&#x77E5;&#x4E4E;&#x4E5F;&#x5199;&#x4E86;&#x4E00;&#x4E9B;&#x6280;&#x672F;&#x6587;&#x7AE0;, &#x4F46;&#x4ECD;&#x5E76;&#x4E0D;&#x65B9;&#x4FBF;&#x5C06;&#x6765;&#x8D34;&#x5728;&#x7B80;&#x5386;&#x4E0A;. &#x603B;&#x603B;&#x539F;&#x56E0;&#x9A71;&#x4F7F;&#x4E0B;, &#x5728;&#x7EFC;&#x5408;&#x8003;&#x91CF;&#x4E86;&#x4E91;&#x670D;&#x52A1;&#x5668;+Wordpress&#x548C;GitHubPages+Hexo&#x4E24;&#x79CD;&#x65B9;&#x6848;&#x540E;, &#x6211;&#x8FD8;&#x662F;&#x9009;&#x62E9;&#x4E86;&#x66F4;&#x4E3A;&#x8F7B;&#x4FBF;&#x7684;&#x540E;&#x8005;, &#x6BD5;&#x7ADF;&#x5BF9;&#x6211;&#x800C;&#x8A00;&#x53EA;&#x662F;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x53D1;&#x5E03;&#x6587;&#x7AE0;&#x4E0E;&#x968F;&#x60F3;&#x7684;&#x3001;&#x5B8C;&#x5168;&#x53EF;&#x63A7;&#x7684;&#x5E73;&#x53F0;&#x7F62;&#x4E86;, &#x6CA1;&#x5FC5;&#x8981;&#x53BB;&#x6298;&#x817E;&#x4EC0;&#x4E48;&#x670D;&#x52A1;&#x5668;. &#x6280;&#x672F;&#x9009;&#x578B;&#x5230;&#x6B64;&#x4E3A;&#x6B62;, &#x5269;&#x4E0B;&#x7684;&#x4FBF;&#x662F;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#x4E86;. &#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#x4FBF;&#x662F;&#x7528;&#x6765;&#x8BB0;&#x5F55;&#x6211;&#x7684;&#x5EFA;&#x7AD9;&#x6D41;&#x7A0B;&#x4EE5;&#x53CA;&#x8E29;&#x5230;&#x7684;&#x4E00;&#x4E9B;&#x5C0F;&#x5751;. &#x987A;&#x4FBF;&#x4E00;&#x63D0;, &#x8FD9;&#x4E2A;&#x7F51;&#x7AD9;&#x5C31;&#x53EB;&#x4F5C;SnowyLakeSide&#x597D;&#x4E86;, &#x4E2D;&#x6587;&#x540D;&#x96EA;&#x4E4B;&#x6E56;&#x7554;, &#x4E00;&#x4E2A;&#x72EC;&#x5C5E;&#x4E8E;&#x6211;(SnowyLake/&#x96EA;&#x6E56;)&#x3001;&#x9762;&#x5411;&#x4E92;&#x8054;&#x7F51;&#x7684;&#x5C0F;&#x5C0F;&#x6D45;&#x6EE9;.   Github Pages&#x521B;&#x5EFA; &#x8FD9;&#x4E00;&#x6B65;&#x975E;&#x5E38;&#x7B80;&#x5355;, &#x5176;&#x5B9E;&#x672C;&#x8D28;&#x5C31;&#x662F;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x540D;&#x4E3A; snowylake.github.io &#x7684;repo, &#x53EA;&#x662F;&#x8981;&#x6C42;&#x524D;&#x7F00;&#x4E0E;github&#x7528;&#x6237;&#x540D;&#x76F8;&#x540C;. &#x521B;&#x5EFA;&#x4E4B;&#x540E;&#x5B9E;&#x9645;&#x4E0A;&#x6211;&#x4EEC;&#x5C31;&#x5DF2;&#x7ECF;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;repo&#x540D;&#x8BBF;&#x95EE;&#x7F51;&#x7AD9;&#x4E86;, &#x4F46;&#x5E94;&#x8BE5;&#x662F;&#x7A7A;&#x7A7A;&#x5982;&#x4E5F;&#x7684;. &#x7136;&#x540E;&#x5C31;&#x53EF;&#x4EE5;&#x6682;&#x65F6;&#x653E;&#x5728;&#x8FD9;&#x91CC;&#x4E0D;&#x7BA1;&#x4E86;, &#x751A;&#x81F3;&#x90FD;&#x4E0D;&#x9700;&#x8981;clone&#x5230;&#x672C;...</div><div class="article-index-tags"><a class="article-index-tag" href="/tags/Hexo/" aria-label="Tag: Hexo"><i class="fas fa-tag" aria-hidden="true"></i>Hexo</a></div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/post/230611-category-collection.html" title="CategoryCollection"><img class="post-bg" src="/images/pictures/picture-8.jpg" onerror="this.onerror=null;this.src=&apos;/img/404.jpg&apos;" alt="CategoryCollection"></a></div><div class="recent-post-info"><a class="article-title" href="/post/230611-category-collection.html" title="CategoryCollection">CategoryCollection</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">&#x53D1;&#x8868;&#x4E8E;</span><time datetime="2023-06-10T22:00:00.000Z" title="&#x53D1;&#x8868;&#x4E8E; 2023-06-11 06:00:00">2023-06-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Game-Engine/">Game Engine</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Talk/">Talk</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Game-Engine/SnowyArk/">SnowyArk</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Game-Engine/Unity/">Unity</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Basic/">Basic</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Talk/Misc-Talk/">Misc Talk</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Talk/Tech-Talk/">Tech Talk</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Game-Engine/Unreal/">Unreal</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Game-Engine/Unity/URP/">URP</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Basic/Cpp/">Cpp</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/AI/">AI</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Game-Engine/Unity/SnowyOwl/">SnowyOwl</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Game-Engine/Unreal/SnowyFalcon/">SnowyFalcon</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/AI/Agent/">Agent</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/AI/Agent/Workflow/">Workflow</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/GPU/">GPU</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/GPU/OpenGL/">OpenGL</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/GPU/Vulkan/">Vulkan</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/GPU/DirectX-11/">DirectX 11</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/GPU/DirectX-12/">DirectX 12</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/GPU/CUDA/">CUDA</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/AI/Agent/Skill/">Skill</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/AI/Agent/MCP/">MCP</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Basic/CSharp/">CSharp</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Basic/TypeScript/">TypeScript</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/DCC/">DCC</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/DCC/3ds-Max/">3ds Max</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/DCC/Blender/">Blender</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/DCC/Houdini/">Houdini</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/DCC/Substance-Designer/">Substance Designer</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Talk/GDC-Translation/">GDC Translation</a></span></div><div class="content"> </div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/post/230611-helloworld.html" title="Hello world!"><img class="post-bg" src="/images/pictures/picture-5.jpg" onerror="this.onerror=null;this.src=&apos;/img/404.jpg&apos;" alt="Hello world!"></a></div><div class="recent-post-info"><a class="article-title" href="/post/230611-helloworld.html" title="Hello world!">Hello world!</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">&#x53D1;&#x8868;&#x4E8E;</span><time datetime="2023-06-10T20:31:27.000Z" title="&#x53D1;&#x8868;&#x4E8E; 2023-06-11 04:31:27">2023-06-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Talk/">Talk</a><i class="fas fa-angle-right article-meta-link"></i><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Talk/Misc-Talk/">Misc Talk</a></span></div><div class="content">&#x82B1;&#x6709;&#x91CD;&#x5F00;&#x65E5;, &#x4EBA;&#x65E0;&#x518D;&#x5C11;&#x5E74;. 1234int main(){    std::cout &lt;&lt; std::format(&quot;Hello world!&quot;);}   </div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/2/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#content-inner">2</a><span class="page-number current">3</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/snowylake.png" onerror="this.onerror=null;this.src=&apos;/img/friend_404.gif&apos;" alt="avatar"></div><div class="author-info-name">SnowyLake</div><div class="author-info-description">Don&apos;t worry, be happy.</div><div class="site-data"><a href="/archives/"><div class="headline">&#x6587;&#x7AE0;</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">&#x6807;&#x7B7E;</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">&#x5206;&#x7C7B;</div><div class="length-num">31</div></a></div><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/SnowyLake" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="https://www.zhihu.com/people/snowylake" target="_blank" title="Zhihu"><i class="fab fa-zhihu" style="color: #0084ff;"></i></a><a class="social-icon" href="mailto:snowylake.me@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>&#x516C;&#x544A;</span></div><div class="announcement_content">&#x4E0D;&#x60F3;&#x5DE5;&#x4F5C;, &#x82E6;&#x5440;&#x897F;~</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>&#x6700;&#x65B0;&#x6587;&#x7AE0;</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/260624-zhihu-blog-migration-agent-workflow.html" title="&#x7231;&#x4E3D;&#x4E1D;&#x7684;&#x5DE5;&#x4F5C;&#x65E5;&#x8BB0;0x05: &#x642C;&#x8FD0;&#x77E5;&#x4E4E;&#x65E7;&#x6587;&#x7AE0;"><img src="/images/pictures/picture-2.jpg" onerror="this.onerror=null;this.src=&apos;/img/404.jpg&apos;" alt="&#x7231;&#x4E3D;&#x4E1D;&#x7684;&#x5DE5;&#x4F5C;&#x65E5;&#x8BB0;0x05: &#x642C;&#x8FD0;&#x77E5;&#x4E4E;&#x65E7;&#x6587;&#x7AE0;"></a><div class="content"><a class="title" href="/post/260624-zhihu-blog-migration-agent-workflow.html" title="&#x7231;&#x4E3D;&#x4E1D;&#x7684;&#x5DE5;&#x4F5C;&#x65E5;&#x8BB0;0x05: &#x642C;&#x8FD0;&#x77E5;&#x4E4E;&#x65E7;&#x6587;&#x7AE0;">&#x7231;&#x4E3D;&#x4E1D;&#x7684;&#x5DE5;&#x4F5C;&#x65E5;&#x8BB0;0x05: &#x642C;&#x8FD0;&#x77E5;&#x4E4E;&#x65E7;&#x6587;&#x7AE0;</a><time datetime="2026-06-23T17:18:00.000Z" title="&#x53D1;&#x8868;&#x4E8E; 2026-06-24 01:18:00">2026-06-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/260622-butterfly-index-post-tags-below-summary.html" title="&#x7231;&#x4E3D;&#x4E1D;&#x7684;&#x5DE5;&#x4F5C;&#x65E5;&#x8BB0;0x04: &#x8C03;&#x6574;&#x9996;&#x9875;&#x6587;&#x7AE0;&#x6807;&#x7B7E;&#x4F4D;&#x7F6E;"><img src="/images/pictures/picture-5.jpg" onerror="this.onerror=null;this.src=&apos;/img/404.jpg&apos;" alt="&#x7231;&#x4E3D;&#x4E1D;&#x7684;&#x5DE5;&#x4F5C;&#x65E5;&#x8BB0;0x04: &#x8C03;&#x6574;&#x9996;&#x9875;&#x6587;&#x7AE0;&#x6807;&#x7B7E;&#x4F4D;&#x7F6E;"></a><div class="content"><a class="title" href="/post/260622-butterfly-index-post-tags-below-summary.html" title="&#x7231;&#x4E3D;&#x4E1D;&#x7684;&#x5DE5;&#x4F5C;&#x65E5;&#x8BB0;0x04: &#x8C03;&#x6574;&#x9996;&#x9875;&#x6587;&#x7AE0;&#x6807;&#x7B7E;&#x4F4D;&#x7F6E;">&#x7231;&#x4E3D;&#x4E1D;&#x7684;&#x5DE5;&#x4F5C;&#x65E5;&#x8BB0;0x04: &#x8C03;&#x6574;&#x9996;&#x9875;&#x6587;&#x7AE0;&#x6807;&#x7B7E;&#x4F4D;&#x7F6E;</a><time datetime="2026-06-21T21:00:00.000Z" title="&#x53D1;&#x8868;&#x4E8E; 2026-06-22 05:00:00">2026-06-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/260622-hexo-codex-background-preview.html" title="&#x7231;&#x4E3D;&#x4E1D;&#x7684;&#x5DE5;&#x4F5C;&#x65E5;&#x8BB0;0x03: &#x7ED9; Codex &#x51C6;&#x5907;&#x540E;&#x53F0;&#x9884;&#x89C8;"><img src="/images/pictures/picture-4.jpg" onerror="this.onerror=null;this.src=&apos;/img/404.jpg&apos;" alt="&#x7231;&#x4E3D;&#x4E1D;&#x7684;&#x5DE5;&#x4F5C;&#x65E5;&#x8BB0;0x03: &#x7ED9; Codex &#x51C6;&#x5907;&#x540E;&#x53F0;&#x9884;&#x89C8;"></a><div class="content"><a class="title" href="/post/260622-hexo-codex-background-preview.html" title="&#x7231;&#x4E3D;&#x4E1D;&#x7684;&#x5DE5;&#x4F5C;&#x65E5;&#x8BB0;0x03: &#x7ED9; Codex &#x51C6;&#x5907;&#x540E;&#x53F0;&#x9884;&#x89C8;">&#x7231;&#x4E3D;&#x4E1D;&#x7684;&#x5DE5;&#x4F5C;&#x65E5;&#x8BB0;0x03: &#x7ED9; Codex &#x51C6;&#x5907;&#x540E;&#x53F0;&#x9884;&#x89C8;</a><time datetime="2026-06-21T20:52:09.000Z" title="&#x53D1;&#x8868;&#x4E8E; 2026-06-22 04:52:09">2026-06-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/260622-butterfly-tag-cloud-count-and-style.html" title="&#x7231;&#x4E3D;&#x4E1D;&#x7684;&#x5DE5;&#x4F5C;&#x65E5;&#x8BB0;0x02: &#x6574;&#x7406; Butterfly &#x6807;&#x7B7E;&#x4E91;"><img src="/images/pictures/picture-2.jpg" onerror="this.onerror=null;this.src=&apos;/img/404.jpg&apos;" alt="&#x7231;&#x4E3D;&#x4E1D;&#x7684;&#x5DE5;&#x4F5C;&#x65E5;&#x8BB0;0x02: &#x6574;&#x7406; Butterfly &#x6807;&#x7B7E;&#x4E91;"></a><div class="content"><a class="title" href="/post/260622-butterfly-tag-cloud-count-and-style.html" title="&#x7231;&#x4E3D;&#x4E1D;&#x7684;&#x5DE5;&#x4F5C;&#x65E5;&#x8BB0;0x02: &#x6574;&#x7406; Butterfly &#x6807;&#x7B7E;&#x4E91;">&#x7231;&#x4E3D;&#x4E1D;&#x7684;&#x5DE5;&#x4F5C;&#x65E5;&#x8BB0;0x02: &#x6574;&#x7406; Butterfly &#x6807;&#x7B7E;&#x4E91;</a><time datetime="2026-06-21T20:17:34.000Z" title="&#x53D1;&#x8868;&#x4E8E; 2026-06-22 04:17:34">2026-06-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/260619-hexo-next-to-butterfly-migration.html" title="&#x7231;&#x4E3D;&#x4E1D;&#x7684;&#x5DE5;&#x4F5C;&#x65E5;&#x8BB0;0x01: &#x4ECE; NeXT &#x8FC1;&#x79FB;&#x5230; Butterfly"><img src="/images/pictures/picture-1.jpg" onerror="this.onerror=null;this.src=&apos;/img/404.jpg&apos;" alt="&#x7231;&#x4E3D;&#x4E1D;&#x7684;&#x5DE5;&#x4F5C;&#x65E5;&#x8BB0;0x01: &#x4ECE; NeXT &#x8FC1;&#x79FB;&#x5230; Butterfly"></a><div class="content"><a class="title" href="/post/260619-hexo-next-to-butterfly-migration.html" title="&#x7231;&#x4E3D;&#x4E1D;&#x7684;&#x5DE5;&#x4F5C;&#x65E5;&#x8BB0;0x01: &#x4ECE; NeXT &#x8FC1;&#x79FB;&#x5230; Butterfly">&#x7231;&#x4E3D;&#x4E1D;&#x7684;&#x5DE5;&#x4F5C;&#x65E5;&#x8BB0;0x01: &#x4ECE; NeXT &#x8FC1;&#x79FB;&#x5230; Butterfly</a><time datetime="2026-06-18T19:28:23.000Z" title="&#x53D1;&#x8868;&#x4E8E; 2026-06-19 03:28:23">2026-06-19</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>&#x5206;&#x7C7B;</span>
+            
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AI/"><span class="card-category-list-name">AI</span><span class="card-category-list-count">6</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AI/Agent/"><span class="card-category-list-name">Agent</span><span class="card-category-list-count">6</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AI/Agent/MCP/"><span class="card-category-list-name">MCP</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AI/Agent/Skill/"><span class="card-category-list-name">Skill</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AI/Agent/Workflow/"><span class="card-category-list-name">Workflow</span><span class="card-category-list-count">6</span></a></li></ul></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Basic/"><span class="card-category-list-name">Basic</span><span class="card-category-list-count">5</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Basic/CSharp/"><span class="card-category-list-name">CSharp</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Basic/Cpp/"><span class="card-category-list-name">Cpp</span><span class="card-category-list-count">5</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Basic/TypeScript/"><span class="card-category-list-name">TypeScript</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/DCC/"><span class="card-category-list-name">DCC</span><span class="card-category-list-count">1</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/DCC/3ds-Max/"><span class="card-category-list-name">3ds Max</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/DCC/Blender/"><span class="card-category-list-name">Blender</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/DCC/Houdini/"><span class="card-category-list-name">Houdini</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/DCC/Substance-Designer/"><span class="card-category-list-name">Substance Designer</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/GPU/"><span class="card-category-list-name">GPU</span><span class="card-category-list-count">1</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/GPU/CUDA/"><span class="card-category-list-name">CUDA</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/GPU/DirectX-11/"><span class="card-category-list-name">DirectX 11</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/GPU/DirectX-12/"><span class="card-category-list-name">DirectX 12</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/GPU/OpenGL/"><span class="card-category-list-name">OpenGL</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/GPU/Vulkan/"><span class="card-category-list-name">Vulkan</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Game-Engine/"><span class="card-category-list-name">Game Engine</span><span class="card-category-list-count">11</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Game-Engine/SnowyArk/"><span class="card-category-list-name">SnowyArk</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Game-Engine/Unity/"><span class="card-category-list-name">Unity</span><span class="card-category-list-count">4</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Game-Engine/Unity/SnowyOwl/"><span class="card-category-list-name">SnowyOwl</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Game-Engine/Unity/URP/"><span class="card-category-list-name">URP</span><span class="card-category-list-count">4</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Game-Engine/Unreal/"><span class="card-category-list-name">Unreal</span><span class="card-category-list-count">7</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Game-Engine/Unreal/SnowyFalcon/"><span class="card-category-list-name">SnowyFalcon</span><span class="card-category-list-count">2</span></a></li></ul></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Talk/"><span class="card-category-list-name">Talk</span><span class="card-category-list-count">5</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Talk/GDC-Translation/"><span class="card-category-list-name">GDC Translation</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Talk/Misc-Talk/"><span class="card-category-list-name">Misc Talk</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Talk/Tech-Talk/"><span class="card-category-list-name">Tech Talk</span><span class="card-category-list-count">3</span></a></li></ul></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>&#x6807;&#x7B7E;</span></div><div class="card-tag-cloud"><a href="/tags/Hexo/" class="tag-cloud-item" style="font-size: 1.33em;" aria-label="Hexo: 6 posts">Hexo<sup>6</sup></a><a href="/tags/Cpp/" class="tag-cloud-item" style="font-size: 1.45em;" aria-label="Cpp: 11 posts">Cpp<sup>11</sup></a><a href="/tags/Rendering/" class="tag-cloud-item" style="font-size: 1.39em;" aria-label="Rendering: 9 posts">Rendering<sup>9</sup></a><a href="/tags/CSharp/" class="tag-cloud-item" style="font-size: 1.27em;" aria-label="CSharp: 3 posts">CSharp<sup>3</sup></a><a href="/tags/Cpp20/" class="tag-cloud-item" style="font-size: 1.21em;" aria-label="Cpp20: 2 posts">Cpp20<sup>2</sup></a><a href="/tags/Template-Metaprogramming/" class="tag-cloud-item" style="font-size: 1.15em;" aria-label="Template Metaprogramming: 1 posts">Template Metaprogramming<sup>1</sup></a><a href="/tags/Shader/" class="tag-cloud-item" style="font-size: 1.21em;" aria-label="Shader: 2 posts">Shader<sup>2</sup></a><a href="/tags/Toon-Shading/" class="tag-cloud-item" style="font-size: 1.21em;" aria-label="Toon Shading: 2 posts">Toon Shading<sup>2</sup></a><a href="/tags/Mobile/" class="tag-cloud-item" style="font-size: 1.21em;" aria-label="Mobile: 2 posts">Mobile<sup>2</sup></a><a href="/tags/Deferred-Rendering/" class="tag-cloud-item" style="font-size: 1.27em;" aria-label="Deferred Rendering: 3 posts">Deferred Rendering<sup>3</sup></a><a href="/tags/Plugin/" class="tag-cloud-item" style="font-size: 1.15em;" aria-label="Plugin: 1 posts">Plugin<sup>1</sup></a><a href="/tags/UI/" class="tag-cloud-item" style="font-size: 1.15em;" aria-label="UI: 1 posts">UI<sup>1</sup></a><a href="/tags/AI/" class="tag-cloud-item" style="font-size: 1.33em;" aria-label="AI: 6 posts">AI<sup>6</sup></a><a href="/tags/Agent/" class="tag-cloud-item" style="font-size: 1.33em;" aria-label="Agent: 6 posts">Agent<sup>6</sup></a><a href="/tags/Software-Engineering/" class="tag-cloud-item" style="font-size: 1.15em;" aria-label="Software Engineering: 1 posts">Software Engineering<sup>1</sup></a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>&#x5F52;&#x6863;</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/06/">
+            <span class="card-archive-list-date">
+              &#x516D;&#x6708; 2026
+            </span>
+            <span class="card-archive-list-count">6</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/09/">
+            <span class="card-archive-list-date">
+              &#x4E5D;&#x6708; 2024
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/07/">
+            <span class="card-archive-list-date">
+              &#x4E03;&#x6708; 2024
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2023/09/">
+            <span class="card-archive-list-date">
+              &#x4E5D;&#x6708; 2023
+            </span>
+            <span class="card-archive-list-count">9</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2023/06/">
+            <span class="card-archive-list-date">
+              &#x516D;&#x6708; 2023
+            </span>
+            <span class="card-archive-list-count">7</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>&#x7F51;&#x7AD9;&#x4FE1;&#x606F;</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">&#x6587;&#x7AE0;&#x6570;&#x76EE; :</div><div class="item-count">24</div></div><div class="webinfo-item"><div class="item-name">&#x672C;&#x7AD9;&#x8BBF;&#x5BA2;&#x6570; :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">&#x672C;&#x7AD9;&#x603B;&#x6D4F;&#x89C8;&#x91CF; :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">&#x6700;&#x540E;&#x66F4;&#x65B0;&#x65F6;&#x95F4; :</div><div class="item-count" id="last-push-date" data-lastpushdate="2026-06-23T17:44:03.532Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&#xA9;&#xA0;2025 - 2026 By SnowyLake</span><span class="framework-info"><span>&#x6846;&#x67B6; </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 6.3.0</a><span class="footer-separator">|</span><span>&#x4E3B;&#x9898; </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="&#x65E5;&#x95F4;&#x548C;&#x591C;&#x95F4;&#x6A21;&#x5F0F;&#x5207;&#x6362;"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="&#x5355;&#x680F;&#x548C;&#x53CC;&#x680F;&#x5207;&#x6362;"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="&#x8BBE;&#x7F6E;"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="&#x56DE;&#x5230;&#x9876;&#x90E8;"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5"></script><script src="/js/main.js?v=5.5.5"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: str => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, {"typeSpeed":90,"backSpeed":40,"startDelay":300,"backDelay":1600,"loop":true}))
+  },
+  run: subtitleType => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        btf.getScript('https://cdn.jsdelivr.net/npm/typed.js@3.0.0/dist/typed.umd.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  },
+  processSubtitle: (content, extraContents = []) => {
+    if (true) {
+      const sub = ["Don't worry, be happy.","Before it begins, the war we all fear."].slice()
+
+      if (extraContents.length > 0) {
+        sub.unshift(...extraContents)
+      }
+
+      if (typeof content === 'string') {
+        sub.unshift(content)
+      } else if (Array.isArray(content)) {
+        sub.unshift(...content)
+      }
+
+      sub.length > 0 && typedJSFn.init(sub)
+    } else {
+      document.getElementById('subtitle').textContent = typeof content === 'string' ? content :
+        (Array.isArray(content) && content.length > 0 ? content[0] : '')
+    }
+  }
+}
+btf.addGlobalFn('pjaxSendOnce', () => { typed.destroy() }, 'typedDestroy')
+</script><script>function subtitleType () {
+  typedJSFn.processSubtitle(["Don't worry, be happy.","Before it begins, the war we all fear."])
+}
+typedJSFn.run(subtitleType)</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">&#x641C;&#x7D22;</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  &#x6570;&#x636E;&#x52A0;&#x8F7D;&#x4E2D;</span></div><div class="local-search-input"><input placeholder="&#x641C;&#x7D22;&#x6587;&#x7AE0;" type="text"></div><hr><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.5"></script></div></div></body></html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>一个C++20下的string split实现 | 雪之湖畔 - SnowyLakeSide</title><meta name="author" content="SnowyLake"><meta name="copyright" content="SnowyLake"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="众所周知，C++一直没有一个官方提供的string split用于分割字符串，在过去（C++20之前）我们可能需要使用std::regex、std::string::find系列方法、甚至是继承自C的strtok函数来自行封装一个split，非常繁琐与不便。 然而，这一切都在C++20中发生了变化。C++20引入了范围库ranges，其中提供的两个范围适配器std::split、std::lazy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个C++20下的string split实现">
+<meta property="og:url" content="https://snowylake.net/post/230911-cpp20-stringsplit.html">
+<meta property="og:site_name" content="雪之湖畔 - SnowyLakeSide">
+<meta property="og:description" content="众所周知，C++一直没有一个官方提供的string split用于分割字符串，在过去（C++20之前）我们可能需要使用std::regex、std::string::find系列方法、甚至是继承自C的strtok函数来自行封装一个split，非常繁琐与不便。 然而，这一切都在C++20中发生了变化。C++20引入了范围库ranges，其中提供的两个范围适配器std::split、std::lazy">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://snowylake.net/images/pictures/picture-2.jpg">
+<meta property="article:published_time" content="2023-09-10T21:10:07.000Z">
+<meta property="article:modified_time" content="2026-06-23T17:43:44.728Z">
+<meta property="article:author" content="SnowyLake">
+<meta property="article:tag" content="Cpp">
+<meta property="article:tag" content="Cpp20">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://snowylake.net/images/pictures/picture-2.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "一个C++20下的string split实现",
+  "url": "https://snowylake.net/post/230911-cpp20-stringsplit.html",
+  "image": "https://snowylake.net/images/pictures/picture-2.jpg",
+  "datePublished": "2023-09-10T21:10:07.000Z",
+  "dateModified": "2026-06-23T17:43:44.728Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "SnowyLake",
+      "url": "https://snowylake.net"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/images/snowylake-icon-32x32.png"><link rel="canonical" href="https://snowylake.net/post/230911-cpp20-stringsplit.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '一个C++20下的string split实现',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div class="bg-animation" id="web_bg" style="background-image: url(/images/pictures/picture-9.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/images/snowylake.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">31</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/images/pictures/picture-2.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">雪之湖畔 - SnowyLakeSide</span></a><a class="nav-page-title" href="/"><span class="site-name">一个C++20下的string split实现</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">一个C++20下的string split实现</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-09-10T21:10:07.000Z" title="发表于 2023-09-11 05:10:07">2023-09-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-06-23T17:43:44.728Z" title="更新于 2026-06-24 01:43:44">2026-06-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Basic/">Basic</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Basic/Cpp/">Cpp</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>众所周知，C++一直没有一个官方提供的string split用于分割字符串，在过去（C++20之前）我们可能需要使用std::regex、std::string::find系列方法、甚至是继承自C的strtok函数来自行封装一个split，非常繁琐与不便。<br />
+然而，这一切都在C++20中发生了变化。C++20引入了范围库ranges，其中提供的两个范围适配器std::split、std::lazy_split可以使我们以一种更为优雅的形式实现split。</p>
+<span id="more"></span>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;concept&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ranges&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;format&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> stdr  std::ranges</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> stdrv std::ranges::views</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> Container = std::vector, <span class="keyword">typename</span> Arg = std::string_view&gt;</span><br><span class="line"><span class="keyword">auto</span> <span class="built_in">Split</span>(std::string_view str, std::string_view delimiter)</span><br><span class="line">&#123;</span><br><span class="line">	Container&lt;Arg&gt; myCont;</span><br><span class="line">	<span class="keyword">auto</span> temp = str </span><br><span class="line">		| stdrv::<span class="built_in">split</span>(delimiter)</span><br><span class="line">		| stdrv::<span class="built_in">transform</span>([](<span class="keyword">auto</span>&amp;&amp; r)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="built_in">Arg</span>(std::<span class="built_in">addressof</span>(*r.<span class="built_in">begin</span>()), stdr::<span class="built_in">distance</span>(r));</span><br><span class="line">			&#125;);</span><br><span class="line">	<span class="keyword">auto</span> iter = std::<span class="built_in">inserter</span>(myCont, myCont.<span class="built_in">end</span>());</span><br><span class="line">	stdr::for_each(temp, [&amp;](<span class="keyword">auto</span>&amp;&amp; x) &#123; iter = &#123;x.<span class="built_in">begin</span>(), x.<span class="built_in">end</span>()&#125;; &#125;);</span><br><span class="line">	<span class="keyword">return</span> myCont;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	std::string str = <span class="string">&quot;Hello233C++20233and233New233Spilt&quot;</span>;</span><br><span class="line">	std::string delimiter = <span class="string">&quot;233&quot;</span>;</span><br><span class="line">	<span class="keyword">auto</span>&amp;&amp; strCont = <span class="built_in">Split</span>&lt;std::list, std::string&gt;(str, delimiter);</span><br><span class="line">	stdr::for_each(strCont, [](<span class="keyword">auto</span>&amp;&amp; x) &#123; std::cout &lt;&lt; std::format(<span class="string">&quot;&#123;&#125; &quot;</span>, x); &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//output: Hello C++20 and New Spilt</span></span><br></pre></td></tr></table></figure>
+<hr />
+<p>PS：std::split与std::lazy_split存在细微区别，在此不作详细说明，感兴趣可以参考：<br />
+<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/68067612/what-is-the-difference-between-the-split-view-and-the-lazy-split-view-in-c">https://stackoverflow.com/questions/68067612/what-is-the-difference-between-the-split-view-and-the-lazy-split-view-in-c</a><br />
+PS2：C++20没有提供关键的ranges::to<container>函数，导致demo中还需要额外封装并手写for_each来写入数据，等到C++23实装了该函数，split的实现会比现在简洁优雅的多，真正做到方便泛用、无需封装：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span>&amp;&amp; strCont = str</span><br><span class="line">	| stdrv::<span class="built_in">lazy_split</span>(delimiter)</span><br><span class="line">	| stdr ::to&lt;std::vector&lt;std::string&gt;&gt;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原文链接: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/474447289">https://zhuanlan.zhihu.com/p/474447289</a></p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://snowylake.net">SnowyLake</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://snowylake.net/post/230911-cpp20-stringsplit.html">https://snowylake.net/post/230911-cpp20-stringsplit.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://snowylake.net" target="_blank">雪之湖畔 - SnowyLakeSide</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Cpp/">Cpp</a><a class="post-meta__tags" href="/tags/Cpp20/">Cpp20</a></div><div class="post-share"><div class="social-share" data-image="/images/pictures/picture-2.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/post/240712-ue5-rendering-plugin-0x00-shader-remapping.html" title="从插件开始的UE渲染开发0x00: Shader路径重定向"><img class="cover" src="/images/pictures/picture-8.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">从插件开始的UE渲染开发0x00: Shader路径重定向</div></div><div class="info-2"><div class="info-item-1">UE 渲染开发一直以来都是个很蛋疼的话题, 拜屎山一般的渲染系统所赐, 想要加点什么东西基本就只有改源码一条路可走, 以至于网上搜十个改源码的文章可能九个都是教你怎么加 ShadingModel 或 MeshPass. 我自己也曾在这类重复且枯燥的工作上花费大量的时间, 深切感受到这玩意到底有多恶心. 而且源码修改一时爽, 后续维护火葬场, 将来如果要升级引擎版本, 面对茫茫多的 diff 那才叫一个痛不欲生. 所以这个系列从 UE 的插件系统(Plugin)入手, 尝试探索在不改动源码的情况下, 如何最大限度的自定义渲染.  虽说不改 C++ 源码, 但 Shader 该改还是要改. 不过直接去引擎路径下改 Shader 就很恶心, 可能我只想为当前项目改动某部分 Shader, 但引擎路径下 Shader 的改动却会影响到本地的所有项目. 如果能像 Unity 那样每个项目自己有一份 Shader 就好了——正确的, 我们就先来把这个功能做了. 在动工之前, 需要先理解 UE Shader 的路径引用原理. UE shader 代码中 include 的文件路径并非真实的路径...</div></div></div></a><a class="pagination-related" href="/post/230911-ue51-mobile-deferred-lightchannels.html" title="UE5.1移动端延迟管线基于Light Channels模拟Unity Rendering Layers"><img class="cover" src="/post/230911-ue51-mobile-deferred-lightchannels/cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">UE5.1移动端延迟管线基于Light Channels模拟Unity Rendering Layers</div></div><div class="info-2"><div class="info-item-1">在实际项目中会有这样一种需求，我们想要对某个或某一类物体，比如角色，单独打光，但同时又想让场景中所有物体的阴影都依赖于同一个主光源。  比如这样，Unity 截图：  上图右边球体不受场景主光，也就是左侧定向光影响，而是单独打光，同时却能通过场景主光投射阴影。这在 Unity 中可以通过 Rendering Layers，也就是 Light Layer + Custom Shadow Layer 轻松实现。 而 UE 并没有像 Unity Rendering Layer 这么方便的系统，只有三个通道的 Light Channels 也并没有那么自由，做不到光源只投射阴影而不着色，至少据我所知。 不过经实验，在 UE5.1 移动端可以钻 Light Channels 的空子来实现这一效果。 UE5.1 对移动端 Light Channels 支持了一波，但依旧有限制，其规则具体来说就是：  一个光源只能有一个 light channel。如果勾选多个 light channel，则着色时应用规则：  light channel[A][B] = light channel[min(A...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/post/230911-cpp20-ghs-concept-foldexpression-mixin.html" title="一个用来ghs的、使用了concept、折叠表达式、模板形参包做基类列表等技巧的模板元编程Mixin Demo"><img class="cover" src="/images/pictures/picture-3.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-11</div><div class="info-item-2">一个用来ghs的、使用了concept、折叠表达式、模板形参包做基类列表等技巧的模板元编程Mixin Demo</div></div><div class="info-2"><div class="info-item-1">昨天看Mixin时突发奇想，写着玩的。图一乐。  直接上代码，受限于平台，Show()部分自行脑补。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758#include &lt;concepts&gt;#include &lt;iostream&gt;template&lt;typename T&gt;concept IsSexuality = requires&#123; T::Show(); &#125;;template&lt;IsSexuality... Sexuality&gt;struct GirlFriend :private Sexuality...&#123;	constexpr GirlFriend() :Sexuality()... &#123;&#125;	constexpr void ShowSexuality() const	&#123;		std::cout &lt;&lt; &quot;...</div></div></div></a><a class="pagination-related" href="/post/230911-ue51-mobile-deferred-lightchannels.html" title="UE5.1移动端延迟管线基于Light Channels模拟Unity Rendering Layers"><img class="cover" src="/post/230911-ue51-mobile-deferred-lightchannels/cover.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-11</div><div class="info-item-2">UE5.1移动端延迟管线基于Light Channels模拟Unity Rendering Layers</div></div><div class="info-2"><div class="info-item-1">在实际项目中会有这样一种需求，我们想要对某个或某一类物体，比如角色，单独打光，但同时又想让场景中所有物体的阴影都依赖于同一个主光源。  比如这样，Unity 截图：  上图右边球体不受场景主光，也就是左侧定向光影响，而是单独打光，同时却能通过场景主光投射阴影。这在 Unity 中可以通过 Rendering Layers，也就是 Light Layer + Custom Shadow Layer 轻松实现。 而 UE 并没有像 Unity Rendering Layer 这么方便的系统，只有三个通道的 Light Channels 也并没有那么自由，做不到光源只投射阴影而不着色，至少据我所知。 不过经实验，在 UE5.1 移动端可以钻 Light Channels 的空子来实现这一效果。 UE5.1 对移动端 Light Channels 支持了一波，但依旧有限制，其规则具体来说就是：  一个光源只能有一个 light channel。如果勾选多个 light channel，则着色时应用规则：  light channel[A][B] = light channel[min(A...</div></div></div></a><a class="pagination-related" href="/post/230911-ue5-cpp-generate-shader.html" title="浅谈UE5的C++程序化生成Shader"><img class="cover" src="/post/230911-ue5-cpp-generate-shader/cover.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-11</div><div class="info-item-2">浅谈UE5的C++程序化生成Shader</div></div><div class="info-2"><div class="info-item-1">UE4时代延迟管线对GBuffer的Encode/Decode工作是直接调用shader中的函数来执行的, 如下所示, 这是BasePassPixelShader.usf中的GBuffer Encode:   可以看到调用了EncodeGBuffer()函数, 其定义在DeferredShadingCommon.ush中:  很普通的函数调用,没什么特殊之处. 然而UE5已经放弃了这套系统,并在代码里硬编码:  这个EncodeGBufferToMRT()函数并没有定义在ush/usf文件中, 而是用C++代码在ShaderGenerationUtil.cpp中程序化生成:  不止Encode, Decode也同样改为了程序化生成的方案:  这样的好处显而易见, 相比于用宏控制, C++代码生成更加的灵活可控. 然而缺点也很明显: 难以在C++代码上扩展 修改与调试, 甚至就连UE代码中注释也这样写道:  The problem is it then becomes a nightmare to step through and debug the lines  不过我们还是有办...</div></div></div></a><a class="pagination-related" href="/post/240712-ue5-rendering-plugin-0x00-shader-remapping.html" title="从插件开始的UE渲染开发0x00: Shader路径重定向"><img class="cover" src="/images/pictures/picture-8.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-12</div><div class="info-item-2">从插件开始的UE渲染开发0x00: Shader路径重定向</div></div><div class="info-2"><div class="info-item-1">UE 渲染开发一直以来都是个很蛋疼的话题, 拜屎山一般的渲染系统所赐, 想要加点什么东西基本就只有改源码一条路可走, 以至于网上搜十个改源码的文章可能九个都是教你怎么加 ShadingModel 或 MeshPass. 我自己也曾在这类重复且枯燥的工作上花费大量的时间, 深切感受到这玩意到底有多恶心. 而且源码修改一时爽, 后续维护火葬场, 将来如果要升级引擎版本, 面对茫茫多的 diff 那才叫一个痛不欲生. 所以这个系列从 UE 的插件系统(Plugin)入手, 尝试探索在不改动源码的情况下, 如何最大限度的自定义渲染.  虽说不改 C++ 源码, 但 Shader 该改还是要改. 不过直接去引擎路径下改 Shader 就很恶心, 可能我只想为当前项目改动某部分 Shader, 但引擎路径下 Shader 的改动却会影响到本地的所有项目. 如果能像 Unity 那样每个项目自己有一份 Shader 就好了——正确的, 我们就先来把这个功能做了. 在动工之前, 需要先理解 UE Shader 的路径引用原理. UE shader 代码中 include 的文件路径并非真实的路径...</div></div></div></a><a class="pagination-related" href="/post/230624-cpp-autoptr-to-uniqueptr.html" title="从auto_ptr到unique_ptr：浅谈C++右值引用、移动语义与智能指针"><img class="cover" src="/images/pictures/picture-4.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-24</div><div class="info-item-2">从auto_ptr到unique_ptr：浅谈C++右值引用、移动语义与智能指针</div></div><div class="info-2"><div class="info-item-1">std::auto_ptr是C++03对智能指针的第一次尝试，作为一个失败品，其甚至已然在后续的标准中被移除，但时至今日，我们依然可以透过它一窥C++发展史的一角。  出于方便、严谨起见，下文所提及类与函数，如未特别标明命名空间，均为std或其子命名空间下的标准库设施。  std::auto_ptr的失败之处 auto_ptr在语义上是有些类似它的后辈unique_ptr的，其拷贝构造/赋值函数并非深拷贝或浅拷贝，而是被设计成了资产的所有权转移即move语义，从而保证一份资源同时只能被一根auto_ptr所持有： 1234567891011121314template &lt;class _Ty&gt;class auto_ptr &#123;public:    auto_ptr(auto_ptr&amp; _Right) noexcept : _Myptr(_Right.release()) &#123;&#125;    _Ty* release() noexcept     &#123;        _Ty* _Tmp = _Myptr;        _Myptr  ...</div></div></div></a><a class="pagination-related" href="/post/230612-snowyark-dev-0x00.html" title="SnowyArkEngine开发笔记[0x00]: 写在最前"><img class="cover" src="/images/pictures/picture-5.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-12</div><div class="info-item-2">SnowyArkEngine开发笔记[0x00]: 写在最前</div></div><div class="info-2"><div class="info-item-1"> </div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/images/snowylake.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">SnowyLake</div><div class="author-info-description">Don't worry, be happy.</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">31</div></a></div><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/SnowyLake" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="https://www.zhihu.com/people/snowylake" target="_blank" title="Zhihu"><i class="fab fa-zhihu" style="color: #0084ff;"></i></a><a class="social-icon" href="mailto:snowylake.me@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">不想工作, 苦呀西~</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/260624-zhihu-blog-migration-agent-workflow.html" title="爱丽丝的工作日记0x05: 搬运知乎旧文章"><img src="/images/pictures/picture-2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="爱丽丝的工作日记0x05: 搬运知乎旧文章"/></a><div class="content"><a class="title" href="/post/260624-zhihu-blog-migration-agent-workflow.html" title="爱丽丝的工作日记0x05: 搬运知乎旧文章">爱丽丝的工作日记0x05: 搬运知乎旧文章</a><time datetime="2026-06-23T17:18:00.000Z" title="发表于 2026-06-24 01:18:00">2026-06-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/260622-butterfly-index-post-tags-below-summary.html" title="爱丽丝的工作日记0x04: 调整首页文章标签位置"><img src="/images/pictures/picture-5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="爱丽丝的工作日记0x04: 调整首页文章标签位置"/></a><div class="content"><a class="title" href="/post/260622-butterfly-index-post-tags-below-summary.html" title="爱丽丝的工作日记0x04: 调整首页文章标签位置">爱丽丝的工作日记0x04: 调整首页文章标签位置</a><time datetime="2026-06-21T21:00:00.000Z" title="发表于 2026-06-22 05:00:00">2026-06-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/260622-hexo-codex-background-preview.html" title="爱丽丝的工作日记0x03: 给 Codex 准备后台预览"><img src="/images/pictures/picture-4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="爱丽丝的工作日记0x03: 给 Codex 准备后台预览"/></a><div class="content"><a class="title" href="/post/260622-hexo-codex-background-preview.html" title="爱丽丝的工作日记0x03: 给 Codex 准备后台预览">爱丽丝的工作日记0x03: 给 Codex 准备后台预览</a><time datetime="2026-06-21T20:52:09.000Z" title="发表于 2026-06-22 04:52:09">2026-06-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/260622-butterfly-tag-cloud-count-and-style.html" title="爱丽丝的工作日记0x02: 整理 Butterfly 标签云"><img src="/images/pictures/picture-2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="爱丽丝的工作日记0x02: 整理 Butterfly 标签云"/></a><div class="content"><a class="title" href="/post/260622-butterfly-tag-cloud-count-and-style.html" title="爱丽丝的工作日记0x02: 整理 Butterfly 标签云">爱丽丝的工作日记0x02: 整理 Butterfly 标签云</a><time datetime="2026-06-21T20:17:34.000Z" title="发表于 2026-06-22 04:17:34">2026-06-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/260619-hexo-next-to-butterfly-migration.html" title="爱丽丝的工作日记0x01: 从 NeXT 迁移到 Butterfly"><img src="/images/pictures/picture-1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="爱丽丝的工作日记0x01: 从 NeXT 迁移到 Butterfly"/></a><div class="content"><a class="title" href="/post/260619-hexo-next-to-butterfly-migration.html" title="爱丽丝的工作日记0x01: 从 NeXT 迁移到 Butterfly">爱丽丝的工作日记0x01: 从 NeXT 迁移到 Butterfly</a><time datetime="2026-06-18T19:28:23.000Z" title="发表于 2026-06-19 03:28:23">2026-06-19</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By SnowyLake</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 6.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5"></script><script src="/js/main.js?v=5.5.5"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.5"></script></div></div></body></html>
